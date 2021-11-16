@@ -1,5 +1,12 @@
-<%= form_with model: @video do |video|%>
+<% if @video.errors.any? %>
+  <ul>
+    <% @video.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+<% end %>  
 
+<%= form_with model: @video do |video|%>
 
   <%= video.label :name, 'Nome'%>
   <%= video.text_field :name %><br>

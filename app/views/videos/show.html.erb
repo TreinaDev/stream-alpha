@@ -1,9 +1,9 @@
 <dl>
-    <dt>Nome: </dt>
+    <dt><%= t(".name") %>: </dt>
     <dd><%= @video.name %></dd>
 
-    <dt>Descrição: </dt>
+    <dt><%= t(".description") %>: </dt>
     <dd> <%= @video.description %> </dd>
 
-    <%= link_to "Video", @video.link%>
+    <%= link_to 'Video', @video.link %>
 </dl>

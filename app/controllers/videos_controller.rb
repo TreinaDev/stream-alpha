@@ -4,10 +4,12 @@ class VideosController < ApplicationController
   end
 
   def create
-    @video = Video.new(video_params)
-    if @video.save!
+    @video = current_streamer.videos.build(video_params)
+    if @video.save
       redirect_to video_path(@video.id)
       flash[:notice] = 'Video cadastrado com sucesso!'
+    else
+      render :new
     end
   end
 
