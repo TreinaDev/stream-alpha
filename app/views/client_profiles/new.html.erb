@@ -1,0 +1,69 @@
+<h1> Crie seu perfil </h1>
+
+<p> Para avançar em seu cadastro, você deve preencher seu perfil com todos os 
+dados abaixo. </p>
+
+<%= form_with model: @client_profile do |f| %>
+
+<div>
+    <%= f.label :full_name %>
+    <%= f.text_field :full_name %>
+    <li><FONT COLOR="#ff0000"><%= @client_profile.errors.full_messages_for(:full_name).to_sentence if (not @client_profile.nil?) and (@client_profile.errors.any?) %></li></FONT>
+</div>
+
+<div>
+    <%= f.label :social_name %>
+    <%= f.text_field :social_name %>
+    <li><FONT COLOR="#ff0000"><%= @client_profile.errors.full_messages_for(:social_name).to_sentence if (not @client_profile.nil?) and (@client_profile.errors.any?) %></li></FONT>
+</div>
+
+<div>
+    <%= f.label :birth_date %>
+    <%= f.date_field :birth_date %>
+    <li><FONT COLOR="#ff0000"><%= @client_profile.errors.full_messages_for(:birth_date).to_sentence if (not @client_profile.nil?) and (@client_profile.errors.any?) %></li></FONT>
+</div>
+
+<div>
+    <%= f.label :cpf, 'CPF (apenas números)' %>
+    <%= f.number_field :cpf %>
+    <li><FONT COLOR="#ff0000"><%= @client_profile.errors.full_messages_for(:cpf).to_sentence if (not @client_profile.nil?) and (@client_profile.errors.any?) %></li></FONT>
+</div>
+
+<div>
+    <%= f.label :cep %>
+    <%= f.number_field :cep %>
+    <li><FONT COLOR="#ff0000"><%= @client_profile.errors.full_messages_for(:cep).to_sentence if (not @client_profile.nil?) and (@client_profile.errors.any?) %></li></FONT>
+</div>
+
+<div>
+    <%= f.label :residential_address %>
+    <%= f.text_field :residential_address %>
+    <li><FONT COLOR="#ff0000"><%= @client_profile.errors.full_messages_for(:residential_address).to_sentence if (not @client_profile.nil?) and (@client_profile.errors.any?) %></li></FONT>
+</div>
+
+<div>
+    <%= f.label :residential_number %>
+    <%= f.number_field :residential_number%>
+    <li><FONT COLOR="#ff0000"><%= @client_profile.errors.full_messages_for(:residential_number).to_sentence if (not @client_profile.nil?) and (@client_profile.errors.any?) %></li></FONT>
+</div>
+
+<div>
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+    <li><FONT COLOR="#ff0000"><%= @client_profile.errors.full_messages_for(:city).to_sentence if (not @client_profile.nil?) and (@client_profile.errors.any?) %></li></FONT>
+</div>
+
+<div>
+    <%= f.label :state %>
+    <%= f.text_field :state %>
+    <li><FONT COLOR="#ff0000"><%= @client_profile.errors.full_messages_for(:state).to_sentence if (not @client_profile.nil?) and (@client_profile.errors.any?) %></li></FONT>
+</div>
+
+<div>
+    <%= f.label :age_rating%>
+    <%= f.select :age_rating, ['L', '10', '12', '14', '16', '18'] %>
+    <li><FONT COLOR="#ff0000"><%= @client_profile.errors.full_messages_for(:age_rating).to_sentence if (not @client_profile.nil?) and (@client_profile.errors.any?) %></li></FONT>
+</div>
+
+    <%= f.submit 'Criar perfil' %>
+<%end%>

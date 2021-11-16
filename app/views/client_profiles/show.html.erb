@@ -1,0 +1,21 @@
+<h2> Perfil de <%= @client_profile.social_name.split[0] %> </h2>
+
+<div>
+<dl>
+  <dt>Nome:</dt>
+  <dd><%= @client_profile.social_name %></dd>
+
+  <dt>Data de nascimento:</dt>
+  <dd><%= l @client_profile.birth_date %></dd>
+
+  <dt>Configuração de classificação etária:</dt>
+  <dd><%= @client_profile.age_rating %></dd>
+
+  <dt>Endereço residencial:</dt>
+  <dd><%= "#{@client_profile.residential_address}, número #{@client_profile.residential_number}" %></dd>
+
+  <dt>CEP:</dt>
+  <dd><%= @client_profile.cep %></dd>
+
+  <dt>Cidade:</dt>
+  <dd><%= "#{@client_profile.city}, #{@client_profile.state}" %></dd>
