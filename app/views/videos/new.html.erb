@@ -1,0 +1,14 @@
+<%= form_with model: @video do |video|%>
+
+
+  <%= video.label :name, 'Nome'%>
+  <%= video.text_field :name %><br>
+
+  <%= video.label :description, 'Descrição' %>
+  <%= video.text_field :description %><br>
+
+  <%= video.label :link, 'Link do video'%>
+  <%= video.text_field :link %><br>
+
+  <%= video.submit 'Enviar' %>
+<% end %>
