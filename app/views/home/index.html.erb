@@ -1,1 +1,4 @@
 <h1>Bem-vindo(a) a Plataforma de Stream</h1>
+<% if streamer_signed_in? %>
+  <%= link_to 'Cadastrar Video', new_video_path %>
+<% end %>

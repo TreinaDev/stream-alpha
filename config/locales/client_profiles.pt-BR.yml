@@ -1,0 +1,17 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      client_profile: 'Perfil de usuário'
+    attributes:
+      client_profile:
+        full_name: 'Nome completo (conforme documentos)'
+        social_name: 'Nome social'
+        birth_date: 'Data de nascimento'
+        cpf: 'CPF'
+        cep: 'CEP'
+        city: 'Cidade'
+        state: 'Estado'
+        residential_address: 'Endereço residencial'
+        residential_number: 'Número residencial'
+        age_rating: 'Configuração de classificação etária'

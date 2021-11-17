@@ -5,6 +5,7 @@ class Streamer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :streamer_profile, dependent: :destroy
+  has_many :videos, dependent: :nullify
 
   enum profile_status: { pending: 5, completed: 10 }
 end

@@ -52,14 +52,13 @@ describe 'Streamer log in' do
   context 'and profile already exists' do
     it 'and is redirected to home page' do
       streamer = create(:streamer)
-      streamer_profile = create(:streamer_profile, streamer: streamer)
-      
+      create(:streamer_profile, streamer: streamer)
+
       visit root_path
       click_on 'Entrar como Streamer'
       fill_in 'Email', with: streamer.email
       fill_in 'Senha', with: streamer.password
       click_on 'Entrar'
-     
 
       expect(current_path).to eq root_path
       expect(page).to have_link('Meu Perfil', href: streamer_profile_path(streamer.streamer_profile.id))

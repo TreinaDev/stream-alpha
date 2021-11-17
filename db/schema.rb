@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_16_220314) do
+ActiveRecord::Schema.define(version: 2021_11_17_154429) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,6 +22,23 @@ ActiveRecord::Schema.define(version: 2021_11_16_220314) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "client_profiles", force: :cascade do |t|
+    t.string "full_name"
+    t.string "social_name"
+    t.date "birth_date"
+    t.string "city"
+    t.string "state"
+    t.string "residential_address"
+    t.integer "residential_number"
+    t.string "age_rating"
+    t.integer "client_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "cep"
+    t.string "cpf"
+    t.index ["client_id"], name: "index_client_profiles_on_client_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -66,7 +83,12 @@ ActiveRecord::Schema.define(version: 2021_11_16_220314) do
     t.string "link"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "description"
+    t.integer "streamer_id", null: false
+    t.index ["streamer_id"], name: "index_videos_on_streamer_id"
   end
 
+  add_foreign_key "client_profiles", "clients"
   add_foreign_key "streamer_profiles", "streamers"
+  add_foreign_key "videos", "streamers"
 end
