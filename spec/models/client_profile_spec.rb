@@ -21,11 +21,14 @@ RSpec.describe ClientProfile, type: :model do
       client_profile.valid?
 
       expect(client_profile.errors.full_messages_for(:full_name)).to include(
-        'Nome completo (conforme documentos) deve incluir um sobrenome')
+        'Nome completo (conforme documentos) deve incluir um sobrenome'
+      )
       expect(client_profile.errors.full_messages_for(:cep)).to include(
-        'CEP deve ter 8 dígitos')
+        'CEP deve ter 8 dígitos'
+      )
       expect(client_profile.errors.full_messages_for(:cpf)).to include(
-        'CPF deve ter 11 dígitos')
+        'CPF deve ter 11 dígitos'
+      )
     end
   end
 end

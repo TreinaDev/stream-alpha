@@ -4,7 +4,7 @@ class ClientProfile < ApplicationRecord
   validates :full_name, :social_name, :birth_date, :cpf, :cep, :city,
             :state, :residential_number, :residential_address, :age_rating,
             presence: true
-  
+
   validate :must_include_a_surname, :correct_cpf_length, :correct_cep_length
 
   private

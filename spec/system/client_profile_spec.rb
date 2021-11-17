@@ -74,7 +74,8 @@ describe 'Client profile' do
       expect(page).to have_content("Perfil de #{client_profile.social_name.first}")
       expect(page).to have_content("Configuração de classificação etária: #{client_profile.age_rating}")
       expect(page).to have_content(
-      "Endereço residencial: #{client_profile.residential_address}, número #{client_profile.residential_number}")
+        "Endereço residencial: #{client_profile.residential_address}, número #{client_profile.residential_number}"
+      )
       expect(page).to have_content("CEP: #{client_profile.cep}")
       expect(page).to have_content("Cidade: #{client_profile.city}, #{client_profile.state}")
     end
