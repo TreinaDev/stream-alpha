@@ -1,4 +1,5 @@
 class VideosController < ApplicationController
+  before_action :authenticate_streamer!, only: %i[new create]
   def new
     @video = Video.new
   end
@@ -6,8 +7,7 @@ class VideosController < ApplicationController
   def create
     @video = current_streamer.videos.build(video_params)
     if @video.save
-      redirect_to video_path(@video.id)
-      flash[:notice] = 'Video cadastrado com sucesso!'
+      redirect_to @video, notice: 'Video cadastrado com sucesso!'
     else
       render :new
     end

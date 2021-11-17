@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'streamer register a video' do
   it 'using link' do
-    streamer = Streamer.new(email: 'streamer@domain.com', password: '123456')
+    streamer = create(:streamer)
 
     login_as streamer, scope: :streamer
 
@@ -19,7 +19,7 @@ describe 'streamer register a video' do
     click_on 'Cadastrar Video'
     fill_in 'Nome', with: 'Jogando Mind Craft'
     fill_in 'Descrição', with: 'Jogador irado, joga demais!!'
-    fill_in 'Link do video', with: 'https://vimeo.com/546542asffdmind56465craft'
+    fill_in 'Link', with: 'https://vimeo.com/546542asffdmind56465craft'
     click_on 'Enviar'
 
     expect(page).to have_content('Nome: Jogando Mind Craft')
@@ -39,5 +39,11 @@ describe 'streamer register a video' do
     expect(page).to have_content('Nome não pode ficar em branco')
     expect(page).to have_content('Descrição não pode ficar em branco')
     expect(page).to have_content('Link não pode ficar em branco')
+  end
+
+  it 'and don´t see the button if isn´t streamer' do
+    visit root_path
+
+    expect(page).not_to have_link('Cadastrar Video', href: new_video_path)
   end
 end
