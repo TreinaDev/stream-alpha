@@ -7,5 +7,4 @@ class Streamer < ApplicationRecord
   has_one :streamer_profile, dependent: :destroy
 
   enum profile_status: { pending: 5, completed: 10 }
-
 end
