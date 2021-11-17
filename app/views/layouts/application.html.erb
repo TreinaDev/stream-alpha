@@ -17,7 +17,11 @@
       <% elsif streamer_signed_in? %>
         <p><%= link_to "Sair", destroy_streamer_session_path, method: :delete %></p>
       <% elsif client_signed_in? %>
-        <p><%= link_to 'Meu perfil', new_client_profile_path if current_client.client_profile.nil? %>
+        <% if current_client.client_profile?%>
+          <p><%= link_to 'Meu perfil', current_client.client_profile %>
+        <% else %>
+          <p><%= link_to 'Meu perfil', new_client_profile_path %>
+        <% end %>
         <p><%= link_to "Sair", destroy_client_session_path, method: :delete %></p>
       <% else %>
         <p><%= link_to "Entrar como Administrador", new_admin_session_path %></p>

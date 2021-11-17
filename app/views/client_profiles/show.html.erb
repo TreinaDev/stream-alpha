@@ -1,6 +1,5 @@
-<h2> Perfil de <%= @client_profile.social_name.split[0] %> </h2>
+<h2> Perfil de <%= @client_profile.social_name.split.first %> </h2>
 
-<div>
 <dl>
   <dt>Nome:</dt>
   <dd><%= @client_profile.social_name %></dd>
@@ -19,3 +18,4 @@
 
   <dt>Cidade:</dt>
   <dd><%= "#{@client_profile.city}, #{@client_profile.state}" %></dd>
+</dl>

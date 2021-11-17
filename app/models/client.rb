@@ -5,4 +5,8 @@ class Client < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :client_profile
+
+  def client_profile?
+    client_profile.present?
+  end
 end

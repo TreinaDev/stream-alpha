@@ -1,11 +1,11 @@
 class ClientProfilesController < ApplicationController
+  before_action :authenticate_client!, only: %i[create new]
+  before_action :authenticate_client_or_admin!, only: %i[show]
   before_action :check_if_profile_is_valid, only: %i[show]
-
   def create
-    @client_profile = ClientProfile.new(client_profile_params)
-    @client_profile.client = current_client
+    @client_profile = current_client.build_client_profile(client_profile_params)
     if @client_profile.save
-      redirect_to client_profile_path(@client_profile), notice: 'Perfil criado com sucesso!'
+      redirect_to @client_profile, notice: 'Perfil criado com sucesso!'
     else
       render :new
     end
@@ -22,7 +22,7 @@ class ClientProfilesController < ApplicationController
   private
 
   def check_if_profile_is_valid
-    redirect_to new_client_profile_path if current_client && current_client.client_profile.nil?
+    redirect_to new_client_profile_path unless current_client&.client_profile?
   end
 
   def client_profile_params
