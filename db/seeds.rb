@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+streamer = FactoryBot.create(:streamer)
+streamer2 = FactoryBot.create(:streamer)
+
+streamer_profile = FactoryBot.create(:streamer_profile, streamer: streamer)

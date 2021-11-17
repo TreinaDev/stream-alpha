@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_16_155946) do
+ActiveRecord::Schema.define(version: 2021_11_16_220314) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -36,6 +36,18 @@ ActiveRecord::Schema.define(version: 2021_11_16_155946) do
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
   end
 
+  create_table "streamer_profiles", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "facebook"
+    t.string "instagram"
+    t.string "twitter"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "streamer_id", null: false
+    t.index ["streamer_id"], name: "index_streamer_profiles_on_streamer_id"
+  end
+
   create_table "streamers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -44,6 +56,7 @@ ActiveRecord::Schema.define(version: 2021_11_16_155946) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "profile_status", default: 5
     t.index ["email"], name: "index_streamers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_streamers_on_reset_password_token", unique: true
   end
@@ -55,4 +68,5 @@ ActiveRecord::Schema.define(version: 2021_11_16_155946) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "streamer_profiles", "streamers"
 end
