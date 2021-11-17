@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_17_154429) do
+ActiveRecord::Schema.define(version: 2021_11_17_224634) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -51,6 +51,15 @@ ActiveRecord::Schema.define(version: 2021_11_17_154429) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_clients_on_email", unique: true
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
+  end
+
+  create_table "game_categories", force: :cascade do |t|
+    t.string "name"
+    t.string "creation_date"
+    t.string "creator"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_game_categories_on_name", unique: true
   end
 
   create_table "streamers", force: :cascade do |t|

@@ -8,9 +8,9 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_client_or_admin!
-    unless current_client || current_admin
-      redirect_to root_path,
-                  notice: 'Você não tem permissão para visualizar essa página'
-    end
+    return if current_client || current_admin
+
+    redirect_to root_path,
+                notice: 'Você não tem permissão para visualizar essa página'
   end
 end
