@@ -70,7 +70,11 @@ ActiveRecord::Schema.define(version: 2021_11_17_154429) do
     t.string "link"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "description"
+    t.integer "streamer_id", null: false
+    t.index ["streamer_id"], name: "index_videos_on_streamer_id"
   end
 
   add_foreign_key "client_profiles", "clients"
+  add_foreign_key "videos", "streamers"
 end

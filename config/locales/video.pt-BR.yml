@@ -1,0 +1,15 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      video: "Video"
+    attributes:
+      video:
+        name: "Nome"
+        description: "Descrição"
+        link: "Link"
+  videos:
+    show:
+      name: "Nome"
+      description: "Descrição"
+      link: "Link"
