@@ -17,6 +17,10 @@ class VideosController < ApplicationController
     @video = Video.find(params[:id])
   end
 
+  def analysis
+    @videos = Video.videos_pending
+  end
+
   private
 
   def video_params

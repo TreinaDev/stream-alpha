@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_17_154429) do
+ActiveRecord::Schema.define(version: 2021_11_17_192435) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2021_11_17_154429) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "description"
     t.integer "streamer_id", null: false
+    t.integer "status", default: 0
     t.index ["streamer_id"], name: "index_videos_on_streamer_id"
   end
 

@@ -1,3 +1,6 @@
 <% if streamer_signed_in? %>
   <%= link_to 'Cadastrar Video', new_video_path %>
 <% end %>
+<% if admin_signed_in? %>
+  <%= link_to 'Area Do Administrador', admin_area_admins_path %>
+<% end %>
