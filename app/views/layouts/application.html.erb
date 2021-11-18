@@ -13,6 +13,7 @@
   <body>
     <div class="container">
       <% if admin_signed_in? %>
+        <p><%= link_to 'Área do administrador', admin_area_admins_path %>
         <p><%= link_to "Sair", destroy_admin_session_path, method: :delete %></p>
       <% elsif streamer_signed_in? %>
         <p>
