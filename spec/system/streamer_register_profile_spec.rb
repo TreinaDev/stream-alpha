@@ -63,5 +63,39 @@ describe 'Streamer log in' do
       expect(current_path).to eq root_path
       expect(page).to have_link('Meu Perfil', href: streamer_profile_path(streamer.streamer_profile.id))
     end
+
+    it 'and click on the link to edit profile' do
+      streamer = create(:streamer)
+      profile = create(:streamer_profile, streamer: streamer)
+
+      visit root_path
+      click_on 'Entrar como Streamer'
+      fill_in 'Email', with: streamer.email
+      fill_in 'Senha', with: streamer.password
+      click_on 'Entrar'
+      click_on 'Meu Perfil'
+      click_on 'Editar Perfil'
+
+      expect(current_path).to eq edit_streamer_profile_path(profile)
+      expect(page).to have_content('Insira as informações que deseja atualizar!')
+    end
+
+    it 'and edit profile' do
+      streamer = create(:streamer)
+      profile = create(:streamer_profile, streamer: streamer)
+
+      visit root_path
+      click_on 'Entrar como Streamer'
+      fill_in 'Email', with: streamer.email
+      fill_in 'Senha', with: streamer.password
+      click_on 'Entrar'
+      click_on 'Meu Perfil'
+      click_on 'Editar Perfil'
+      fill_in 'Descrição', with: 'Faço gameplays maneiras'
+      fill_in 'URL do Instagram', with: 'https://www.instagram.com/alanzoka/'
+      click_on 'Atualizar Perfil de Streamer'
+
+      expect(page).to have_content('Perfil atualizado com sucesso!')
+    end
   end
 end

@@ -24,6 +24,16 @@ class StreamerProfilesController < ApplicationController
     end
   end
 
+  def edit
+    @streamer_profile = StreamerProfile.find(params[:id])
+  end
+
+  def update
+    @streamer_profile = StreamerProfile.find(params[:id])
+    @streamer_profile.update(streamer_profile_params)
+    redirect_to @streamer_profile, notice: 'Perfil atualizado com sucesso!'
+  end
+
   private
 
   def streamer_profile_exists?
