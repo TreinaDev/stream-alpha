@@ -7,6 +7,7 @@ AllCops:
   SuggestExtensions: false
   Exclude:
     - 'bin/**/*'
+    - 'config/**/*'
     - 'vendor/**/*'
     - 'db/**/*'
     - 'node_modules/**/*'

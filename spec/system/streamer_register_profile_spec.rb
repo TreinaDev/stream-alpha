@@ -11,16 +11,18 @@ describe 'Streamer log in' do
       fill_in 'Senha', with: streamer.password
       click_on 'Entrar'
       fill_in 'Nome', with: 'Fulano'
+      attach_file 'Avatar', Rails.root.join('spec/support/assets/gary-bendig-6GMq7AGxNbE-unsplash.jpg')
       fill_in 'Descrição', with: 'Jovem de 22 anos sem ter o que fazer da vida e fica fazendo live na internet'
       fill_in 'URL do Facebook', with: 'https://www.facebook.com/fulano/'
       fill_in 'URL do Instagram', with: 'https://twitter.com/fulano/'
       fill_in 'URL do Twitter', with: 'https://www.instagram.com/fulano/'
       click_on 'Criar Perfil de Streamer'
 
-      expect(current_path).to eq streamer_profile_path(streamer.streamer_profile.id)
+      expect(current_path).to eq streamer_profile_path(streamer.streamer_profile)
       expect(page).to have_content 'Perfil de Streamer criado com sucesso!'
       expect(page).to have_content 'Descrição Jovem de 22 anos sem ter o que fazer da vida ' \
                                    'e fica fazendo live na internet'
+      expect(page).to have_css('img[src*="gary-bendig-6GMq7AGxNbE-unsplash.jpg"]')
       expect(page).to have_link 'https://www.facebook.com/fulano/'
       expect(page).to have_link 'https://twitter.com/fulano/'
       expect(page).to have_link 'https://www.instagram.com/fulano/'
@@ -36,9 +38,9 @@ describe 'Streamer log in' do
       click_on 'Entrar'
       fill_in 'Nome', with: ''
       fill_in 'Descrição', with: ''
-      fill_in 'URL do Facebook', with: 'https://www.facebook.com/fulano/'
-      fill_in 'URL do Instagram', with: 'https://twitter.com/fulano/'
-      fill_in 'URL do Twitter', with: 'https://www.instagram.com/fulano/'
+      fill_in 'URL do Facebook', with: ''
+      fill_in 'URL do Instagram', with: ''
+      fill_in 'URL do Twitter', with: ''
       click_on 'Criar Perfil de Streamer'
 
       expect(current_path).to eq streamer_profiles_path
@@ -79,7 +81,7 @@ describe 'Streamer log in' do
 
     it 'and edit profile' do
       streamer = create(:streamer)
-      profile = create(:streamer_profile, streamer: streamer)
+      create(:streamer_profile, streamer: streamer)
 
       visit root_path
       click_on 'Entrar como Streamer'
@@ -92,7 +94,10 @@ describe 'Streamer log in' do
       fill_in 'URL do Instagram', with: 'https://www.instagram.com/alanzoka/'
       click_on 'Atualizar Perfil de Streamer'
 
+      expect(current_path).to eq streamer_profile_path(streamer.streamer_profile)
       expect(page).to have_content('Perfil atualizado com sucesso!')
+      expect(page).to have_css('img[src*="streamer_avatar' \
+                               '-7cf2b2e4a6bf46ca28b45bc3a866a1a9bfca0a3de9ce12f59caf7da72bcf72b8.svg"]')
     end
   end
 end
