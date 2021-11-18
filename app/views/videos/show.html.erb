@@ -7,6 +7,9 @@
     <dd> <%= @video.description %> </dd>
 
     <%= link_to Video.human_attribute_name(:video), @video.link %>
+
+    <dt>Video.human_attribute_name(:feed_back)</dt>
+    <dd> <%= @video.feed_back %> </dd>
 </dl>
 <% if admin_signed_in?  && @video.pending?%>
     <%= link_to 'Aprovar', approve_button_video_path, method: :post %>

@@ -6,7 +6,6 @@ class VideosController < ApplicationController
 
   def create
     @video = current_streamer.videos.build(video_params)
-    @video.feed_back = ''
     if @video.save
       redirect_to @video, notice: 'Video cadastrado com sucesso!'
     else
@@ -32,11 +31,12 @@ class VideosController < ApplicationController
 
   def refuse_button
     @video = Video.find(params[:id])
+    @video.feed_back = params[:feed_back]
     refuse_video(@video)
-    if .blank?
+    if @video.feed_back.nil?
       render :show
     else
-      @video.update(feed_back: params.require(:feed_back))
+      @video.save
       redirect_to @video
     end
   end

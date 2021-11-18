@@ -62,7 +62,6 @@ describe 'admin approves registration of video' do
     admin = create(:admin)
     login_as admin, scope: :admin
 
-    video1.reload
     visit root_path
     click_on 'Área do administrador'
     click_on 'Videos Pendentes'
@@ -70,11 +69,12 @@ describe 'admin approves registration of video' do
     click_on 'Rejeitar'
     fill_in 'Retorne um feedback para o streamer:',	with: 'o vídeo não se enquadra no requisitos preestabelecidos'
     click_on 'Enviar'
+    video1.reload
 
     expect(video1.feed_back).to eq('o vídeo não se enquadra no requisitos preestabelecidos')
     expect(current_path).to eq(video_path(video1))
     expect(video1.status).to eq('refused')
-    expect(page).to have_content('Retorne um feedback para o streamer:')
+    expect(page).to have_content('Feedback: o vídeo não se enquadra no requisitos preestabelecidos')
     expect(page).not_to have_link('Aprovar')
     expect(page).not_to have_link('Rejeitar')
     expect(page).not_to have_button('Enviar')
