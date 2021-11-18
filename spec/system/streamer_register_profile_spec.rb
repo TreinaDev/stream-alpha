@@ -21,9 +21,6 @@ describe 'Streamer log in' do
       expect(page).to have_content 'Perfil de Streamer criado com sucesso!'
       expect(page).to have_content 'Descrição Jovem de 22 anos sem ter o que fazer da vida ' \
                                    'e fica fazendo live na internet'
-      have_css("img[src*='https://www.facebook.com/fulano/']")
-      have_css("img[src*='https://twitter.com/fulano/']")
-      have_css("img[src*='https://www.instagram.com/fulano/']")
       expect(page).to have_link 'https://www.facebook.com/fulano/'
       expect(page).to have_link 'https://twitter.com/fulano/'
       expect(page).to have_link 'https://www.instagram.com/fulano/'

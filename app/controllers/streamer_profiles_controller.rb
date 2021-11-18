@@ -43,6 +43,6 @@ class StreamerProfilesController < ApplicationController
   def streamer_profile_params
     params.require(:streamer_profile).permit(:name, :description, :facebook,
                                              :instagram, :twitter,
-                                             :streamer_id)
+                                             :streamer_id, :avatar)
   end
 end

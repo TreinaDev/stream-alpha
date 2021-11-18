@@ -4,6 +4,8 @@ class StreamerProfile < ApplicationRecord
   validates :name, :description, :streamer_id,
             presence: true
 
+  has_one_attached :avatar
+
   private
 
   def owner?

@@ -27,9 +27,11 @@
         <% end %>
         <p><%= link_to "Sair", destroy_client_session_path, method: :delete %></p>
       <% else %>
-        <p><%= link_to "Entrar como Administrador", new_admin_session_path %></p>
-        <p><%= link_to "Entrar como Streamer", new_streamer_session_path %></p>
-        <p><%= link_to "Entrar como Assinante", new_client_session_path %></p>
+        <p>
+          <%= link_to "Entrar como Administrador", new_admin_session_path %>
+          <%= link_to "Entrar como Streamer", new_streamer_session_path %>
+          <%= link_to "Entrar como Assinante", new_client_session_path %>
+        </p>
       <% end %>
       <% if notice %>
         <p class="notice"><%= notice %></p>
