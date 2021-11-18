@@ -1,3 +1,4 @@
+<%= link_to 'Voltar', analysis_videos_path %>
 <dl>
     <dt><%= Video.human_attribute_name(:name) %>: </dt>
     <dd><%= @video.name %></dd>
@@ -7,3 +8,15 @@
 
     <%= link_to Video.human_attribute_name(:video), @video.link %>
 </dl>
+<% if admin_signed_in?  && @video.pending?%>
+    <%= link_to 'Aprovar', approve_button_video_path, method: :post %>
+    <%= link_to 'Rejeitar', refuse_button_video_path, method: :post %>
+<% end %>
+
+<% if admin_signed_in? && @video.refused? %>
+    <%= form_with url: refuse_button_video_path(@video) do |form| %>
+        <%= form.label :feed_back, t('.feed_back') %>
+        <%= form.text_field :feed_back %>
+        <%= form.submit 'Enviar' %>
+    <% end %>
+<% end %>

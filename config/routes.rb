@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   end
 
   resources :client_profiles, only: %i[create new show]
-  resources :videos, only: %i[new create show] do
+  resources :videos, only: %i[new create show approve] do
     get 'analysis', on: :collection
+    post 'approve_button', on: :member
+    post 'refuse_button', on: :member
   end
 end
