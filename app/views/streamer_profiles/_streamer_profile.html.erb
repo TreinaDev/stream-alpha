@@ -1,0 +1,27 @@
+<h2>Perfil de <%= @streamer_profile.name %></h2>
+
+<dl>
+  <dt><%= I18n.t(:description, scope: "activerecord.attributes.streamer_profile") %></dt>
+  <dd><%= @streamer_profile.description %></dd>
+
+  <dt><%= I18n.t(:facebook, scope: "activerecord.attributes.streamer_profile") %></dt>
+  <% if @streamer_profile.facebook.blank? %>
+    <dd>Não possui</dd>
+  <% else %>
+    <dd><%= link_to @streamer_profile.facebook %></dd>
+  <% end %>  
+
+  <dt><%= I18n.t(:instagram, scope: "activerecord.attributes.streamer_profile") %></dt>
+  <% if @streamer_profile.instagram.blank? %>
+    <dd>Não possui</dd>
+  <% else %>
+    <dd><%= link_to @streamer_profile.instagram %></dd>
+  <% end %>  
+
+  <dt><%= I18n.t(:twitter, scope: "activerecord.attributes.streamer_profile") %></dt>
+  <% if @streamer_profile.twitter.blank? %>
+    <dd>Não possui</dd>
+  <% else %>
+    <dd><%= link_to @streamer_profile.twitter %></dd>
+  <% end %>  
+</dl>

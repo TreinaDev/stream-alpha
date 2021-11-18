@@ -4,7 +4,7 @@ class Client < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_one :client_profile
+  has_one :client_profile, dependent: :destroy
 
   def client_profile?
     client_profile.present?
