@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :streamer do
-    email { 'streamer@domain.com' }
+    sequence(:email) { |n| "jogador#{n}@streamer.com" }
     password { '123456' }
   end
 end

@@ -17,7 +17,7 @@ class GameCategoriesController < ApplicationController
 
   def game_category_creation
     @game_category = GameCategory.new(params.require(:game_category).permit(:name))
-    @game_category.creator = current_admin.email
+    @game_category.admin = current_admin
     @game_category.creation_date = Time.zone.now.to_date
     @game_category
   end
