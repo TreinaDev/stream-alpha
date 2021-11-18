@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_18_145404) do
+ActiveRecord::Schema.define(version: 2021_11_18_215609) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -95,11 +95,14 @@ ActiveRecord::Schema.define(version: 2021_11_18_145404) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "description"
     t.integer "streamer_id", null: false
+    t.integer "game_category_id", null: false
+    t.index ["game_category_id"], name: "index_videos_on_game_category_id"
     t.index ["streamer_id"], name: "index_videos_on_streamer_id"
   end
 
   add_foreign_key "client_profiles", "clients"
   add_foreign_key "game_categories", "admins"
   add_foreign_key "streamer_profiles", "streamers"
+  add_foreign_key "videos", "game_categories"
   add_foreign_key "videos", "streamers"
 end

@@ -12,6 +12,7 @@ describe 'streamer register a video' do
   end
 
   it 'successfully' do
+    create(:game_category, name: 'RPG')
     streamer = create(:streamer)
     login_as streamer, scope: :streamer
 
@@ -20,11 +21,13 @@ describe 'streamer register a video' do
     fill_in 'Nome', with: 'Jogando Mind Craft'
     fill_in 'Descrição', with: 'Jogador irado, joga demais!!'
     fill_in 'Link', with: 'https://vimeo.com/546542asffdmind56465craft'
+    select 'RPG', from: 'Categoria do Vídeo'
     click_on 'Enviar'
 
     expect(page).to have_content('Nome: Jogando Mind Craft')
     expect(page).to have_content('Video cadastrado com sucesso!')
     expect(page).to have_content('Descrição: Jogador irado, joga demais!!')
+    expect(page).to have_content('Categoria de Jogos: RPG')
     expect(page).to have_link('Video', href: 'https://vimeo.com/546542asffdmind56465craft')
   end
 
@@ -39,6 +42,7 @@ describe 'streamer register a video' do
     expect(page).to have_content('Nome não pode ficar em branco')
     expect(page).to have_content('Descrição não pode ficar em branco')
     expect(page).to have_content('Link não pode ficar em branco')
+    expect(page).to have_content('Categoria de Jogos é obrigatório(a)')
   end
 
   it 'and don´t see the button if isn´t streamer' do

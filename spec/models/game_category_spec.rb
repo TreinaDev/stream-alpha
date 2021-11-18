@@ -1,6 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe GameCategory, type: :model do
+  context 'have_many' do
+    it 'should have many videos' do
+      should have_many(:videos)
+    end
+  end
+  context 'belong_to' do
+    it 'should be admin' do
+      should belong_to(:admin)
+    end
+  end
   describe 'presence and uniqueness validations' do
     subject { GameCategory.new(admin: create(:admin)) }
 

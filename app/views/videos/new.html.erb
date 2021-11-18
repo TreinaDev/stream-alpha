@@ -1,21 +1,43 @@
-<% if @video.errors.any? %>
-  <ul>
-    <% @video.errors.full_messages.each do |error| %>
-      <li><%= error %></li>
-    <% end %>
-  </ul>
-<% end %>  
+<h3>Área de submissão de vídeos</h3>
+
+<p>Para submeter um vídeo na plataforma, preencha os campos abaixo</p>
 
 <%= form_with model: @video do |video|%>
 
-  <%= video.label :name %>
-  <%= video.text_field :name %><br>
+  <div>
+    <%= video.label :name %><br>
+    <%= video.text_field :name, placeholder: I18n.t(:name, scope: "activerecord.attributes.streamer_profile") %>
+    <% @video.errors.full_messages_for(:name).each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </div>
 
-  <%= video.label :description %>
-  <%= video.text_field :description %><br>
+  <div>
+    <%= video.label :description %><br>
+    <%= video.text_area :description, rows: 5, cols: 50, placeholder: t('.description') %>
+    <% @video.errors.full_messages_for(:description).each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </div>
 
-  <%= video.label :link %>
-  <%= video.text_field :link %><br>
+  <div>
+    <%= video.label :link %><br>
+    <%= video.text_field :link , placeholder: t('.link')%>
+    <% @video.errors.full_messages_for(:link).each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </div>
 
-  <%= video.submit 'Enviar' %>
+  <div>
+    <%= video.label :game_category_id, t('.game_category') %><br>
+    <%= video.collection_select :game_category_id, GameCategory.all, :id, :name, prompt: "Escolha uma categoria" %>
+    <% @video.errors.full_messages_for(:game_category).each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </div>
+
+  <div>
+    <br>
+    <%= video.submit 'Enviar' %>
+  </div>
 <% end %>

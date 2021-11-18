@@ -10,3 +10,6 @@ streamer = FactoryBot.create(:streamer)
 streamer2 = FactoryBot.create(:streamer)
 
 streamer_profile = FactoryBot.create(:streamer_profile, streamer: streamer)
+
+game_category = FactoryBot.create(:game_category)
+
