@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_18_054057) do
+ActiveRecord::Schema.define(version: 2021_11_18_145404) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -81,6 +81,16 @@ ActiveRecord::Schema.define(version: 2021_11_18_054057) do
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
   end
 
+  create_table "game_categories", force: :cascade do |t|
+    t.string "name"
+    t.string "creation_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "admin_id", null: false
+    t.index ["admin_id"], name: "index_game_categories_on_admin_id"
+    t.index ["name"], name: "index_game_categories_on_name", unique: true
+  end
+
   create_table "streamer_profiles", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -119,6 +129,7 @@ ActiveRecord::Schema.define(version: 2021_11_18_054057) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "client_profiles", "clients"
+  add_foreign_key "game_categories", "admins"
   add_foreign_key "streamer_profiles", "streamers"
   add_foreign_key "videos", "streamers"
 end
