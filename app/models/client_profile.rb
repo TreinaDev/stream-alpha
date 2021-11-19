@@ -26,9 +26,6 @@ class ClientProfile < ApplicationRecord
 
   def acceptable_photo
     return unless photo.attached?
-  
-    unless photo.byte_size <= 2.megabyte
-      errors.add :photo, 'deve ser menor que 2 Mb'
-    end
+    return errors.add :photo, 'deve ser menor que 2 Mb' if photo.byte_size > 2.megabyte
   end
 end
