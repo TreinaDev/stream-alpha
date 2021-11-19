@@ -11,5 +11,8 @@ FactoryBot.define do
     residential_number { '59' }
     age_rating { 'L' }
     client
+    trait :with_photo do
+      photo { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'support', 'assets', 'test_photo.jpg'), 'photo/jpg') }
+    end
   end
 end

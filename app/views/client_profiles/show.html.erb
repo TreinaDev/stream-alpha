@@ -2,7 +2,7 @@
 
 <dl>
   <% if @client_profile.photo.attached? %>
-    <dd><%= image_tag(@client_profile.photo) %></dd>
+    <dd><%= image_tag(@client_profile.photo, size: '120') %></dd>
   <% end %>
 
   <dt>Nome:</dt>

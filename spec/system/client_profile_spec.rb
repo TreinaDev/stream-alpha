@@ -11,7 +11,7 @@ describe 'Client profile' do
       fill_in 'Senha', with: client.password
       click_on 'Entrar'
       fill_in 'Nome completo (conforme documentos)', with: 'Otávio Augusto da Silva Lins'
-      fill_in 'Nome social', with: 'Marcel'
+      fill_in 'Nome social', with: 'Marcela'
       fill_in 'Data de nascimento', with: '19/08/1997'
       fill_in 'CPF (apenas números)', with: '60243105878'
       fill_in 'CEP', with: '08150530'
@@ -20,17 +20,17 @@ describe 'Client profile' do
       fill_in 'Endereço residencial', with: 'Avenida dos clientes'
       fill_in 'Número residencial', with: '153'
       select '16', from: 'Configuração de classificação etária'
-      attach_file('Foto', Rails.root + 'app/assets/images/photo_for_my_profile.jpg')
+      attach_file 'Foto', Rails.root.join('spec', 'support', 'assets', 'test_photo.jpg')
       click_on 'Criar perfil'
 
-      expect(page).to have_content('Perfil de Marcel')
+      expect(page).to have_content('Perfil de Marcela')
       expect(page).to have_content('Data de nascimento: 19/08/1997')
       expect(page).to have_content('Configuração de classificação etária: 16')
       expect(page).to have_content('Endereço residencial: Avenida dos clientes, número 153')
       expect(page).to have_content('CEP: 08150530')
       expect(page).to have_content('Cidade: São Paulo, SP')
       expect(ClientProfile.count).to eq(1)
-      expect(page).to have_css("img[src*='photo_for_my_profile.jpg']")
+      expect(page).to have_css("img[src*='test_photo.jpg']")
     end
     it 'unsuccessfully: left mandatory information blank' do
       client = create(:client)
@@ -57,7 +57,7 @@ describe 'Client profile' do
   context 'Visualization:' do
     it 'successfully view own profile, with a valid profile' do
       client = create(:client)
-      client_profile = create(:client_profile, client: client)
+      client_profile = create(:client_profile, :with_photo, client: client)
 
       login_as client, scope: :client
       visit root_path
@@ -71,6 +71,7 @@ describe 'Client profile' do
       )
       expect(page).to have_content("CEP: #{client_profile.cep}")
       expect(page).to have_content("Cidade: #{client_profile.city}, #{client_profile.state}")
+      expect(page).to have_css("img[src*='test_photo.jpg']")
     end
     it 'unsuccessfully view own profile, cause the profile is invalid/nil' do
       client = create(:client)

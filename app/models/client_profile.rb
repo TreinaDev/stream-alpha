@@ -8,6 +8,8 @@ class ClientProfile < ApplicationRecord
 
   validate :must_include_a_surname, :correct_cpf_length, :correct_cep_length
 
+  validate :acceptable_photo
+
   private
 
   def correct_cep_length
@@ -20,5 +22,13 @@ class ClientProfile < ApplicationRecord
 
   def must_include_a_surname
     errors.add(:full_name, 'deve incluir um sobrenome') if full_name && full_name.split.length < 2
+  end
+
+  def acceptable_photo
+    return unless photo.attached?
+  
+    unless photo.byte_size <= 2.megabyte
+      errors.add :photo, 'A foto deve ser menor que 2 Mb'
+    end
   end
 end
