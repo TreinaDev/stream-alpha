@@ -1,0 +1,16 @@
+<h1>Insira as informações do plano que deseja cadastrar</h1>
+<%= form_with model: @video_plan do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+  <div>
+    <%= f.label :value %>
+    <%= f.number_field :value %>
+  </div>  
+  <%= f.submit %>
+<% end %>

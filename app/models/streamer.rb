@@ -6,6 +6,8 @@ class Streamer < ApplicationRecord
 
   has_one :streamer_profile, dependent: :destroy
   has_many :videos, dependent: :nullify
+  has_many :content_streamers, dependent: :destroy
+  has_many :streamer, through: :content_streamers
 
   enum profile_status: { pending: 5, completed: 10 }
 end
