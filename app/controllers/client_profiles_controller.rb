@@ -29,6 +29,6 @@ class ClientProfilesController < ApplicationController
     params.require(:client_profile).permit(:full_name, :social_name, :birth_date,
                                            :cpf, :cep, :city, :state, :age_rating,
                                            :residential_address,
-                                           :residential_number)
+                                           :residential_number, :photo)
   end
 end

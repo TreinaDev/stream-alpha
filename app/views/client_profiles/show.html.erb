@@ -1,6 +1,10 @@
 <h2> Perfil de <%= @client_profile.social_name.split.first %> </h2>
 
 <dl>
+  <% if @client_profile.photo.attached? %>
+    <dd><%= image_tag(@client_profile.photo) %></dd>
+  <% end %>
+
   <dt>Nome:</dt>
   <dd><%= @client_profile.social_name %></dd>
 

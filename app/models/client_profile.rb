@@ -1,5 +1,6 @@
 class ClientProfile < ApplicationRecord
   belongs_to :client
+  has_one_attached :photo
 
   validates :full_name, :social_name, :birth_date, :cpf, :cep, :city,
             :state, :residential_number, :residential_address, :age_rating,
