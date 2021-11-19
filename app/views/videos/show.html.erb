@@ -22,13 +22,11 @@
 <% end %>
 
 <% if admin_signed_in? && @video.reproved_with_feedback? %>
-    <% if @video.errors.any? %>
     <ul>
-        <% @video.errors.full_messages.each do |error| %>
-        <li><%= error %></li>
-        <% end %>
-    </ul>
-    <% end %>  
+    <% @video.errors.full_messages_for(:feed_back).each do |message| %>
+        <li><%= message %></li>
+    <% end %>
+    </ul>  
     <%= form_with url: refuse_button_video_path(@video) do |form| %>
         <%= form.label :feed_back, t('.feed_back') %>
         <%= form.text_field :feed_back %>

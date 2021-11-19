@@ -34,6 +34,7 @@ class VideosController < ApplicationController
     refuse_video(@video)
     @video.feed_back = params[:feed_back]
     if @video.feed_back.nil? || @video.feed_back.empty?
+      flash[:alert] = 'Feedback não pode ficar em branco.'
       render :show
     else
       @video.save
