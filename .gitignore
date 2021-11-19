@@ -36,3 +36,6 @@
 yarn-debug.log*
 .yarn-integrity
 coverage
+
+#ignore files upload through active storage
+/storage
