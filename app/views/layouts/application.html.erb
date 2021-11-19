@@ -35,10 +35,10 @@
         </p>
       <% end %>
       <% if notice %>
-        <p class="notice"><%= notice %></p>
+        <p class="alert alert-primary" role="alert"><%= notice %></p>
       <% end %>
       <% if alert %>
-        <p class="alert"><%= alert %></p>
+        <p class="alert alert-warning" role="alert"><%= alert %></p>
       <% end %>
 
       <%= yield %>
