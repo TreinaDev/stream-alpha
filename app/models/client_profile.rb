@@ -28,7 +28,7 @@ class ClientProfile < ApplicationRecord
     return unless photo.attached?
   
     unless photo.byte_size <= 2.megabyte
-      errors.add :photo, 'A foto deve ser menor que 2 Mb'
+      errors.add :photo, 'deve ser menor que 2 Mb'
     end
   end
 end
