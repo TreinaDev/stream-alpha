@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     get 'admin_area', on: :collection
   end
 
-  resources :streamer_profiles, only: %i[show new create]
+  resources :streamer_profiles, only: %i[show new create edit update]
   resources :client_profiles, only: %i[create new show]
   resources :game_categories, only: %i[create new]
   resources :videos, only: %i[new create show]

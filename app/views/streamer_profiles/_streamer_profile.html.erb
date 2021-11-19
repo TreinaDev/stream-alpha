@@ -1,5 +1,10 @@
+<% if @streamer_profile.avatar.attached? %>
+    <p><%= image_tag(@streamer_profile.avatar, size: "200x200", alt: 'profile_avatar', class: 'profile_avatar' )%></p>
+<% else %>
+  <p><%= image_tag("streamer_avatar.svg", size: "200x200", alt: 'profile_avatar', class: 'profile_avatar') %></p>
+<% end %>
 <h2>Perfil de <%= @streamer_profile.name %></h2>
-
+<%= link_to "Editar Perfil", edit_streamer_profile_path %>
 <dl>
   <dt><%= I18n.t(:description, scope: "activerecord.attributes.streamer_profile") %></dt>
   <dd><%= @streamer_profile.description %></dd>

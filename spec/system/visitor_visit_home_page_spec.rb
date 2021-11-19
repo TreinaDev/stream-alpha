@@ -22,5 +22,6 @@ describe 'visitor visit home page' do
     expect(current_path).to eq new_streamer_profile_path
     expect(page).to have_content 'Login efetuado com sucesso. Se não foi autorizado, ' \
                                  'a confirmação será enviada por e-mail.'
+    expect(page).to have_link 'Sair'
   end
 end
