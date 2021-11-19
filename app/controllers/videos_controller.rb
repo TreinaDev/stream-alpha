@@ -33,7 +33,7 @@ class VideosController < ApplicationController
     @video = Video.find(params[:id])
     refuse_video(@video)
     @video.feed_back = params[:feed_back]
-    if @video.feed_back.nil?
+    if @video.feed_back.nil? || @video.feed_back.empty?
       render :show
     else
       @video.save
