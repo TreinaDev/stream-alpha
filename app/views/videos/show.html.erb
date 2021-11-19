@@ -8,15 +8,20 @@
 
     <%= link_to Video.human_attribute_name(:video), @video.link %>
 
-    <dt>Video.human_attribute_name(:feed_back)</dt>
-    <dd> <%= @video.feed_back %> </dd>
+    <% if admin_signed_in? || streamer_signed_in? %>
+        <dt> <%= Video.human_attribute_name(:status) %>: </dt>
+        <dd> <%= @video.status %> </dd>
+
+        <dt> <%= Video.human_attribute_name(:feed_back) %>: </dt>
+        <dd> <%= @video.feed_back %> </dd>
+    <% end %>
 </dl>
 <% if admin_signed_in?  && @video.pending?%>
     <%= link_to 'Aprovar', approve_button_video_path, method: :post %>
     <%= link_to 'Rejeitar', refuse_button_video_path, method: :post %>
 <% end %>
 
-<% if admin_signed_in? && @video.refused? %>
+<% if admin_signed_in? && @video.reproved_with_feedback? %>
     <%= form_with url: refuse_button_video_path(@video) do |form| %>
         <%= form.label :feed_back, t('.feed_back') %>
         <%= form.text_field :feed_back %>

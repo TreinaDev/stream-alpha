@@ -31,8 +31,8 @@ class VideosController < ApplicationController
 
   def refuse_button
     @video = Video.find(params[:id])
-    @video.feed_back = params[:feed_back]
     refuse_video(@video)
+    @video.feed_back = params[:feed_back]
     if @video.feed_back.nil?
       render :show
     else

@@ -79,4 +79,25 @@ describe 'admin approves registration of video' do
     expect(page).not_to have_link('Rejeitar')
     expect(page).not_to have_button('Enviar')
   end
+  it 'and refused without fill field feed back' do
+    video1 = create(:video, name: 'Jogando Mind Craft', status: 'pending')
+    admin = create(:admin)
+    login_as admin, scope: :admin
+
+
+    visit root_path
+    click_on 'Área do administrador'
+    click_on 'Videos Pendentes'
+    click_on 'Jogando Mind Craft'
+    click_on 'Rejeitar'
+    click_on 'Enviar'
+    video1.reload
+
+    expect(current_path).to eq(refuse_button_video_path(video1))
+    expect(video1.status).to eq('refused')
+    expect(page).to have_content('Feedback não pode ficar em branco')
+    expect(page).to have_button('Enviar')
+    expect(page).not_to have_link('Aprovar')
+    expect(page).not_to have_link('Rejeitar')
+  end
 end
