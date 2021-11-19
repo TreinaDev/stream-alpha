@@ -44,6 +44,7 @@ rails db:seed
 
 ```sh
 rspec
+rubocop
 ```
 
 ## Serviços (job queues, cache servers, search engines, etc.)
@@ -53,3 +54,27 @@ rspec
 ```sh
 rails server
 ```
+
+## Logins Disponíveis
+
+### Entrar como Admin
+
+| E-mail                   | Password |
+| ------------------------ | -------- |
+| admin1@gamestream.com.br | 123456   |
+| admin2@gamestream.com.br | 123456   |
+
+### Entrar como Cliente
+
+| E-mail           | Password  |
+| ---------------- | --------- |
+| client1@user.com | 123456798 |
+| client2@user.com | 123456798 |
+
+### Entrar como Streamer
+
+| E-mail             | Password |
+| ------------------ | -------- |
+| streamer1@user.com | 123456   |
+| streamer2@user.com | 123456   |
+| streamer3@user.com | 123456   |

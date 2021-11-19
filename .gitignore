@@ -22,7 +22,6 @@
 !/tmp/pids/
 !/tmp/pids/.keep
 
-
 /public/assets
 .byebug_history
 
@@ -37,5 +36,5 @@ yarn-debug.log*
 .yarn-integrity
 coverage
 
-#ignore files upload through active storage
+# Ignore Active Storage files
 /storage

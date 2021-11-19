@@ -4,9 +4,11 @@ class StreamerProfile < ApplicationRecord
   validates :name, :description, :streamer_id,
             presence: true
 
-  private
+  has_one_attached :avatar
 
-  def owner?
-    streamer_signed_in? && current_streamer == @streamer_profile.streamer
+  def owner?(current_streamer_id = nil)
+    return current_streamer_id == streamer.id if current_streamer_id
+
+    current_streamer == streamer
   end
 end
