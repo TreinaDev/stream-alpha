@@ -1,5 +1,8 @@
 class VideosController < ApplicationController
   before_action :authenticate_streamer!, only: %i[new create]
+  before_action :authenticate_admin!, only: %i[approve refuse]
+  before_action :find_video, only: %i[refuse approve show]
+  before_action :analysed_video!, only: %i[refuse approve]
   def new
     @video = Video.new
   end
@@ -7,42 +10,40 @@ class VideosController < ApplicationController
   def create
     @video = current_streamer.videos.build(video_params)
     if @video.save
-      redirect_to @video, notice: 'Video cadastrado com sucesso!'
+      redirect_to @video, notice: t('.success')
     else
       render :new
     end
   end
 
-  def show
-    @video = Video.find(params[:id])
-  end
+  def show; end
 
   def analysis
-    @videos = Video.videos_pending
+    @videos = Video.all_in_analysis
   end
 
-  def approve_button
-    @video = Video.find(params[:id])
-    approve_video(@video)
-    if @video.approved?
-      redirect_to @video, notice: 'Video aprovado com sucesso!'
-    end
+  def approve
+    redirect_to @video, notice: t('.success') if @video.approved!
   end
 
-  def refuse_button
-    @video = Video.find(params[:id])
-    refuse_video(@video)
-    @video.feed_back = params[:feed_back]
-    if @video.feed_back.nil? || @video.feed_back.empty?
-      flash[:alert] = 'Feedback não pode ficar em branco.'
-      render :show
+  def refuse
+    if @video.update(status: 'refused', feed_back: params[:feed_back])
+      redirect_to @video, notice: t('.success')
     else
-      @video.save
-      redirect_to @video
+      @video.status = 'refused'
+      render :show
     end
   end
 
   private
+
+  def find_video
+    @video = Video.find(params[:id])
+  end
+
+  def analysed_video!
+    redirect_to @video, status: :permanent_redirect unless find_video.pending?
+  end
 
   def video_params
     params.require(:video).permit(:name, :description, :link)
@@ -50,9 +51,5 @@ class VideosController < ApplicationController
 
   def approve_video(video)
     video.approved!
-  end
-
-  def refuse_video(video)
-    video.refused!
   end
 end
