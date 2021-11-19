@@ -6,20 +6,21 @@ AllCops:
   NewCops: enable
   SuggestExtensions: false
   Exclude:
-    - 'bin/**/*'
-    - 'config/**/*'
-    - 'vendor/**/*'
-    - 'db/**/*'
-    - 'node_modules/**/*'
+    - "bin/**/*"
+    - "vendor/**/*"
+    - "db/**/*"
+    - "node_modules/**/*"
 
 Metrics/BlockLength:
- IgnoredMethods: ['describe', 'context', 'feature', 'scenario', 'let', 'it']
+  Exclude:
+    - "config/environments/**/*"
+  IgnoredMethods: ["describe", "context", "feature", "scenario", "let", "it"]
 
 Style/AsciiComments:
   Enabled: false
 
 Style/Documentation:
- Enabled: false
+  Enabled: false
 
 Style/FrozenStringLiteralComment:
- Enabled: false
+  Enabled: false
