@@ -1,0 +1,14 @@
+<h1> Cadastro de nova categoria de jogos </h1>
+
+<%= form_with model: @game_category do |f| %>
+
+<div>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <% @game_category.errors.full_messages_for(:name).each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+</div>
+
+  <%= f.submit 'Registrar nova categoria' %>
+<% end %>
