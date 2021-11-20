@@ -1,0 +1,10 @@
+FactoryBot.define do
+  factory :streamer do
+<<<<<<< HEAD
+    sequence(:email) { |n| "streamer#{n}@domain.com" }
+=======
+    sequence(:email) { |n| "streamer#{n}@user.com" }
+>>>>>>> f44d057768d819d8825fe9d7a722ee3dce82fe6c
+    password { '123456' }
+  end
+end
