@@ -1,0 +1,54 @@
+<%= form_with model: @streamer_profile do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name, placeholder: I18n.t(:name, scope: "activerecord.attributes.streamer_profile") %>
+    <% @streamer_profile.errors.full_messages_for(:name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :avatar %>
+    <%= f.file_field :avatar %>
+    <% @streamer_profile.errors.full_messages_for(:avatar).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :description %><br>
+    <%= f.text_area :description, rows: 5, cols: 50, placeholder: I18n.t(:description, scope: "activerecord.attributes.streamer_profile") %>
+    <% @streamer_profile.errors.full_messages_for(:description).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :facebook %><br> 
+    <%= f.text_field :facebook, placeholder: I18n.t(:facebook, scope: "activerecord.attributes.streamer_profile") %>
+    <% @streamer_profile.errors.full_messages_for(:facebook).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :instagram %><br> 
+    <%= f.text_field :instagram, placeholder: I18n.t(:instagram, scope: "activerecord.attributes.streamer_profile") %>
+    <% @streamer_profile.errors.full_messages_for(:instagram).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :twitter %><br> 
+    <%= f.text_field :twitter, placeholder: I18n.t(:twitter, scope: "activerecord.attributes.streamer_profile") %>
+    <% @streamer_profile.errors.full_messages_for(:twitter).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.submit %>
+  </div>
+
+<% end %>
