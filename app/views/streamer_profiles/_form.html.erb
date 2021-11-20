@@ -8,6 +8,14 @@
   </div>
 
   <div>
+    <%= f.label :avatar %>
+    <%= f.file_field :avatar %>
+    <% @streamer_profile.errors.full_messages_for(:avatar).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
     <%= f.label :description %><br>
     <%= f.text_area :description, rows: 5, cols: 50, placeholder: I18n.t(:description, scope: "activerecord.attributes.streamer_profile") %>
     <% @streamer_profile.errors.full_messages_for(:description).each do |message| %>
