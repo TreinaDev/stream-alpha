@@ -12,7 +12,12 @@
 
 <div>
   <%= f.label :game_category_ids %>
-  <%= f.collection_select :game_category_ids, @categories, :id, :name, {prompt: 'Escolha uma ou mais categorias'}, {multiple: true} %>
+  <p>
+    <%= f.collection_select :game_category_ids, @categories, :id, :name, {prompt: 'Escolha uma ou mais categorias'}, {multiple: true} %>
+  </p>
+  <% @game.errors.full_messages_for(:game_category_ids).each do |message| %>
+    <li><%= message %></li>
+  <% end %>
 </div>
 
   <%= f.submit 'Registrar novo jogo' %>

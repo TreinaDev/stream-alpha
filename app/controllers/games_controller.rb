@@ -5,13 +5,14 @@ class GamesController < ApplicationController
     if @game.save
       redirect_to admin_area_admins_path, notice: 'Jogo cadastrado com sucesso!'
     else
+      @categories = GameCategory.all.order(name: :asc)
       render :new
     end
   end
 
   def new
     @game = Game.new
-    @categories = GameCategory.all
+    @categories = GameCategory.all.order(name: :asc)
   end
 
   private
