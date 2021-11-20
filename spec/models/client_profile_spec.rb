@@ -33,11 +33,11 @@ RSpec.describe ClientProfile, type: :model do
 
     it 'image cannot be grater than 2 Mb' do
       photo_profile = ClientProfile.new(photo: Rack::Test::UploadedFile
-      .new(Rails.root.join('spec/support/assets/4mb_photo.jpg')))
+        .new(Rails.root.join('spec/support/assets/4mb_photo.jpg')))
       photo_profile.valid?
 
       expect(photo_profile.errors.full_messages_for(:photo)).to include(
-        'Foto deve ser menor que 2 Mb'
+        'Foto do Perfil deve ser menor que 2Mb'
       )
     end
   end

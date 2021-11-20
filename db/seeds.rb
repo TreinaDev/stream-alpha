@@ -11,6 +11,10 @@ admin2 = FactoryBot.create(:admin)
 
 client = FactoryBot.create(:client)
 client2 = FactoryBot.create(:client)
+client3 = FactoryBot.create(:client)
+
+client_profile = FactoryBot.create(:client_profile, :with_photo, client: client)
+client_profile2 = FactoryBot.create(:client_profile, client: client2)
 
 streamer = FactoryBot.create(:streamer)
 streamer2 = FactoryBot.create(:streamer)

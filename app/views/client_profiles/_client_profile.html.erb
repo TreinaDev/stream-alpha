@@ -1,0 +1,27 @@
+<h2> Perfil de <%= @client_profile.social_name.split.first %> </h2>
+
+<dl>
+<% if @client_profile.photo.attached? %>
+    <p><%= image_tag(@client_profile.photo, size: "200x200", alt: 'profile_photo', class: 'profile_photo' )%></p>
+<% else %>
+  <p><%= image_tag("client_photo.svg", size: "200x200", alt: 'profile_photo', class: 'profile_photo') %></p>
+<% end %>
+
+  <dt><%= t(:social_name, scope: "activerecord.attributes.client_profile") %>:</dt>
+  <dd><%= @client_profile.social_name %></dd>
+
+  <dt><%= t(:birth_date, scope: "activerecord.attributes.client_profile") %>:</dt>
+  <dd><%= l @client_profile.birth_date %></dd>
+
+  <dt><%= t(:age_rating, scope: "activerecord.attributes.client_profile") %>:</dt>
+  <dd><%= @client_profile.age_rating %></dd>
+
+  <dt><%= t(:residential_address, scope: "activerecord.attributes.client_profile") %>:</dt>
+  <dd><%= "#{@client_profile.residential_address}, número #{@client_profile.residential_number}" %></dd>
+
+  <dt><%= t(:cep, scope: "activerecord.attributes.client_profile") %>:</dt>
+  <dd><%= @client_profile.cep %></dd>
+
+  <dt><%= t(:city, scope: "activerecord.attributes.client_profile") %>:</dt>
+  <dd><%= "#{@client_profile.city}, #{@client_profile.state}" %></dd>
+</dl>

@@ -26,6 +26,9 @@ class ClientProfile < ApplicationRecord
 
   def acceptable_photo
     return unless photo.attached?
-    return errors.add :photo, 'deve ser menor que 2 Mb' if photo.byte_size > 2.megabyte
+
+    if photo.byte_size > 2.megabyte
+      errors.add(:photo, I18n.t('photo.image_too_big', scope: 'activerecord.errors.models.client_profile.attributes'))
+    end
   end
 end
