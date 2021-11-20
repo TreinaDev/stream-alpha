@@ -13,8 +13,9 @@
   </head>
 
   <body>
-    <div class="container">
-      <%= render '/shared/flash_notification' %>
+    <%= render '/shared/nav_bar'%>
+    <%= render '/shared/flash_notification' %>
+    <div class="container mx-auto px-5 py-2">
       <% if admin_signed_in? %>
         <p><%= link_to 'Área do administrador', admin_area_admins_path %>
         <p><%= link_to "Sair", destroy_admin_session_path, method: :delete %></p>
