@@ -8,7 +8,7 @@ FactoryBot.define do
     streamer
     trait :with_photo do
       photo do
-        Rack::Test::UploadedFile.new(Rails.root.join('spec/support/assets/gary-bendig-6GMq7AGxNbE-unsplash.jpg'),
+        Rack::Test::UploadedFile.new(Rails.root.join('spec/support/assets/gary-bendig-unsplash.jpg'),
                                      'photo/jpg')
       end
     end

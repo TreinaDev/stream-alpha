@@ -20,7 +20,7 @@ describe 'Client profile' do
       fill_in 'Endereço residencial', with: 'Avenida dos clientes'
       fill_in 'Número residencial', with: '153'
       select '16', from: 'Configuração de classificação etária'
-      attach_file 'Foto', Rails.root.join('spec/support/assets/test_photo.jpg')
+      attach_file 'Foto', Rails.root.join('spec/support/assets/gary-bendig-unsplash.jpg')
       click_on 'Criar Perfil de usuário'
 
       expect(page).to have_content('Perfil de Marcela')
@@ -30,7 +30,7 @@ describe 'Client profile' do
       expect(page).to have_content('CEP: 08150530')
       expect(page).to have_content('Cidade: São Paulo, SP')
       expect(ClientProfile.count).to eq(1)
-      expect(page).to have_css("img[src*='test_photo.jpg']")
+      expect(page).to have_css("img[src*='gary-bendig-unsplash.jpg']")
     end
     it 'unsuccessfully: left mandatory information blank' do
       client = create(:client)
@@ -85,7 +85,7 @@ describe 'Client profile' do
       )
       expect(page).to have_content("CEP: #{client_profile.cep}")
       expect(page).to have_content("Cidade: #{client_profile.city}, #{client_profile.state}")
-      expect(page).to have_css("img[src*='test_photo.jpg']")
+      expect(page).to have_css("img[src*='gary-bendig-unsplash.jpg']")
     end
     it 'unsuccessfully view own profile, cause the profile is invalid/nil' do
       client = create(:client)

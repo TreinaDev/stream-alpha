@@ -11,7 +11,7 @@ describe 'Streamer log in' do
       fill_in 'Senha', with: streamer.password
       click_on 'Entrar'
       fill_in 'Nome', with: 'Fulano'
-      attach_file 'Foto do Perfil', Rails.root.join('spec/support/assets/gary-bendig-6GMq7AGxNbE-unsplash.jpg')
+      attach_file 'Foto do Perfil', Rails.root.join('spec/support/assets/gary-bendig-unsplash.jpg')
       fill_in 'Descrição', with: 'Jovem de 22 anos sem ter o que fazer da vida e fica fazendo live na internet'
       fill_in 'URL do Facebook', with: 'https://www.facebook.com/fulano/'
       fill_in 'URL do Instagram', with: 'https://twitter.com/fulano/'
@@ -22,7 +22,7 @@ describe 'Streamer log in' do
       expect(page).to have_content 'Perfil de streamer criado com sucesso!'
       expect(page).to have_content 'Descrição: Jovem de 22 anos sem ter o que fazer da vida ' \
                                    'e fica fazendo live na internet'
-      expect(page).to have_css('img[src*="gary-bendig-6GMq7AGxNbE-unsplash.jpg"]')
+      expect(page).to have_css('img[src*="gary-bendig-unsplash.jpg"]')
       expect(page).to have_link 'https://www.facebook.com/fulano/'
       expect(page).to have_link 'https://twitter.com/fulano/'
       expect(page).to have_link 'https://www.instagram.com/fulano/'

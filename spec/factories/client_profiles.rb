@@ -12,7 +12,7 @@ FactoryBot.define do
     age_rating { 'L' }
     client
     trait :with_photo do
-      photo { Rack::Test::UploadedFile.new(Rails.root.join('spec/support/assets/test_photo.jpg'), 'photo/jpg') }
+      photo { Rack::Test::UploadedFile.new(Rails.root.join('spec/support/assets/gary-bendig-unsplash.jpg'), 'photo/jpg') }
     end
   end
 end
