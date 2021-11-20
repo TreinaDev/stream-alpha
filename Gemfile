@@ -33,3 +33,5 @@ group :test do
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
 end
+
+gem "view_component", "~> 2.44"
