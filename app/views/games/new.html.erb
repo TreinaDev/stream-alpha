@@ -1,0 +1,18 @@
+<h1> Cadastro de novo jogo </h1>
+
+<%= form_with model: @game do |f| %>
+
+<div>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <% @game.errors.full_messages_for(:name).each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+</div>
+
+<div>
+  <%= f.label :game_category_ids %>
+<%= f.collection_select :game_category_ids, @categories, :id, :name %></div>
+
+  <%= f.submit 'Registrar novo jogo' %>
+<% end %>

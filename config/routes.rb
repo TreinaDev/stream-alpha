@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   resources :streamer_profiles, only: %i[show new create]
   resources :client_profiles, only: %i[create new show]
   resources :game_categories, only: %i[create new]
+  resources :games, only: %i[create new]
   resources :videos, only: %i[new create show]
 end

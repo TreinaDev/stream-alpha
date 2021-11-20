@@ -1,0 +1,12 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      game: 'Jogos'
+    attributes:
+      game:
+        name: 'Nome'
+        creation_date: 'Data de criação'
+        creator: 'Criador'
+        game_category_ids: 'Categorias'
+        game_categories: 'Categorias'
