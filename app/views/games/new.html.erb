@@ -12,7 +12,8 @@
 
 <div>
   <%= f.label :game_category_ids %>
-<%= f.collection_select :game_category_ids, @categories, :id, :name %></div>
+  <%= f.collection_select :game_category_ids, @categories, :id, :name, {prompt: 'Escolha uma ou mais categorias'}, {multiple: true} %>
+</div>
 
   <%= f.submit 'Registrar novo jogo' %>
 <% end %>

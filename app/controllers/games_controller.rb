@@ -17,7 +17,7 @@ class GamesController < ApplicationController
   private
 
   def game_creation
-    @game = Game.new(params.require(:game).permit(:name, :game_category_ids))
+    @game = Game.new(params.require(:game).permit(:name, game_category_ids: []))
     @game.admin = current_admin
     @game.creation_date = Time.zone.now.to_date
     @game
