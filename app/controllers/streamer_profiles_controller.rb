@@ -12,8 +12,7 @@ class StreamerProfilesController < ApplicationController
   end
 
   def create
-    @streamer_profile = StreamerProfile.new(streamer_profile_params)
-    @streamer_profile.streamer = current_streamer
+    @streamer_profile = current_streamer.build_streamer_profile(streamer_profile_params)
 
     if streamer_profile_exists?
       redirect_to current_streamer.streamer_profile, alert: 'Perfil já existente!'
@@ -27,8 +26,8 @@ class StreamerProfilesController < ApplicationController
   def edit
     @streamer_profile = StreamerProfile.find(params[:id])
 
-    # O Rubocop apita aqui porque poderia ser "current_streamer" ao invés do _id, e entra num loop com Guard Clause
-    unless @streamer_profile.owner?(current_streamer_id = current_streamer.id)
+    # O Rubocop apita aqui porque entra num loop com GuardClause e IfUnless
+    unless @streamer_profile.owner?(current_streamer.id)
       redirect_to root_path, alert: "Você só pode editar o seu #{t(:streamer_profile, scope: 'activerecord.models')}!"
     end
   end
@@ -36,8 +35,8 @@ class StreamerProfilesController < ApplicationController
   def update
     @streamer_profile = StreamerProfile.find(params[:id])
 
-    # O Rubocop apita aqui porque poderia ser "current_streamer" ao invés do _id, e entra num loop com Guard Clause
-    if !@streamer_profile.owner?(current_streamer_id = current_streamer.id)
+    # O Rubocop apita aqui porque entra num loop com GuardClause e IfUnless
+    if !@streamer_profile.owner?(current_streamer.id)
       redirect_to root_path, alert: "Você só pode editar o seu #{t(:streamer_profile, scope: 'activerecord.models')}!"
     elsif @streamer_profile.update(streamer_profile_params)
       redirect_to @streamer_profile, notice: 'Perfil atualizado com sucesso!'
@@ -55,6 +54,6 @@ class StreamerProfilesController < ApplicationController
   def streamer_profile_params
     params.require(:streamer_profile).permit(:name, :description, :facebook,
                                              :instagram, :twitter,
-                                             :streamer_id, :avatar)
+                                             :streamer_id, :photo)
   end
 end

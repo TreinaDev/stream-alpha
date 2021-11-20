@@ -16,5 +16,5 @@ streamer = FactoryBot.create(:streamer)
 streamer2 = FactoryBot.create(:streamer)
 streamer3 = FactoryBot.create(:streamer)
 
-streamer_profile = FactoryBot.create(:streamer_profile, streamer: streamer)
+streamer_profile = FactoryBot.create(:streamer_profile, :with_photo, streamer: streamer)
 streamer_profile2 = FactoryBot.create(:streamer_profile, streamer: streamer2)
