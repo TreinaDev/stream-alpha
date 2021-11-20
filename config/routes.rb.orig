@@ -5,16 +5,12 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   root to: 'home#index'
-<<<<<<< HEAD
-
-=======
->>>>>>> f44d057768d819d8825fe9d7a722ee3dce82fe6c
   resources :admins, only: %i[] do
     get 'admin_area', on: :collection
   end
 
-<<<<<<< HEAD
   resources :client_profiles, only: %i[create new show]
+  resources :streamer_profiles, only: %i[show new create edit update]
   resources :videos, only: %i[new create show approve] do
     get 'analysis', on: :collection
     member do
@@ -22,10 +18,12 @@ Rails.application.routes.draw do
       post 'refuse'
     end
   end
+<<<<<<< HEAD
+  resources :game_categories, only: %i[create new]
 =======
   resources :streamer_profiles, only: %i[show new create edit update]
   resources :client_profiles, only: %i[create new show]
   resources :game_categories, only: %i[create new]
   resources :videos, only: %i[new create show]
->>>>>>> f44d057768d819d8825fe9d7a722ee3dce82fe6c
+>>>>>>> b540dc9fe221a553be11f6c3f44ac1c33ee2d834
 end

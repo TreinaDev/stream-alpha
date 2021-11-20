@@ -13,7 +13,11 @@
 <<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2021_11_18_190731) do
 =======
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 2021_11_18_190731) do
+=======
 ActiveRecord::Schema.define(version: 2021_11_18_145404) do
+>>>>>>> b540dc9fe221a553be11f6c3f44ac1c33ee2d834
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -42,7 +46,10 @@ ActiveRecord::Schema.define(version: 2021_11_18_145404) do
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
+<<<<<<< HEAD
+=======
 >>>>>>> f44d057768d819d8825fe9d7a722ee3dce82fe6c
+>>>>>>> b540dc9fe221a553be11f6c3f44ac1c33ee2d834
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
