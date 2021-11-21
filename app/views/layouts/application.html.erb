@@ -13,7 +13,7 @@
   <body>
     <div class="container">
       <p>
-        <%= link_to 'Início', root_path if !current_page?(root_path) %>
+        <%= link_to 'Início', root_path %>
         <% if admin_signed_in? %>
             <%= link_to "Área do administrador", admin_area_admins_path %>
             <%= link_to "Sair", destroy_admin_session_path, method: :delete %>
