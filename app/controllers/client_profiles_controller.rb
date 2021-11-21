@@ -9,6 +9,7 @@ class ClientProfilesController < ApplicationController
     elsif @client_profile.save
       redirect_to @client_profile, notice: 'Perfil criado com sucesso!'
     else
+      flash[:alert] = "Erro ao criar #{t(:client_profile, scope: 'activerecord.models')}!"
       render :new
     end
   end
@@ -25,7 +26,7 @@ class ClientProfilesController < ApplicationController
   private
 
   def client_profile_exists?
-    !ClientProfile.find_by(client: current_client).nil?
+    ClientProfile.find_by(client: current_client).present?
   end
 
   def check_if_profile_is_valid

@@ -19,14 +19,14 @@ class StreamerProfilesController < ApplicationController
     elsif @streamer_profile.save
       redirect_to @streamer_profile, notice: "#{t(:streamer_profile, scope: 'activerecord.models')} criado com sucesso!"
     else
-      render :new, alert: "Erro ao criar #{t(:streamer_profile, scope: 'activerecord.models')}!"
+      flash[:alert] = "Erro ao criar #{t(:streamer_profile, scope: 'activerecord.models')}!"
+      render :new
     end
   end
 
   def edit
     @streamer_profile = StreamerProfile.find(params[:id])
 
-    # O Rubocop apita aqui porque entra num loop com GuardClause e IfUnless
     unless @streamer_profile.owner?(current_streamer.id)
       redirect_to root_path, alert: "Você só pode editar o seu #{t(:streamer_profile, scope: 'activerecord.models')}!"
     end
@@ -35,13 +35,13 @@ class StreamerProfilesController < ApplicationController
   def update
     @streamer_profile = StreamerProfile.find(params[:id])
 
-    # O Rubocop apita aqui porque entra num loop com GuardClause e IfUnless
     if !@streamer_profile.owner?(current_streamer.id)
       redirect_to root_path, alert: "Você só pode editar o seu #{t(:streamer_profile, scope: 'activerecord.models')}!"
     elsif @streamer_profile.update(streamer_profile_params)
       redirect_to @streamer_profile, notice: 'Perfil atualizado com sucesso!'
     else
-      render :edit, alert: "Erro ao atualizar #{t(:streamer_profile, scope: 'activerecord.models')}!"
+      flash[:alert] = "Erro ao atualizar #{t(:streamer_profile, scope: 'activerecord.models')}!"
+      render :edit
     end
   end
 

@@ -6,7 +6,8 @@ class GameCategoriesController < ApplicationController
       redirect_to admin_area_admins_path,
                   notice: "#{t(:game_category, scope: 'activerecord.models')} criada com sucesso!"
     else
-      render :new, alert: "Erro ao criar #{t(:game_category, scope: 'activerecord.models')}!"
+      flash[:alert] = "Erro ao criar #{t(:game_category, scope: 'activerecord.models')}!"
+      render :new
     end
   end
 
