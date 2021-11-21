@@ -61,6 +61,43 @@
 .anime {
     animation: notification-countdown 3s;
 }
+.uiui-headline {
+  overflow: hidden;
+  margin: 0;
+  font-size: clamp(1rem, 6vw, 50px);
+}
+
+.uiui-headline > * {
+  will-change: auto;
+  display: inline-block;
+  transform: translate(0, 100%) translateZ(0);
+}
+
+.uiui-headline > *.Revealed {
+  transform: translate(0, 0) translateZ(0);
+}
+
+.uiui-blocks span {
+  transform: translateZ(0);
+  overflow: hidden;
+}
+.uiui-blocks span span {
+  opacity: 0;
+}
+
+.uiui-blocks .uiui-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  transform: translateX(-105%);
+  transform-origin: right;
+}
+
+
 
 
 
