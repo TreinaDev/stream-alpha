@@ -6,6 +6,5 @@ pt-BR:
     attributes:
       game:
         name: 'Nome'
-        creation_date: 'Data de criação'
         creator: 'Criador'
         game_category_ids: 'Categorias'

@@ -26,7 +26,7 @@ describe 'games' do
       admin = create(:admin)
       game_category = create(:game_category)
       Game.create!(name: 'Final Fantasy XII - The Zodiac Age', admin: admin,
-                   creation_date: Time.zone.now.to_date, game_categories: [game_category])
+                   game_categories: [game_category])
 
       login_as admin, scope: :admin
       visit root_path
@@ -57,9 +57,9 @@ describe 'games' do
       admin = create(:admin)
       game_category = create(:game_category)
       Game.create!(name: 'Final Fantasy XII - The Zodiac Age', admin: admin,
-                   creation_date: Time.zone.now.to_date, game_categories: [game_category])
+                   game_categories: [game_category])
       Game.create!(name: 'TLOZ - Breath of the Wild', admin: admin,
-                   creation_date: Time.zone.now.to_date, game_categories: [game_category])
+                   game_categories: [game_category])
 
       login_as admin, scope: :admin
       visit root_path

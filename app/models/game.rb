@@ -7,12 +7,12 @@ class Game < ApplicationRecord
   validates :name, uniqueness: true
 
   def game_categories_list_as_string
-    return unless game_categories.present?
-      string = ''
-      game_categories.sort_by(&:name).each do |category|
-        string += "#{category.name}, "
-      end
-      string[0..string.size - 3]
+    return if game_categories.blank?
+
+    string = ''
+    game_categories.sort_by(&:name).each do |category|
+      string += "#{category.name}, "
     end
+    string.chomp(', ')
   end
 end

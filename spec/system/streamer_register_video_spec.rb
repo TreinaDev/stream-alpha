@@ -8,7 +8,7 @@ describe 'streamer register a video' do
 
     visit root_path
 
-    expect(page).to have_link('Cadastrar Video', href: new_video_path)
+    expect(page).to have_link('Cadastrar Vídeo', href: new_video_path)
   end
 
   it 'successfully' do
@@ -16,7 +16,7 @@ describe 'streamer register a video' do
     login_as streamer, scope: :streamer
 
     visit root_path
-    click_on 'Cadastrar Video'
+    click_on 'Cadastrar Vídeo'
     fill_in 'Nome', with: 'Jogando Mind Craft'
     fill_in 'Descrição', with: 'Jogador irado, joga demais!!'
     fill_in 'Link', with: 'https://vimeo.com/546542asffdmind56465craft'
