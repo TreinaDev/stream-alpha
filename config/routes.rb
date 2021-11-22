@@ -10,7 +10,14 @@ Rails.application.routes.draw do
   end
 
   resources :client_profiles, only: %i[create new show]
-  resources :streamer_profiles, only: %i[show new create edit update]
+
+  resources :streamer_profiles, only: %i[show new create edit update index] do
+    member do
+      post 'inactive'
+      post 'active'
+    end
+  end
+
   resources :videos, only: %i[new create show approve] do
     get 'analysis', on: :collection
     member do
@@ -18,5 +25,6 @@ Rails.application.routes.draw do
       post 'refuse'
     end
   end
+
   resources :game_categories, only: %i[create new]
 end

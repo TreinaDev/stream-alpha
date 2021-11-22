@@ -11,6 +11,12 @@ pt-BR:
         twitter: "URL do Twitter"
         profile_picture: "Foto do Perfil"
         streamer_id: "Perfil de:"
-      statuses:
-        pending: "Pendente"
-        completed: "Completo"
+        status: "Status"
+        statuses:
+          active: "Ativo"
+          inactive: "Inativo"
+  streamer_profiles:
+    inactive:
+      success: "Streamer inativado com sucesso!"
+    active:
+      success: "Streamer ativado com sucesso!"

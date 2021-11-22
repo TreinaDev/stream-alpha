@@ -1,9 +1,12 @@
 class StreamerProfilesController < ApplicationController
   before_action :authenticate_streamer!, only: %i[new create edit update]
-
-  def show
-    @streamer_profile = StreamerProfile.find(params[:id])
+  before_action :authenticate_admin!, only: %i[index active inactive]
+  before_action :find_profile, only: %i[show edit update inactive active]
+  def index
+    @streamers = StreamerProfile.all
   end
+
+  def show; end
 
   def new
     @streamer_profile = StreamerProfile.new
@@ -25,8 +28,6 @@ class StreamerProfilesController < ApplicationController
   end
 
   def edit
-    @streamer_profile = StreamerProfile.find(params[:id])
-
     # O Rubocop apita aqui porque poderia ser "current_streamer" ao invés do _id, e entra num loop com Guard Clause
     unless @streamer_profile.owner?(current_streamer_id = current_streamer.id)
       redirect_to root_path, alert: "Você só pode editar o seu #{t(:streamer_profile, scope: 'activerecord.models')}!"
@@ -34,8 +35,6 @@ class StreamerProfilesController < ApplicationController
   end
 
   def update
-    @streamer_profile = StreamerProfile.find(params[:id])
-
     # O Rubocop apita aqui porque poderia ser "current_streamer" ao invés do _id, e entra num loop com Guard Clause
     if !@streamer_profile.owner?(current_streamer_id = current_streamer.id)
       redirect_to root_path, alert: "Você só pode editar o seu #{t(:streamer_profile, scope: 'activerecord.models')}!"
@@ -46,7 +45,18 @@ class StreamerProfilesController < ApplicationController
     end
   end
 
+  def inactive
+    redirect_to streamer_profile_path(@streamer_profile), notice: t('.success') if @streamer_profile.inactive!
+  end
+  def active
+    redirect_to streamer_profile_path(@streamer_profile), notice: t('.success') if @streamer_profile.active!
+  end
+
   private
+
+  def find_profile
+    @streamer_profile = StreamerProfile.find(params[:id])
+  end
 
   def streamer_profile_exists?
     !StreamerProfile.find_by(streamer: current_streamer).nil?
