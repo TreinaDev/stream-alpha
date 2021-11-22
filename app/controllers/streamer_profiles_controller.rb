@@ -46,11 +46,11 @@ class StreamerProfilesController < ApplicationController
   end
 
   def inactive
-    redirect_to streamer_profile_path(@streamer_profile), notice: t('.success') if @streamer_profile.inactive!
+    redirect_to @streamer_profile, notice: t('.success') if @streamer_profile.inactive!
   end
 
   def active
-    redirect_to streamer_profile_path(@streamer_profile), notice: t('.success') if @streamer_profile.active!
+    redirect_to @streamer_profile, notice: t('.success') if @streamer_profile.active!
   end
 
   private
