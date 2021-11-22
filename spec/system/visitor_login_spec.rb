@@ -12,6 +12,7 @@ describe 'Visitor login' do
       click_on 'Entrar'
 
       expect(page).to have_content 'Login efetuado com sucesso!'
+      expect(page).to have_link 'Sair'
     end
   end
 end

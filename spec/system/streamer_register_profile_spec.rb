@@ -99,5 +99,28 @@ describe 'Streamer log in' do
       expect(page).to have_css('img[src*="streamer_avatar' \
                                '-7cf2b2e4a6bf46ca28b45bc3a866a1a9bfca0a3de9ce12f59caf7da72bcf72b8.svg"]')
     end
+
+    it 'and cant edit another streamer profile' do
+      streamer = create(:streamer)
+      streamer2 = create(:streamer)
+      create(:streamer_profile, streamer: streamer)
+      streamer_profile2 = create(:streamer_profile, streamer: streamer2)
+
+      visit root_path
+      click_on 'Entrar como Streamer'
+      fill_in 'Email', with: streamer.email
+      fill_in 'Senha', with: streamer.password
+      click_on 'Entrar'
+      visit edit_streamer_profile_path(streamer2.streamer_profile)
+
+      expect(current_path).to eq root_path
+      expect(page).to have_content 'Você só pode editar o seu ' \
+                                   "#{I18n.t(:streamer_profile, scope: 'activerecord.models')}!"
+      expect(page).to_not have_content streamer_profile2.name
+      expect(page).to_not have_content streamer_profile2.description
+      expect(page).to_not have_content streamer_profile2.facebook
+      expect(page).to_not have_content streamer_profile2.twitter
+      expect(page).to_not have_content streamer_profile2.instagram
+    end
   end
 end

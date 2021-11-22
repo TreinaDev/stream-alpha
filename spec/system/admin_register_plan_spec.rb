@@ -18,7 +18,7 @@ describe 'Admin' do
 
     it 'but fills wrong' do
       admin = create(:admin) 
-      gamer = create(:streamer)
+      gamer = create(:streamer, profile_status: 10)
       profile = create(:streamer_profile, streamer: gamer)
 
       visit root_path
@@ -42,7 +42,7 @@ describe 'Admin' do
 
     it 'successfully' do
       admin = create(:admin) 
-      gamer = create(:streamer)
+      gamer = create(:streamer, profile_status: 10)
       profile = create(:streamer_profile, streamer: gamer)
 
       visit root_path
@@ -75,7 +75,7 @@ describe 'Admin' do
       click_on 'Log in'
       click_on 'Área do administrador'
       click_on 'Planos de Assinatura'
-      
+
       expect(page).to have_content("#{plano_a.name}")
       expect(page).to have_content("#{plano_b.name}")
       expect(page).to have_content("#{plano_c.name}")  

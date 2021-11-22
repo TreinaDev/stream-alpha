@@ -6,9 +6,9 @@ class StreamerProfile < ApplicationRecord
 
   has_one_attached :avatar
 
-  private
+  def owner?(current_streamer_id = nil)
+    return current_streamer_id == streamer.id if current_streamer_id
 
-  def owner?
-    streamer_signed_in? && current_streamer == @streamer_profile.streamer
+    current_streamer == streamer
   end
 end
