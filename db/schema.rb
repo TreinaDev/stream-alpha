@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_20_031616) do
+ActiveRecord::Schema.define(version: 2021_11_22_230559) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -90,6 +90,24 @@ ActiveRecord::Schema.define(version: 2021_11_20_031616) do
     t.index ["name"], name: "index_game_categories_on_name", unique: true
   end
 
+  create_table "games", force: :cascade do |t|
+    t.string "name"
+    t.integer "admin_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_id"], name: "index_games_on_admin_id"
+    t.index ["name"], name: "index_games_on_name", unique: true
+  end
+
+  create_table "games_game_categories", force: :cascade do |t|
+    t.integer "game_category_id", null: false
+    t.integer "game_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_category_id"], name: "index_games_game_categories_on_game_category_id"
+    t.index ["game_id"], name: "index_games_game_categories_on_game_id"
+  end
+
   create_table "streamer_profiles", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -129,6 +147,9 @@ ActiveRecord::Schema.define(version: 2021_11_20_031616) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "client_profiles", "clients"
   add_foreign_key "game_categories", "admins"
+  add_foreign_key "games", "admins"
+  add_foreign_key "games_game_categories", "game_categories"
+  add_foreign_key "games_game_categories", "games"
   add_foreign_key "streamer_profiles", "streamers"
   add_foreign_key "videos", "streamers"
 end
