@@ -15,12 +15,12 @@ describe 'admin management streamer' do
 
     visit admin_area_admins_path
     click_on 'Ver Streamers'
-    
-    expect(current_path).to eq(streamer_profiles_path) 
+
+    expect(current_path).to eq(streamer_profiles_path)
     streamers.each do |streamer|
       expect(page).to have_link(streamer.name, href: streamer_profile_path(streamer))
       expect(page).to have_content('Ativo')
-    end  
+    end
     expect(page).to_not have_content('Não existem streamers cadastrados na plataforma')
   end
   it 'can view no there streamers' do
@@ -28,8 +28,8 @@ describe 'admin management streamer' do
 
     visit admin_area_admins_path
     click_on 'Ver Streamers'
-    
-    expect(current_path).to eq(streamer_profiles_path) 
+
+    expect(current_path).to eq(streamer_profiles_path)
     expect(page).to have_content('Não existem streamers cadastrados na plataforma')
   end
   it 'can view link for disable a streamer' do
@@ -41,7 +41,7 @@ describe 'admin management streamer' do
     click_on 'Ver Streamers'
     click_on streamer.name
 
-    expect(current_path).to eq(streamer_profile_path(streamer)) 
+    expect(current_path).to eq(streamer_profile_path(streamer))
     expect(page).to have_link('Inativar', href: inactive_streamer_profile_path(streamer))
   end
   it 'can disable a streamer' do
@@ -53,7 +53,7 @@ describe 'admin management streamer' do
     click_on 'Inativar'
 
     streamer.reload
-    expect(current_path).to eq streamer_profile_path(streamer) 
+    expect(current_path).to eq streamer_profile_path(streamer)
     expect(streamer.inactive?).to be true
     expect(page).to have_content 'Streamer inativado com sucesso!'
     expect(page).to have_content 'Inativo'
@@ -69,7 +69,7 @@ describe 'admin management streamer' do
     click_on 'Ver Streamers'
     click_on streamer.name
 
-    expect(current_path).to eq(streamer_profile_path(streamer)) 
+    expect(current_path).to eq(streamer_profile_path(streamer))
     expect(page).to have_link('Ativar', href: active_streamer_profile_path(streamer))
     expect(page).to_not have_link('Inativar', href: inactive_streamer_profile_path(streamer))
   end
@@ -82,7 +82,7 @@ describe 'admin management streamer' do
     click_on 'Ativar'
 
     streamer.reload
-    expect(current_path).to eq streamer_profile_path(streamer) 
+    expect(current_path).to eq streamer_profile_path(streamer)
     expect(streamer.active?).to be true
     expect(page).to have_content 'Streamer ativado com sucesso!'
     expect(page).to have_content 'Ativo'

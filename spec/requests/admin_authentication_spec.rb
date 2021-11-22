@@ -18,19 +18,19 @@ describe 'Admin authentication' do
   end
   it 'cannot view all streamers' do
     get '/streamer_profiles'
-    
+
     expect(response).to redirect_to(new_admin_session_path)
   end
   it 'cannot inactivate a streamer' do
     streamer = create(:streamer)
     post "/streamer_profiles/#{streamer.id}/inactive"
-    
+
     expect(response).to redirect_to(new_admin_session_path)
   end
   it 'cannot activate a streamer' do
     streamer = create(:streamer)
     post "/streamer_profiles/#{streamer.id}/active"
-    
+
     expect(response).to redirect_to(new_admin_session_path)
   end
 end
