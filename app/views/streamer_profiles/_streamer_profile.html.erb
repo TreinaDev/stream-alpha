@@ -5,7 +5,7 @@
 <% end %>
 
 <h2>Perfil de <%= @streamer_profile.name %></h2>
-<% if @streamer_profile.owner?(current_streamer.id) %>
+<% if @streamer_profile.owner?(current_streamer) %>
   <%= link_to "Editar Perfil", edit_streamer_profile_path %>
 <% end %>
 

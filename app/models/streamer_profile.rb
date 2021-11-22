@@ -6,7 +6,7 @@ class StreamerProfile < ApplicationRecord
 
   has_one_attached :photo
 
-  def owner?(current_streamer_id = nil)
-    return current_streamer_id == streamer.id if current_streamer_id
+  def owner?(current_streamer = nil)
+    return current_streamer == streamer if current_streamer
   end
 end
