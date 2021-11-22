@@ -1,0 +1,6 @@
+<h1>Planos Cadastrados</h1>
+
+<% @plans.each do |plano| %>
+  <p><%= link_to plano.name, plan_path(plano) %><br>
+  <%= plano.description %></p>
+<% end %>

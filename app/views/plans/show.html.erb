@@ -1,0 +1,8 @@
+<h1><%= @video_plan.name%></h1>
+<h4><%= @video_plan.description%></h4>
+<h4>Valor: <%= number_to_currency @video_plan.value%></h4><br>
+<h6>Conteúdo:</h6><br>
+<p>Streamers:</p>
+<%@profiles.each do |perfil| %>
+  <p><%= link_to perfil.name, streamer_profile_path(perfil) if perfil.present?%></p>
+<% end %>

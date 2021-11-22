@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :plan do
-    name { "MyString" }
-    description { "MyString" }
-    value { "9.99" }
+    sequence(:name) { |n| "Plano #{n}" }
+    description { "Este plano vale cada centavo" }
+    value { "79.99" }
   end
 end

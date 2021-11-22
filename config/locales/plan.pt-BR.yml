@@ -1,0 +1,10 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      plan: "Plano de Assinatura"
+    attributes:
+      plan:
+        name: "Nome do Plano"
+        description: "Descrição"
+        value: "Valor"

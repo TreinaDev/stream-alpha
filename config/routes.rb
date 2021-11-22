@@ -14,5 +14,5 @@ Rails.application.routes.draw do
   resources :game_categories, only: %i[create new]
   resources :videos, only: %i[new create show]
   resources :game_categories, only: %i[create new]
-  resources :plans, only: %i[create new]
+  resources :plans, only: %i[create new show index]
 end
