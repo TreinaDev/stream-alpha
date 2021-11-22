@@ -8,9 +8,9 @@
   </div>
 
   <div>
-    <%= f.label :avatar %>
-    <%= f.file_field :avatar %>
-    <% @streamer_profile.errors.full_messages_for(:avatar).each do |message| %>
+    <%= f.label :photo %>
+    <%= f.file_field :photo %>
+    <% @streamer_profile.errors.full_messages_for(:photo).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>

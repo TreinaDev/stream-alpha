@@ -12,23 +12,22 @@ class StreamerProfilesController < ApplicationController
   end
 
   def create
-    @streamer_profile = StreamerProfile.new(streamer_profile_params)
-    @streamer_profile.streamer = current_streamer
+    @streamer_profile = current_streamer.build_streamer_profile(streamer_profile_params)
 
     if streamer_profile_exists?
       redirect_to current_streamer.streamer_profile, alert: 'Perfil já existente!'
     elsif @streamer_profile.save
       redirect_to @streamer_profile, notice: "#{t(:streamer_profile, scope: 'activerecord.models')} criado com sucesso!"
     else
-      render :new, alert: "Erro ao criar #{t(:streamer_profile, scope: 'activerecord.models')}!"
+      flash[:alert] = "Erro ao criar #{t(:streamer_profile, scope: 'activerecord.models')}!"
+      render :new
     end
   end
 
   def edit
     @streamer_profile = StreamerProfile.find(params[:id])
 
-    # O Rubocop apita aqui porque poderia ser "current_streamer" ao invés do _id, e entra num loop com Guard Clause
-    unless @streamer_profile.owner?(current_streamer_id = current_streamer.id)
+    unless @streamer_profile.owner?(current_streamer)
       redirect_to root_path, alert: "Você só pode editar o seu #{t(:streamer_profile, scope: 'activerecord.models')}!"
     end
   end
@@ -36,13 +35,13 @@ class StreamerProfilesController < ApplicationController
   def update
     @streamer_profile = StreamerProfile.find(params[:id])
 
-    # O Rubocop apita aqui porque poderia ser "current_streamer" ao invés do _id, e entra num loop com Guard Clause
-    if !@streamer_profile.owner?(current_streamer_id = current_streamer.id)
+    if !@streamer_profile.owner?(current_streamer)
       redirect_to root_path, alert: "Você só pode editar o seu #{t(:streamer_profile, scope: 'activerecord.models')}!"
     elsif @streamer_profile.update(streamer_profile_params)
       redirect_to @streamer_profile, notice: 'Perfil atualizado com sucesso!'
     else
-      render :edit, alert: "Erro ao atualizar #{t(:streamer_profile, scope: 'activerecord.models')}!"
+      flash[:alert] = "Erro ao atualizar #{t(:streamer_profile, scope: 'activerecord.models')}!"
+      render :edit
     end
   end
 
@@ -55,6 +54,6 @@ class StreamerProfilesController < ApplicationController
   def streamer_profile_params
     params.require(:streamer_profile).permit(:name, :description, :facebook,
                                              :instagram, :twitter,
-                                             :streamer_id, :avatar)
+                                             :streamer_id, :photo)
   end
 end
