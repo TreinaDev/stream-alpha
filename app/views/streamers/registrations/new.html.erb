@@ -1,4 +1,4 @@
-<h2>Criar conta de <%= t(:streamer, scope: "activerecord.models") %></h2>
+<h2>Criar conta de Streamer</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "streamers/shared/error_messages", resource: resource %>
@@ -11,7 +11,7 @@
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> caracteres mínimos)</em>
+    <em>(<%= @minimum_password_length %> caracteres no mínimo)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>

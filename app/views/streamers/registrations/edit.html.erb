@@ -17,7 +17,7 @@
     <%= f.password_field :password, autocomplete: "new-password" %>
     <% if @minimum_password_length %>
       <br />
-      <em><%= @minimum_password_length %> caracteres mínimos</em>
+      <em><%= @minimum_password_length %> caracteres no mínimo</em>
     <% end %>
   </div>
 
@@ -32,7 +32,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "Atualizar" %>
   </div>
 <% end %>
 
