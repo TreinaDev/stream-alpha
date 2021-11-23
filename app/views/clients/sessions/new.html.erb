@@ -1,26 +1,29 @@
 <h2>Entrar como assinante</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
+<div class="bg-gray-900 xl:w-2/5 mx-auto w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <%= f.label :email, class: "block text-blue-300 py-2 font-bold mb-2" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password, class: "block text-blue-300 py-2 font-bold mb-2" %>
+      <%= f.password_field :password, autocomplete: "current-password", class: "shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out" %>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="field">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "Entrar", class: "bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out" %>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= f.submit "Entrar" %>
-  </div>
-<% end %>
+</div>
 
 <%= render "clients/shared/links" %>
+

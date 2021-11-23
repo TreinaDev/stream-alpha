@@ -125,6 +125,7 @@ GEM
     parallel (1.21.0)
     parser (3.0.2.0)
       ast (~> 2.4.1)
+    particles-js-rails (2.0.0)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -282,6 +283,7 @@ DEPENDENCIES
   importmap-rails (~> 0.8.2)
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  particles-js-rails (~> 2.0)
   pry-byebug
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)

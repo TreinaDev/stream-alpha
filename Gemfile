@@ -13,6 +13,7 @@ gem 'sass-rails', '>= 6'
 gem 'sqlite3', '~> 1.4'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 5.0'
+gem 'particles-js-rails', '~> 2.0'
 
 group :development, :test do
   gem 'factory_bot_rails'
