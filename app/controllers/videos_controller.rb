@@ -20,7 +20,7 @@ class VideosController < ApplicationController
   def show; end
 
   def analysis
-    @videos = Video.all_in_analysis
+    @videos = Video.pending
   end
 
   def approve
