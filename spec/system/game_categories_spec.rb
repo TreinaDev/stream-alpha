@@ -12,7 +12,7 @@ describe 'game categories' do
       fill_in 'Nome', with: 'Ação'
       click_on 'Registrar nova categoria'
 
-      expect(page).to have_content("Ação || criada em: #{Time.zone.now.to_date} por #{admin.email}")
+      expect(page).to have_content("Ação || criada em: #{Time.zone.now} por #{admin.email}")
       expect(GameCategory.count).to eq(1)
     end
     it 'unsuccessfully - tried to create a repeated category' do
@@ -54,13 +54,13 @@ describe 'game categories' do
       click_on 'Área do administrador'
 
       expect(page).to have_content(
-        "#{game_category3.name} || criada em: #{game_category3.creation_date} por #{game_category3.admin.email}"
+        "#{game_category3.name} || criada em: #{game_category3.created_at} por #{game_category3.admin.email}"
       )
       expect(page).to have_content(
-        "#{game_category2.name} || criada em: #{game_category2.creation_date} por #{game_category2.admin.email}"
+        "#{game_category2.name} || criada em: #{game_category2.created_at} por #{game_category2.admin.email}"
       )
       expect(page).to have_content(
-        "#{game_category1.name} || criada em: #{game_category1.creation_date} por #{game_category1.admin.email}"
+        "#{game_category1.name} || criada em: #{game_category1.created_at} por #{game_category1.admin.email}"
       )
     end
     it 'and there are no game categories registered' do
