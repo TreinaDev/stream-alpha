@@ -12,7 +12,9 @@ describe 'game categories' do
       fill_in 'Nome', with: 'Ação'
       click_on 'Registrar nova categoria'
 
-      expect(page).to have_content("Ação || criada em: #{Time.zone.now.to_date} por #{admin.email}")
+      expect(page).to have_content('Ação')
+      expect(page).to have_content(I18n.l(Time.zone.now.to_date))
+      expect(page).to have_content(admin.email)
       expect(GameCategory.count).to eq(1)
     end
     it 'unsuccessfully - tried to create a repeated category' do
@@ -45,23 +47,23 @@ describe 'game categories' do
   context 'Admin views game categories:' do
     it 'successfully' do
       admin = create(:admin)
-      game_category1 = create(:game_category, name: 'RPG')
-      game_category2 = create(:game_category, name: 'MOBA')
-      game_category3 = create(:game_category, name: 'Ação')
+      game_category1 = create(:game_category, name: 'RPG', created_at: 3.months.ago)
+      game_category2 = create(:game_category, name: 'MOBA', created_at: 2.months.ago)
+      game_category3 = create(:game_category, name: 'Ação', created_at: 1.month.ago)
 
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
 
-      expect(page).to have_content(
-        "#{game_category3.name} || criada em: #{game_category3.creation_date} por #{game_category3.admin.email}"
-      )
-      expect(page).to have_content(
-        "#{game_category2.name} || criada em: #{game_category2.creation_date} por #{game_category2.admin.email}"
-      )
-      expect(page).to have_content(
-        "#{game_category1.name} || criada em: #{game_category1.creation_date} por #{game_category1.admin.email}"
-      )
+      expect(page).to have_content(game_category1.name)
+      expect(page).to have_content(I18n.l(game_category1.created_at.to_date))
+      expect(page).to have_content(game_category1.admin.email)
+      expect(page).to have_content(game_category2.name)
+      expect(page).to have_content(I18n.l(game_category2.created_at.to_date))
+      expect(page).to have_content(game_category2.admin.email)
+      expect(page).to have_content(game_category3.name)
+      expect(page).to have_content(I18n.l(game_category3.created_at.to_date))
+      expect(page).to have_content(game_category3.admin.email)
     end
     it 'and there are no game categories registered' do
       admin = create(:admin)

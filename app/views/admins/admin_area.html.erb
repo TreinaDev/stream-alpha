@@ -1,16 +1,20 @@
+<h1>Área do administrador</h1>
+
 <%= link_to 'Videos Pendentes', analysis_videos_path %>
 <%= link_to "Ver Streamers", streamer_profiles_path %>
 
-<h1> Área do administrador </h1>
+<%= render 'game_categories/game_categories' %>
 
 <div>
-  <p> Categorias de jogos atualmente cadastradas na plataforma: </p>
-  <% if @game_categories.any? %>
-    <% @game_categories.each do |category| %>
-      <%= "#{category.name} || criada em: #{category.creation_date} por #{category.admin.email}" %>
+  <p> Jogos cadastrados na plataforma: </p>
+    <% if @games.any? %>
+    <% @games.each do |game| %>
+      <%= "Nome: #{game.name}" %>
+      <%= "Categorias: #{game.game_categories_list_as_string}" %>
+      <%= "Adicionado em #{l game.created_at.to_date}, por #{game.admin.email}"%>
     <% end %>
   <% else %>
-    <p>Nenhuma categoria de jogo registrada.</p>
+    <p>Nenhum jogo registrado.</p>
   <% end %>
-  <p><%= link_to 'Registrar nova categoria de jogos', new_game_category_path %></p>
+  <%= link_to 'Registrar novo jogo', new_game_path%>
 </div>

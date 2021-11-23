@@ -66,10 +66,11 @@ rails server
 
 ### Entrar como Cliente
 
-| E-mail           | Password  |
-| ---------------- | --------- |
-| client1@user.com | 123456798 |
-| client2@user.com | 123456798 |
+| E-mail           | Password |
+| ---------------- | -------- |
+| client1@user.com | 123456   |
+| client2@user.com | 123456   |
+| client3@user.com | 123456   |
 
 ### Entrar como Streamer
 

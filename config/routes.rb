@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     get 'admin_area', on: :collection
   end
 
-  resources :client_profiles, only: %i[create new show]
+  resources :client_profiles, only: %i[create new show edit update]
+  resources :game_categories, only: %i[create new]
+  resources :games, only: %i[create new]
 
   resources :streamer_profiles, only: %i[show new create edit update index] do
     member do
@@ -25,6 +27,4 @@ Rails.application.routes.draw do
       post 'refuse'
     end
   end
-
-  resources :game_categories, only: %i[create new]
 end

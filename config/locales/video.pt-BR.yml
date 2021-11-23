@@ -2,7 +2,7 @@
 pt-BR:
   activerecord:
     models:
-      video: "Video"
+      video: "Vídeo"
     attributes:
       video:
         name: "Nome"

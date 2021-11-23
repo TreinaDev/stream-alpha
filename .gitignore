@@ -36,5 +36,5 @@ yarn-debug.log*
 .yarn-integrity
 coverage
 
-# Ignore Storage files
+# Ignore Active Storage files
 /storage
