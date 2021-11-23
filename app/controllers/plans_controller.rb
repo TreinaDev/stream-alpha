@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
   before_action :authenticate_admin!, only: %i[new create]
-  
+
   def index
     @plans = Plan.all
   end
@@ -20,14 +20,11 @@ class PlansController < ApplicationController
 
   def show
     @video_plan = Plan.find(params[:id])
-    @profiles = []
-    @video_plan.streamer.each{ |gamer| @profiles << gamer.streamer_profile }
   end
 
   private
-  
+
   def plans_params
-  params.require(:plan).permit(:name, :description, :value, streamer_ids: [])
+    params.require(:plan).permit(:name, :description, :value, streamer_ids: [])
   end
 end
-  

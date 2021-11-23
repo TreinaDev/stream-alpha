@@ -8,3 +8,6 @@ pt-BR:
         name: "Nome do Plano"
         description: "Descrição"
         value: "Valor"
+        content_streamer: "Conteúdo"
+        streamer_ids: "Streamers"
+        created_at: "Criado em"

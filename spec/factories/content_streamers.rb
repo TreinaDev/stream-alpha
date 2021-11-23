@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :content_streamer do
-    plan { nil }
-    streamer { nil }
+    plan
+    streamer
   end
 end

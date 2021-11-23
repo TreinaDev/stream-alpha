@@ -1,29 +1,3 @@
-<h1>Insira as informações do plano que deseja cadastrar</h1>
-<%= form_with model: @video_plan do |f| %>
-  <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-    <%@video_plan.errors.full_messages_for(:name).each do |message|%>
-    <div><%= message %></div>
-    <% end %>
-  </div>
-  <div>
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-    <%@video_plan.errors.full_messages_for(:description).each do |message|%>
-    <div><%= message %></div>
-    <% end %>
-  </div>
-  <div>
-    <%= f.label :value %>
-    <%= f.number_field :value %>
-    <%@video_plan.errors.full_messages_for(:value).each do |message|%>
-    <div><%= message %></div>
-    <% end %>
-  </div>
-  <div>
-    <%= f.label :streamer_ids, 'Selecione os Streamer incluídos no plano' %><br>
-    <%= f.collection_select :streamer_ids, Streamer.where(profile_status:10), :id ,:email, {prompt: true}, {multiple: true} %>
-  </div><br>  
-  <%= f.submit %>
-<% end %>
+<h2>Insira as informações do plano que deseja cadastrar</h2>
+
+<%= render "form", object: @video_plan %>
