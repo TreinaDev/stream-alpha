@@ -1,11 +1,14 @@
-<h2> Perfil de <%= @client_profile.social_name.split.first %> </h2>
+<h2>Perfil de <%= @client_profile.social_name.split.first %></h2>
+<% if @client_profile.owner?(current_client) %>
+  <%= link_to "Editar Perfil", edit_client_profile_path %>
+<% end %>
 
 <dl>
-<% if @client_profile.photo.attached? %>
-    <p><%= image_tag(@client_profile.photo, size: "200x200", alt: 'profile_photo', class: 'profile_photo' )%></p>
-<% else %>
-  <p><%= image_tag("client_photo.svg", size: "200x200", alt: 'profile_photo', class: 'profile_photo') %></p>
-<% end %>
+  <% if @client_profile.photo.attached? %>
+      <p><%= image_tag(@client_profile.photo, size: "200x200", alt: 'profile_photo', class: 'profile_photo' )%></p>
+  <% else %>
+    <p><%= image_tag("client_photo.svg", size: "200x200", alt: 'profile_photo', class: 'profile_photo') %></p>
+  <% end %>
 
   <dt><%= t(:social_name, scope: "activerecord.attributes.client_profile") %>:</dt>
   <dd><%= @client_profile.social_name %></dd>

@@ -23,6 +23,27 @@ class ClientProfilesController < ApplicationController
     @client_profile = ClientProfile.find(params[:id])
   end
 
+  def edit
+    @client_profile = ClientProfile.find(params[:id])
+
+    unless @client_profile.owner?(current_client)
+      redirect_to root_path, alert: "Você só pode editar o seu #{t(:client_profile, scope: 'activerecord.models')}!"
+    end
+  end
+
+  def update
+    @client_profile = ClientProfile.find(params[:id])
+
+    if !@client_profile.owner?(current_client)
+      redirect_to root_path, alert: "Você só pode editar o seu #{t(:client_profile, scope: 'activerecord.models')}!"
+    elsif @client_profile.update(update_client_profile_params)
+      redirect_to @client_profile, notice: 'Perfil atualizado com sucesso!'
+    else
+      flash[:alert] = "Erro ao atualizar #{t(:client_profile, scope: 'activerecord.models')}!"
+      render :edit
+    end
+  end
+
   private
 
   def client_profile_exists?
@@ -36,6 +57,13 @@ class ClientProfilesController < ApplicationController
   def client_profile_params
     params.require(:client_profile).permit(:full_name, :social_name, :birth_date,
                                            :cpf, :cep, :city, :state, :age_rating,
+                                           :residential_address,
+                                           :residential_number, :photo)
+  end
+
+  def update_client_profile_params
+    params.require(:client_profile).permit(:full_name, :social_name, :birth_date,
+                                           :cep, :city, :state, :age_rating,
                                            :residential_address,
                                            :residential_number, :photo)
   end
