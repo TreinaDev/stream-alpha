@@ -44,7 +44,7 @@ describe 'Client profile' do
       click_on 'Criar Perfil de usuário'
 
       expect(current_path).to eq client_profiles_path
-      expect(page).to have_content('Erro ao criar Perfil de usuário!') 
+      expect(page).to have_content('Erro ao criar Perfil de usuário!')
       expect(page).to have_content(
         'Nome completo (conforme documentos) não pode ficar em branco'
       )
