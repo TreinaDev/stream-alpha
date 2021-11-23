@@ -1,3 +1,4 @@
+<%= link_to 'Videos Pendentes', analysis_videos_path %>
 <h1>Área do administrador</h1>
 
 <%= render 'game_categories/game_categories' %>
@@ -8,7 +9,7 @@
     <% @games.each do |game| %>
       <%= "Nome: #{game.name}" %>
       <%= "Categorias: #{game.game_categories_list_as_string}" %>
-      <%= "Adicionado em #{game.creation_date}, por #{game.admin.email}"%>
+      <%= "Adicionado em #{l game.created_at.to_date}, por #{game.admin.email}"%>
     <% end %>
   <% else %>
     <p>Nenhum jogo registrado.</p>
