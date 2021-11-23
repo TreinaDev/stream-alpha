@@ -11,6 +11,7 @@ class ClientProfile < ApplicationRecord
 
   def owner?(current_client = nil)
     return current_client == client if current_client
+    false
   end
 
   private

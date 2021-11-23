@@ -2,6 +2,7 @@ class ClientProfilesController < ApplicationController
   before_action :authenticate_client!, only: %i[create new]
   before_action :authenticate_client_or_admin!, only: %i[show]
   before_action :check_if_profile_is_valid, only: %i[show]
+  before_action :client_is_owner!, only: %i[edit update]
   def create
     @client_profile = current_client.build_client_profile(client_profile_params)
     if client_profile_exists?
@@ -25,18 +26,12 @@ class ClientProfilesController < ApplicationController
 
   def edit
     @client_profile = ClientProfile.find(params[:id])
-
-    unless @client_profile.owner?(current_client)
-      redirect_to root_path, alert: "Você só pode editar o seu #{t(:client_profile, scope: 'activerecord.models')}!"
-    end
   end
 
   def update
     @client_profile = ClientProfile.find(params[:id])
 
-    if !@client_profile.owner?(current_client)
-      redirect_to root_path, alert: "Você só pode editar o seu #{t(:client_profile, scope: 'activerecord.models')}!"
-    elsif @client_profile.update(update_client_profile_params)
+    if @client_profile.update(update_client_profile_params)
       redirect_to @client_profile, notice: 'Perfil atualizado com sucesso!'
     else
       flash[:alert] = "Erro ao atualizar #{t(:client_profile, scope: 'activerecord.models')}!"
@@ -52,6 +47,13 @@ class ClientProfilesController < ApplicationController
 
   def check_if_profile_is_valid
     redirect_to new_client_profile_path unless current_client&.client_profile?
+  end
+
+  def client_is_owner!
+    @client_profile = ClientProfile.find(params[:id])
+    unless @client_profile.owner?(current_client)
+      redirect_to root_path, alert: "Você só pode editar o seu #{t(:client_profile, scope: 'activerecord.models')}!"
+    end
   end
 
   def client_profile_params
