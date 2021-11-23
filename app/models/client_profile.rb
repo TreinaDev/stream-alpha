@@ -1,11 +1,14 @@
 class ClientProfile < ApplicationRecord
   belongs_to :client
+  has_one_attached :photo
 
   validates :full_name, :social_name, :birth_date, :cpf, :cep, :city,
             :state, :residential_number, :residential_address, :age_rating,
             presence: true
 
   validate :must_include_a_surname, :correct_cpf_length, :correct_cep_length
+
+  validate :acceptable_photo
 
   private
 
@@ -19,5 +22,13 @@ class ClientProfile < ApplicationRecord
 
   def must_include_a_surname
     errors.add(:full_name, 'deve incluir um sobrenome') if full_name && full_name.split.length < 2
+  end
+
+  def acceptable_photo
+    return unless photo.attached?
+
+    if photo.byte_size > 2.megabyte
+      errors.add(:photo, I18n.t('photo.image_too_big', scope: 'activerecord.errors.models.client_profile.attributes'))
+    end
   end
 end
