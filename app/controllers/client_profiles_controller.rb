@@ -51,9 +51,9 @@ class ClientProfilesController < ApplicationController
 
   def client_is_owner!
     @client_profile = ClientProfile.find(params[:id])
-    unless @client_profile.owner?(current_client)
-      redirect_to root_path, alert: "Você só pode editar o seu #{t(:client_profile, scope: 'activerecord.models')}!"
-    end
+    return if @client_profile.owner?(current_client)
+
+    redirect_to root_path, alert: "Você só pode editar o seu #{t(:client_profile, scope: 'activerecord.models')}!"
   end
 
   def client_profile_params

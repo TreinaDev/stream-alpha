@@ -5,4 +5,5 @@ class Admin < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :game_categories, dependent: :nullify
+  has_many :playlists, dependent: :nullify
 end

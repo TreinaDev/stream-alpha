@@ -18,11 +18,13 @@ class ClientProfile < ApplicationRecord
   private
 
   def correct_cep_length
-    errors.add(:cep, 'deve ter 8 dígitos') if cep && cep.chars.length != 8
+    errors.add(:cep, I18n.t('digits', scope: 'activerecord.errors.messages', size: '8')) if cep && cep.chars.length != 8
   end
 
   def correct_cpf_length
-    errors.add(:cpf, 'deve ter 11 dígitos') if cpf && cpf.chars.length != 11
+    return unless cpf && cpf.chars.length != 11
+
+    errors.add(:cpf, I18n.t('digits', scope: 'activerecord.errors.messages', size: '11'))
   end
 
   def must_include_a_surname
@@ -31,11 +33,8 @@ class ClientProfile < ApplicationRecord
 
   def acceptable_photo
     return unless photo.attached?
+    return unless photo.byte_size > 2.megabyte
 
-    if photo.byte_size > 2.megabyte
-      errors.add(:photo, I18n.t('photo.image_too_big',
-                                scope: 'activerecord.errors.models.'\
-                                       'client_profile.attributes'))
-    end
+    errors.add(:photo, I18n.t('file_too_large', scope: 'activerecord.errors.messages', size: '2Mb'))
   end
 end

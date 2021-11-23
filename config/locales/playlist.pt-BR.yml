@@ -1,0 +1,13 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      playlist: "Playlist"
+    attributes:
+      playlist:
+        name: "Nome"
+        description: "Descrição"
+  playlists:
+    create:
+      success: "Playlist criada com sucesso!"
+      failed: "Erro ao criar Playlist!"

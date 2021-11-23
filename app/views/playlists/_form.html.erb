@@ -1,0 +1,23 @@
+<%= form_with model: @playlist do |pl|%>
+  <div>
+    <%= pl.label :name %>
+    <%= pl.text_field :name, placeholder: 'Escreva o nome da playlist' %>
+
+    <% @playlist.errors.full_messages_for(:name).each do |error| %>
+      <div><%= error %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= pl.label :description %><br>
+    <%= pl.text_area :description, rows: 5, cols: 50, placeholder: 'Escreva o descrição da playlist' %>
+
+    <% @playlist.errors.full_messages_for(:description).each do |error| %>
+      <div><%= error %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= pl.submit "Enviar Playlist" %>
+  </div>
+<% end %>
