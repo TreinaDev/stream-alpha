@@ -20,8 +20,6 @@ class PlansController < ApplicationController
 
   def show
     @video_plan = Plan.find(params[:id])
-    @profiles = []
-    @video_plan.streamer.each{ |gamer| @profiles << gamer.streamer_profile }
   end
 
   private

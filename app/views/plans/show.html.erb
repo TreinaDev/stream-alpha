@@ -3,6 +3,6 @@
 <h4>Valor: <%= number_to_currency @video_plan.value%></h4><br>
 <h6>Conteúdo:</h6><br>
 <p>Streamers:</p>
-<%@profiles.each do |perfil| %>
-  <p><%= link_to perfil.name, streamer_profile_path(perfil) if perfil.present?%></p>
-<% end %>
+<% @video_plan.streamers.each do |gamer|%>
+  <%= gamer.streamer_profile.name if gamer.present? %><br>
+<%end%>
