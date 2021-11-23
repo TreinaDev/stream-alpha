@@ -1,8 +1,10 @@
 FactoryBot.define do
   factory :video do
-    name { 'Jogando fifa' }
-    description { 'Modo carreira' }
-    link { 'https://www.vimeo.com/123nasndlka' }
+    name { 'Jogando Mind Craft' }
+    description { 'Jogador irado, joga demais!!' }
+    link do
+      "https://vimeo.com/#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}"
+    end
     streamer
   end
 end

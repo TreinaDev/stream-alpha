@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      streamer_profile: "Perfil de streamer"
+    attributes:
+      streamer_profile:
+        name: "Nome"
+        description: "Descrição"
+        facebook: "URL do Facebook"
+        instagram: "URL do Instagram"
+        twitter: "URL do Twitter"
+        photo: "Foto do Perfil"
+        streamer_id: "Perfil de"
+      statuses:
+        pending: "Pendente"
+        completed: "Completo"
