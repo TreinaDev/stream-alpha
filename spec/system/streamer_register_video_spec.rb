@@ -19,12 +19,19 @@ describe 'streamer register a video' do
     click_on 'Cadastrar Video'
     fill_in 'Nome', with: 'Jogando Mind Craft'
     fill_in 'Descrição', with: 'Jogador irado, joga demais!!'
+    fill_in 'Nome do jogo', with: 'Mind Craft'
+    fill_in 'Duração', with: '10:15'
+    select 'Adolecentes e crianças', from: 'Categoria de Jogos'
+    select 'menores de 13 anos', from: 'Subcategoria de Jogos'
+    check 'Venda avulso'
     fill_in 'Link', with: 'https://vimeo.com/546542asffdmind56465craft'
     click_on 'Enviar'
 
     expect(page).to have_content('Nome: Jogando Mind Craft')
     expect(page).to have_content('Video cadastrado com sucesso!')
     expect(page).to have_content('Descrição: Jogador irado, joga demais!!')
+    expect(page).to have_content('Duração: 10:15')
+    expect(page).to have_content('Faixa etaria: +18')
     expect(page).to have_link('Video', href: 'https://vimeo.com/546542asffdmind56465craft')
   end
 

@@ -5,5 +5,8 @@
     <dt><%= Video.human_attribute_name(:description) %>: </dt>
     <dd> <%= @video.description %> </dd>
 
+    <dt><%= Video.human_attribute_name(:duração) %>: </dt>
+    <dd> <%= @video.duration %> </dd>
+
     <%= link_to Video.human_attribute_name(:video), @video.link %>
 </dl>

@@ -18,3 +18,5 @@ streamer3 = FactoryBot.create(:streamer)
 
 streamer_profile = FactoryBot.create(:streamer_profile, streamer: streamer)
 streamer_profile2 = FactoryBot.create(:streamer_profile, streamer: streamer2)
+
+game_category1 = FactoryBot.create(:game_category, name: 'Adolecentes e crianças')
