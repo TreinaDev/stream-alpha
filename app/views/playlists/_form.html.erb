@@ -18,6 +18,14 @@
   </div>
 
   <div>
+    <%= pl.label :cover %>
+    <%= pl.file_field :cover %>
+    <% @playlist.errors.full_messages_for(:cover).each do |error| %>
+      <div><%= error %></div>
+    <% end %>
+  </div>
+
+  <div>
     <%= pl.submit "Enviar Playlist" %>
   </div>
 <% end %>

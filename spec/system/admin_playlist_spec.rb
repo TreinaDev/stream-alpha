@@ -21,12 +21,14 @@ describe 'Admin' do
       click_on 'Registrar nova playlist'
       fill_in 'Nome', with: 'Casual Gamers'
       fill_in 'Descrição', with: 'Encontre streamers que jogam apenas para se divertir.'
+      attach_file 'Capa', Rails.root.join('spec/support/assets/gary-bendig-unsplash.jpg')
       click_on 'Enviar Playlist'
 
       expect(current_path).to eq playlist_path(1)
       expect(page).to have_content 'Playlist criada com sucesso!'
       expect(page).to have_content 'Nome: Casual Gamers'
       expect(page).to have_content 'Descrição: Encontre streamers que jogam apenas para se divertir.'
+      expect(page).to have_css "img[src*='gary-bendig-unsplash.jpg']"
     end
   end
 
