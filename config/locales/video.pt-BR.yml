@@ -8,14 +8,12 @@ pt-BR:
         name: "Nome"
         description: "Descrição"
         link: "Link"
-        game_name: "Nome do jogo"
+        name_game: "Nome do jogo"
         duration: 'Duração'
-        adult: '+18'
+        adult: 'Faixa etaria'
         loose: 'Venda avulso'
-        game_category: 'Categoria de Jogos'
   videos:
     show:
       name: "Nome"
       description: "Descrição"
       link: "Link"
-      game_name: "Nome do jogo"

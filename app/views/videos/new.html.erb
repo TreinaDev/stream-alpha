@@ -17,20 +17,18 @@
   <%= video.label :link %>
   <%= video.text_field :link %><br>
 
-  <%= video.label :game_name %>
-  <%= video.text_field :game_name %><br>
+  <%= video.label :name_game %>
+  <%= video.text_field :name_game %><br>
 
   <%= video.label :duration %>
   <%= video.text_field :duration %><br> 
 
+  <%= Video.human_attribute_name(:adult) %> : 
   <%= video.check_box :adult %>
-  <%= video.label :adult %><br>
+  <%= video.label :adult, '+18' %><br>
 
   <%= video.check_box :loose %>
   <%= video.label :loose %><br>
-  
-  <%= video.label :game_category %>
-  <%= video.collection_select :game_category_id, GameCategory.order(:name), :id, :name, prompt: true %><br>
 
   <%= video.submit 'Enviar' %>
 <% end %>

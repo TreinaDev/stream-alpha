@@ -28,7 +28,7 @@ describe 'streamer register a video' do
     expect(page).to have_content('Nome: Jogando Mind Craft')
     expect(page).to have_content('Video cadastrado com sucesso!')
     expect(page).to have_content('Descrição: Jogador irado, joga demais!!')
-    expect(page).to have_content('Nome do Jogo: Mind Craft')
+    expect(page).to have_content('Nome do jogo: Mind Craft')
     expect(page).to have_content('Duração: 10:15')
     expect(page).to have_content('Venda avulso: Sim')
     expect(page).to have_content('Faixa etaria: -18')

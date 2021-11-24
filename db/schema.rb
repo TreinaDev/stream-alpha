@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_23_162748) do
+ActiveRecord::Schema.define(version: 2021_11_24_154802) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -117,7 +117,6 @@ ActiveRecord::Schema.define(version: 2021_11_23_162748) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "streamer_id", null: false
-    t.integer "status", default: 0
     t.index ["streamer_id"], name: "index_streamer_profiles_on_streamer_id"
   end
 
@@ -141,13 +140,10 @@ ActiveRecord::Schema.define(version: 2021_11_23_162748) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "description"
     t.integer "streamer_id", null: false
-    t.integer "status", default: 0
-    t.string "feed_back"
     t.string "duration"
     t.boolean "adult"
     t.string "name_game"
-    t.integer "game_category_id", null: false
-    t.index ["game_category_id"], name: "index_videos_on_game_category_id"
+    t.boolean "loose"
     t.index ["streamer_id"], name: "index_videos_on_streamer_id"
   end
 
@@ -159,6 +155,5 @@ ActiveRecord::Schema.define(version: 2021_11_23_162748) do
   add_foreign_key "games_game_categories", "game_categories"
   add_foreign_key "games_game_categories", "games"
   add_foreign_key "streamer_profiles", "streamers"
-  add_foreign_key "videos", "game_categories"
   add_foreign_key "videos", "streamers"
 end
