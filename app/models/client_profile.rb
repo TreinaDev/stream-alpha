@@ -11,8 +11,6 @@ class ClientProfile < ApplicationRecord
 
   def owner?(current_client = nil)
     return current_client == client if current_client
-
-    false
   end
 
   private
@@ -31,11 +29,8 @@ class ClientProfile < ApplicationRecord
 
   def acceptable_photo
     return unless photo.attached?
+    return unless photo.byte_size > 2.megabyte
 
-    if photo.byte_size > 2.megabyte
-      errors.add(:photo, I18n.t('photo.image_too_big',
-                                scope: 'activerecord.errors.models.'\
-                                       'client_profile.attributes'))
-    end
+    errors.add(:photo, I18n.t('photo.image_too_big', scope: 'activerecord.errors.models.client_profile.attributes'))
   end
 end

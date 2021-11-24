@@ -1,0 +1,28 @@
+<%= form_with model: @video_plan do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <% field_errors(@video_plan, :name).each do |message|%>
+      <%= message%>
+    <%end%>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+    <% field_errors(@video_plan, :description).each do |message|%>
+      <%= message%>
+    <%end%>
+  </div>
+  <div>
+    <%= f.label :value %>
+    <%= f.number_field :value %>
+    <% field_errors(@video_plan, :value).each do |message|%>
+      <%= message%>
+    <%end%>
+  </div>
+  <div>
+    <%= f.label :streamer_ids, 'Selecione os Streamer incluídos no plano' %><br>
+    <%= f.collection_select :streamer_ids, @streamers, :id ,:email, { prompt: true }, { multiple: true } %>
+  </div><br>  
+  <%= f.submit %>
+<% end %>

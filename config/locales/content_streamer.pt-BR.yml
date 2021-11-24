@@ -1,0 +1,8 @@
+pt-BR:
+  activerecord:
+    models:
+      content_streamer: "Conteúdo do streamer"
+    attributes:
+      content_streamer:
+        plan_id: "Plano"
+        streamer_id: "Streamer"
