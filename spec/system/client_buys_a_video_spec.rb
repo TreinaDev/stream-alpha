@@ -4,9 +4,9 @@ describe 'client buys a video' do
   context 'from the videos show page' do
     it 'successfully view payment methods via API' do
       payment_methods = []
-      payment_methods << PaymentMethod.new({ name: "Pix", status: "Ativo" })
-      payment_methods << PaymentMethod.new({ name: "Cartão de crédito", status: "Ativo" })
-      payment_methods << PaymentMethod.new({ name: "Boleto", status: "Ativo" })
+      payment_methods << PaymentMethod.new({ name: 'Pix', status: 'Ativo' })
+      payment_methods << PaymentMethod.new({ name: 'Cartão de crédito', status: 'Ativo' })
+      payment_methods << PaymentMethod.new({ name: 'Boleto', status: 'Ativo' })
       allow(PaymentMethod).to receive(:all).and_return(payment_methods)
       client = create(:client)
       video = create(:video)
@@ -37,7 +37,7 @@ describe 'client buys a video' do
       click_on video.name
       click_on 'Comprar Video'
 
-      expect(page).to have_content("Não foi possível consultar os meios de pagamento no momento")
+      expect(page).to have_content('Não foi possível consultar os meios de pagamento no momento')
     end
   end
 end
