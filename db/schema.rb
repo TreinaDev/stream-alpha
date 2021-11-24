@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 2021_11_22_230559) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "streamer_id", null: false
+    t.integer "status", default: 0
     t.index ["streamer_id"], name: "index_streamer_profiles_on_streamer_id"
   end
 
