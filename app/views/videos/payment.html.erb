@@ -2,7 +2,7 @@
 
 <%= render 'video' %>
 <div>
-<p> Meios de pagamento disponíveis. Clique no meio de pagamento que você quer utilizar </p>
+<p> Clique no meio de pagamento que você quer utilizar nessa compra </p>
   <% @payment_methods.each do |pm| %>
     <li><%= link_to pm.name %></li>
   <% end %>

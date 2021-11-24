@@ -5,7 +5,7 @@ describe 'client buys a video' do
     it 'successfully view payment methods via API' do
       payment_methods = []
       payment_methods << PaymentMethod.new({ name: "Pix", status: "Ativo" })
-      payment_methods << PaymentMethod.new({ name: "Cartão crédito", status: "Ativo" })
+      payment_methods << PaymentMethod.new({ name: "Cartão de crédito", status: "Ativo" })
       payment_methods << PaymentMethod.new({ name: "Boleto", status: "Ativo" })
       allow(PaymentMethod).to receive(:all).and_return(payment_methods)
       client = create(:client)
@@ -20,10 +20,10 @@ describe 'client buys a video' do
       expect(current_path).to eq(payment_video_path(video.id))
       expect(page).to have_content(video.name)
       expect(page).to have_content(video.description)
-      expect(page).to have_link(video.link)
-      expect(page).to have_content('Escolha um meio de pagamento:')
+      expect(page).to have_link('Video', href: video.link)
+      expect(page).to have_content('Clique no meio de pagamento que você quer utilizar nessa compra')
       expect(page).to have_content('Pix')
-      expect(page).to have_content('Cartão de credito')
+      expect(page).to have_content('Cartão de crédito')
       expect(page).to have_content('Boleto')
     end
   end
