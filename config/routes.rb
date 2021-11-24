@@ -9,8 +9,16 @@ Rails.application.routes.draw do
     get 'admin_area', on: :collection
   end
 
+  resources :client_profiles, only: %i[create new show edit update]
+  resources :videos, only: %i[approve create index new show] do
+    get 'payment', on: :member
+    get 'analysis', on: :collection
+    member do
+      post 'approve'
+      post 'refuse'
+    end
+  end
   resources :streamer_profiles, only: %i[show new create edit update]
-  resources :client_profiles, only: %i[create new show]
   resources :game_categories, only: %i[create new]
-  resources :videos, only: %i[new create show]
+  resources :games, only: %i[create new]
 end

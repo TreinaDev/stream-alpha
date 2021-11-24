@@ -1,0 +1,33 @@
+<dl>
+  <dt><%= Video.human_attribute_name(:name) %>:</dt>
+  <dd><%= @video.name %></dd>
+
+  <dt><%= Video.human_attribute_name(:description) %>:</dt>
+  <dd> <%= @video.description %> </dd>
+
+  <%= link_to Video.human_attribute_name(:video), @video.link %>
+
+	<dt><%= Video.human_attribute_name(:name_game) %>: </dt>
+	<dd> <%= @video.name_game %> </dd>
+
+	<dt><%= Video.human_attribute_name(:duração) %>: </dt>
+	<dd> <%= @video.duration %> </dd>
+
+	<dt><%= Video.human_attribute_name(:loose) %>: </dt>
+	<dd>
+	<% if @video.loose %> 
+		<%= 'Sim' %>
+	<% else %>
+		<%= 'Não' %>
+	<% end %>
+	</dd>
+
+	<dt><%= Video.human_attribute_name(:adult) %>: </dt>
+	<dd>
+	<% if @video.adult %> 
+		<%= '+18' %>
+	<% else %>
+		<%= '-18' %>
+	<% end %>
+	</dd>
+</dl>

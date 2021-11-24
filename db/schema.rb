@@ -140,6 +140,8 @@ ActiveRecord::Schema.define(version: 2021_11_24_154802) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "description"
     t.integer "streamer_id", null: false
+    t.integer "status", default: 0
+    t.string "feed_back"
     t.string "duration"
     t.boolean "adult"
     t.string "name_game"
