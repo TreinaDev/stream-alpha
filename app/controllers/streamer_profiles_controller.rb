@@ -1,10 +1,13 @@
 class StreamerProfilesController < ApplicationController
+  before_action :authenticate_admin!, only: %i[index active inactive]
   before_action :authenticate_streamer!, only: %i[new create edit update]
+  before_action :find_profile, only: %i[show edit update inactive active]
   before_action :streamer_is_owner!, only: %i[edit update]
-
-  def show
-    @streamer_profile = StreamerProfile.find(params[:id])
+  def index
+    @streamers = StreamerProfile.all
   end
+
+  def show; end
 
   def new
     @streamer_profile = StreamerProfile.new
@@ -18,6 +21,7 @@ class StreamerProfilesController < ApplicationController
     if streamer_profile_exists?
       redirect_to current_streamer.streamer_profile, alert: 'Perfil já existente!'
     elsif @streamer_profile.save
+      @streamer_profile.streamer.completed!
       redirect_to @streamer_profile, notice: "#{t(:streamer_profile, scope: 'activerecord.models')} criado com sucesso!"
     else
       flash[:alert] = "Erro ao criar #{t(:streamer_profile, scope: 'activerecord.models')}!"
@@ -40,7 +44,19 @@ class StreamerProfilesController < ApplicationController
     end
   end
 
+  def inactive
+    redirect_to @streamer_profile, notice: t('.success') if @streamer_profile.inactive!
+  end
+
+  def active
+    redirect_to @streamer_profile, notice: t('.success') if @streamer_profile.active!
+  end
+
   private
+
+  def find_profile
+    @streamer_profile = StreamerProfile.find(params[:id])
+  end
 
   def streamer_is_owner!
     @streamer_profile = StreamerProfile.find(params[:id])

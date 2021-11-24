@@ -1,0 +1,13 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      plan: "Plano de Assinatura"
+    attributes:
+      plan:
+        name: "Nome do Plano"
+        description: "Descrição"
+        value: "Valor"
+        content_streamer: "Conteúdo"
+        streamer_ids: "Streamers"
+        created_at: "Criado em"

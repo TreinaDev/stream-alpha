@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :games_game_category do
-    game_category { nil }
-    game { nil }
+    game_category
+    game
   end
 end
