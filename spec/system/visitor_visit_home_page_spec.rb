@@ -10,10 +10,10 @@ describe 'visitor visit home page' do
     expect(page).to have_link('Entrar como Assinante')
   end
 
-  it 'visitor register as streamer' do
+  it 'and register as streamer' do
     visit root_path
     click_on 'Entrar como Streamer'
-    click_on 'Cadastrar'
+    click_on 'Cadastre-se'
     fill_in 'Email', with: 'jogador@streamer'
     fill_in 'Senha', with: '123456'
     fill_in 'Confirme a senha', with: '123456'

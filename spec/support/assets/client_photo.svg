@@ -1,0 +1,8 @@
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>Layer 1</title>
+  <path stroke-width="3" id="svg_1" d="m255,512.50001c-140.88398,0 -255,-114.78729 -255,-256.5c0,-141.71271 114.11602,-256.5 255,-256.5c140.88398,0 255,114.78729 255,256.5c0,141.71271 -114.11602,256.5 -255,256.5z" opacity="undefined" stroke="#000" fill="#fff"/>
+  <text transform="matrix(1 0 0 1 0 0)" style="cursor: move;" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="70" stroke-width="0" id="svg_4" y="279.5" x="154.91406" stroke="#000" fill="#000000">Cliente</text>
+ </g>
+</svg>

@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
   before_action :authenticate_admin!, only: %i[new create]
-  
+
   def index
     @plans = Plan.all
   end
@@ -23,9 +23,8 @@ class PlansController < ApplicationController
   end
 
   private
-  
+
   def plans_params
-  params.require(:plan).permit(:name, :description, :value, streamer_ids: [])
+    params.require(:plan).permit(:name, :description, :value, streamer_ids: [])
   end
 end
-  

@@ -9,6 +9,7 @@ class VideosController < ApplicationController
     if @video.save
       redirect_to @video, notice: 'Video cadastrado com sucesso!'
     else
+      flash[:alert] = "Erro ao criar #{t(:video, scope: 'activerecord.models')}!"
       render :new
     end
   end

@@ -1,9 +1,1 @@
-<dl>
-    <dt><%= Video.human_attribute_name(:name) %>: </dt>
-    <dd><%= @video.name %></dd>
-
-    <dt><%= Video.human_attribute_name(:description) %>: </dt>
-    <dd> <%= @video.description %> </dd>
-
-    <%= link_to Video.human_attribute_name(:video), @video.link %>
-</dl>
+<%= render @video %>
