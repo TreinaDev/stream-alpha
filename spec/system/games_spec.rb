@@ -24,9 +24,7 @@ describe 'games' do
     end
     it 'unsuccessfully - tried to create a repeated game' do
       admin = create(:admin)
-      game_category = create(:game_category)
-      Game.create!(name: 'Final Fantasy XII - The Zodiac Age', admin: admin,
-                   game_categories: [game_category])
+      create(:game, name: 'Final Fantasy XII - The Zodiac Age')
 
       login_as admin, scope: :admin
       visit root_path
@@ -56,10 +54,8 @@ describe 'games' do
     it 'successfully' do
       admin = create(:admin)
       game_category = create(:game_category)
-      Game.create!(name: 'Final Fantasy XII - The Zodiac Age', admin: admin,
-                   game_categories: [game_category])
-      Game.create!(name: 'TLOZ - Breath of the Wild', admin: admin,
-                   game_categories: [game_category])
+      create(:game, name: 'Final Fantasy XII - The Zodiac Age')
+      create(:game, name: 'TLOZ - Breath of the Wild')
 
       login_as admin, scope: :admin
       visit root_path

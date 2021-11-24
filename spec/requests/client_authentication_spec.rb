@@ -17,4 +17,44 @@ describe 'Client authentication' do
 
     expect(response).to redirect_to(root_path)
   end
+  it 'cannot create a second profile - action new' do
+    client = create(:client)
+    create(:client_profile, client: client)
+
+    login_as client, scope: :client
+    get '/client_profiles/new'
+
+    expect(response).to redirect_to(client.client_profile)
+  end
+  it 'cannot create a second profile - action create' do
+    client = create(:client)
+    create(:client_profile, client: client)
+
+    login_as client, scope: :client
+    post '/client_profiles'
+
+    expect(response).to redirect_to(client.client_profile)
+  end
+  it 'cannot edit another user profile - action edit' do
+    client = create(:client)
+    client2 = create(:client)
+    create(:client_profile, client: client)
+    create(:client_profile, client: client2)
+
+    login_as client, scope: :client
+    get '/client_profiles/2/edit'
+
+    expect(response).to redirect_to(root_path)
+  end
+  it 'cannot edit another user profile - action update' do
+    client = create(:client)
+    client2 = create(:client)
+    create(:client_profile, client: client)
+    create(:client_profile, client: client2)
+
+    login_as client, scope: :client
+    patch '/client_profiles/2'
+
+    expect(response).to redirect_to(root_path)
+  end
 end

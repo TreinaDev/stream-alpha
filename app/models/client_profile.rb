@@ -9,10 +9,8 @@ class ClientProfile < ApplicationRecord
   validate :must_include_a_surname, :correct_cpf_length, :correct_cep_length
   validate :acceptable_photo
 
-  def owner?(current_client = nil)
+  def owner?(current_client = false)
     return current_client == client if current_client
-
-    false
   end
 
   private
