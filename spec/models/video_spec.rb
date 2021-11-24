@@ -19,16 +19,16 @@ RSpec.describe Video, type: :model do
 
   context 'custom validations' do
     it 'duration most be number' do
-      subject { bluild(:video, duration: 'asfnfjcf') }
+      subject = build(:video, duration: 'asfnfjcf')
       
       subject.valid?
 
       expect(subject.errors.full_messages_for(:duration)).to include(
-        'Deve inserir minutos e segundos. Exemplo 139:59 (139 minutos 59 segundos)'
+        'Duração deve inserir minutos e segundos. Exemplo 139:59 (139 minutos 59 segundos)'
       )
     end
-    
-    it ' ans cannot be greater the 140 minutes' do
+  end
+  
   context 'feed back presence validations on refused video' do
     subject { build(:video, status: 'refused') }
     it { should validate_presence_of(:feed_back).with_message('não pode ficar em branco') }

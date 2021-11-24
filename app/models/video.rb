@@ -11,6 +11,6 @@ class Video < ApplicationRecord
   end
   
   def explaining_duration_patterns
-    errors.add(:duration, 'Deve inserir minutos e segundos. Exemplo 139:59 (139 minutos 59 segundos)') if duration && duration.size > 6
+    errors.add(:duration, 'deve inserir minutos e segundos. Exemplo 139:59 (139 minutos 59 segundos)') if duration && duration.chars.length > 6
   end
 end

@@ -19,7 +19,8 @@ describe 'streamer register a video' do
     click_on 'Cadastrar Vídeo'
     fill_in 'Nome', with: 'Jogando Mind Craft'
     fill_in 'Descrição', with: 'Jogador irado, joga demais!!'
-    fill_in 'Nome do jogo', with: 'Mind Craft'
+    select 'Mind Craft', from: 'Nome do jogo'
+      # associar game ao video e add value com preço default SE ele for loose true
     fill_in 'Duração', with: '10:15'
     check 'Venda avulso'
     fill_in 'Link', with: 'https://vimeo.com/546542asffdmind56465craft'
