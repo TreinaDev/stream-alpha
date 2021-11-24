@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Boleto",
+    "status": "Ativo"
+  },
+  {
+    "id": 2,
+    "name": "Cartão de crédito",
+    "status": "Ativo"
+  },
+  {
+    "id": 3,
+    "name": "Pix",
+    "status": "Ativo"
+  }
+]
