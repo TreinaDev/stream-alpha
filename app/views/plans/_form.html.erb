@@ -22,7 +22,7 @@
   </div>
   <div>
     <%= f.label :streamer_ids, 'Selecione os Streamer incluídos no plano' %><br>
-    <%= f.collection_select :streamer_ids, Streamer.where(profile_status:10), :id ,:email, { prompt: true }, { multiple: true } %>
+    <%= f.collection_select :streamer_ids, @streamers, :id ,:email, { prompt: true }, { multiple: true } %>
   </div><br>  
   <%= f.submit %>
 <% end %>

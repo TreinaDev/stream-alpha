@@ -7,10 +7,12 @@ class PlansController < ApplicationController
 
   def new
     @video_plan = Plan.new
+    @streamers = Streamer.completed
   end
 
   def create
     @video_plan = Plan.new(plans_params)
+    @streamers = Streamer.completed
     if @video_plan.save
       redirect_to @video_plan, notice: 'Plano cadastrado com sucesso!'
     else
