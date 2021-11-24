@@ -1,5 +1,5 @@
 module ErrorsHelper
-  def error_plan(object, field)
+  def field_errors(object, field)
     object.errors.full_messages_for(field).each do |message|
       message
     end

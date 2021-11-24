@@ -2,21 +2,21 @@
   <div>
     <%= f.label :name %>
     <%= f.text_field :name %>
-    <% error_plan(@video_plan, :name).each do |message|%>
+    <% field_errors(@video_plan, :name).each do |message|%>
       <%= message%>
     <%end%>
   </div>
   <div>
     <%= f.label :description %>
     <%= f.text_field :description %>
-    <% error_plan(@video_plan, :description).each do |message|%>
+    <% field_errors(@video_plan, :description).each do |message|%>
       <%= message%>
     <%end%>
   </div>
   <div>
     <%= f.label :value %>
     <%= f.number_field :value %>
-    <% error_plan(@video_plan, :value).each do |message|%>
+    <% field_errors(@video_plan, :value).each do |message|%>
       <%= message%>
     <%end%>
   </div>
