@@ -7,6 +7,7 @@ gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
+gem 'faraday'
 gem 'jbuilder', '~> 2.7'
 gem 'puma', '~> 5.0'
 gem 'sass-rails', '>= 6'
