@@ -26,5 +26,18 @@ describe 'client buys a video' do
       expect(page).to have_content('Cartão de crédito')
       expect(page).to have_content('Boleto')
     end
+    it 'and should view error message for down API' do
+      allow(PaymentMethod).to receive(:all).and_return(nil)
+      client = create(:client)
+      video = create(:video)
+
+      login_as client, scope: :client
+      visit root_path
+      click_on 'Ver todos os videos avulsos'
+      click_on video.name
+      click_on 'Comprar Video'
+
+      expect(page).to have_content("Não foi possível consultar os meios de pagamento no momento")
+    end
   end
 end

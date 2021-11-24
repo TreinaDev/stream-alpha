@@ -19,5 +19,17 @@ describe PaymentMethod, type: :model do
       expect(result[2].name).to eq "Pix"
       expect(result[2].status).to eq "Ativo"
     end
+    
+    it 'should return nil if API returns 500' do
+      fake_response = double('faraday_response', status: 500, body: '')
+
+      allow(Faraday).to receive(:get).with("http://pagapaga.com.br/api/v1/payment_methods/")
+                        .and_return(fake_response)
+
+      result = PaymentMethod.all
+
+      expect(result).to eq(nil)
+    end
   end
+
 end
