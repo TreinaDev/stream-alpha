@@ -17,7 +17,14 @@ class VideosController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @video = Video.find(params[:id])
+  end
+
+  def payment
+    @video = Video.find(params[:id])
+    @payment_methods = PaymentMethod.all
+  end
 
   def analysis
     @videos = Video.pending
@@ -25,6 +32,10 @@ class VideosController < ApplicationController
 
   def approve
     redirect_to @video, notice: t('.success') if @video.approved!
+  end
+
+  def index
+    @videos = Video.all
   end
 
   def refuse

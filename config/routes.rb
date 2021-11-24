@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   end
 
   resources :client_profiles, only: %i[create new show edit update]
-  resources :videos, only: %i[approve create new show] do
+  resources :videos, only: %i[approve create index new show] do
+    get 'payment', on: :member
     get 'analysis', on: :collection
     member do
       post 'approve'

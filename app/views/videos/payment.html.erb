@@ -1,0 +1,9 @@
+<h2> Comprar vídeo </h2>
+
+<%= render 'video' %>
+<div>
+<p> Meios de pagamento disponíveis. Clique no meio de pagamento que você quer utilizar </p>
+  <% @payment_methods.each do |pm| %>
+    <li><%= link_to pm.name %></li>
+  <% end %>
+</div>
