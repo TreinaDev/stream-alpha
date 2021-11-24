@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :client_profiles, only: %i[create new show edit update]
   resources :game_categories, only: %i[create new]
   resources :games, only: %i[create new]
+  resources :plans, only: %i[create new show index]
 
   resources :streamer_profiles, only: %i[show new create edit update index] do
     member do
@@ -20,7 +21,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :videos, only: %i[new create show approve] do
+  resources :videos, only: %i[approve create index new show] do
+    get 'payment', on: :member
     get 'analysis', on: :collection
     member do
       post 'approve'
