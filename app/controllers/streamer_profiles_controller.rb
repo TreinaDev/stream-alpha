@@ -18,6 +18,7 @@ class StreamerProfilesController < ApplicationController
     if streamer_profile_exists?
       redirect_to current_streamer.streamer_profile, alert: 'Perfil já existente!'
     elsif @streamer_profile.save
+      @streamer_profile.streamer.completed!
       redirect_to @streamer_profile, notice: "#{t(:streamer_profile, scope: 'activerecord.models')} criado com sucesso!"
     else
       flash[:alert] = "Erro ao criar #{t(:streamer_profile, scope: 'activerecord.models')}!"

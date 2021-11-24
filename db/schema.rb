@@ -81,6 +81,15 @@ ActiveRecord::Schema.define(version: 2021_11_22_230559) do
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
   end
 
+  create_table "content_streamers", force: :cascade do |t|
+    t.integer "plan_id", null: false
+    t.integer "streamer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["plan_id"], name: "index_content_streamers_on_plan_id"
+    t.index ["streamer_id"], name: "index_content_streamers_on_streamer_id"
+  end
+
   create_table "game_categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -106,6 +115,14 @@ ActiveRecord::Schema.define(version: 2021_11_22_230559) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["game_category_id"], name: "index_games_game_categories_on_game_category_id"
     t.index ["game_id"], name: "index_games_game_categories_on_game_id"
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.decimal "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "streamer_profiles", force: :cascade do |t|
@@ -148,6 +165,8 @@ ActiveRecord::Schema.define(version: 2021_11_22_230559) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "client_profiles", "clients"
+  add_foreign_key "content_streamers", "plans"
+  add_foreign_key "content_streamers", "streamers"
   add_foreign_key "game_categories", "admins"
   add_foreign_key "games", "admins"
   add_foreign_key "games_game_categories", "game_categories"

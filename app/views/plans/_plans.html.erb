@@ -1,0 +1,22 @@
+<% if @plans.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th><%= t(:name, scope: "activerecord.attributes.plan") %></th>
+        <th><%= t(:description, scope: "activerecord.attributes.plan") %></th>
+        <th><%= t(:created_at, scope: "activerecord.attributes.plan") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @plans.each do |plan| %>
+        <tr>
+          <td><%= link_to plan.name, plan_path(plan) %></td>
+          <td><%= plan.description %></td>
+          <td><%= l plan.created_at.to_date %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Nenhum plano registrado.</p>
+<% end %>
