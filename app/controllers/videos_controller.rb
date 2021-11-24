@@ -31,7 +31,8 @@ class VideosController < ApplicationController
   end
 
   def approve
-    redirect_to @video, notice: t('.success') if @video.approved!
+    @video.approved!
+    redirect_to @video, notice: t('.success')
   end
 
   def index
@@ -59,9 +60,5 @@ class VideosController < ApplicationController
 
   def video_params
     params.require(:video).permit(:name, :description, :link)
-  end
-
-  def approve_video(video)
-    video.approved!
   end
 end
