@@ -18,10 +18,14 @@
 
   
   <%= video.label :name_game %>
-  <%= video.text_field :name_game %><br>
+  <%= video.collection_select :name_game, Game.all, :id, :name, {prompt: 'Escolha um joga'}%><br>
 
-  <%= video.label :duration %>
-  <%= video.text_field :duration %><br> 
+  <% video.fields_for :duration, @duration do |c| %>
+    <%= video.label :minutes %>
+    <%= video.text_field :minutes %>:
+    <%= video.label :minutes %>
+    <%= video.text_field :minutes %><br> 
+  <% end %>
 
   <%= Video.human_attribute_name(:adult) %> : 
   <%= video.check_box :adult %>

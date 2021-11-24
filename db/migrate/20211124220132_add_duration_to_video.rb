@@ -1,5 +1,5 @@
 class AddDurationToVideo < ActiveRecord::Migration[6.1]
   def change
-    add_column :videos, :duration, :string
+    add_reference :videos, :duration, null: false, foreign_key: true
   end
 end

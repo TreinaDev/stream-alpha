@@ -5,6 +5,7 @@ class VideosController < ApplicationController
   before_action :analysed_video!, only: %i[refuse approve]
   def new
     @video = Video.new
+    @duration = @video.duration.build
   end
 
   def create
@@ -58,7 +59,7 @@ class VideosController < ApplicationController
   end
 
   def video_params
-    params.require(:video).permit(:name, :description, :name_game, :link, :duration, :loose)
+    params.require(:video).permit(:name, :description, :name_game, :link, duration_attributes: [:minutes, :seconds], :loose)
   end
 
   def approve_video(video)

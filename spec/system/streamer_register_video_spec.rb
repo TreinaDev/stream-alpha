@@ -21,7 +21,8 @@ describe 'streamer register a video' do
     fill_in 'Descrição', with: 'Jogador irado, joga demais!!'
     select 'Mind Craft', from: 'Nome do jogo'
       # associar game ao video e add value com preço default SE ele for loose true
-    fill_in 'Duração', with: '10:15'
+    fill_in 'Minutos', with: '10'
+    fill_in 'Segundos', with: '05'
     check 'Venda avulso'
     fill_in 'Link', with: 'https://vimeo.com/546542asffdmind56465craft'
     click_on 'Enviar'

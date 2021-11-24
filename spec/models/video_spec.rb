@@ -26,6 +26,12 @@ RSpec.describe Video, type: :model do
       expect(subject.errors.full_messages_for(:duration)).to include(
         'Duração deve inserir minutos e segundos. Exemplo 139:59 (139 minutos 59 segundos)'
       )
+      expect(subject.errors.full_messages_for(:duration)).to include(
+        'Duração: Maximo 139 minutos por video'
+      )
+      expect(subject.errors.full_messages_for(:duration)).to include(
+        'Duração: Segundos devem ser duass cifras de valor maximo 59.'
+      )
     end
   end
   
