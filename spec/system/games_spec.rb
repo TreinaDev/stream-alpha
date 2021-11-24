@@ -19,7 +19,7 @@ describe 'games' do
 
       expect(page).to have_content('Nome: Minecraft')
       expect(page).to have_content('Categorias: Sandbox, Sobrevivência')
-      expect(page).to have_content("Adicionado em #{I18n.l(Time.zone.now.to_date)}, por #{admin.email}")
+      expect(page).to have_content("Adicionado em #{I18n.l Date.current}, por #{admin.email}")
       expect(Game.count).to eq(1)
     end
     it 'unsuccessfully - tried to create a repeated game' do

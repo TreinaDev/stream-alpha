@@ -7,8 +7,11 @@ class ClientProfile < ApplicationRecord
             presence: true
 
   validate :must_include_a_surname, :correct_cpf_length, :correct_cep_length
-
   validate :acceptable_photo
+
+  def owner?(current_client = nil)
+    return current_client == client if current_client
+  end
 
   private
 
@@ -26,9 +29,8 @@ class ClientProfile < ApplicationRecord
 
   def acceptable_photo
     return unless photo.attached?
+    return unless photo.byte_size > 2.megabyte
 
-    if photo.byte_size > 2.megabyte
-      errors.add(:photo, I18n.t('photo.image_too_big', scope: 'activerecord.errors.models.client_profile.attributes'))
-    end
+    errors.add(:photo, I18n.t('photo.image_too_big', scope: 'activerecord.errors.models.client_profile.attributes'))
   end
 end

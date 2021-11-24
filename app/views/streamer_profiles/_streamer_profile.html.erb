@@ -1,15 +1,15 @@
-<% if @streamer_profile.photo.attached? %>
-    <p><%= image_tag(@streamer_profile.photo, size: "200x200", alt: 'profile_photo', class: 'profile_photo' )%></p>
-<% else %>
-  <p><%= image_tag("streamer_photo.svg", size: "200x200", alt: 'profile_photo', class: 'profile_photo') %></p>
-<% end %>
-
 <h2>Perfil de <%= @streamer_profile.name %></h2>
 <% if @streamer_profile.owner?(current_streamer) %>
   <%= link_to "Editar Perfil", edit_streamer_profile_path %>
 <% end %>
 
 <dl>
+  <% if @streamer_profile.photo.attached? %>
+    <p><%= image_tag(@streamer_profile.photo, size: "200x200", alt: 'profile_photo', class: 'profile_photo' )%></p>
+  <% else %>
+    <p><%= image_tag("streamer_photo.svg", size: "200x200", alt: 'profile_photo', class: 'profile_photo') %></p>
+  <% end %>
+
   <dt><%= t(:description, scope: "activerecord.attributes.streamer_profile") %>:</dt>
   <dd><%= @streamer_profile.description %></dd>
 

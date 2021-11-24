@@ -44,6 +44,7 @@ describe 'Streamer log in' do
       click_on 'Criar Perfil de streamer'
 
       expect(current_path).to eq streamer_profiles_path
+      expect(page).to have_content('Erro ao criar Perfil de streamer!')
       expect(page).to have_content('Nome não pode ficar em branco')
       expect(page).to have_content('Descrição não pode ficar em branco')
     end
@@ -53,11 +54,8 @@ describe 'Streamer log in' do
       streamer = create(:streamer)
       create(:streamer_profile, streamer: streamer)
 
+      login_as streamer, scope: :streamer
       visit root_path
-      click_on 'Entrar como Streamer'
-      fill_in 'Email', with: streamer.email
-      fill_in 'Senha', with: streamer.password
-      click_on 'Entrar'
       visit new_streamer_profile_path
 
       expect(current_path).to eq streamer_profile_path(streamer.streamer_profile.id)
@@ -68,11 +66,8 @@ describe 'Streamer log in' do
       streamer = create(:streamer)
       profile = create(:streamer_profile, streamer: streamer)
 
+      login_as streamer, scope: :streamer
       visit root_path
-      click_on 'Entrar como Streamer'
-      fill_in 'Email', with: streamer.email
-      fill_in 'Senha', with: streamer.password
-      click_on 'Entrar'
       click_on 'Meu Perfil'
       click_on 'Editar Perfil'
 
@@ -84,11 +79,8 @@ describe 'Streamer log in' do
       streamer = create(:streamer)
       create(:streamer_profile, streamer: streamer)
 
+      login_as streamer, scope: :streamer
       visit root_path
-      click_on 'Entrar como Streamer'
-      fill_in 'Email', with: streamer.email
-      fill_in 'Senha', with: streamer.password
-      click_on 'Entrar'
       click_on 'Meu Perfil'
       click_on 'Editar Perfil'
       fill_in 'Descrição', with: 'Faço gameplays maneiras'
@@ -101,17 +93,35 @@ describe 'Streamer log in' do
                                '-7cf2b2e4a6bf46ca28b45bc3a866a1a9bfca0a3de9ce12f59caf7da72bcf72b8.svg"]')
     end
 
+    it 'and edit filling fields wrong' do
+      streamer = create(:streamer)
+      create(:streamer_profile, streamer: streamer)
+
+      login_as streamer, scope: :streamer
+      visit root_path
+      click_on 'Meu Perfil'
+      click_on 'Editar Perfil'
+      fill_in 'Nome', with: ''
+      fill_in 'Descrição', with: ''
+      fill_in 'URL do Facebook', with: ''
+      fill_in 'URL do Instagram', with: ''
+      fill_in 'URL do Twitter', with: ''
+      click_on 'Atualizar Perfil de streamer'
+
+      expect(current_path).to eq streamer_profile_path(streamer.streamer_profile)
+      expect(page).to have_content('Erro ao atualizar Perfil de streamer!')
+      expect(page).to have_content('Nome não pode ficar em branco')
+      expect(page).to have_content('Descrição não pode ficar em branco')
+    end
+
     it 'and cant edit another streamer profile' do
       streamer = create(:streamer)
       streamer2 = create(:streamer)
       create(:streamer_profile, streamer: streamer)
       streamer_profile2 = create(:streamer_profile, streamer: streamer2)
 
+      login_as streamer, scope: :streamer
       visit root_path
-      click_on 'Entrar como Streamer'
-      fill_in 'Email', with: streamer.email
-      fill_in 'Senha', with: streamer.password
-      click_on 'Entrar'
       visit edit_streamer_profile_path(streamer2.streamer_profile)
 
       expect(current_path).to eq root_path
