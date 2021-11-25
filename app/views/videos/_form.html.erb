@@ -16,7 +16,7 @@
   <%= video.label :link %>
   <%= video.text_field :link %><br>
 
-  <%= video.fields_for :price, Price.new do |price| %>
+  <%= video.fields_for :price, @price do |price| %>
     <%= price.check_box :loose %>
     <%= price.label :loose, 'Avulso' %><br>
     <%= price.label :value, 'Preço' %>

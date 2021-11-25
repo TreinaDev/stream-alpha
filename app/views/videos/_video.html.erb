@@ -7,13 +7,15 @@
 
   <dt><%= Video.human_attribute_name(:loose) %>:</dt>
   <dd> 
-    <% if @video.price.loose? %>
+    <% if @price&.loose? %>
       <%= 'Sim' %>
+    <% else %>
+      <%= 'Não' %>
     <% end %>
   </dd>
   
   <dt><%= Video.human_attribute_name(:value) %>:</dt>
-  <dd> R$ <%= @video.price.value %> </dd>
+  <dd> R$ <%= @price&.value %> </dd>
 
   <%= link_to Video.human_attribute_name(:video), @video.link %>
 </dl>

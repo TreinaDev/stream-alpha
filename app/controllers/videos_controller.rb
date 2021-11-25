@@ -5,6 +5,7 @@ class VideosController < ApplicationController
   before_action :analysed_video!, only: %i[refuse approve]
   def new
     @video = Video.new
+    @price = Price.new
   end
 
   def create
@@ -19,6 +20,7 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
+    @price = @video.price
   end
 
   def payment
