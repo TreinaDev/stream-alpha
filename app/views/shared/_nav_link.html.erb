@@ -1,0 +1,52 @@
+<% if admin_signed_in? %>
+
+  <%# <%= link_to 'Meus Projetos', projects_path, class: "nav-text nav-link none" %1> %>
+  <%# <%= link_to 'Novo Projeto', new_project_path, class: "nav-text nav-link none" %1> %>
+
+  <div class="dropdown">
+
+    <button id="b-drop" href="" 
+            class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-blue-600 hover:ring-4 hover:ring-indigo-300 hover:text-white transition duration-300">
+      <%= current_admin.email %>
+    </button>
+
+    <ul class="dropdown-toggle text-gray-500" id="drop">
+      <%= form_with url: destroy_admin_session_path, method: :delete do%>
+        <li> <%= button_tag "Sair", class: "dropdown-menu-top bg-white border-l-4  hover:border-blue-500" %>
+      <% end %>
+    </ul>
+
+  </div>
+
+<% end %>
+
+<% unless admin_signed_in? or client_signed_in? or streamer_signed_in? %>
+
+  <div class="dropdown">
+
+    <button id="b-drop"href=""   
+            class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-blue-600 hover:ring-4 hover:ring-indigo-300 hover:text-white transition duration-300">
+      Entrar
+    </button>
+
+    <ul class="dropdown-toggle hidden text-gray-500" id="drop">
+      <li> <%= link_to "Administrador", new_admin_session_path, class: "dropdown-menu-top bg-white border-l-4  hover:border-blue-500" %> </li>
+      <%# <li> <%= link_to "FreelancerTech", new_professional_session_path, class: "dropdown-menu-botton bg-white border-l-4  hover:border-blue-500" %1> </li> %>
+    </ul>
+
+  </div>
+
+  <div data-controller="nav" class="dropdown">
+
+    <button data-action="nav#toggle" href="" data-nav-target="button"
+            class="py-2 px-2 font-medium text-white bg-blue-700 rounded hover:bg-blue-600 transition duration-300">
+      Inscreva-se
+    </button>
+
+    <ul class="dropdown-toggle hidden text-gray-500" id="drop-in" data-nav-target="list">
+      <li> <%= link_to "Novo Administrador", new_admin_registration_path, class: "dropdown-menu-top bg-white border-l-4  hover:border-blue-500" %> </li>
+      <%# <li> <%= link_to "Novo FreelancerTech", new_professional_registration_path, class: "dropdown-menu-botton bg-white border-l-4  hover:border-blue-500" %1> </li> %>
+    </ul>
+  </div>
+
+<% end %>
