@@ -19,5 +19,12 @@
   <%= video.label :link, "https://vimeo.com/" %>
   <%= video.text_field :link %><br>
 
+  <%= video.fields_for :price, @price do |price| %>
+    <%= price.check_box :loose %>
+    <%= price.label :loose %><br>
+    <%= price.label :value %>
+    <%= price.text_field :value %><br>
+  <% end %>
+
   <%= video.submit 'Enviar' %>
 <% end %>

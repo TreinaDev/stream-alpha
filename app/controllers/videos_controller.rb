@@ -5,14 +5,16 @@ class VideosController < ApplicationController
   before_action :find_video, only: %i[refuse approve show]
   before_action :analysed_video!, only: %i[refuse approve]
   def new
-    @video = Video.new
     @games = Game.all
+    @price = Price.new
+    @video = Video.new
   end
 
   def create
     @video = current_streamer.videos.build(video_params)
     if @video.save
       redirect_to @video, notice: t('.success')
+      @video.price.value = nil unless @video.price.loose?
     else
       @games = Game.all
       flash[:alert] = "Erro ao criar #{t(:video, scope: 'activerecord.models')}!"
@@ -22,6 +24,7 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
+    @price = @video.price
   end
 
   def payment
@@ -34,7 +37,8 @@ class VideosController < ApplicationController
   end
 
   def approve
-    redirect_to @video, notice: t('.success') if @video.approved!
+    @video.approved!
+    redirect_to @video, notice: t('.success')
   end
 
   def index
@@ -65,6 +69,6 @@ class VideosController < ApplicationController
   end
 
   def video_params
-    params.require(:video).permit(:name, :description, :link, :game_id)
+    params.require(:video).permit(:name, :description, :link, :game_id, price_attributes: %i[loose value])
   end
 end

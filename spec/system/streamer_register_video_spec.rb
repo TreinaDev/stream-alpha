@@ -19,6 +19,8 @@ describe 'streamer register a video' do
     click_on 'Cadastrar Vídeo'
     fill_in 'Nome', with: 'Jogando Mind Craft'
     fill_in 'Descrição', with: 'Jogador irado, joga demais!!'
+    check 'Avulso'
+    fill_in 'Preço', with: 50
     fill_in 'https://vimeo.com/', with: '613710178'
     select 'Megaman X4', from: 'Jogo'
     click_on 'Enviar'
@@ -30,7 +32,26 @@ describe 'streamer register a video' do
     expect(page).to have_content('Megaman X4')
     expect(page).to have_content("Categorias: #{game.game_categories_list_as_string}")
     expect(page).to have_content('Status: Pendente')
+    expect(page).to have_content('Avulso: Sim')
+    expect(page).to have_content('Preço: R$ 50')
     expect(page).to_not have_link('Comprar Video', href: payment_video_path(1))
+    expect(page).to_not have_link('Video', href: 'https://vimeo.com/613710178')
+  end
+
+  it 'and has no price if loose is not checked' do
+    client = create(:client)
+    create(:video)
+    login_as client, scope: :client
+
+    visit root_path
+    click_on 'Ver todos os videos avulsos'
+    click_on 'Jogando Mind Craft'
+
+    expect(page).to have_content('Jogando Mind Craft')
+    expect(page).to have_content('Descrição: Jogador irado, joga demais!!')
+    expect(page).to have_content('Avulso: Não')
+    expect(page).not_to have_content('Preço: R$ 9')
+    expect(page).not_to have_link('Comprar Video')
   end
 
   it 'without fill fields' do

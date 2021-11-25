@@ -1,6 +1,7 @@
 <dl>
   <%= render @video %>
-  <% if client_signed_in? %>
+
+  <% if client_signed_in? && @price&.loose? %>
     <%= link_to 'Comprar Video', payment_video_path(@video) %>
   <% end %>
   <% if admin_signed_in? || streamer_signed_in? %>

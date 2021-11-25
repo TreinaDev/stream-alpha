@@ -9,13 +9,14 @@ pt-BR:
         description: "Descrição"
         link: "Link"
         feed_back: "Feedback"
+        loose: "Avulso"
+        value: "Preço"
         game: "Jogo"
         game_id: "Jogo"
         statuses:
           pending: "Pendente"
           approved: "Aprovado"
           reproved: "Reprovado"
-
   videos:
     show:
       name: "Nome"
