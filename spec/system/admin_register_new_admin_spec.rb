@@ -44,7 +44,7 @@ describe 'Some' do
     end
   end
   context 'Client' do
-    it 'try to see the plan registration form' do
+    it 'try to see the admin registration form' do
       user = create(:client)
 
       login_as user, scope: :client
@@ -54,7 +54,7 @@ describe 'Some' do
     end
   end
   context 'Streamer' do
-    it 'try to see the plan registration form' do
+    it 'try to see the admin registration form' do
       streamer = create(:streamer)
 
       login_as streamer, scope: :streamer
@@ -64,7 +64,7 @@ describe 'Some' do
     end
   end
   context 'Person not logged in' do
-    it 'try to see the plan registration form' do
+    it 'try to see the admin registration form' do
       visit new_admin_path
 
       expect(page).to have_content('Para continuar, efetue login ou registre-se.')
