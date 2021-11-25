@@ -14,8 +14,17 @@ Rails.application.routes.draw do
   resources :games, only: %i[create new]
   resources :playlists, only: %i[new create show]
   resources :streamer_profiles, only: %i[show new create edit update]
+  resources :plans, only: %i[create new show index]
 
-  resources :videos, only: %i[new create show approve] do
+  resources :streamer_profiles, only: %i[show new create edit update index] do
+    member do
+      post 'inactive'
+      post 'active'
+    end
+  end
+
+  resources :videos, only: %i[approve create index new show] do
+    get 'payment', on: :member
     get 'analysis', on: :collection
     member do
       post 'approve'

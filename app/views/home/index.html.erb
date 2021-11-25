@@ -1,4 +1,6 @@
 <h1>Bem-vindo(a) a plataforma GameStream!</h1>
 <% if streamer_signed_in? %>
   <%= link_to 'Cadastrar Vídeo', new_video_path %>
+<% elsif client_signed_in? %>
+  <%= link_to 'Ver todos os videos avulsos', videos_path%>
 <% end %>

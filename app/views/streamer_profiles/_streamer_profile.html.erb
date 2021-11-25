@@ -32,5 +32,13 @@
     <dd>Não possui</dd>
   <% else %>
     <dd><%= link_to @streamer_profile.twitter, @streamer_profile.twitter %></dd>
-  <% end %>
+  <% end %>  
+  <dt><%= I18n.t(:status, scope: "activerecord.attributes.streamer_profile") %></dt>
+  <dd> <%= StreamerProfile.human_enum_name(:status, @streamer_profile.status) %> </dd>
 </dl>
+
+<% if admin_signed_in? && @streamer_profile.active? %>
+  <%= link_to "Inativar", inactive_streamer_profile_path(@streamer_profile), method: :post, data: { confirm: "Deseja continuar?" } %>
+<% elsif admin_signed_in? && @streamer_profile.inactive? %>
+  <%= link_to "Ativar", active_streamer_profile_path(@streamer_profile), method: :post, data: { confirm: "Deseja continuar?" } %>
+<% end %>
