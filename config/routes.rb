@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :admins
+  devise_for :admins, skip: [:registrations]
   devise_for :streamers
   devise_for :clients
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   root to: 'home#index'
-  resources :admins, only: %i[] do
+  resources :admins, only: %i[new create] do
     get 'admin_area', on: :collection
   end
 

@@ -1,0 +1,9 @@
+<h1>Informe os dados de cadastro do novo Administrador</h1>
+
+<%= form_with model: @admin do |f|%>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+  <%= f.label :password %>
+  <%= f.text_field :password %>
+  <%= f.submit "Cadastrar" %>
+<% end %>
