@@ -5,7 +5,8 @@ class Video < ApplicationRecord
   accepts_nested_attributes_for :price
 
   validates :name, :description, :link, presence: true
-  validates :link, length: { minimum: 8, maximum: 9 }, numericality: true,
+  validates :link, length: { minimum: 8, maximum: 9 },
+                   numericality: true,
                    uniqueness: true
 
   validates :feed_back, presence: true, if: :refused?
