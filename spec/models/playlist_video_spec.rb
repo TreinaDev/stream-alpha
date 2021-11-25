@@ -1,5 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe PlaylistVideo, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'belongs_to' do
+    it 'should be video' do
+      should belong_to(:video)
+    end
+    it 'should be playlist' do
+      should belong_to(:playlist)
+    end
+  end
 end

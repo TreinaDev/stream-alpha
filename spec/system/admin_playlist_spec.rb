@@ -13,10 +13,10 @@ describe 'Admin' do
     end
 
     it 'creates playlist' do
-      video = create(:video, :approved, name: "jogando fifa modo carreira")
-      video2 = create(:video, :approved, name: "jogando fifa na master league")
-      streamer = create(:streamer_profile, name: "Yoda SL")
-      streamer2 = create(:streamer_profile, name: "Robo")
+      video = create(:video, :approved, name: 'jogando fifa modo carreira')
+      video2 = create(:video, :approved, name: 'jogando fifa na master league')
+      streamer = create(:streamer_profile, name: 'Yoda SL')
+      streamer2 = create(:streamer_profile, name: 'Robo')
       admin = create(:admin)
 
       login_as admin, scope: :admin
@@ -26,10 +26,10 @@ describe 'Admin' do
       fill_in 'Nome', with: 'Casual Gamers'
       fill_in 'Descrição', with: 'Encontre streamers que jogam apenas para se divertir.'
       attach_file 'Capa', Rails.root.join('spec/support/assets/gary-bendig-unsplash.jpg')
-      select "jogando fifa modo carreira", from: "Videos"
-      select "jogando fifa na master league", from: "Videos"
-      select "Yoda SL", from: "Streamers"
-      select "Robo", from: "Streamers"
+      select 'jogando fifa modo carreira', from: 'Videos'
+      select 'jogando fifa na master league', from: 'Videos'
+      select 'Yoda SL', from: 'Streamers'
+      select 'Robo', from: 'Streamers'
 
       click_on 'Enviar Playlist'
 
@@ -48,7 +48,7 @@ describe 'Admin' do
   context 'unsuccessfully' do
     it 'creates playlist with empty fields' do
       admin = create(:admin)
-      video = create(:video, name: "jogando fifa na master league")
+      create(:video, name: 'jogando fifa na master league')
 
       login_as admin, scope: :admin
       visit root_path

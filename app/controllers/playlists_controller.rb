@@ -9,7 +9,6 @@ class PlaylistsController < ApplicationController
   end
 
   def create
-    puts playlist_params
     @playlist = current_admin.playlists.build(playlist_params)
 
     if @playlist.save

@@ -2,9 +2,9 @@ class Playlist < ApplicationRecord
   belongs_to :admin
 
   has_one_attached :cover
-  has_many :playlist_videos
+  has_many :playlist_videos, dependent: :nullify
   has_many :videos, through: :playlist_videos
-  has_many :playlist_streamers
+  has_many :playlist_streamers, dependent: :nullify
   has_many :streamers, through: :playlist_streamers
 
   validates :name, :description, presence: true
