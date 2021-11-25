@@ -64,10 +64,6 @@ class VideosController < ApplicationController
     redirect_to @video, status: :permanent_redirect unless find_video.pending?
   end
 
-  def approve_video(video)
-    video.approved!
-  end
-
   def video_params
     params.require(:video).permit(:name, :description, :link, :game_id, price_attributes: %i[loose value])
   end
