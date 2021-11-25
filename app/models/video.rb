@@ -1,5 +1,7 @@
 class Video < ApplicationRecord
   belongs_to :streamer
+  has_one :price, dependent: :destroy
+  accepts_nested_attributes_for :price
 
   validates :name, :description, :link, presence: true, on: :create
   validates :feed_back, presence: true, if: :refused?

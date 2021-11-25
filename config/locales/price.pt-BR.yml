@@ -1,0 +1,16 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      price: "Preço"
+    attributes:
+      price:
+        loose: 'Avulso'
+        value: 'Preço'
+  # videos:
+  #   show:
+  #     name: "Nome"
+  #     description: "Descrição"
+  #     link: "Link"
+  #     feed_back: "Retorne um feedback para o streamer:"
+
