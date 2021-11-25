@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_230559) do
+ActiveRecord::Schema.define(version: 2021_11_25_040910) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -125,6 +125,15 @@ ActiveRecord::Schema.define(version: 2021_11_22_230559) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "prices", force: :cascade do |t|
+    t.boolean "loose"
+    t.decimal "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "video_id", null: false
+    t.index ["video_id"], name: "index_prices_on_video_id"
+  end
+
   create_table "streamer_profiles", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -172,6 +181,7 @@ ActiveRecord::Schema.define(version: 2021_11_22_230559) do
   add_foreign_key "games", "admins"
   add_foreign_key "games_game_categories", "game_categories"
   add_foreign_key "games_game_categories", "games"
+  add_foreign_key "prices", "videos"
   add_foreign_key "streamer_profiles", "streamers"
   add_foreign_key "videos", "streamers"
 end
