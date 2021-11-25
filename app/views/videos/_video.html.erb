@@ -1,9 +1,34 @@
+<div style="padding:56.25% 0 0 0;position:relative;">
+  <iframe src="https://player.vimeo.com/video/<%= video.link %>?autoplay=1&background=0" 
+          style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+          frameborder="0" 
+          allow="autoplay; fullscreen; picture-in-picture" 
+          allowfullscreen>
+  </iframe>
+</div>
+<script src="https://player.vimeo.com/api/player.js"></script>
+
+<h1><%= video.name %></h1>
+
 <dl>
-  <dt><%= Video.human_attribute_name(:name) %>:</dt>
-  <dd><%= @video.name %></dd>
-
   <dt><%= Video.human_attribute_name(:description) %>:</dt>
-  <dd> <%= @video.description %> </dd>
+  <dd><%= video.description %></dd>
 
-  <%= link_to Video.human_attribute_name(:video), @video.link %>
+  <dt><%= Video.human_attribute_name(:game_id) %>:</dt>
+  <dd><%= video.game.name %></dd>
+
+  <dt><%= Game.human_attribute_name(:game_category_ids) %>:</dt>
+  <dd><%= video.game.game_categories_list_as_string %></dd>
+
+  <dt><%= Video.human_attribute_name(:loose) %>:</dt>
+  <dd> 
+    <% if @price&.loose? %>
+      <%= 'Sim' %>
+    <% else %>
+      <%= 'Não' %>
+    <% end %>
+  </dd>
+  
+  <dt><%= Video.human_attribute_name(:value) %>:</dt>
+  <dd><%= number_to_currency(@price&.value) %> </dd>
 </dl>

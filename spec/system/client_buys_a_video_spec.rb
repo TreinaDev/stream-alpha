@@ -9,7 +9,8 @@ describe 'client buys a video' do
       payment_methods << PaymentMethod.new({ name: 'Boleto', status: 'Ativo' })
       allow(PaymentMethod).to receive(:all).and_return(payment_methods)
       client = create(:client)
-      video = create(:video)
+      video = create(:video, link: '613710178')
+      create(:price, loose: true, video: video)
 
       login_as client, scope: :client
       visit root_path
@@ -20,7 +21,7 @@ describe 'client buys a video' do
       expect(current_path).to eq(payment_video_path(video.id))
       expect(page).to have_content(video.name)
       expect(page).to have_content(video.description)
-      expect(page).to have_link('Video', href: video.link)
+      expect(page).to have_css('iframe[src*="https://player.vimeo.com/video/613710178?autoplay=1&background=0"]')
       expect(page).to have_content('Clique no meio de pagamento que você quer utilizar nessa compra')
       expect(page).to have_content('Pix')
       expect(page).to have_content('Cartão de crédito')
@@ -30,6 +31,7 @@ describe 'client buys a video' do
       allow(PaymentMethod).to receive(:all).and_return(nil)
       client = create(:client)
       video = create(:video)
+      create(:price, loose: true, video: video)
 
       login_as client, scope: :client
       visit root_path

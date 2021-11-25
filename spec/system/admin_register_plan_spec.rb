@@ -69,28 +69,31 @@ describe 'Some' do
       expect(page).to have_content(plano_c.name)
     end
   end
+  context 'Client' do
+    it 'try to see the plan registration form' do
+      user = create(:client)
 
-  it 'Client try to see the plan registration form' do
-    user = create(:client)
+      login_as user, scope: :client
+      visit new_plan_path
 
-    login_as user, scope: :client
-    visit new_plan_path
-
-    expect(page).to have_content('Para continuar, efetue login ou registre-se.')
+      expect(page).to have_content('Para continuar, efetue login ou registre-se.')
+    end
   end
+  context 'Streamer' do
+    it 'try to see the plan registration form' do
+      streamer = create(:streamer)
 
-  it 'Streamer try to see the plan registration form' do
-    streamer = create(:streamer)
+      login_as streamer, scope: :streamer
+      visit new_plan_path
 
-    login_as streamer, scope: :streamer
-    visit new_plan_path
-
-    expect(page).to have_content('Para continuar, efetue login ou registre-se.')
+      expect(page).to have_content('Para continuar, efetue login ou registre-se.')
+    end
   end
+  context 'Person not logged in' do
+    it 'try to see the plan registration form' do
+      visit new_plan_path
 
-  it 'person not logged in' do
-    visit new_plan_path
-
-    expect(page).to have_content('Para continuar, efetue login ou registre-se.')
+      expect(page).to have_content('Para continuar, efetue login ou registre-se.')
+    end
   end
 end

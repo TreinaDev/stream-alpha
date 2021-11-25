@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_25_160718) do
+ActiveRecord::Schema.define(version: 2021_11_25_161516) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -153,6 +153,15 @@ ActiveRecord::Schema.define(version: 2021_11_25_160718) do
     t.index ["name"], name: "index_playlists_on_name", unique: true
   end
 
+  create_table "prices", force: :cascade do |t|
+    t.boolean "loose"
+    t.decimal "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "video_id", null: false
+    t.index ["video_id"], name: "index_prices_on_video_id"
+  end
+
   create_table "streamer_profiles", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -188,6 +197,9 @@ ActiveRecord::Schema.define(version: 2021_11_25_160718) do
     t.integer "streamer_id", null: false
     t.integer "status", default: 0
     t.string "feed_back"
+    t.integer "game_id", null: false
+    t.index ["game_id"], name: "index_videos_on_game_id"
+    t.index ["link"], name: "index_videos_on_link", unique: true
     t.index ["streamer_id"], name: "index_videos_on_streamer_id"
   end
 
@@ -205,6 +217,8 @@ ActiveRecord::Schema.define(version: 2021_11_25_160718) do
   add_foreign_key "playlist_videos", "playlists"
   add_foreign_key "playlist_videos", "videos"
   add_foreign_key "playlists", "admins"
+  add_foreign_key "prices", "videos"
   add_foreign_key "streamer_profiles", "streamers"
+  add_foreign_key "videos", "games"
   add_foreign_key "videos", "streamers"
 end

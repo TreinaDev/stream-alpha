@@ -1,9 +1,16 @@
 class Video < ApplicationRecord
+  belongs_to :game
   belongs_to :streamer
   has_many :playlist_videos, dependent: :nullify
   has_many :playlists, through: :playlist_videos
+  has_one :price, dependent: :destroy
+  accepts_nested_attributes_for :price
 
-  validates :name, :description, :link, presence: true, on: :create
+  validates :name, :description, :link, presence: true
+  validates :link, length: { minimum: 8, maximum: 9 },
+                   numericality: true,
+                   uniqueness: true
+
   validates :feed_back, presence: true, if: :refused?
 
   enum status: { pending: 0, approved: 1, refused: 2 }
