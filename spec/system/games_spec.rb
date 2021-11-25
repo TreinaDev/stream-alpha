@@ -17,9 +17,10 @@ describe 'games' do
       select 'Sandbox', from: 'Categorias'
       click_on 'Registrar novo jogo'
 
-      expect(page).to have_content('Nome: Minecraft')
-      expect(page).to have_content('Categorias: Sandbox, Sobrevivência')
-      expect(page).to have_content("Adicionado em #{I18n.l Date.current}, por #{admin.email}")
+      expect(page).to have_content('Minecraft')
+      expect(page).to have_content('Sandbox, Sobrevivência')
+      expect(page).to have_content("#{I18n.l Date.current}")
+      expect(page).to have_content(admin.email)
       expect(Game.count).to eq(1)
     end
     it 'unsuccessfully - tried to create a repeated game' do
@@ -61,7 +62,7 @@ describe 'games' do
       visit root_path
       click_on 'Área do administrador'
 
-      expect(page).to have_content('Nome: TLOZ - Breath of the Wild')
+      expect(page).to have_content('TLOZ - Breath of the Wild')
       expect(page).to have_content('Final Fantasy XII - The Zodiac Age')
     end
     it 'and there are no games registered' do
