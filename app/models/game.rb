@@ -2,6 +2,7 @@ class Game < ApplicationRecord
   belongs_to :admin
   has_many :games_game_categories, dependent: :nullify
   has_many :game_categories, through: :games_game_categories
+  has_many :videos, dependent: :nullify
 
   validates :name, :game_category_ids, presence: true
   validates :name, uniqueness: true

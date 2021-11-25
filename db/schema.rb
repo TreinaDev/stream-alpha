@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_25_040910) do
+ActiveRecord::Schema.define(version: 2021_11_25_161516) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -169,6 +169,9 @@ ActiveRecord::Schema.define(version: 2021_11_25_040910) do
     t.integer "streamer_id", null: false
     t.integer "status", default: 0
     t.string "feed_back"
+    t.integer "game_id", null: false
+    t.index ["game_id"], name: "index_videos_on_game_id"
+    t.index ["link"], name: "index_videos_on_link", unique: true
     t.index ["streamer_id"], name: "index_videos_on_streamer_id"
   end
 
@@ -183,5 +186,6 @@ ActiveRecord::Schema.define(version: 2021_11_25_040910) do
   add_foreign_key "games_game_categories", "games"
   add_foreign_key "prices", "videos"
   add_foreign_key "streamer_profiles", "streamers"
+  add_foreign_key "videos", "games"
   add_foreign_key "videos", "streamers"
 end
