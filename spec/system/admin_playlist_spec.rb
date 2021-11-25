@@ -43,6 +43,39 @@ describe 'Admin' do
       expect(page).to have_link('Robo', href: streamer_profile_path(streamer2))
       expect(page).to have_css "img[src*='gary-bendig-unsplash.jpg']"
     end
+
+    it 'can view playlists' do
+      video = create(:video, :approved, name: 'jogando fifa modo carreira')
+      video2 = create(:video, :approved, name: 'jogando fifa na master league')
+      streamer_profile = create(:streamer_profile, name: 'Yoda SL')
+      streamer_profile2 = create(:streamer_profile, name: 'Robo')
+      playlist = create(:playlist, name: 'Casual Gamers', videos: [video, video2],
+                                   streamers: [streamer_profile.streamer, streamer_profile2.streamer])
+      admin = create(:admin)
+
+      login_as admin, scope: :admin
+      visit root_path
+      click_on 'Área do administrador'
+      click_on 'Ver Playlists'
+
+      expect(current_path).to eq playlists_path
+      expect(page).to have_content 'Casual Gamers'
+      expect(page).to have_content 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' \
+                                   'labore et dolore magna aliqua.'
+      expect(page).to have_content I18n.l playlist.created_at.to_date
+    end
+  end
+
+  it 'but theres no playlist' do
+    admin = create(:admin)
+
+    login_as admin, scope: :admin
+    visit root_path
+    click_on 'Área do administrador'
+    click_on 'Ver Playlists'
+
+    expect(current_path).to eq playlists_path
+    expect(page).to have_content 'Nenhuma playlist registrada.'
   end
 
   context 'unsuccessfully' do

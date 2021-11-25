@@ -1,6 +1,9 @@
 class PlaylistsController < ApplicationController
   before_action :authenticate_admin!, only: %i[new create]
   before_action :authenticate_admin_client_streamer!, only: %i[show]
+  def index
+    @playlists = Playlist.all
+  end
 
   def new
     @playlist = current_admin.playlists.new

@@ -18,4 +18,15 @@ RSpec.describe Playlist, type: :model do
       should validate_uniqueness_of(:name)
     end
   end
+  context 'custom validations' do
+    it 'cover image cannot be grater than 2 Mb' do
+      cover = Playlist.new(cover: Rack::Test::UploadedFile
+        .new(Rails.root.join('spec/support/assets/4mb_photo.jpg')))
+      cover.valid?
+
+      expect(cover.errors.full_messages_for(:cover)).to include(
+        'Capa deve ser menor que 2Mb'
+      )
+    end
+  end
 end
