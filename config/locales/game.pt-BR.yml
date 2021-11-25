@@ -6,5 +6,6 @@ pt-BR:
     attributes:
       game:
         name: 'Nome'
-        creator: 'Criador'
+        admin_id: 'Admin'
         game_category_ids: 'Categorias'
+        created_at: 'Criado em'

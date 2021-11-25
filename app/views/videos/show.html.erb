@@ -1,6 +1,8 @@
 <dl>
     <%= render 'video' %>
-    <%= link_to 'Comprar Video', payment_video_path(@video) %>
+    <% if @price&.loose?%>
+        <%= link_to 'Comprar Video', payment_video_path(@video) %>
+    <% end %>
     <% if admin_signed_in? || streamer_signed_in? %>
         <dt> <%= Video.human_attribute_name(:status) %>: </dt>
         <dd> <%= @video.status %> </dd>

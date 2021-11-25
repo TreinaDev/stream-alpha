@@ -15,5 +15,14 @@ describe 'streamer autheticated' do
       expect(response).to have_http_status(302)
       expect(response).to redirect_to(new_streamer_session_path)
     end
+    it 'cannot create a second profile - action new' do
+      streamer = create(:streamer)
+      create(:streamer_profile, streamer: streamer)
+
+      login_as streamer, scope: :streamer
+      get '/streamer_profiles/new'
+
+      expect(response).to redirect_to(streamer.streamer_profile)
+    end
   end
 end

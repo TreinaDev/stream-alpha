@@ -19,13 +19,35 @@ describe 'streamer register a video' do
     click_on 'Cadastrar Vídeo'
     fill_in 'Nome', with: 'Jogando Mind Craft'
     fill_in 'Descrição', with: 'Jogador irado, joga demais!!'
+    check 'Avulso'
+    fill_in 'Preço', with: 50
     fill_in 'Link', with: 'https://vimeo.com/546542asffdmind56465craft'
     click_on 'Enviar'
 
-    expect(page).to have_content('Nome: Jogando Mind Craft')
     expect(page).to have_content('Video cadastrado com sucesso!')
+    expect(page).to have_content('Nome: Jogando Mind Craft')
     expect(page).to have_content('Descrição: Jogador irado, joga demais!!')
+    expect(page).to have_content('Avulso: Sim')
+    expect(page).to have_content('Preço: R$ 50')
+    expect(page).to have_link('Comprar')
     expect(page).to have_link('Video', href: 'https://vimeo.com/546542asffdmind56465craft')
+  end
+
+  it 'and has no price if loose is not checked' do
+    client = create(:client)
+    create(:video)
+    login_as client, scope: :client
+
+    visit root_path
+    click_on 'Ver todos os videos avulsos'
+    click_on 'Jogando Mind Craft'
+
+    expect(page).to have_content('Nome: Jogando Mind Craft')
+    expect(page).to have_content('Descrição: Jogador irado, joga demais!!')
+    expect(page).to have_content('Avulso: Não')
+    expect(page).not_to have_content('Preço: R$ 9')
+    expect(page).not_to have_link('Comprar Video')
+    expect(page).to have_link('Video')
   end
 
   it 'without fill fields' do
