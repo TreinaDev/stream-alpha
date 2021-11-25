@@ -79,8 +79,8 @@ describe 'Some' do
       expect(page).to have_content('Para continuar, efetue login ou registre-se.')
     end
   end
-  context 'Client' do
-    it 'Streamer try to see the plan registration form' do
+  context 'Streamer' do
+    it 'try to see the plan registration form' do
       streamer = create(:streamer)
 
       login_as streamer, scope: :streamer
@@ -89,8 +89,8 @@ describe 'Some' do
       expect(page).to have_content('Para continuar, efetue login ou registre-se.')
     end
   end
-  context 'Client' do
-    it 'person not logged in' do
+  context 'Person not logged in' do
+    it 'try to see the plan registration form' do
       visit new_plan_path
 
       expect(page).to have_content('Para continuar, efetue login ou registre-se.')

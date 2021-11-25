@@ -43,4 +43,31 @@ describe 'Some' do
       expect(page).to have_content('Senha não pode ficar em branco')
     end
   end
+  context 'Client' do
+    it 'try to see the plan registration form' do
+      user = create(:client)
+
+      login_as user, scope: :client
+      visit new_admin_path
+
+      expect(page).to have_content('Para continuar, efetue login ou registre-se.')
+    end
+  end
+  context 'Streamer' do
+    it 'try to see the plan registration form' do
+      streamer = create(:streamer)
+
+      login_as streamer, scope: :streamer
+      visit new_admin_path
+
+      expect(page).to have_content('Para continuar, efetue login ou registre-se.')
+    end
+  end
+  context 'Person not logged in' do
+    it 'try to see the plan registration form' do
+      visit new_admin_path
+
+      expect(page).to have_content('Para continuar, efetue login ou registre-se.')
+    end
+  end
 end
