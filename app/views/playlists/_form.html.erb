@@ -27,13 +27,13 @@
   </div>
 
   <div>
-    <%= pl.label :video_ids %>
+    <%= pl.label :video_ids %><br>
     <%= pl.collection_select :video_ids, @videos || [], :id, :name, {prompt: 'Escolha um ou mais videos'}, {multiple: true} %>
   </div>
 
   <div>
-    <%= pl.label :streamer_ids %>
-    <%= pl.collection_select :streamer_ids, @streamers || [], :streamer_id, :name, {prompt: 'Escolha um ou mais stramers'}, {multiple: true} %>
+    <%= pl.label :streamer_ids %><br>
+    <%= pl.collection_select :streamer_ids, @streamers || [], :streamer_id, :name, {prompt: 'Escolha um ou mais streamers'}, {multiple: true} %>
   </div>
 
   <div>

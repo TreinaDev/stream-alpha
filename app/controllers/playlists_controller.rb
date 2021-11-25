@@ -13,11 +13,10 @@ class PlaylistsController < ApplicationController
 
     if @playlist.save
       redirect_to @playlist, notice: t('.success')
-      return
+    else
+      flash['alert'] = t('.failed')
+      render :new
     end
-
-    flash['alert'] = t('.failed')
-    render :new
   end
 
   def show
