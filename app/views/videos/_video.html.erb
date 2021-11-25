@@ -15,7 +15,7 @@
   </dd>
   
   <dt><%= Video.human_attribute_name(:value) %>:</dt>
-  <dd> R$ <%= @price&.value %> </dd>
+  <dd><%= number_to_currency(@price&.value) %> </dd>
 
   <%= link_to Video.human_attribute_name(:video), @video.link %>
 </dl>
