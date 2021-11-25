@@ -6,6 +6,7 @@ class VideosController < ApplicationController
   before_action :analysed_video!, only: %i[refuse approve]
   def new
     @video = Video.new
+    @games = Game.all
   end
 
   def create
@@ -13,6 +14,7 @@ class VideosController < ApplicationController
     if @video.save
       redirect_to @video, notice: t('.success')
     else
+      @games = Game.all
       flash[:alert] = "Erro ao criar #{t(:video, scope: 'activerecord.models')}!"
       render :new
     end
@@ -57,12 +59,12 @@ class VideosController < ApplicationController
   def analysed_video!
     redirect_to @video, status: :permanent_redirect unless find_video.pending?
   end
-
-  def video_params
-    params.require(:video).permit(:name, :description, :link)
-  end
-
+  
   def approve_video(video)
     video.approved!
+  end
+
+  def video_params
+    params.require(:video).permit(:name, :description, :link, :game_id)
   end
 end

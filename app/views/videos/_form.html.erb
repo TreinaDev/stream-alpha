@@ -13,6 +13,9 @@
   <%= video.label :description %>
   <%= video.text_field :description %><br>
 
+  <%= video.label :game_id %>
+  <%= video.collection_select :game_id, @games, :id, :name, { prompt: 'Escolha um Jogo' } %><br>
+
   <%= video.label :link, "https://vimeo.com/" %>
   <%= video.text_field :link %><br>
 

@@ -12,6 +12,7 @@ describe 'streamer register a video' do
 
   it 'successfully' do
     streamer = create(:streamer)
+    game = create(:game, name: 'Megaman X4')
 
     login_as streamer, scope: :streamer
     visit root_path
@@ -19,12 +20,15 @@ describe 'streamer register a video' do
     fill_in 'Nome', with: 'Jogando Mind Craft'
     fill_in 'Descrição', with: 'Jogador irado, joga demais!!'
     fill_in 'https://vimeo.com/', with: '613710178'
+    select 'Megaman X4', from: 'Jogo'
     click_on 'Enviar'
 
     expect(page).to have_content('Video cadastrado com sucesso!')
     expect(page).to have_css('iframe[src*="https://player.vimeo.com/video/613710178?autoplay=1&background=0"]')
     expect(page).to have_content('Jogando Mind Craft')
     expect(page).to have_content('Descrição: Jogador irado, joga demais!!')
+    expect(page).to have_content('Megaman X4')
+    expect(page).to have_content("Categorias: #{game.game_categories_list_as_string}")
     expect(page).to have_content('Status: Pendente')
     expect(page).to_not have_link('Comprar Video', href: payment_video_path(1))
   end
@@ -38,6 +42,7 @@ describe 'streamer register a video' do
 
     expect(current_path).to have_content('/videos')
     expect(page).to have_content('Erro ao criar Vídeo!')
+    expect(page).to have_content('Jogo é obrigatório(a)')
     expect(page).to have_content('Nome não pode ficar em branco')
     expect(page).to have_content('Descrição não pode ficar em branco')
     expect(page).to have_content('Link não pode ficar em branco')

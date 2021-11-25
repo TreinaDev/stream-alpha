@@ -13,4 +13,10 @@
 <dl>
   <dt><%= Video.human_attribute_name(:description) %>:</dt>
   <dd><%= video.description %></dd>
+
+  <dt><%= Video.human_attribute_name(:game_id) %>:</dt>
+  <dd><%= video.game.name %></dd>
+
+  <dt><%= Game.human_attribute_name(:game_category_ids) %>:</dt>
+  <dd><%= video.game.game_categories_list_as_string %></dd>
 </dl>

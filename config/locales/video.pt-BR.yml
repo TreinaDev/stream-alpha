@@ -9,6 +9,8 @@ pt-BR:
         description: "Descrição"
         link: "Link"
         feed_back: "Feedback"
+        game: "Jogo"
+        game_id: "Jogo"
         statuses:
           pending: "Pendente"
           approved: "Aprovado"

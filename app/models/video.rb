@@ -1,7 +1,8 @@
 class Video < ApplicationRecord
+  belongs_to :game
   belongs_to :streamer
 
-  validates :name, :description, :link, presence: true, on: :create
+  validates :name, :description, :link, presence: true
   validates :link, length: { minimum: 8, maximum: 9 }, numericality: true,
                    uniqueness: true
 

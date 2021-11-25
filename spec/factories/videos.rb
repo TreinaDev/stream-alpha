@@ -5,6 +5,7 @@ FactoryBot.define do
     link do
       "#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}"
     end
+    game
     streamer
   end
 end

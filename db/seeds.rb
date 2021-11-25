@@ -29,14 +29,6 @@ plan3 = FactoryBot.create(:plan)
 
 content_streamer = ContentStreamer.create!({ streamer: streamer, plan: plan })
 
-video = FactoryBot.create(:video, streamer: streamer, link: '76979871')
-video2 = FactoryBot.create(:video, streamer: streamer2, link: '647748643')
-video3 = FactoryBot.create(:video, streamer: streamer3, link: '83558749')
-
-video = FactoryBot.create(:video, streamer: streamer)
-video2 = FactoryBot.create(:video, streamer: streamer2)
-video3 = FactoryBot.create(:video, streamer: streamer3)
-
 action = FactoryBot.create(:game_category, name: 'Ação', admin: admin)
 arcade_rhythm = FactoryBot.create(:game_category, name: 'Arcade e Ritmo', admin: admin)
 fighting = FactoryBot.create(:game_category, name: 'Luta e Artes Marciais', admin: admin)
@@ -104,3 +96,15 @@ game_category3 = FactoryBot.create(:game_category, admin: admin2, created_at: 58
 game_category4 = FactoryBot.create(:game_category, admin: admin2, created_at: 57.days.ago)
 game_category5 = FactoryBot.create(:game_category, admin: admin2, created_at: 56.days.ago)
 game_category6 = FactoryBot.create(:game_category, admin: admin2, created_at: 55.days.ago)
+
+game = FactoryBot.create(:game)
+game2 = FactoryBot.create(:game)
+game3 = FactoryBot.create(:game)
+
+video = FactoryBot.create(:video, streamer: streamer, link: '76979871', game: game)
+video2 = FactoryBot.create(:video, streamer: streamer2, link: '647748643', game: game2)
+video3 = FactoryBot.create(:video, streamer: streamer3, link: '83558749', game: game3)
+
+video = FactoryBot.create(:video, streamer: streamer)
+video2 = FactoryBot.create(:video, streamer: streamer2)
+video3 = FactoryBot.create(:video, streamer: streamer3)
