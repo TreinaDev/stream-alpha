@@ -4,17 +4,21 @@ class PlaylistsController < ApplicationController
 
   def new
     @playlist = current_admin.playlists.new
+    @videos = Video.available.order(name: :asc)
+    @streamers = StreamerProfile.all_actives.order(name: :asc)
   end
 
   def create
+    puts playlist_params
     @playlist = current_admin.playlists.build(playlist_params)
 
     if @playlist.save
       redirect_to @playlist, notice: t('.success')
-    else
-      flash['alert'] = t('.failed')
-      render :new
+      return
     end
+
+    flash['alert'] = t('.failed')
+    render :new
   end
 
   def show
@@ -24,6 +28,6 @@ class PlaylistsController < ApplicationController
   private
 
   def playlist_params
-    params.require(:playlist).permit(:name, :description, :cover)
+    params.require(:playlist).permit(:name, :description, :cover, video_ids: [], streamer_ids: [])
   end
 end

@@ -10,4 +10,14 @@
 
   <dt><%= t(:description, scope: "activerecord.attributes.playlist") %>:</dt>
   <dd><%= playlist.description %></dd>
+
+  <dt><%= t(:video_ids, scope: "activerecord.attributes.playlist") %>:</dt>
+  <% playlist.videos.each do |video|%>
+    <dd><%= link_to video.name, video %></dd>
+  <% end %>
+
+  <dt><%= t(:streamer_ids, scope: "activerecord.attributes.playlist") %>:</dt>
+  <% playlist.streamers.each do |streamer|%>
+    <dd><%= link_to streamer.streamer_profile.name, streamer.streamer_profile %></dd>
+  <% end %>
 </dl>

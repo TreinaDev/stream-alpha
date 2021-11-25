@@ -20,9 +20,20 @@
   <div>
     <%= pl.label :cover %>
     <%= pl.file_field :cover %>
+
     <% @playlist.errors.full_messages_for(:cover).each do |error| %>
       <div><%= error %></div>
     <% end %>
+  </div>
+
+  <div>
+    <%= pl.label :video_ids %>
+    <%= pl.collection_select :video_ids, @videos || [], :id, :name, {prompt: 'Escolha um ou mais videos'}, {multiple: true} %>
+  </div>
+
+  <div>
+    <%= pl.label :streamer_ids %>
+    <%= pl.collection_select :streamer_ids, @streamers || [], :streamer_id, :name, {prompt: 'Escolha um ou mais stramers'}, {multiple: true} %>
   </div>
 
   <div>
