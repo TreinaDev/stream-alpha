@@ -1,3 +1,4 @@
+---
 pt-BR:
   activerecord:
     models:
@@ -10,7 +11,18 @@ pt-BR:
         instagram: "URL do Instagram"
         twitter: "URL do Twitter"
         photo: "Foto do Perfil"
-        streamer_id: "Perfil de"
+        streamer_id: "Perfil de:"
+        status: "Status"
+        statuses:
+          active: "Ativo"
+          inactive: "Inativo"
+  streamer_profiles:
+    inactive:
+      success: "Streamer inativado com sucesso!"
+    active:
+      success: "Streamer ativado com sucesso!"
+      photo: "Foto do Perfil"
+      streamer_id: "Perfil de"
       statuses:
         pending: "Pendente"
         completed: "Completo"

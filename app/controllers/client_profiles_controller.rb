@@ -3,8 +3,8 @@ class ClientProfilesController < ApplicationController
   before_action :authenticate_client_or_admin!, only: %i[show]
   before_action :check_if_profile_is_valid, only: %i[show]
   before_action :client_is_owner!, only: %i[edit update]
-  before_action :client_profile_exists?, only: %i[create new]
   def create
+    redirect_to current_client.client_profile, alert: 'Perfil já existente!' if client_profile_exists?
     @client_profile = current_client.build_client_profile(client_profile_params)
     if @client_profile.save
       redirect_to @client_profile, notice: 'Perfil criado com sucesso!'
@@ -15,6 +15,7 @@ class ClientProfilesController < ApplicationController
   end
 
   def new
+    redirect_to current_client.client_profile, alert: 'Perfil já existente!' if client_profile_exists?
     @client_profile = ClientProfile.new
   end
 
@@ -40,9 +41,7 @@ class ClientProfilesController < ApplicationController
   private
 
   def client_profile_exists?
-    if ClientProfile.find_by(client: current_client).present?
-      redirect_to current_client.client_profile, alert: 'Perfil já existente!'
-    end
+    ClientProfile.find_by(client: current_client).present?
   end
 
   def check_if_profile_is_valid
@@ -51,9 +50,9 @@ class ClientProfilesController < ApplicationController
 
   def client_is_owner!
     @client_profile = ClientProfile.find(params[:id])
-    unless @client_profile.owner?(current_client)
-      redirect_to root_path, alert: "Você só pode editar o seu #{t(:client_profile, scope: 'activerecord.models')}!"
-    end
+    return if @client_profile.owner?(current_client)
+
+    redirect_to root_path, alert: "Você só pode editar o seu #{t(:client_profile, scope: 'activerecord.models')}!"
   end
 
   def client_profile_params

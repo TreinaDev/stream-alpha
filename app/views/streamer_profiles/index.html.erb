@@ -1,0 +1,17 @@
+<h3>Área de Gerenciamento de Streamers</h3>
+
+<p>Todos os streamers cadastrados na plataforma</p>
+
+<% if @streamers.blank? %>
+  <p>Não existem streamers cadastrados na plataforma</p>
+<% end %>
+<dl>
+  <% @streamers.each do |streamer| %>
+    <dt>
+      <%= link_to streamer.name, streamer_profile_path(streamer) %>
+    </dt>
+    <dd>
+      <%= StreamerProfile.human_enum_name(:status, streamer.status) %>
+    </dd>
+  <% end %>
+</dl>

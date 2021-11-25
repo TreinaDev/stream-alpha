@@ -6,6 +6,8 @@ class StreamerProfile < ApplicationRecord
 
   has_one_attached :photo
 
+  enum status: { active: 0, inactive: 1 }
+
   def owner?(current_streamer = nil)
     return current_streamer == streamer if current_streamer
   end

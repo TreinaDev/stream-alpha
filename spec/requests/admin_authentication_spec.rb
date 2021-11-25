@@ -16,6 +16,21 @@ describe 'Admin authentication' do
 
     expect(response).to redirect_to(new_admin_session_path)
   end
+  it 'cannot view all streamers' do
+    get '/streamer_profiles'
+
+    expect(response).to redirect_to(new_admin_session_path)
+  end
+  it 'cannot inactivate a streamer' do
+    streamer = create(:streamer)
+    post "/streamer_profiles/#{streamer.id}/inactive"
+
+    expect(response).to redirect_to(new_admin_session_path)
+  end
+  it 'cannot activate a streamer' do
+    streamer = create(:streamer)
+    post "/streamer_profiles/#{streamer.id}/active"
+  end
   it 'cannot create a game without login in as a admin' do
     post '/games'
 
