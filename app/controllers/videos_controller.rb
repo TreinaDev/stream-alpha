@@ -12,6 +12,9 @@ class VideosController < ApplicationController
     @video = current_streamer.videos.build(video_params)
     if @video.save
       redirect_to @video, notice: t('.success')
+      # if !@video.price.loose?
+      #   @video.price.value = nil
+      # end
     else
       flash[:alert] = "Erro ao criar #{t(:video, scope: 'activerecord.models')}!"
       render :new
