@@ -59,7 +59,7 @@ class VideosController < ApplicationController
   def analysed_video!
     redirect_to @video, status: :permanent_redirect unless find_video.pending?
   end
-  
+
   def approve_video(video)
     video.approved!
   end
