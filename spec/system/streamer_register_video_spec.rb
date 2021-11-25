@@ -37,6 +37,7 @@ describe 'streamer register a video' do
     click_on 'Enviar'
 
     expect(current_path).to have_content('/videos')
+    expect(page).to have_content('Erro ao criar Vídeo!')
     expect(page).to have_content('Nome não pode ficar em branco')
     expect(page).to have_content('Descrição não pode ficar em branco')
     expect(page).to have_content('Link não pode ficar em branco')
@@ -53,7 +54,22 @@ describe 'streamer register a video' do
     click_on 'Enviar'
 
     expect(current_path).to have_content('/videos')
+    expect(page).to have_content('Erro ao criar Vídeo!')
     expect(page).to have_content('Link é muito longo (máximo: 9 caracteres)')
+  end
+
+  it 'but link is unique' do
+    streamer = create(:streamer)
+    create(:video, link: '123456789')
+    login_as streamer, scope: :streamer
+
+    visit new_video_path
+    fill_in 'https://vimeo.com/', with: '123456789'
+    click_on 'Enviar'
+
+    expect(current_path).to have_content('/videos')
+    expect(page).to have_content('Erro ao criar Vídeo!')
+    expect(page).to have_content('Link já está em uso')
   end
 
   it 'and don´t see the button if isn´t streamer' do
