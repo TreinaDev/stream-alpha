@@ -63,7 +63,7 @@ class VideosController < ApplicationController
   end
 
   def video_params
-    params.require(:video).permit(:name, :description, :link, price_attributes: [:loose, :value])
+    params.require(:video).permit(:name, :description, :link, price_attributes: %i[loose value])
   end
 
   def approve_video(video)

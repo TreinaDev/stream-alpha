@@ -14,7 +14,7 @@ describe 'streamer register a video' do
   it 'successfully' do
     streamer = create(:streamer)
     login_as streamer, scope: :streamer
-    
+
     visit root_path
     click_on 'Cadastrar Vídeo'
     fill_in 'Nome', with: 'Jogando Mind Craft'
@@ -23,7 +23,7 @@ describe 'streamer register a video' do
     fill_in 'Preço', with: 50
     fill_in 'Link', with: 'https://vimeo.com/546542asffdmind56465craft'
     click_on 'Enviar'
-    
+
     expect(page).to have_content('Video cadastrado com sucesso!')
     expect(page).to have_content('Nome: Jogando Mind Craft')
     expect(page).to have_content('Descrição: Jogador irado, joga demais!!')
@@ -35,13 +35,13 @@ describe 'streamer register a video' do
 
   it 'and has no price if loose is not checked' do
     client = create(:client)
-    video = create(:video)
+    create(:video)
     login_as client, scope: :client
-    
+
     visit root_path
     click_on 'Ver todos os videos avulsos'
     click_on 'Jogando Mind Craft'
-    
+
     expect(page).to have_content('Nome: Jogando Mind Craft')
     expect(page).to have_content('Descrição: Jogador irado, joga demais!!')
     expect(page).to have_content('Avulso: Não')

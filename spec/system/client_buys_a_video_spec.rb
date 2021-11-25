@@ -10,6 +10,7 @@ describe 'client buys a video' do
       allow(PaymentMethod).to receive(:all).and_return(payment_methods)
       client = create(:client)
       video = create(:video)
+      create(:price, loose: true, video: video)
 
       login_as client, scope: :client
       visit root_path
@@ -30,6 +31,7 @@ describe 'client buys a video' do
       allow(PaymentMethod).to receive(:all).and_return(nil)
       client = create(:client)
       video = create(:video)
+      create(:price, loose: true, video: video)
 
       login_as client, scope: :client
       visit root_path
