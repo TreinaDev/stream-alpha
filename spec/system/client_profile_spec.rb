@@ -33,6 +33,18 @@ describe 'Client profile' do
       expect(page).to have_css("img[src*='gary-bendig-unsplash.jpg']")
       expect(page).to_not have_content('CPF: 60243105878')
     end
+    it 'successfully logs_in with a created profile' do
+      client = create(:client)
+      create(:client_profile, client: client)
+
+      visit root_path
+      click_on 'Entrar como Assinante'
+      fill_in 'Email', with: client.email
+      fill_in 'Senha', with: client.password
+      click_on 'Entrar'
+
+      expect(current_path).to eq(root_path)
+    end
     it 'unsuccessfully: left mandatory information blank' do
       client = create(:client)
 
