@@ -1,9 +1,20 @@
 <h1>Informe os dados de cadastro do novo Administrador</h1>
 
 <%= form_with model: @admin do |f|%>
+<div>
   <%= f.label :email %>
   <%= f.text_field :email %>
+  <% field_errors(@admin, :email).each do |message|%>
+    <li><%= message %></li>
+  <%end%>
+</div>
+
+<div>
   <%= f.label :password %>
   <%= f.text_field :password %>
-  <%= f.submit "Cadastrar" %>
+  <% field_errors(@admin, :password).each do |message|%>
+    <li><%= message %></li>
+  <%end%>
+</div>
+  <%= f.submit "Cadastrar" %> 
 <% end %>
