@@ -14,6 +14,8 @@ RSpec.describe Playlist, type: :model do
     it 'description must be present' do
       should validate_presence_of(:description).with_message('não pode ficar em branco')
     end
-    it { should validate_uniqueness_of(:name) }
+    it 'name must be uniqueness' do
+      should validate_uniqueness_of(:name)
+    end
   end
 end
