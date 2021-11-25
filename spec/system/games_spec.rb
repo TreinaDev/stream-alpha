@@ -19,7 +19,7 @@ describe 'games' do
 
       expect(page).to have_content('Minecraft')
       expect(page).to have_content('Sandbox, Sobrevivência')
-      expect(page).to have_content("#{I18n.l Date.current}")
+      expect(page).to have_content(I18n.l(Date.current))
       expect(page).to have_content(admin.email)
       expect(Game.count).to eq(1)
     end
@@ -54,7 +54,6 @@ describe 'games' do
   context 'Admin views games:' do
     it 'successfully' do
       admin = create(:admin)
-      game_category = create(:game_category)
       create(:game, name: 'Final Fantasy XII - The Zodiac Age')
       create(:game, name: 'TLOZ - Breath of the Wild')
 
