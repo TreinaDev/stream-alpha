@@ -1,5 +1,6 @@
 class VideosController < ApplicationController
   before_action :authenticate_streamer!, only: %i[new create]
+  before_action :authenticate_client!, only: %i[payment]
   before_action :authenticate_admin!, only: %i[approve refuse]
   before_action :find_video, only: %i[refuse approve show]
   before_action :analysed_video!, only: %i[refuse approve]

@@ -9,6 +9,11 @@ pt-BR:
         description: "Descrição"
         link: "Link"
         feed_back: "Feedback"
+        statuses:
+          pending: "Pendente"
+          approved: "Aprovado"
+          reproved: "Reprovado"
+
   videos:
     show:
       name: "Nome"
@@ -24,4 +29,3 @@ pt-BR:
   actioncontroller:
     videos:
       success: "Operação realizada com sucesso!"
-
