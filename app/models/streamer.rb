@@ -8,6 +8,8 @@ class Streamer < ApplicationRecord
   has_many :videos, dependent: :nullify
   has_many :content_streamers, dependent: :destroy
   has_many :plans, through: :content_streamers
+  validates :email, :password, presence: true
 
   enum profile_status: { pending: 5, completed: 10 }
+
 end
