@@ -30,5 +30,15 @@ RSpec.describe ClientProfile, type: :model do
         'CPF deve ter 11 dígitos'
       )
     end
+
+    it 'image cannot be grater than 2 Mb' do
+      photo_profile = ClientProfile.new(photo: Rack::Test::UploadedFile
+        .new(Rails.root.join('spec/support/assets/4mb_photo.jpg')))
+      photo_profile.valid?
+
+      expect(photo_profile.errors.full_messages_for(:photo)).to include(
+        'Foto do Perfil deve ser menor que 2Mb'
+      )
+    end
   end
 end

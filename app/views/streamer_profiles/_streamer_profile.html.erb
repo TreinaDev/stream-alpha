@@ -1,32 +1,44 @@
-<% if @streamer_profile.avatar.attached? %>
-    <p><%= image_tag(@streamer_profile.avatar, size: "200x200", alt: 'profile_avatar', class: 'profile_avatar' )%></p>
-<% else %>
-  <p><%= image_tag("streamer_avatar.svg", size: "200x200", alt: 'profile_avatar', class: 'profile_avatar') %></p>
+<h2>Perfil de <%= streamer_profile.name %></h2>
+<% if streamer_profile.owner?(current_streamer) %>
+  <%= link_to "Editar Perfil", edit_streamer_profile_path %>
 <% end %>
-<h2>Perfil de <%= @streamer_profile.name %></h2>
-<%= link_to "Editar Perfil", edit_streamer_profile_path %>
+
 <dl>
-  <dt><%= I18n.t(:description, scope: "activerecord.attributes.streamer_profile") %></dt>
-  <dd><%= @streamer_profile.description %></dd>
+  <% if streamer_profile.photo.attached? %>
+    <p><%= image_tag(streamer_profile.photo, size: "200x200", alt: 'profile_photo', class: 'profile_photo' )%></p>
+  <% else %>
+    <p><%= image_tag("streamer_photo.svg", size: "200x200", alt: 'profile_photo', class: 'profile_photo') %></p>
+  <% end %>
 
-  <dt><%= I18n.t(:facebook, scope: "activerecord.attributes.streamer_profile") %></dt>
-  <% if @streamer_profile.facebook.blank? %>
+  <dt><%= t(:description, scope: "activerecord.attributes.streamer_profile") %>:</dt>
+  <dd><%= streamer_profile.description %></dd>
+
+  <dt><%= t(:facebook, scope: "activerecord.attributes.streamer_profile") %>:</dt>
+  <% if streamer_profile.facebook.blank? %>
     <dd>Não possui</dd>
   <% else %>
-    <dd><%= link_to @streamer_profile.facebook %></dd>
-  <% end %>  
+    <dd><%= link_to streamer_profile.facebook, streamer_profile.facebook %></dd>
+  <% end %>
 
-  <dt><%= I18n.t(:instagram, scope: "activerecord.attributes.streamer_profile") %></dt>
-  <% if @streamer_profile.instagram.blank? %>
+  <dt><%= t(:instagram, scope: "activerecord.attributes.streamer_profile") %>:</dt>
+  <% if streamer_profile.instagram.blank? %>
     <dd>Não possui</dd>
   <% else %>
-    <dd><%= link_to @streamer_profile.instagram %></dd>
-  <% end %>  
+    <dd><%= link_to streamer_profile.instagram, streamer_profile.instagram %></dd>
+  <% end %>
 
-  <dt><%= I18n.t(:twitter, scope: "activerecord.attributes.streamer_profile") %></dt>
-  <% if @streamer_profile.twitter.blank? %>
+  <dt><%= t(:twitter, scope: "activerecord.attributes.streamer_profile") %>:</dt>
+  <% if streamer_profile.twitter.blank? %>
     <dd>Não possui</dd>
   <% else %>
-    <dd><%= link_to @streamer_profile.twitter %></dd>
+    <dd><%= link_to streamer_profile.twitter, streamer_profile.twitter %></dd>
   <% end %>  
+  <dt><%= I18n.t(:status, scope: "activerecord.attributes.streamer_profile") %></dt>
+  <dd> <%= StreamerProfile.human_enum_name(:status, streamer_profile.status) %> </dd>
 </dl>
+
+<% if admin_signed_in? && streamer_profile.active? %>
+  <%= link_to "Inativar", inactive_streamer_profile_path(streamer_profile), method: :post, data: { confirm: "Deseja continuar?" } %>
+<% elsif admin_signed_in? && streamer_profile.inactive? %>
+  <%= link_to "Ativar", active_streamer_profile_path(streamer_profile), method: :post, data: { confirm: "Deseja continuar?" } %>
+<% end %>

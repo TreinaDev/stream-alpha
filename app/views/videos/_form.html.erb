@@ -1,0 +1,30 @@
+<% if @video.errors.any? %>
+  <ul>
+    <% @video.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+<% end %>  
+
+<%= form_with model: @video do |video|%>
+  <%= video.label :name %>
+  <%= video.text_field :name %><br>
+
+  <%= video.label :description %>
+  <%= video.text_field :description %><br>
+
+  <%= video.label :game_id %>
+  <%= video.collection_select :game_id, @games, :id, :name, { prompt: 'Escolha um Jogo' } %><br>
+
+  <%= video.label :link, "https://vimeo.com/" %>
+  <%= video.text_field :link %><br>
+
+  <%= video.fields_for :price, @price do |price| %>
+    <%= price.check_box :loose %>
+    <%= price.label :loose %><br>
+    <%= price.label :value %>
+    <%= price.text_field :value %><br>
+  <% end %>
+
+  <%= video.submit 'Enviar' %>
+<% end %>

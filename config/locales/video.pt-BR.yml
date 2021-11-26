@@ -2,14 +2,33 @@
 pt-BR:
   activerecord:
     models:
-      video: "Video"
+      video: "Vídeo"
     attributes:
       video:
         name: "Nome"
         description: "Descrição"
         link: "Link"
+        feed_back: "Feedback"
+        loose: "Avulso"
+        value: "Preço"
+        game: "Jogo"
+        game_id: "Jogo"
+        statuses:
+          pending: "Pendente"
+          approved: "Aprovado"
+          reproved: "Reprovado"
   videos:
     show:
       name: "Nome"
       description: "Descrição"
       link: "Link"
+      feed_back: "Retorne um feedback para o streamer:"
+    refuse:
+      success: "Feedback recusado com sucesso!"
+    approve:
+      success: "Video aprovado com sucesso!"
+    create:
+      success: "Video cadastrado com sucesso!"
+  actioncontroller:
+    videos:
+      success: "Operação realizada com sucesso!"

@@ -1,0 +1,27 @@
+<div>
+  <p>Jogos atualmente cadastrados na plataforma:</p>
+  <% if @games.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th><%= t(:name, scope: "activerecord.attributes.game") %></th>
+          <th><%= t(:created_at, scope: "activerecord.attributes.game") %></th>
+          <th><%= t(:admin_id, scope: "activerecord.attributes.game") %></th>
+          <th><%= t(:game_category_ids, scope: "activerecord.attributes.game") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @games.each do |game| %>
+          <tr>
+            <td><%= game.name %></td>
+            <td><%= l game.created_at.to_date %></td>
+            <td><%= game.admin.email %></td>
+            <td><%= game.game_categories_list_as_string %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>Nenhum jogo registrado.</p>
+  <% end %>
+</div>

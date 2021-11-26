@@ -1,0 +1,19 @@
+<h2><%= plan.name %></h2>
+<h3><%= plan.description %></h3>
+
+<dl>
+  <dt><%= t(:value, scope: "activerecord.attributes.plan") %>:</dt>
+  <dd><%= number_to_currency plan.value %></dd>
+
+  <dt><%= t(:content_streamer, scope: "activerecord.attributes.plan") %>:</dt>
+  <dd></dd>
+
+  <dt><%= t(:streamer_ids, scope: "activerecord.attributes.plan") %>:</dt>
+  <% plan.streamers.each do |streamer| %>
+    <% if streamer.streamer_profile.present? %>
+      <dd><%= link_to streamer.streamer_profile.name, streamer_profile_path(streamer.streamer_profile) %></dd>
+    <% else %>
+      <dd>Streamer sem perfil!</dd>
+    <% end %>
+  <% end %>
+</dl>

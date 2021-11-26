@@ -1,6 +1,11 @@
 FactoryBot.define do
   factory :video do
-    nome { 'MyString' }
-    link { 'MyString' }
+    sequence(:name) { |n| "\##{n} Jogando Mind Craft" }
+    description { 'Jogador irado, joga demais!!' }
+    link do
+      "#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}"
+    end
+    game
+    streamer
   end
 end

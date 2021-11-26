@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_18_145404) do
+ActiveRecord::Schema.define(version: 2021_11_25_161516) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -81,14 +81,57 @@ ActiveRecord::Schema.define(version: 2021_11_18_145404) do
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
   end
 
+  create_table "content_streamers", force: :cascade do |t|
+    t.integer "plan_id", null: false
+    t.integer "streamer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["plan_id"], name: "index_content_streamers_on_plan_id"
+    t.index ["streamer_id"], name: "index_content_streamers_on_streamer_id"
+  end
+
   create_table "game_categories", force: :cascade do |t|
     t.string "name"
-    t.string "creation_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "admin_id", null: false
     t.index ["admin_id"], name: "index_game_categories_on_admin_id"
     t.index ["name"], name: "index_game_categories_on_name", unique: true
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.string "name"
+    t.integer "admin_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_id"], name: "index_games_on_admin_id"
+    t.index ["name"], name: "index_games_on_name", unique: true
+  end
+
+  create_table "games_game_categories", force: :cascade do |t|
+    t.integer "game_category_id", null: false
+    t.integer "game_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_category_id"], name: "index_games_game_categories_on_game_category_id"
+    t.index ["game_id"], name: "index_games_game_categories_on_game_id"
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.decimal "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "prices", force: :cascade do |t|
+    t.boolean "loose"
+    t.decimal "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "video_id", null: false
+    t.index ["video_id"], name: "index_prices_on_video_id"
   end
 
   create_table "streamer_profiles", force: :cascade do |t|
@@ -100,6 +143,7 @@ ActiveRecord::Schema.define(version: 2021_11_18_145404) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "streamer_id", null: false
+    t.integer "status", default: 0
     t.index ["streamer_id"], name: "index_streamer_profiles_on_streamer_id"
   end
 
@@ -123,13 +167,25 @@ ActiveRecord::Schema.define(version: 2021_11_18_145404) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "description"
     t.integer "streamer_id", null: false
+    t.integer "status", default: 0
+    t.string "feed_back"
+    t.integer "game_id", null: false
+    t.index ["game_id"], name: "index_videos_on_game_id"
+    t.index ["link"], name: "index_videos_on_link", unique: true
     t.index ["streamer_id"], name: "index_videos_on_streamer_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "client_profiles", "clients"
+  add_foreign_key "content_streamers", "plans"
+  add_foreign_key "content_streamers", "streamers"
   add_foreign_key "game_categories", "admins"
+  add_foreign_key "games", "admins"
+  add_foreign_key "games_game_categories", "game_categories"
+  add_foreign_key "games_game_categories", "games"
+  add_foreign_key "prices", "videos"
   add_foreign_key "streamer_profiles", "streamers"
+  add_foreign_key "videos", "games"
   add_foreign_key "videos", "streamers"
 end

@@ -1,0 +1,26 @@
+<div>
+  <p><%= link_to 'Registrar nova categoria de jogos', new_game_category_path %></p>
+  <p>Categorias de jogos atualmente cadastradas na plataforma:</p>
+  <% if @game_categories.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th><%= t(:name, scope: "activerecord.attributes.game_category") %></th>
+          <th><%= t(:created_at, scope: "activerecord.attributes.game_category") %></th>
+          <th><%= t(:admin_id, scope: "activerecord.attributes.game_category") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @game_categories.each do |category| %>
+          <tr>
+            <td><%= category.name %></td>
+            <td><%= l category.created_at.to_date %></td>
+            <td><%= category.admin.email %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>Nenhuma categoria de jogo registrada.</p>
+  <% end %>
+</div>

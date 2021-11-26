@@ -1,0 +1,11 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      game: 'Jogos'
+    attributes:
+      game:
+        name: 'Nome'
+        admin_id: 'Admin'
+        game_category_ids: 'Categorias'
+        created_at: 'Criado em'
