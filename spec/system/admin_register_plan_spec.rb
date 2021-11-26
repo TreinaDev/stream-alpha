@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Some' do
-  context "Admin register a video plan" do
+  context 'Admin register a video plan' do
     it 'but see the registration form before' do
       admin = create(:admin)
 

@@ -1,6 +1,6 @@
 class Playlist < ApplicationRecord
   belongs_to :admin
-  has_many :content_playlists
+  has_many :content_playlists, dependent: :nullify
   has_many :plans, through: :content_playlists
 
   has_one_attached :cover
