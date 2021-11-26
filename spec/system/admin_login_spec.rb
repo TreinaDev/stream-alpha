@@ -6,14 +6,16 @@ describe 'Admin login -' do
       admin = create(:admin)
 
       visit root_path
-      click_on 'Entrar como Administrador'
+      click_on 'Como administrador'
       fill_in 'Email', with: admin.email
       fill_in 'Senha', with: admin.password
-      click_on 'Entrar'
+      within 'form'do
+        click_on 'Entrar'
+      end
 
       expect(current_path).to eq(root_path)
       expect(page).to have_content 'Login efetuado com sucesso!'
-      expect(page).to have_link 'Sair', href: destroy_admin_session_path
+      expect(page).to have_content(admin.email)
     end
   end
 end

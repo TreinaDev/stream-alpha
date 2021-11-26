@@ -10,7 +10,7 @@ describe 'Client profile' do
       fill_in 'Email', with: client.email
       fill_in 'Senha', with: client.password
       within 'form' do
-      click_on 'Entrar'
+        click_on 'Entrar'
       end
       fill_in 'Nome completo (conforme documentos)', with: 'Otávio Augusto da Silva Lins'
       fill_in 'Nome social', with: 'Marcela'
@@ -197,8 +197,8 @@ describe 'Client profile' do
 
       login_as client, scope: :client
       visit root_path
-      
-      expect(page).to have_link('Meu Perfil', href: new_client_profile_path) 
+
+      expect(page).to have_link('Meu Perfil', href: new_client_profile_path)
     end
   end
 end

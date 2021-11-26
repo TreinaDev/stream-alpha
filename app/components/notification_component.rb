@@ -26,8 +26,8 @@ class NotificationComponent < ViewComponent::Base
       'border-green-700'
     when 'error'
       'border-red-700'
-      when 'alert'
-        'border-red-700'
+    when 'alert'
+      'border-red-700'
     else
       'border-gray-700'
     end

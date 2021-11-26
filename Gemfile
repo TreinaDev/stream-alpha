@@ -9,12 +9,12 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 gem 'faraday'
 gem 'jbuilder', '~> 2.7'
+gem 'particles-js-rails', '~> 2.0'
 gem 'puma', '~> 5.0'
 gem 'sass-rails', '>= 6'
 gem 'sqlite3', '~> 1.4'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 5.0'
-gem 'particles-js-rails', '~> 2.0'
 
 group :development, :test do
   gem 'factory_bot_rails'
@@ -36,8 +36,8 @@ group :test do
   gem 'simplecov', require: false
 end
 
-gem "view_component", "~> 2.44"
+gem 'view_component', '~> 2.44'
 
-gem "importmap-rails", "~> 0.8.2"
+gem 'importmap-rails', '~> 0.8.2'
 
-gem "stimulus-rails", "~> 0.7.2"
+gem 'stimulus-rails', '~> 0.7.2'
