@@ -25,7 +25,7 @@
     <%= f.collection_select :streamer_ids, @streamers, :id ,:email, { prompt: true }, { multiple: true } %>
   </div><br>  
     <div>
-    <%= f.label :playlist_ids, 'Selecione as Playlist incluídas no plano' %><br>
+    <%= f.label :playlist_ids, 'Selecione as playlists incluídas no plano' %><br>
     <%= f.collection_select :playlist_ids, @playlists, :id ,:name, { prompt: true }, { multiple: true } %>
   </div><br>  
   <%= f.submit %>

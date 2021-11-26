@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_25_161516) do
+ActiveRecord::Schema.define(version: 2021_11_26_193043) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -79,6 +79,15 @@ ActiveRecord::Schema.define(version: 2021_11_25_161516) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_clients_on_email", unique: true
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
+  end
+
+  create_table "content_playlists", force: :cascade do |t|
+    t.integer "plan_id", null: false
+    t.integer "playlist_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["plan_id"], name: "index_content_playlists_on_plan_id"
+    t.index ["playlist_id"], name: "index_content_playlists_on_playlist_id"
   end
 
   create_table "content_streamers", force: :cascade do |t|
@@ -206,6 +215,8 @@ ActiveRecord::Schema.define(version: 2021_11_25_161516) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "client_profiles", "clients"
+  add_foreign_key "content_playlists", "plans"
+  add_foreign_key "content_playlists", "playlists"
   add_foreign_key "content_streamers", "plans"
   add_foreign_key "content_streamers", "streamers"
   add_foreign_key "game_categories", "admins"

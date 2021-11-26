@@ -57,6 +57,7 @@ describe 'Some' do
       gamer = create(:streamer, profile_status: 10)
       create(:streamer_profile, streamer: gamer)
       playlist = create(:playlist)
+      playlist1 = create(:playlist)
 
       login_as admin, scope: :admin
       visit root_path
@@ -67,10 +68,12 @@ describe 'Some' do
       fill_in 'Valor', with: '100'
       select gamer.email, from: 'Selecione os Streamer incluídos no plano'
       select playlist.name, from: 'Selecione as playlists incluídas no plano'
+      select playlist1.name, from: 'Selecione as playlists incluídas no plano'
       click_on 'Criar Plano de Assinatura'
 
       expect(page).to have_content('Plano cadastrado com sucesso!')
       expect(page).to have_content(playlist.name)
+      expect(page).to have_content(playlist1.name)
     end
   end
   context 'Admin view all plans registred' do
