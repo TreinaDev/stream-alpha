@@ -7,7 +7,18 @@ class ClientProfilesController < ApplicationController
     redirect_to current_client.client_profile, alert: 'Perfil já existente!' if client_profile_exists?
     @client_profile = current_client.build_client_profile(client_profile_params)
     if @client_profile.save
-      redirect_to @client_profile, notice: 'Perfil criado com sucesso!'
+      response = Faraday.post('http://pagapaga.com.br/api/v1/client_registration/',
+                              {name: @client_profile.full_name, cpf: @client_profile.cpf},
+                              {company_token: SecureRandom.alphanumeric(20)}
+                            )
+      if response.status != 200
+        response_body = {name: @client_profile.full_name, cpf: @client_profile.cpf, token: SecureRandom.alphanumeric(10)}
+        @client_profile.token = response_body[:token]
+      else
+        response_body = JSON.parse(response.body, simbolize_names: true)
+        @client_profile.token = response_body["token"]
+        redirect_to @client_profile, notice: 'Perfil criado com sucesso!'
+      end
     else
       flash[:alert] = "Erro ao criar #{t(:client_profile, scope: 'activerecord.models')}!"
       render :new

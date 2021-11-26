@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_25_161516) do
+ActiveRecord::Schema.define(version: 2021_11_26_030339) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2021_11_25_161516) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "cep"
     t.string "cpf"
+    t.string "token"
     t.index ["client_id"], name: "index_client_profiles_on_client_id"
   end
 

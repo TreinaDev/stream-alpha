@@ -5,8 +5,8 @@ describe PaymentMethod, type: :model do
     it 'should return an array' do
       api_response = File.read(Rails.root.join('spec/support/apis/payment_methods.json'))
       fake_response = double('faraday_response', status: 200, body: api_response)
-
-      allow(Faraday).to receive(:get).with('http://pagapaga.com.br/api/v1/payment_methods/')
+      allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('154689459647851263as')
+      allow(Faraday).to receive(:get).with('http://pagapaga.com.br/api/v1/payment_methods/', nil, {company_token: '154689459647851263as'})
                                      .and_return(fake_response)
 
       result = PaymentMethod.all
@@ -23,7 +23,8 @@ describe PaymentMethod, type: :model do
     it 'should return nil if API returns 500' do
       fake_response = double('faraday_response', status: 500, body: '')
 
-      allow(Faraday).to receive(:get).with('http://pagapaga.com.br/api/v1/payment_methods/')
+      allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('154689459647851263as')
+      allow(Faraday).to receive(:get).with('http://pagapaga.com.br/api/v1/payment_methods/', nil, {company_token: '154689459647851263as'})
                                      .and_return(fake_response)
 
       result = PaymentMethod.all

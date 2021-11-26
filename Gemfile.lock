@@ -240,6 +240,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    securerandom (0.1.1)
     semantic_range (3.0.0)
     shoulda-matchers (5.0.0)
       activesupport (>= 5.2.0)
@@ -303,6 +304,7 @@ DEPENDENCIES
   rspec-rails
   rubocop-rails
   sass-rails (>= 6)
+  securerandom
   shoulda-matchers
   simplecov
   spring
