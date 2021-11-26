@@ -1,0 +1,7 @@
+---
+pt-BR:
+  activerecord:
+    errors:
+      messages:
+        file_too_large: "deve ser menor que %{size}"
+        digits: "deve ter %{size} dígitos"

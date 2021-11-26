@@ -29,6 +29,7 @@ describe 'Admin authentication' do
   end
   it 'cannot activate a streamer' do
     streamer = create(:streamer)
+
     post "/streamer_profiles/#{streamer.id}/active"
   end
   it 'cannot create a game without login in as a admin' do
@@ -38,6 +39,16 @@ describe 'Admin authentication' do
   end
   it 'cannot view game creation page without login in as a admin' do
     get '/games/new'
+
+    expect(response).to redirect_to(new_admin_session_path)
+  end
+  it 'cannot create a playlist without login as a admin' do
+    post '/playlists'
+
+    expect(response).to redirect_to(new_admin_session_path)
+  end
+  it 'cannot view form for create playlist without authentication' do
+    get '/playlists/new'
 
     expect(response).to redirect_to(new_admin_session_path)
   end

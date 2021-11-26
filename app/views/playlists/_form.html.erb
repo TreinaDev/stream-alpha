@@ -1,0 +1,42 @@
+<%= form_with model: @playlist do |pl|%>
+  <div>
+    <%= pl.label :name %>
+    <%= pl.text_field :name, placeholder: 'Escreva o nome da playlist' %>
+
+    <% @playlist.errors.full_messages_for(:name).each do |error| %>
+      <div><%= error %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= pl.label :description %><br>
+    <%= pl.text_area :description, rows: 5, cols: 50, placeholder: 'Escreva o descrição da playlist' %>
+
+    <% @playlist.errors.full_messages_for(:description).each do |error| %>
+      <div><%= error %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= pl.label :cover %>
+    <%= pl.file_field :cover %>
+
+    <% @playlist.errors.full_messages_for(:cover).each do |error| %>
+      <div><%= error %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= pl.label :video_ids %><br>
+    <%= pl.collection_select :video_ids, @videos || [], :id, :name, {prompt: 'Escolha um ou mais videos'}, {multiple: true} %>
+  </div>
+
+  <div>
+    <%= pl.label :streamer_ids %><br>
+    <%= pl.collection_select :streamer_ids, @streamers || [], :streamer_id, :name, {prompt: 'Escolha um ou mais streamers'}, {multiple: true} %>
+  </div>
+
+  <div>
+    <%= pl.submit "Enviar Playlist" %>
+  </div>
+<% end %>

@@ -1,0 +1,22 @@
+<% if @playlists.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th><%= t(:name, scope: "activerecord.attributes.playlist") %></th>
+        <th><%= t(:description, scope: "activerecord.attributes.playlist") %></th>
+        <th><%= t(:created_at, scope: "activerecord.attributes.playlist") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @playlists.each do |playlist| %>
+        <tr>
+          <td><%= link_to playlist.name, playlist_path(playlist) %></td>
+          <td><%= playlist.description %></td>
+          <td><%= l playlist.created_at.to_date %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Nenhuma playlist registrada.</p>
+<% end %>
