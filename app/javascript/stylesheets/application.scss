@@ -35,19 +35,19 @@
 }
 
 .dropdown-toggle {
-    @apply absolute pt-1 shadow-lg
+    @apply bg-white absolute mt-1 shadow-lg overflow-hidden rounded
 }
 
 .dropdown-menu-top {
-    @apply rounded-t py-2 px-4 block
+    @apply py-2 px-4 block truncate overflow-hidden
 }
 
 .dropdown-menu-mid {
-    @apply py-2 px-4 block 
+    @apply py-2 pl-4 pr-10 block
 }
 
 .dropdown-menu-botton {
-    @apply rounded-b px-2 py-2 block
+    @apply px-4 py-2 block
 }
 
 @keyframes notification-countdown {
