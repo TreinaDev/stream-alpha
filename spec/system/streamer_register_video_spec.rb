@@ -41,15 +41,17 @@ describe 'streamer register a video' do
   it 'and has no price if loose is not checked' do
     client = create(:client)
     create(:video)
-    login_as client, scope: :client
 
+    login_as client, scope: :client
     visit root_path
     click_on 'Ver todos os videos avulsos'
     click_on 'Jogando Mind Craft'
 
     expect(page).to have_content('Jogando Mind Craft')
+    expect(page).to have_content('Por: Solaire')
     expect(page).to have_content('Descrição: Jogador irado, joga demais!!')
     expect(page).to have_content('Avulso: Não')
+    expect(page).not_to have_content('Preço:')
     expect(page).not_to have_content('Preço: R$ 9')
     expect(page).not_to have_link('Comprar Video')
   end

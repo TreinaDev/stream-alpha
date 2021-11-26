@@ -26,6 +26,7 @@ class VideosController < ApplicationController
   def show
     @video = Video.find(params[:id])
     @price = @video.price
+    @streamer = Streamer.find(@video.streamer_id)
   end
 
   def payment

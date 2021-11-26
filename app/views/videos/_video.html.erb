@@ -9,6 +9,7 @@
 <script src="https://player.vimeo.com/api/player.js"></script>
 
 <h1><%= video.name %></h1>
+<h3>Por: <%= link_to @streamer.streamer_profile, streamer_profile_path(@streamer.streamer_profile.id) %></h3>
 
 <dl>
   <dt><%= Video.human_attribute_name(:description) %>:</dt>
@@ -21,14 +22,12 @@
   <dd><%= video.game.game_categories_list_as_string %></dd>
 
   <dt><%= Video.human_attribute_name(:loose) %>:</dt>
-  <dd> 
-    <% if @price&.loose? %>
-      <%= 'Sim' %>
-    <% else %>
-      <%= 'Não' %>
-    <% end %>
-  </dd>
-  
-  <dt><%= Video.human_attribute_name(:value) %>:</dt>
-  <dd><%= number_to_currency(@price&.value) %> </dd>
+  <% if @price&.loose? %>
+    <dd><%= 'Sim' %></dd>
+
+    <dt><%= Video.human_attribute_name(:value) %>:</dt>
+    <dd><%= number_to_currency(@price&.value) %> </dd>
+  <% else %>
+    <dd><%= 'Não' %></dd>
+  <% end %>
 </dl>
