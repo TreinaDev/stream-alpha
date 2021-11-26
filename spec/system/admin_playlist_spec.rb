@@ -15,6 +15,7 @@ describe 'Admin' do
     it 'creates playlist' do
       video = create(:video, :approved, name: 'jogando fifa modo carreira')
       video2 = create(:video, :approved, name: 'jogando fifa na master league')
+      video3 = create(:video, :approved, name: 'jogando Mind Craft')
       streamer = create(:streamer_profile, name: 'Yoda SL')
       streamer2 = create(:streamer_profile, name: 'Robo')
       admin = create(:admin)
@@ -42,6 +43,7 @@ describe 'Admin' do
       expect(page).to have_link('Yoda SL', href: streamer_profile_path(streamer))
       expect(page).to have_link('Robo', href: streamer_profile_path(streamer2))
       expect(page).to have_css "img[src*='gary-bendig-unsplash.jpg']"
+      expect(page).to_not have_link('jogando Mind Craft', href: video_path(video3))
     end
 
     it 'can view playlists' do
