@@ -2,8 +2,15 @@ require 'rails_helper'
 
 describe 'Client profile' do
   context 'Creation:' do
-    it 'successfully make login and create profile' do
+    it 'successfully make login and create profile with token' do
       client = create(:client)
+      api_response = File.read(Rails.root.join('spec/support/apis/client_registration.json'))
+      fake_response = double('faraday_response', status: 200, body: api_response)
+      allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('154689459647851263as')
+      allow(Faraday).to receive(:post).with('http://pagapaga.com.br/api/v1/customer_registration/',
+                                            { name: 'Otávio Augusto da Silva Lins', cpf: '60243105878' },
+                                            { company_token: '154689459647851263as' })
+                                      .and_return(fake_response)
 
       visit root_path
       click_on 'Entrar como Assinante'
@@ -32,35 +39,6 @@ describe 'Client profile' do
       expect(ClientProfile.count).to eq(1)
       expect(page).to have_css("img[src*='gary-bendig-unsplash.jpg']")
       expect(page).to_not have_content('CPF: 60243105878')
-    end
-    it 'creates an token on pagapaga after profile registration' do
-      client = create(:client)
-      api_response = File.read(Rails.root.join('spec/support/apis/client_registration.json'))
-      fake_response = double('faraday_response', status: 200, body: api_response)
-      allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('154689459647851263as')
-      allow(Faraday).to receive(:post).with('http://pagapaga.com.br/api/v1/customer_registration/',
-                                            {name: 'Otávio Augusto da Silva Lins', cpf: '60243105878'},
-                                            {company_token: '154689459647851263as'})
-                                            .and_return(fake_response)
-
-      visit root_path
-      click_on 'Entrar como Assinante'
-      fill_in 'Email', with: client.email
-      fill_in 'Senha', with: client.password
-      click_on 'Entrar'
-      fill_in 'Nome completo (conforme documentos)', with: 'Otávio Augusto da Silva Lins'
-      fill_in 'Nome social', with: 'Marcela'
-      fill_in 'Data de nascimento', with: '19/08/1997'
-      fill_in 'CPF (apenas números)', with: '60243105878'
-      fill_in 'CEP', with: '08150530'
-      fill_in 'Cidade', with: 'São Paulo'
-      fill_in 'Estado', with: 'SP'
-      fill_in 'Endereço residencial', with: 'Avenida dos clientes'
-      fill_in 'Número residencial', with: '153'
-      select '16', from: 'Configuração de classificação etária'
-      attach_file 'Foto', Rails.root.join('spec/support/assets/gary-bendig-unsplash.jpg')
-      click_on 'Criar Perfil de usuário'
-
       expect(ClientProfile.find(1).token).to eq('XpD75xP4lQ')
     end
     it 'successfully logs_in with a created profile' do

@@ -8,7 +8,8 @@ class PaymentMethod
 
   def self.all
     result = []
-    response = Faraday.get('http://pagapaga.com.br/api/v1/payment_methods/', nil, {company_token: SecureRandom.alphanumeric(20)})
+    response = Faraday.get('http://pagapaga.com.br/api/v1/payment_methods/', nil,
+                           { company_token: SecureRandom.alphanumeric(20) })
     return if response.status == 500
 
     if response.status == 200

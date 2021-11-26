@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_030339) do
+ActiveRecord::Schema.define(version: 2021_11_26_212909) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_030339) do
     t.string "cep"
     t.string "cpf"
     t.string "token"
+    t.integer "client_token_status", default: 5
     t.index ["client_id"], name: "index_client_profiles_on_client_id"
   end
 
@@ -124,6 +125,34 @@ ActiveRecord::Schema.define(version: 2021_11_26_030339) do
     t.decimal "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "playlist_streamers", force: :cascade do |t|
+    t.integer "playlist_id", null: false
+    t.integer "streamer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["playlist_id"], name: "index_playlist_streamers_on_playlist_id"
+    t.index ["streamer_id"], name: "index_playlist_streamers_on_streamer_id"
+  end
+
+  create_table "playlist_videos", force: :cascade do |t|
+    t.integer "video_id", null: false
+    t.integer "playlist_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["playlist_id"], name: "index_playlist_videos_on_playlist_id"
+    t.index ["video_id"], name: "index_playlist_videos_on_video_id"
+  end
+
+  create_table "playlists", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "admin_id", null: false
+    t.index ["admin_id"], name: "index_playlists_on_admin_id"
+    t.index ["name"], name: "index_playlists_on_name", unique: true
   end
 
   create_table "prices", force: :cascade do |t|
@@ -185,6 +214,11 @@ ActiveRecord::Schema.define(version: 2021_11_26_030339) do
   add_foreign_key "games", "admins"
   add_foreign_key "games_game_categories", "game_categories"
   add_foreign_key "games_game_categories", "games"
+  add_foreign_key "playlist_streamers", "playlists"
+  add_foreign_key "playlist_streamers", "streamers"
+  add_foreign_key "playlist_videos", "playlists"
+  add_foreign_key "playlist_videos", "videos"
+  add_foreign_key "playlists", "admins"
   add_foreign_key "prices", "videos"
   add_foreign_key "streamer_profiles", "streamers"
   add_foreign_key "videos", "games"

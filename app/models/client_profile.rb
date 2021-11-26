@@ -9,8 +9,25 @@ class ClientProfile < ApplicationRecord
   validate :must_include_a_surname, :correct_cpf_length, :correct_cep_length
   validate :acceptable_photo
 
+  enum client_token_status: { pending: 5, accepted: 10 }
+
   def owner?(current_client = nil)
     return current_client == client if current_client
+  end
+
+  def register_client_api(current_client)
+    response = Faraday.post('http://pagapaga.com.br/api/v1/customer_registration/',
+                            { name: full_name, cpf: cpf },
+                            { company_token: SecureRandom.alphanumeric(20) })
+
+    if response.status == 500 || response.status == 401
+      pending!
+    elsif response.status == 422
+      pending!
+    elsif response.status == 200
+      current_client.client_profile.token = JSON.parse(response.body, simbolize_names: true)[0]['token']
+      accepted!
+    end
   end
 
   private

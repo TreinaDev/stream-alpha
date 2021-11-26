@@ -41,23 +41,23 @@ RSpec.describe ClientProfile, type: :model do
       )
     end
   end
-  # context 'must create a client_token on pagapaga after profile creation' do
-  #   it 'successfully - must return an array' do
-  #     api_response = File.read(Rails.root.join('spec/support/apis/client_registration.json'))
-  #     fake_response = double('faraday_response', status: 200, body: api_response)
+  context 'Registration on PagaPaga' do
+    it 'unsuccessfully: response == 401' do
+    end
+    it 'unsuccessfully: response == 422' do
+    end
+    it 'unsuccessfully: response == 500' do
+      client_profile = ClientProfile.new(full_name: 'Otávio', cep: '0815053', cpf: '608154958')
+      fake_response = double('faraday_response', status: 500, body: '')
 
-  #     allow(Faraday).to receive(:post).with('http://pagapaga.com.br/api/v1/client_registration/')
-  #                                    .and_return(fake_response)
-      
-  #     result = PaymentMethod.all
+      allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('154689459647851263as')
+      allow(Faraday).to receive(:post).with('http://pagapaga.com.br/api/v1/customer_registration/',
+                                            { name: 'Otávio Augusto da Silva Lins', cpf: '60243105878' },
+                                            { company_token: '154689459647851263as' })
+                                      .and_return(fake_response)
 
-  #     expect(result.length).to eq 3
-  #     expect(result[0].name).to eq 'Boleto'
-  #     expect(result[0].status).to eq 'Ativo'
-  #     expect(result[1].name).to eq 'Cartão de crédito'
-  #     expect(result[1].status).to eq 'Ativo'
-  #     expect(result[2].name).to eq 'Pix'
-  #     expect(result[2].status).to eq 'Ativo'
-  #   end
-  # end
+      client_profile.valid?
+      expect(ClientProfile.count).to eq(0)
+    end
+  end
 end
