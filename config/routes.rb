@@ -22,8 +22,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :videos, only: %i[new create show update index] do
+  resources :videos, only: %i[new create show index] do
     get 'analysis', on: :collection
+    get 'my_videos', on: :collection
     get 'payment', on: :member
     member do
       post 'approve'

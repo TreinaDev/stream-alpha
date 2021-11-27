@@ -2,8 +2,8 @@ class VideosController < ApplicationController
   before_action :authenticate_admin!, only: %i[analysis approve refuse]
   before_action :authenticate_admin_client_streamer!, only: %i[show]
   before_action :authenticate_client!, only: %i[payment]
-  before_action :authenticate_streamer!, only: %i[new create]
-  before_action :authenticate_streamer_profile!, only: %i[new create]
+  before_action :authenticate_streamer!, only: %i[new create my_videos]
+  before_action :authenticate_streamer_profile!, only: %i[new create my_videos]
   before_action :analysed_video!, only: %i[approve refuse]
   before_action :find_video, only: %i[approve refuse show]
   def new
@@ -33,6 +33,10 @@ class VideosController < ApplicationController
 
   def index
     @videos = Video.all
+  end
+
+  def my_videos
+    @videos = current_streamer.streamer_profile.videos
   end
 
   def analysis
