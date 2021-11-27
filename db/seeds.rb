@@ -104,10 +104,10 @@ game3 = FactoryBot.create(:game)
 video1 = Video.create!(name: 'Gameplay do beta do Battlefield!', description: 'O jogo está muito bugado...', link: '946275951', game: game1, streamer: streamer1)
 video2 = FactoryBot.create(:video, :approved, streamer: streamer1, link: '76979871', game: game1)
 video3 = FactoryBot.create(:video, streamer: streamer2, link: '647748643', game: game2)
-video4 = FactoryBot.create(:video, streamer: streamer3, link: '83558749', game: game3)
+video4 = FactoryBot.create(:video, streamer: streamer1, link: '83558749', game: game3)
 video5 = FactoryBot.create(:video, streamer: streamer1)
 video6 = FactoryBot.create(:video, streamer: streamer2)
-video7 = FactoryBot.create(:video, :refused, streamer: streamer3)
+video7 = FactoryBot.create(:video, :refused, streamer: streamer1)
 
 loose_video_price = Price.create!(value: 10.00, loose: true, video: video1)
 

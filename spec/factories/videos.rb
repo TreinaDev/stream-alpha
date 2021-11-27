@@ -6,6 +6,12 @@ FactoryBot.define do
     visualization { rand(1..5_000_000) }
     game
     streamer
+
+    # factory :price do
+    #   loose { false }
+    #   value { loose ? rand(9.99..99.99) : 0 }
+    # end
+
     trait :approved do
       status { 'approved' }
     end

@@ -22,7 +22,8 @@ describe 'admin approves registration of video' do
   end
 
   it 'and approves video' do
-    video1 = create(:video, name: 'Jogando Mind Craft', status: 'pending')
+    streamer_profile = create(:streamer_profile, name: 'Solaire')
+    video1 = create(:video, name: 'Jogando Mind Craft', status: 'pending', streamer: streamer_profile.streamer)
     admin = create(:admin)
     login_as admin, scope: :admin
 
@@ -43,7 +44,8 @@ describe 'admin approves registration of video' do
   end
 
   it 'and refused video' do
-    video1 = create(:video, name: 'Jogando Mind Craft', status: 'pending')
+    streamer_profile = create(:streamer_profile, name: 'Solaire')
+    video1 = create(:video, name: 'Jogando Mind Craft', status: 'pending', streamer: streamer_profile.streamer)
     admin = create(:admin)
     login_as admin, scope: :admin
 
@@ -60,7 +62,8 @@ describe 'admin approves registration of video' do
     expect(page).not_to have_link('Rejeitar')
   end
   it 'and refused video with feedback' do
-    video1 = create(:video, name: 'Jogando Mind Craft', status: 'pending')
+    streamer_profile = create(:streamer_profile, name: 'Solaire')
+    video1 = create(:video, name: 'Jogando Mind Craft', status: 'pending', streamer: streamer_profile.streamer)
     admin = create(:admin)
     login_as admin, scope: :admin
 
@@ -84,7 +87,8 @@ describe 'admin approves registration of video' do
   end
 
   it 'and refused without fill field feed back' do
-    video1 = create(:video, name: 'Jogando Mind Craft', status: 'pending')
+    streamer_profile = create(:streamer_profile, name: 'Solaire')
+    video1 = create(:video, name: 'Jogando Mind Craft', status: 'pending', streamer: streamer_profile.streamer)
     admin = create(:admin)
     login_as admin, scope: :admin
 

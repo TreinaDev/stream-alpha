@@ -3,6 +3,7 @@ class VideosController < ApplicationController
   before_action :authenticate_admin_client_streamer!, only: %i[show]
   before_action :authenticate_client!, only: %i[payment]
   before_action :authenticate_streamer!, only: %i[new create]
+  before_action :authenticate_streamer_profile!, only: %i[new create]
   before_action :analysed_video!, only: %i[approve refuse]
   before_action :find_video, only: %i[approve refuse show]
   def new
@@ -27,7 +28,7 @@ class VideosController < ApplicationController
     @video = Video.find(params[:id])
     @price = @video.price
     @streamer_profile = @video.streamer_profile
-    @video.increment!(:visualization)
+    @video.update_view_counter
   end
 
   def index
@@ -48,16 +49,22 @@ class VideosController < ApplicationController
       redirect_to @video, notice: t('.success')
     else
       @video.status = 'refused'
+      @streamer_profile = @video.streamer_profile
       render :show
     end
   end
 
   def payment
     @video = Video.find(params[:id])
+    @streamer_profile = @video.streamer_profile
     @payment_methods = PaymentMethod.all
   end
 
   private
+
+  def authenticate_streamer_profile!
+    redirect_to new_streamer_profile_path if StreamerProfile.find_by(streamer: current_streamer).nil?
+  end
 
   def find_video
     @video = Video.find(params[:id])

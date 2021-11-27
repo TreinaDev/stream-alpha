@@ -65,8 +65,9 @@ describe 'streamer register a video' do
 
   it 'without fill fields' do
     streamer = create(:streamer)
-    login_as streamer, scope: :streamer
+    create(:streamer_profile, name: 'Solaire', streamer: streamer)
 
+    login_as streamer, scope: :streamer
     visit new_video_path
     click_on 'Enviar'
 
@@ -82,8 +83,9 @@ describe 'streamer register a video' do
 
   it 'then see other validations' do
     streamer = create(:streamer)
-    login_as streamer, scope: :streamer
+    create(:streamer_profile, name: 'Solaire', streamer: streamer)
 
+    login_as streamer, scope: :streamer
     visit new_video_path
     fill_in 'https://vimeo.com/', with: '0123456789'
     click_on 'Enviar'
@@ -95,6 +97,7 @@ describe 'streamer register a video' do
 
   it 'but link is unique' do
     streamer = create(:streamer)
+    create(:streamer_profile, name: 'Solaire', streamer: streamer)
     create(:video, link: '123456789')
     login_as streamer, scope: :streamer
 

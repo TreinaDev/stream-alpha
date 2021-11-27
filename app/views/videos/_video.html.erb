@@ -9,13 +9,7 @@
 <script src="https://player.vimeo.com/api/player.js"></script>
 
 <h1><%= video.name %></h1>
-<h3>
-  <% if @streamer_profile.present? %>
-    Por: <%= link_to @streamer_profile.name, streamer_profile_path(@streamer_profile) %>
-  <% else %>
-    Por: Anônimo
-  <% end %>
-</h3>
+<h3>Por: <%= link_to @streamer_profile.name, streamer_profile_path(@streamer_profile) %></h3>
 <p>
   <% if video.visualization == 1 %>
     <%= "#{video.visualization} #{Video.human_attribute_name(:visualization)} -" %>
