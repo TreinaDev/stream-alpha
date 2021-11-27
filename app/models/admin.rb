@@ -4,7 +4,6 @@ class Admin < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validate :email_valid
-  validates :email, :password, presence: true
   has_many :game_categories, dependent: :nullify
 
   private

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :game_categories, only: %i[create new]
   resources :games, only: %i[create new]
   resources :plans, only: %i[create new show index]
- 
+
   resources :streamer_profiles, only: %i[show new create edit update index] do
     member do
       post 'inactive'
