@@ -4,10 +4,10 @@ describe 'Client profile' do
   context 'Creation:' do
     it 'successfully make login and create profile with token' do
       client = create(:client)
-      api_response = File.read(Rails.root.join('spec/support/apis/client_registration.json'))
-      fake_response = double('faraday_response', status: 200, body: api_response)
+      api_response = File.read(Rails.root.join('spec/support/apis/client_registration_201.json'))
+      fake_response = double('faraday_response', status: 201, body: api_response)
       allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('154689459647851263as')
-      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customer_registration/',
+      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customers',
                                             { name: 'Otávio Augusto da Silva Lins', cpf: '60243105878' },
                                             { company_token: '154689459647851263as' })
                                       .and_return(fake_response)
@@ -28,7 +28,7 @@ describe 'Client profile' do
       fill_in 'Número residencial', with: '153'
       select '16', from: 'Configuração de classificação etária'
       attach_file 'Foto', Rails.root.join('spec/support/assets/gary-bendig-unsplash.jpg')
-      click_on 'Criar Perfil de usuário'
+      click_on 'Criar Perfil de Assinante'
 
       expect(page).to have_content('Perfil de Marcela')
       expect(page).to have_content('Data de nascimento: 19/08/1997')
@@ -61,10 +61,10 @@ describe 'Client profile' do
       fill_in 'Email', with: client.email
       fill_in 'Senha', with: client.password
       click_on 'Entrar'
-      click_on 'Criar Perfil de usuário'
+      click_on 'Criar Perfil de Assinante'
 
       expect(current_path).to eq client_profiles_path
-      expect(page).to have_content('Erro ao criar Perfil de usuário!')
+      expect(page).to have_content('Erro ao criar Perfil de Assinante!')
       expect(page).to have_content(
         'Nome completo (conforme documentos) não pode ficar em branco'
       )
@@ -117,7 +117,7 @@ describe 'Client profile' do
       fill_in 'Endereço residencial', with: 'Rua Santa Cecília'
       fill_in 'Número residencial', with: '61'
       select '18', from: 'Configuração de classificação etária'
-      click_on 'Atualizar Perfil de usuário'
+      click_on 'Atualizar Perfil de Assinante'
 
       expect(current_path).to eq client_profile_path(client.client_profile)
       expect(page).to have_content('Perfil atualizado com sucesso!')
@@ -170,10 +170,10 @@ describe 'Client profile' do
       fill_in 'Endereço residencial', with: ''
       fill_in 'Número residencial', with: ''
       select '18', from: 'Configuração de classificação etária'
-      click_on 'Atualizar Perfil de usuário'
+      click_on 'Atualizar Perfil de Assinante'
 
       expect(current_path).to eq client_profile_path(client.client_profile)
-      expect(page).to have_content('Erro ao atualizar Perfil de usuário!')
+      expect(page).to have_content('Erro ao atualizar Perfil de Assinante!')
       expect(page).to have_content('Data de nascimento não pode ficar em branco')
       expect(page).to have_content('Endereço residencial não pode ficar em branco')
       expect(page).to have_content('Número residencial não pode ficar em branco')

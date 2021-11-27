@@ -2,7 +2,7 @@
 pt-BR:
   activerecord:
     models:
-      client_profile: "Perfil de usuário"
+      client_profile: "Perfil de Assinante"
     attributes:
       client_profile:
         full_name: "Nome completo (conforme documentos)"
@@ -22,3 +22,10 @@ pt-BR:
           attributes:
             photo:
               image_too_big: "deve ser menor que 2Mb"
+  client_profiles:
+    create:
+      success: "Perfil criado com sucesso!"
+      fail: "Erro ao criar Perfil de Assinante!"
+    update:
+      success: "Perfil atualizado com sucesso!"
+      fail: "Erro ao atualizar Perfil de Assinante!"

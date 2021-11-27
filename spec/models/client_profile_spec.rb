@@ -41,47 +41,63 @@ RSpec.describe ClientProfile, type: :model do
       )
     end
   end
+
   context 'Registration on PagaPaga' do
-    it 'successfully: response == 200' do
+    it 'successfully: response == 201' do
       client_profile = create(:client_profile)
-      api_response = File.read(Rails.root.join('spec/support/apis/client_registration.json'))
-      fake_response = double('faraday_response', status: 200, body: api_response)
+      api_response = File.read(Rails.root.join('spec/support/apis/client_registration_201.json'))
+      fake_response = double('faraday_response', status: 201, body: api_response)
       allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('154689459647851263as')
-      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customer_registration/',
+      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customers',
                                             { name: client_profile.full_name, cpf: client_profile.cpf },
                                             { company_token: '154689459647851263as' })
                                       .and_return(fake_response)
-      
+
       client_profile.register_client_api(client_profile.client)
 
       expect(client_profile.client_token_status).to eq('accepted')
       expect(client_profile.token).to eq('XpD75xP4lQ')
     end
+
     it 'unsuccessfully: response == 401' do
       client_profile = create(:client_profile)
       fake_response = double('faraday_response', status: 401, body: '')
-      allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('154689459647851263as')
-      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customer_registration/',
+      allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('')
+      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customers',
                                             { name: client_profile.full_name, cpf: client_profile.cpf },
-                                            { company_token: '154689459647851263as' })
+                                            { company_token: '' })
                                       .and_return(fake_response)
       client_profile.register_client_api(client_profile.client)
-      
+
       expect(client_profile.client_token_status).to eq('pending')
       expect(client_profile.token).to eq(nil)
     end
-    #it 'unsuccessfully: response == 422' do
-    #end
+
+    # it 'unsuccessfully: response == 422' do
+    #   client_profile = create(:client_profile)
+    #   api_response = File.read(Rails.root.join('spec/support/apis/client_registration_error_422_full.json'))
+    #   fake_response = double('faraday_response', status: 422, body: api_response)
+    #   allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('154689459647851263as')
+    #   allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customers',
+    #                                         { name: '', cpf: '' },
+    #                                         { company_token: '154689459647851263as' })
+    #                                   .and_return(fake_response)
+    #   client_profile.register_client_api(client_profile.client)
+
+    #   expect(client_profile.client_token_status).to eq('pending')
+    #   expect(client_profile.token).to eq(nil)
+    # end
+
     it 'unsuccessfully: response == 500' do
       client_profile = create(:client_profile)
       fake_response = double('faraday_response', status: 500, body: '')
       allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('154689459647851263as')
-      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customer_registration/',
+      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customers',
                                             { name: client_profile.full_name, cpf: client_profile.cpf },
                                             { company_token: '154689459647851263as' })
                                       .and_return(fake_response)
       client_profile.register_client_api(client_profile.client)
-      
+
       expect(client_profile.client_token_status).to eq('pending')
       expect(client_profile.token).to eq(nil)
     end

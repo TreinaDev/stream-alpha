@@ -13,6 +13,13 @@ class ApplicationController < ActionController::Base
                 notice: 'Você não tem permissão para visualizar essa página'
   end
 
+  def check_client_token
+    return unless current_client&.client_profile&.pending?
+
+    current_client.client_profile.register_client_api(current_client)
+    redirect_to root_path, notice: t('.get_client_token_error') if current_client.client_profile.pending?
+  end
+
   private
 
   def streamer_profile_blank?

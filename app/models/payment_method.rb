@@ -14,9 +14,7 @@ class PaymentMethod
 
     if response.status == 200
       data = JSON.parse(response.body, symbolize_names: true)
-      data.each do |d|
-        result << PaymentMethod.new(d)
-      end
+      data.each { |d| result << PaymentMethod.new(d) }
     end
     result
   end

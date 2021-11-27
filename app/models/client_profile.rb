@@ -16,15 +16,14 @@ class ClientProfile < ApplicationRecord
   end
 
   def register_client_api(current_client)
-    response = Faraday.post('http://localhost:4000/api/v1/customer_registration/',
+    response = Faraday.post('http://localhost:4000/api/v1/customers',
                             { name: current_client.client_profile.full_name, cpf: current_client.client_profile.cpf },
                             { company_token: SecureRandom.alphanumeric(20) })
 
-    if response.status == 500 || response.status == 401
+    case response.status
+    when 500, 422, 401
       pending!
-    #elsif response.status == 422
-    #  pending!
-    elsif response.status == 200
+    when 201
       current_client.client_profile.token = JSON.parse(response.body, simbolize_names: true)[0]['token']
       accepted!
     end

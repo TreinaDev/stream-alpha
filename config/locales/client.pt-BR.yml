@@ -16,3 +16,6 @@ pt-BR:
               too_short: "deve ter no mínimo 6 caracteres"
             password_confirmation:
               confirmation: "e senha não são iguais"
+  clients:
+    my_payment_methods:
+      get_client_token_error: "Não foi possível realizar essa ação agora. Por favor, tente novamente mais tarde"

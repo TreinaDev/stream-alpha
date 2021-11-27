@@ -1,0 +1,16 @@
+{
+  "message": "Requisição inválida",
+  "errors": {
+    "name": [
+      "não pode ficar em branco"
+    ],
+    "cpf": [
+      "não pode ficar em branco",
+      "deve ter 11 dígitos"
+    ]
+  },
+  "request": {
+    "name": "",
+    "cpf": ""
+  }
+}
