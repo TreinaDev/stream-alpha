@@ -27,7 +27,7 @@ describe 'streamer register a video' do
     select 'Megaman X4', from: 'Jogo'
     click_on 'Enviar'
 
-    expect(page).to have_content('Video cadastrado com sucesso!')
+    expect(page).to have_content('Vídeo cadastrado com sucesso!')
     expect(page).to have_css('iframe[src*="https://player.vimeo.com/video/613710178?autoplay=1&background=0"]')
     expect(page).to have_content('Jogando Mind Craft')
     expect(page).to have_content("1 Visualização - #{I18n.l(Time.zone.now.to_date)}")

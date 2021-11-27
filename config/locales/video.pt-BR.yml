@@ -18,7 +18,7 @@ pt-BR:
         statuses:
           pending: "Pendente"
           approved: "Aprovado"
-          reproved: "Reprovado"
+          refused: "Recusado"
   videos:
     show:
       name: "Nome"
@@ -26,11 +26,13 @@ pt-BR:
       link: "Link"
       feed_back: "Retorne um feedback para o streamer:"
     refuse:
-      success: "Feedback recusado com sucesso!"
+      success: "Vídeo recusado com sucesso!"
+      fail: "Erro ao recusar Vídeo!"
     approve:
-      success: "Video aprovado com sucesso!"
+      success: "Vídeo aprovado com sucesso!"
     create:
-      success: "Video cadastrado com sucesso!"
+      success: "Vídeo cadastrado com sucesso!"
+      fail: "Erro ao criar Vídeo!"
   actioncontroller:
     videos:
       success: "Operação realizada com sucesso!"

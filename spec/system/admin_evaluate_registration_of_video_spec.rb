@@ -13,12 +13,12 @@ describe 'admin approves registration of video' do
 
     visit root_path
     click_on 'Área do administrador'
-    click_on 'Videos Pendentes'
+    click_on 'Ver Vídeos Pendentes'
 
     expect(page).to have_link('Jogando Mind Craft', href: video_path(video1))
     expect(page).to have_link('Fifa 1988', href: video_path(video2))
-    expect(page).not_to have_link('Grand theft auto crazy', href: video_path(video3))
-    expect(page).not_to have_link('Master yi insace mechanics', href: video_path(video4))
+    expect(page).to_not have_link('Grand theft auto crazy', href: video_path(video3))
+    expect(page).to_not have_link('Master yi insace mechanics', href: video_path(video4))
   end
 
   it 'and approves video' do
@@ -29,18 +29,20 @@ describe 'admin approves registration of video' do
 
     visit root_path
     click_on 'Área do administrador'
-    click_on 'Videos Pendentes'
+    click_on 'Ver Vídeos Pendentes'
     click_on 'Jogando Mind Craft'
-    click_on 'Aprovar'
-
+    click_on 'Aprovar Vídeo'
     video1.reload
+
     expect(current_path).to eq(video_path(video1))
-    expect(video1.status).to eq('approved')
-    expect(page).to have_content('Video aprovado com sucesso!')
+    expect(page).to have_content('Vídeo aprovado com sucesso!')
     expect(page).to have_link('Voltar', href: analysis_videos_path)
-    expect(page).not_to have_link('Jogando Mind Craft', href: video_path(video1))
-    expect(page).not_to have_link('Aprovar')
-    expect(page).not_to have_link('Rejeitar')
+    expect(video1.status).to eq('approved')
+    expect(page).to have_content('Status: Aprovado')
+    expect(page).to_not have_content('Feedback:')
+    expect(page).to_not have_link('Jogando Mind Craft', href: video_path(video1))
+    expect(page).to_not have_link('Aprovar Vídeo')
+    expect(page).to_not have_button('Recusar Vídeo')
   end
 
   it 'and refused video' do
@@ -51,16 +53,20 @@ describe 'admin approves registration of video' do
 
     visit root_path
     click_on 'Área do administrador'
-    click_on 'Videos Pendentes'
+    click_on 'Ver Vídeos Pendentes'
     click_on 'Jogando Mind Craft'
-    click_on 'Rejeitar'
+    fill_in 'Retorne um feedback para o streamer', with: 'Podia ser melhor...'
+    click_on 'Recusar Vídeo'
 
-    expect(current_path).to eq(refuse_video_path(video1))
-    expect(page).to have_content('Retorne um feedback para o streamer:')
-    expect(page).to have_button('Enviar')
-    expect(page).not_to have_link('Aprovar')
-    expect(page).not_to have_link('Rejeitar')
+    expect(current_path).to eq(video_path(video1))
+    expect(page).to have_content('Vídeo recusado com sucesso!')
+    expect(page).to have_content('Status: Recusado')
+    expect(page).to have_content('Feedback: Podia ser melhor...')
+    expect(page).to_not have_link('Aprovar Vídeo')
+    expect(page).to_not have_button('Recusar Vídeo')
+    expect(page).to_not have_content('Retorne um feedback para o streamer:')
   end
+
   it 'and refused video with feedback' do
     streamer_profile = create(:streamer_profile, name: 'Solaire')
     video1 = create(:video, name: 'Jogando Mind Craft', status: 'pending', streamer: streamer_profile.streamer)
@@ -69,24 +75,23 @@ describe 'admin approves registration of video' do
 
     visit root_path
     click_on 'Área do administrador'
-    click_on 'Videos Pendentes'
+    click_on 'Ver Vídeos Pendentes'
     click_on 'Jogando Mind Craft'
-    click_on 'Rejeitar'
     fill_in 'Retorne um feedback para o streamer:',	with: 'o vídeo não se enquadra no requisitos preestabelecidos'
-    click_on 'Enviar'
+    click_on 'Recusar Vídeo'
 
     video1.reload
     expect(video1.status).to eq('refused')
     expect(video1.feed_back).to eq('o vídeo não se enquadra no requisitos preestabelecidos')
     expect(current_path).to eq(video_path(video1))
+    expect(page).to have_content('Vídeo recusado com sucesso!')
+    expect(page).to have_content('Status: Recusado')
     expect(page).to have_content('Feedback: o vídeo não se enquadra no requisitos preestabelecidos')
-    expect(page).to have_content('Feedback recusado com sucesso!')
-    expect(page).not_to have_link('Aprovar')
-    expect(page).not_to have_link('Rejeitar')
-    expect(page).not_to have_button('Enviar')
+    expect(page).to_not have_link('Aprovar Vídeo')
+    expect(page).to_not have_button('Recusar Vídeo')
   end
 
-  it 'and refused without fill field feed back' do
+  it 'and tried to refused without filling feedback' do
     streamer_profile = create(:streamer_profile, name: 'Solaire')
     video1 = create(:video, name: 'Jogando Mind Craft', status: 'pending', streamer: streamer_profile.streamer)
     admin = create(:admin)
@@ -94,15 +99,15 @@ describe 'admin approves registration of video' do
 
     visit root_path
     click_on 'Área do administrador'
-    click_on 'Videos Pendentes'
+    click_on 'Ver Vídeos Pendentes'
     click_on 'Jogando Mind Craft'
-    click_on 'Rejeitar'
-    click_on 'Enviar'
+    click_on 'Recusar Vídeo'
 
     expect(current_path).to eq(refuse_video_path(video1))
-    expect(page).not_to have_link('Aprovar')
-    expect(page).not_to have_link('Rejeitar')
-    expect(page).to have_button('Enviar')
+    expect(page).to have_content('Erro ao recusar Vídeo!')
+    expect(page).to have_link('Aprovar Vídeo')
     expect(page).to have_content('Feedback não pode ficar em branco')
+    expect(page).to have_button('Recusar Vídeo')
+    expect(page).to have_content('Status: Pendente')
   end
 end

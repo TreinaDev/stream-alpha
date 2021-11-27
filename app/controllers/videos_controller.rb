@@ -14,12 +14,12 @@ class VideosController < ApplicationController
 
   def create
     @video = current_streamer.videos.build(video_params)
+    @games = Game.all
     if @video.save
       redirect_to @video, notice: t('.success')
       @video.price.value = nil unless @video.price.loose?
     else
-      @games = Game.all
-      flash[:alert] = "Erro ao criar #{t(:video, scope: 'activerecord.models')}!"
+      flash[:alert] = t('.fail')
       render :new
     end
   end
@@ -48,8 +48,9 @@ class VideosController < ApplicationController
     if @video.update(status: 'refused', feed_back: params[:feed_back])
       redirect_to @video, notice: t('.success')
     else
-      @video.status = 'refused'
+      @video.status = 'pending'
       @streamer_profile = @video.streamer_profile
+      flash[:alert] = t('.fail')
       render :show
     end
   end
@@ -62,16 +63,16 @@ class VideosController < ApplicationController
 
   private
 
+  def analysed_video!
+    redirect_to @video, status: :permanent_redirect unless find_video.pending?
+  end
+
   def authenticate_streamer_profile!
     redirect_to new_streamer_profile_path if StreamerProfile.find_by(streamer: current_streamer).nil?
   end
 
   def find_video
     @video = Video.find(params[:id])
-  end
-
-  def analysed_video!
-    redirect_to @video, status: :permanent_redirect unless find_video.pending?
   end
 
   def video_params
