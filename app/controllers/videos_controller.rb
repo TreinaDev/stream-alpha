@@ -34,6 +34,10 @@ class VideosController < ApplicationController
   end
 
   def approve
+    if @video.price
+      @video.register_video_api(@video)
+      redirect_to @video, notice: t('.integration_error') and return unless @video.single_video_token
+    end
     @video.approved!
     redirect_to @video, notice: t('.success')
   end

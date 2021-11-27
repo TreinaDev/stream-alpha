@@ -27,8 +27,6 @@ plan = FactoryBot.create(:plan, streamers: [streamer, streamer2, streamer3])
 plan2 = FactoryBot.create(:plan)
 plan3 = FactoryBot.create(:plan)
 
-content_streamer = FactoryBot.create(:content_streamer, streamer: streamer, plan: plan)
-
 video = FactoryBot.create(:video, streamer: streamer)
 video2 = FactoryBot.create(:video, streamer: streamer2)
 video3 = FactoryBot.create(:video, streamer: streamer3)

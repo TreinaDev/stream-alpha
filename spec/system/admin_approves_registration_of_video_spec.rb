@@ -41,7 +41,57 @@ describe 'admin approves registration of video' do
     expect(page).not_to have_link('Aprovar')
     expect(page).not_to have_link('Rejeitar')
   end
+  it 'and approves a single video, registering it on pagapaga via API' do
+    streamer_profile = create(:streamer_profile)
+    video = create(:video, name: 'Ocarina of Time Any% WR', status: 'pending', streamer: streamer_profile.streamer)
+    create(:price, video: video)
+    admin = create(:admin)
+    api_response = File.read(Rails.root.join('spec/support/apis/single_video_registration_201.json'))
+    fake_response = double('faraday_response', status: 201, body: api_response)
+    allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('154689459647851263as')
+    allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
+                                          { product: { name: video.name } },
+                                          { company_token: '154689459647851263as' })
+                                    .and_return(fake_response)
 
+    login_as admin, scope: :admin
+    visit root_path
+    click_on 'Área do administrador'
+    click_on 'Videos Pendentes'
+    click_on 'Ocarina of Time Any% WR'
+    click_on 'Aprovar'
+
+    video.reload
+    expect(current_path).to eq(video_path(video))
+    expect(video.status).to eq('approved')
+    expect(page).to have_content('Video aprovado com sucesso!')
+    expect(video.single_video_token).to eq('3fGXrXJ4tAyysV9KW7G2')
+  end
+  it 'and tries to approve a single video, but PagaPaga API is down' do
+    streamer_profile = create(:streamer_profile)
+    video = create(:video, name: 'Ocarina of Time Any% WR', status: 'pending', streamer: streamer_profile.streamer)
+    create(:price, video: video)
+    admin = create(:admin)
+    fake_response = double('faraday_response', status: 500, body: nil)
+    allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('154689459647851263as')
+    allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
+                                          { product: { name: video.name } },
+                                          { company_token: '154689459647851263as' })
+                                    .and_return(fake_response)
+
+    login_as admin, scope: :admin
+    visit root_path
+    click_on 'Área do administrador'
+    click_on 'Videos Pendentes'
+    click_on 'Ocarina of Time Any% WR'
+    click_on 'Aprovar'
+
+    video.reload
+    expect(current_path).to eq(video_path(video))
+    expect(video.status).to eq('pending')
+    expect(page).to have_content('Falha na integração com a plataforma Pagapaga. Tente novamente')
+    expect(video.single_video_token).to eq(nil)
+  end
   it 'and refused video' do
     video1 = create(:video, name: 'Jogando Mind Craft', status: 'pending')
     admin = create(:admin)

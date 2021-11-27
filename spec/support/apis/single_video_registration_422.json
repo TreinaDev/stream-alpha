@@ -1,0 +1,12 @@
+{
+  "message": "Requisição inválida",
+  "errors": {
+    "name": [
+      "não pode ficar em branco"
+    ]
+  },
+  "request": {
+    "name": "",
+    "status": "enabled"
+  }
+}

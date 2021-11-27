@@ -21,6 +21,7 @@ pt-BR:
       success: "Feedback recusado com sucesso!"
     approve:
       success: "Video aprovado com sucesso!"
+      integration_error: "Falha na integração com a plataforma Pagapaga. Tente novamente"
     create:
       success: "Video cadastrado com sucesso!"
   actioncontroller:
