@@ -17,7 +17,7 @@ class Video < ApplicationRecord
 
   scope :all_in_analysis, -> { where(status: 'pending') }
   scope :available, -> { where(status: 'approved') }
-  
+
   def register_video_api(video)
     response = Faraday.post('http://localhost:4000/api/v1/products',
                             { product: { name: video.name } },
@@ -29,7 +29,7 @@ class Video < ApplicationRecord
       video.single_video_token = JSON.parse(response.body, simbolize_names: true)['token']
     end
   end
-  
+
   def reproved_with_feedback?
     refused? && feed_back_in_database.present?
   end
