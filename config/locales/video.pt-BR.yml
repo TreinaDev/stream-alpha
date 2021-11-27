@@ -11,6 +11,8 @@ pt-BR:
         feed_back: "Feedback"
         loose: "Avulso"
         value: "Preço"
+        visualization: "Visualização"
+        visualizations: "Visualizações"
         game: "Jogo"
         game_id: "Jogo"
         statuses:

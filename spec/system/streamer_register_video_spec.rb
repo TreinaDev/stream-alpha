@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'streamer register a video' do
   it 'using link' do
     streamer = create(:streamer)
+    create(:streamer_profile, streamer: streamer)
 
     login_as streamer, scope: :streamer
     visit root_path
@@ -13,6 +14,7 @@ describe 'streamer register a video' do
   it 'successfully' do
     streamer = create(:streamer)
     game = create(:game, name: 'Megaman X4')
+    create(:streamer_profile, name: 'Solaire', streamer: streamer)
 
     login_as streamer, scope: :streamer
     visit root_path
@@ -28,6 +30,8 @@ describe 'streamer register a video' do
     expect(page).to have_content('Video cadastrado com sucesso!')
     expect(page).to have_css('iframe[src*="https://player.vimeo.com/video/613710178?autoplay=1&background=0"]')
     expect(page).to have_content('Jogando Mind Craft')
+    expect(page).to have_content("1 Visualização - #{I18n.l(Time.zone.now.to_date)}")
+    expect(page).to have_content('Por: Solaire')
     expect(page).to have_content('Descrição: Jogador irado, joga demais!!')
     expect(page).to have_content('Megaman X4')
     expect(page).to have_content("Categorias: #{game.game_categories_list_as_string}")
@@ -40,15 +44,18 @@ describe 'streamer register a video' do
 
   it 'and has no price if loose is not checked' do
     client = create(:client)
-    create(:video)
+    streamer = create(:streamer)
+    create(:streamer_profile, name: 'Solaire', streamer: streamer)
+    video = create(:video, streamer: streamer, visualization: 0, created_at: Time.zone.now)
 
     login_as client, scope: :client
     visit root_path
     click_on 'Ver todos os videos avulsos'
-    click_on 'Jogando Mind Craft'
+    click_on video.name
 
-    expect(page).to have_content('Jogando Mind Craft')
+    expect(page).to have_content(video.name)
     expect(page).to have_content('Por: Solaire')
+    expect(page).to have_content("1 Visualização - #{I18n.l(Time.zone.now.to_date)}")
     expect(page).to have_content('Descrição: Jogador irado, joga demais!!')
     expect(page).to have_content('Avulso: Não')
     expect(page).not_to have_content('Preço:')

@@ -1,14 +1,14 @@
 class VideosController < ApplicationController
-  before_action :authenticate_streamer!, only: %i[new create]
-  before_action :authenticate_client!, only: %i[payment]
-  before_action :authenticate_admin!, only: %i[approve refuse]
+  before_action :authenticate_admin!, only: %i[analysis approve refuse]
   before_action :authenticate_admin_client_streamer!, only: %i[show]
-  before_action :find_video, only: %i[refuse approve show]
-  before_action :analysed_video!, only: %i[refuse approve]
+  before_action :authenticate_client!, only: %i[payment]
+  before_action :authenticate_streamer!, only: %i[new create]
+  before_action :analysed_video!, only: %i[approve refuse]
+  before_action :find_video, only: %i[approve refuse show]
   def new
+    @video = current_streamer.videos.new
     @games = Game.all
     @price = Price.new
-    @video = Video.new
   end
 
   def create
@@ -26,12 +26,12 @@ class VideosController < ApplicationController
   def show
     @video = Video.find(params[:id])
     @price = @video.price
-    @streamer = Streamer.find(@video.streamer_id)
+    @streamer_profile = @video.streamer_profile
+    @video.increment!(:visualization)
   end
 
-  def payment
-    @video = Video.find(params[:id])
-    @payment_methods = PaymentMethod.all
+  def index
+    @videos = Video.all
   end
 
   def analysis
@@ -43,10 +43,6 @@ class VideosController < ApplicationController
     redirect_to @video, notice: t('.success')
   end
 
-  def index
-    @videos = Video.all
-  end
-
   def refuse
     if @video.update(status: 'refused', feed_back: params[:feed_back])
       redirect_to @video, notice: t('.success')
@@ -54,6 +50,11 @@ class VideosController < ApplicationController
       @video.status = 'refused'
       render :show
     end
+  end
+
+  def payment
+    @video = Video.find(params[:id])
+    @payment_methods = PaymentMethod.all
   end
 
   private

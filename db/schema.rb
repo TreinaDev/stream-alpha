@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_25_161516) do
+ActiveRecord::Schema.define(version: 2021_11_27_022848) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -198,6 +198,7 @@ ActiveRecord::Schema.define(version: 2021_11_25_161516) do
     t.integer "status", default: 0
     t.string "feed_back"
     t.integer "game_id", null: false
+    t.integer "visualization", default: 0
     t.index ["game_id"], name: "index_videos_on_game_id"
     t.index ["link"], name: "index_videos_on_link", unique: true
     t.index ["streamer_id"], name: "index_videos_on_streamer_id"
