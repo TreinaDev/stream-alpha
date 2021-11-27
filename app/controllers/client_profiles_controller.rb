@@ -7,7 +7,6 @@ class ClientProfilesController < ApplicationController
     redirect_to current_client.client_profile, alert: 'Perfil já existente!' if client_profile_exists?
     @client_profile = current_client.build_client_profile(client_profile_params)
     if @client_profile.save
-      # register_client_api(@client_profile)
       @client_profile.register_client_api(current_client)
       current_client.client_profile.update(params.require(:client_profile).permit(:token))
       redirect_to @client_profile, notice: 'Perfil criado com sucesso!'
@@ -64,26 +63,6 @@ class ClientProfilesController < ApplicationController
                                            :residential_address,
                                            :residential_number, :photo)
   end
-
-  # def register_client_api(client_profile)
-  #   response = Faraday.post('http://pagapaga.com.br/api/v1/customer_registration/',
-  #                           { name: client_profile.full_name, cpf: client_profile.cpf },
-  #                           { company_token: SecureRandom.alphanumeric(20) })
-
-  #   if response.status == 500 || response.status == 401
-  #     client_profile.destroy
-  #     flash['alert'] = 'Um erro ocorreu ao registrar seu perfil. Por favor, aguarde alguns minutos e tente novamente.'
-  #     render :new
-  #   elsif response.status == 422
-  #     client_profile.destroy
-  #     flash['alert'] = 'Nome ou CPF inválidos. Por favor, verifique seus dados e tente novamente.'
-  #     render :new
-  #   elsif response.status == 200
-  #     current_client.client_profile.token = JSON.parse(response.body, simbolize_names: true)[0]['token']
-  #     current_client.client_profile.update(params.require(:client_profile).permit(:token))
-  #     redirect_to current_client.client_profile, notice: 'Perfil criado com sucesso!'
-  #   end
-  # end
 
   def update_client_profile_params
     params.require(:client_profile).permit(:full_name, :social_name, :birth_date,

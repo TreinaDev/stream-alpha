@@ -7,7 +7,7 @@ describe 'Client profile' do
       api_response = File.read(Rails.root.join('spec/support/apis/client_registration.json'))
       fake_response = double('faraday_response', status: 200, body: api_response)
       allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('154689459647851263as')
-      allow(Faraday).to receive(:post).with('http://pagapaga.com.br/api/v1/customer_registration/',
+      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customer_registration/',
                                             { name: 'Otávio Augusto da Silva Lins', cpf: '60243105878' },
                                             { company_token: '154689459647851263as' })
                                       .and_return(fake_response)
