@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :client_profiles, only: %i[create new show edit update]
   resources :game_categories, only: %i[create new]
   resources :games, only: %i[create new]
+  resources :playlists, only: %i[new create show index]
+  resources :streamer_profiles, only: %i[show new create edit update]
   resources :plans, only: %i[create new show index]
 
   resources :streamer_profiles, only: %i[show new create edit update index] do

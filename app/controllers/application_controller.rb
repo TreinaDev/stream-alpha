@@ -6,11 +6,18 @@ class ApplicationController < ActionController::Base
     stored_location_for(resource) || root_path
   end
 
+  def authenticate_admin_client_streamer!
+    return if current_admin || current_client || current_streamer
+
+    redirect_to root_path,
+                alert: 'Você não tem permissão para visualizar essa página!'
+  end
+
   def authenticate_client_or_admin!
     return if current_client || current_admin
 
     redirect_to root_path,
-                notice: 'Você não tem permissão para visualizar essa página'
+                alert: 'Você não tem permissão para visualizar essa página!'
   end
 
   private
