@@ -1,12 +1,14 @@
 <%= link_to "Ver Streamers", streamer_profiles_path %>
 <%= link_to 'Videos Pendentes', analysis_videos_path %>
+<%= link_to 'Planos de Assinatura', plans_path %>
+<%= link_to 'Ver Playlists', playlists_path %>
 
 <h1>Área do administrador</h1>
 
+<%= link_to 'Registrar nova playlist', new_playlist_path %>
 <%= link_to 'Registrar novo jogo', new_game_path%>
 <%= link_to 'Cadastrar Plano', new_plan_path %>
-<%= link_to 'Planos de Assinatura', plans_path %></p>
+<%= link_to 'Cadastrar novo Administrador', new_admin_path %>
 
 <%= render 'game_categories/game_categories' %>
 <%= render 'games/games' %>
-

@@ -1,0 +1,23 @@
+<% if playlist.cover.attached? %>
+  <p><%= image_tag(playlist.cover, size: "200x200", alt: 'cover', class: 'cover' )%></p>
+<% else %>
+  <p>Não possui capa</p>
+<% end %>
+
+<dl>
+  <dt><%= t(:name, scope: "activerecord.attributes.playlist") %>:</dt>
+  <dd><%= playlist.name %></dd>
+
+  <dt><%= t(:description, scope: "activerecord.attributes.playlist") %>:</dt>
+  <dd><%= playlist.description %></dd>
+
+  <dt><%= t(:video_ids, scope: "activerecord.attributes.playlist") %>:</dt>
+  <% playlist.videos.each do |video|%>
+    <dd><%= link_to video.name, video %></dd>
+  <% end %>
+
+  <dt><%= t(:streamer_ids, scope: "activerecord.attributes.playlist") %>:</dt>
+  <% playlist.streamers.each do |streamer|%>
+    <dd><%= link_to streamer.streamer_profile.name, streamer.streamer_profile %></dd>
+  <% end %>
+</dl>

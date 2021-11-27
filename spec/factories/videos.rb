@@ -1,10 +1,15 @@
 FactoryBot.define do
   factory :video do
-    name { 'Jogando Mind Craft' }
+    sequence(:name) { |n| "\##{n} Jogando Mind Craft" }
     description { 'Jogador irado, joga demais!!' }
-    link do
-      "https://vimeo.com/#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}#{rand(10)}"
-    end
+    link { rand(10_000_000..999_999_999) }
+    game
     streamer
+    trait :approved do
+      status { 'approved' }
+    end
+    trait :refused do
+      status { 'refused' }
+    end
   end
 end

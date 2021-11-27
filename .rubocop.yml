@@ -14,7 +14,8 @@ AllCops:
 Metrics/BlockLength:
   Exclude:
     - "config/environments/**/*"
-  IgnoredMethods: ["describe", "context", "feature", "scenario", "let", "it"]
+  IgnoredMethods:
+    ["describe", "context", "feature", "scenario", "let", "it", "draw"]
 
 Style/AsciiComments:
   Enabled: false

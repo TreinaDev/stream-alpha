@@ -7,5 +7,5 @@ pt-BR:
       admin:
         email: "Email"
         password: "Senha"
-        password_confirmation: "Confirme a senha"
+        password_confirmation: "Confirme sua senha"
         remember_me: "Lembrar senha"
