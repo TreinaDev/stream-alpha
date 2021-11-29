@@ -6,10 +6,9 @@ describe 'Client profile' do
       client = create(:client)
       api_response = File.read(Rails.root.join('spec/support/apis/client_registration_201.json'))
       fake_response = double('faraday_response', status: 201, body: api_response)
-      allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('154689459647851263as')
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customers',
                                             { name: 'Otávio Augusto da Silva Lins', cpf: '60243105878' },
-                                            { company_token: '154689459647851263as' })
+                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
       visit root_path

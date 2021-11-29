@@ -16,9 +16,7 @@ class ClientProfile < ApplicationRecord
   end
 
   def register_client_api(current_client)
-    response = Faraday.post('http://localhost:4000/api/v1/customers',
-                            { name: current_client.client_profile.full_name, cpf: current_client.client_profile.cpf },
-                            { company_token: SecureRandom.alphanumeric(20) })
+    response = faraday_call(current_client)
 
     case response.status
     when 500, 422, 401
@@ -48,5 +46,11 @@ class ClientProfile < ApplicationRecord
     return unless photo.byte_size > 2.megabyte
 
     errors.add(:photo, I18n.t('photo.image_too_big', scope: 'activerecord.errors.models.client_profile.attributes'))
+  end
+
+  def faraday_call(current_client)
+    Faraday.post('http://localhost:4000/api/v1/customers',
+                 { name: current_client.client_profile.full_name, cpf: current_client.client_profile.cpf },
+                 { company_token: Rails.configuration.payment_api['company_auth_token'] })
   end
 end
