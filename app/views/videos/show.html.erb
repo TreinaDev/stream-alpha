@@ -1,34 +1,25 @@
-<dl>
-  <%= render @video %>
+<% if admin_signed_in? %>
+  <p><%= link_to 'Voltar', analysis_videos_path %></p>
 
-  <% if client_signed_in? && @price&.loose? %>
-    <%= link_to 'Comprar Video', payment_video_path(@video) %>
-  <% end %>
-  <% if admin_signed_in? || streamer_signed_in? %>
-    <dt><%= Video.human_attribute_name(:status) %>:</dt>
-    <dd><%= Video.human_enum_name(:status, @video.status) %></dd>
+  <% if @video.pending? %>
+    <%= link_to 'Aprovar Vídeo', approve_video_path, method: :post %>
 
-    <dt><%= Video.human_attribute_name(:feed_back) %>:</dt>
-    <dd><%= @video.feed_back %> </dd>
-  <% end %>
-</dl>
+    <%= form_with url: refuse_video_path(@video) do |form| %>
+      <div>
+        <%= form.label :feed_back, t('.feed_back') %><br>
+        <%= form.text_area :feed_back, rows: 5, cols: 50, placeholder: Video.human_attribute_name(:feed_back) %>
+        <% @video.errors.full_messages_for(:feed_back).each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </div>
 
-<% if admin_signed_in? && @video.pending?%>
-  <%= link_to 'Aprovar', approve_video_path, method: :post %>
-  <%= link_to 'Rejeitar', refuse_video_path, method: :post %>
+      <%= form.submit 'Recusar Vídeo' %>
+    <% end %>
+  <% end %><br>
 <% end %>
 
-<% if admin_signed_in? && !@video.reproved_with_feedback? %>
-  <ul>
-    <% @video.errors.full_messages_for(:feed_back).each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>  
+<%= render @video %>
 
-  <%= form_with url: refuse_video_path(@video) do |form| %>
-    <%= form.label :feed_back, t('.feed_back') %>
-    <%= form.text_field :feed_back %>
-    <%= form.submit 'Enviar' %>
-  <% end %>
-  <%= link_to 'Voltar', analysis_videos_path %>
+<% if client_signed_in? && @price&.loose? %>
+  <%= link_to 'Comprar Video', payment_video_path(@video) %>
 <% end %>

@@ -1,0 +1,31 @@
+<div>
+  <p>Vídeos atualmente cadastrados na plataforma:</p>
+  <% if @videos.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th><%= t(:name, scope: "activerecord.attributes.video") %></th>
+          <th><%= t(:game, scope: "activerecord.models") %></th>
+          <th><%= t(:game_category, scope: "activerecord.models") %></th>
+          <th><%= t(:created_at, scope: "activerecord.attributes.video") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @videos.each do |video| %>
+          <tr>
+            <td><%= link_to video.name, video_path(video) %></td>
+            <td><%= video.game.name %></td>
+            <td>
+              <% video.game.game_categories.each do |cat| %>
+                <%= cat.name %><br>
+              <% end %>
+            </td>
+            <td><%= l video.created_at.to_date %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>Nenhum vídeo registrado.</p>
+  <% end %>
+</div>

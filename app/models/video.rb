@@ -2,6 +2,9 @@ class Video < ApplicationRecord
   belongs_to :game
   belongs_to :streamer
   has_one :price, dependent: :destroy
+  has_many :playlists, through: :playlist_videos
+  has_many :playlist_videos, dependent: :nullify
+  has_one :streamer_profile, through: :streamer
   accepts_nested_attributes_for :price
 
   validates :name, :description, :link, presence: true
@@ -13,7 +16,11 @@ class Video < ApplicationRecord
 
   enum status: { pending: 0, approved: 1, refused: 2 }
 
-  def reproved_with_feedback?
-    refused? && feed_back_in_database.present?
+  scope :all_in_analysis, -> { where(status: 'pending') }
+  scope :available, -> { where(status: 'approved') }
+
+  def update_view_counter
+    self.visualization += 1
+    update({ visualization: self.visualization })
   end
 end

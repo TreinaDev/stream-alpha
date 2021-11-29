@@ -1,0 +1,16 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      playlist: "Playlist"
+    attributes:
+      playlist:
+        name: "Nome"
+        description: "Descrição"
+        cover: "Capa"
+        video_ids: "Videos"
+        streamer_ids: "Streamers"
+  playlists:
+    create:
+      success: "Playlist criada com sucesso!"
+      failed: "Erro ao criar Playlist!"

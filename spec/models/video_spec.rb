@@ -17,12 +17,12 @@ RSpec.describe Video, type: :model do
       it 'is refused with feedback' do
         video = create(:video, status: 'refused', feed_back: 'não atende aos requisitos')
 
-        expect(video.reproved_with_feedback?).to be true
+        expect(video.refused? && video.feed_back.present?).to be true
       end
       it 'is refused without feed_back' do
         video = build(:video, status: 'refused')
 
-        expect(video.reproved_with_feedback?).to be false
+        expect(video.refused? && video.feed_back.present?).to be false
       end
     end
   end

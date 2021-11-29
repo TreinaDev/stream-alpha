@@ -1,8 +1,13 @@
 class ClientProfilesController < ApplicationController
-  before_action :authenticate_client!, only: %i[create new]
+  before_action :authenticate_client!, only: %i[new create]
   before_action :authenticate_client_or_admin!, only: %i[show]
   before_action :check_if_profile_is_valid, only: %i[show]
   before_action :client_is_owner!, only: %i[edit update]
+  def new
+    redirect_to current_client.client_profile, alert: 'Perfil já existente!' if client_profile_exists?
+    @client_profile = ClientProfile.new
+  end
+
   def create
     redirect_to current_client.client_profile, alert: 'Perfil já existente!' if client_profile_exists?
     @client_profile = current_client.build_client_profile(client_profile_params)
@@ -13,11 +18,6 @@ class ClientProfilesController < ApplicationController
       flash[:alert] = t('.fail')
       render :new
     end
-  end
-
-  def new
-    redirect_to current_client.client_profile, alert: 'Perfil já existente!' if client_profile_exists?
-    @client_profile = ClientProfile.new
   end
 
   def show
