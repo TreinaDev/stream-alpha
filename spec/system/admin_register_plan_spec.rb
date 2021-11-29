@@ -108,5 +108,34 @@ describe 'Some' do
       expect(page).to have_content('Valor: R$ 100')
       expect(page).to have_content(gamer.name)
     end
+    it 'receive error 503 status from API' do
+      gamer = create(:streamer_profile)
+      admin = create(:admin)
+      fake_response = double('faraday_response', status: 503)
+      allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('bsdjbfjbf41546154523')
+      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/subscriptions',
+                                            { subscription: { name: 'Plano 4' } },
+                                            { company_token: 'bsdjbfjbf41546154523' })
+                                      .and_return(fake_response)
+
+      login_as admin, scope: :admin
+      visit root_path
+      click_on 'Área do administrador'
+      click_on 'Cadastrar Plano'
+      fill_in 'Nome do Plano', with: 'Plano 4'
+      fill_in 'Descrição', with: 'Desbloqueia todos videos de um Streamer'
+      fill_in 'Valor', with: '100'
+      select gamer.streamer.email, from: 'Selecione os Streamer incluídos no plano'
+      click_on 'Criar Plano de Assinatura'
+
+      Plan.last.reload
+      expect(Plan.last.plan_token).to eq(nil)
+      expect(Plan.last.api_registred).to eq('não enviado')
+      expect(page).to have_content('Servidor pagapaga indisponivel, cadastro ficou na fila.')
+      expect(page).to have_content('Plano 4')
+      expect(page).to have_content('Desbloqueia todos videos de um Streamer')
+      expect(page).to have_content('Valor: R$ 100')
+      expect(page).to have_content(gamer.name)
+    end
   end
 end

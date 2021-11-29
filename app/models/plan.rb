@@ -13,6 +13,8 @@ class Plan < ApplicationRecord
     when 201
       data = JSON.parse(response.body, simbolize_names: true)
       plan.plan_token = data['token']
+    when 503
+      
     end
   end
 end
