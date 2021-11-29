@@ -1,4 +1,4 @@
-<%= form_with model: @playlist do |pl|%>
+<%= form_with model: @playlist do |pl| %>
   <div>
     <%= pl.label :name %>
     <%= pl.text_field :name, placeholder: 'Escreva o nome da playlist' %>
@@ -28,15 +28,15 @@
 
   <div>
     <%= pl.label :video_ids %><br>
-    <%= pl.collection_select :video_ids, @videos || [], :id, :name, {prompt: 'Escolha um ou mais videos'}, {multiple: true} %>
+    <%= pl.collection_select :video_ids, @videos || [], :id, :name, { prompt: 'Escolha um ou mais Vídeos' }, { multiple: true } %>
   </div>
 
   <div>
     <%= pl.label :streamer_ids %><br>
-    <%= pl.collection_select :streamer_ids, @streamers || [], :streamer_id, :name, {prompt: 'Escolha um ou mais streamers'}, {multiple: true} %>
+    <%= pl.collection_select :streamer_ids, @streamers || [], :streamer_id, :name, { prompt: 'Escolha um ou mais Streamers' }, { multiple: true } %>
   </div>
 
   <div>
-    <%= pl.submit "Enviar Playlist" %>
+    <%= pl.submit %>
   </div>
 <% end %>

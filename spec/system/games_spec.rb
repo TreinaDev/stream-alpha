@@ -11,11 +11,11 @@ describe 'games' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Registrar novo jogo'
+      click_on 'Cadastrar Jogo'
       fill_in 'Nome', with: 'Minecraft'
       select 'Sobrevivência', from: 'Categorias'
       select 'Sandbox', from: 'Categorias'
-      click_on 'Registrar novo jogo'
+      click_on 'Registrar Jogo'
 
       expect(page).to have_content('Minecraft')
       expect(page).to have_content('Sandbox, Sobrevivência')
@@ -30,9 +30,9 @@ describe 'games' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Registrar novo jogo'
+      click_on 'Cadastrar Jogo'
       fill_in 'Nome', with: 'Final Fantasy XII - The Zodiac Age'
-      click_on 'Registrar novo jogo'
+      click_on 'Registrar Jogo'
 
       expect(page).to have_content('Nome já está em uso')
       expect(Game.count).to eq(1)
@@ -43,8 +43,8 @@ describe 'games' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Registrar novo jogo'
-      click_on 'Registrar novo jogo'
+      click_on 'Cadastrar Jogo'
+      click_on 'Registrar Jogo'
 
       expect(page).to have_content('Nome não pode ficar em branco')
       expect(page).to have_content('Categorias não pode ficar em branco')

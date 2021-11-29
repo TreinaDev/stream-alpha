@@ -18,8 +18,11 @@
             <%= link_to "Área do administrador", admin_area_admins_path %>
             <%= link_to "Sair", destroy_admin_session_path, method: :delete %>
         <% elsif streamer_signed_in? %>
+          <% if current_streamer.streamer_profile.present? %>
             <%= link_to "Meu Perfil", current_streamer.streamer_profile || new_streamer_profile_path %>
-            <%= link_to "Sair", destroy_streamer_session_path, method: :delete %>
+            <%= link_to "Meus Vídeos", my_videos_videos_path %>
+          <% end %>
+          <%= link_to "Sair", destroy_streamer_session_path, method: :delete %>
         <% elsif client_signed_in? %>
             <% if current_client.client_profile?%>
               <%= link_to "Meu Perfil", current_client.client_profile %>
