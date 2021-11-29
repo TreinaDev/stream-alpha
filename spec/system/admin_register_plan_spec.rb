@@ -104,7 +104,7 @@ describe 'Some' do
       api_response = File.read(Rails.root.join('spec/support/apis/plan_registration_201.json'))
       fake_response = double('faraday_response', status: 201, body: api_response)
       allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('bsdjbfjbf41546154523')
-      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/subscription',
+      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/subscriptions',
                                             { subscription: { name: plan.name } },
                                             { company_token: 'bsdjbfjbf41546154523' })
                                       .and_return(fake_response)
@@ -113,16 +113,14 @@ describe 'Some' do
       visit root_path
       click_on 'Área do administrador'
       click_on 'Cadastrar Plano'
-      fill_in 'Nome do Plano', with: 'Plano 1'
+      fill_in 'Nome do Plano', with: 'Plano 4'
       fill_in 'Descrição', with: 'Desbloqueia todos videos de um Streamer'
       fill_in 'Valor', with: '100'
       select gamer.streamer.email, from: 'Selecione os Streamer incluídos no plano'
       click_on 'Criar Plano de Assinatura'
 
       plan.reload
-      expect(plan.name).to eq('Plano 1')
       expect(plan.plan_token).to eq('ag54g6sd54gas87d52jk')
-      expect(page).to have_content('Plano cadastrado com sucesso!')
     end
   end
 end

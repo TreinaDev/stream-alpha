@@ -5,12 +5,13 @@ class Plan < ApplicationRecord
   validates :value, numericality: true
 
   def register_plan_api(plan)
-    response = Faraday.post('http://localhost:4000/api/v1/subscription',
+    response = Faraday.post('http://localhost:4000/api/v1/subscriptions',
                             { subscription: { name: plan.name } },
-                            { company_token: SecureRandom.alphanumeric(20) })
-    case response.status
-    when 201
-      plan.plan_token = JSON.parse(response.body, simbolize_names: true)['token']
+                            { company_token: SecureRandom.alphanumeric(20) }
+                            )
+    if response.status == 201
+      data = JSON.parse(response.body, simbolize_names: true)
+      plan.plan_token = data["token"]
     end
   end
 end
