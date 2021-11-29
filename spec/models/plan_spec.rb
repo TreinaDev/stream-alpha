@@ -17,10 +17,9 @@ RSpec.describe Plan, type: :model do
         plan = create(:plan)
         api_response = File.read(Rails.root.join('spec/support/apis/plan_registration_201.json'))
         fake_response = double('faraday_response', status: 201, body: api_response)
-        allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('bsdjbfjbf41546154523')
         allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/subscriptions',
                                               { subscription: { name: plan.name } },
-                                              { company_token: 'bsdjbfjbf41546154523' })
+                                              { company_token: 'rVAfNGdvfh6va61nDv11' })
                                         .and_return(fake_response)
         plan.register_plan_api(plan)
 

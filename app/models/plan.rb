@@ -8,13 +8,13 @@ class Plan < ApplicationRecord
   def register_plan_api(plan)
     response = Faraday.post('http://localhost:4000/api/v1/subscriptions',
                             { subscription: { name: plan.name } },
-                            { company_token: SecureRandom.alphanumeric(20) }
+                            { company_token: Rails.configuration.company_token['token'] }
                             )
-    case
+    case response.status
     when 201
       data = JSON.parse(response.body, simbolize_names: true)
       plan.plan_token = data['token']
-    when 503
+    when 500
       
     end
   end

@@ -34,5 +34,6 @@ module Stream
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.company_token = config_for(:company_token)
   end
 end
