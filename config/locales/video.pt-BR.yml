@@ -31,6 +31,7 @@ pt-BR:
       fail: "Erro ao recusar Vídeo!"
     approve:
       success: "Vídeo aprovado com sucesso!"
+      integration_error: "Falha na integração com a plataforma Pagapaga. Tente novamente"
     create:
       success: "Vídeo cadastrado com sucesso!"
       fail: "Erro ao criar Vídeo!"
