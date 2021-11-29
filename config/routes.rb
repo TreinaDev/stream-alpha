@@ -6,7 +6,10 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
   resources :admins, only: %i[new create] do
-    get 'admin_area', on: :collection
+    collection do
+      get 'admin_area'
+      get 'admin_conteudos'
+    end
   end
 
   resources :client_profiles, only: %i[create new show edit update]

@@ -1,0 +1,11 @@
+<div>
+  <% if @method.eql? :get or @method.blank? %>
+    <%= link_to @text, @path, class: "bg-#{@color}-500 border-2 p-#{@p} rounded-lg text-white m-2 transition-colors duration-700
+              hover:bg-white hover:text-#{@color}-500 hover:border-2 hover:border-#{@color}-500 focus:ring-4 focus:ring-#{@color}-300" %>
+  <% else %>
+    <%= form_with url: @path, method: @method , local: @local do %>
+      <%= button_tag @text, class: "bg-#{@color}-500 border-2 p-#{@p} rounded-lg text-white m-2 transition-colors duration-700
+              hover:bg-white hover:text-#{@color}-500 hover:border-2 hover:border-#{@color}-500 focus:ring-4 focus:ring-#{@color}-300" %>
+    <% end %>
+  <% end %>
+</div>

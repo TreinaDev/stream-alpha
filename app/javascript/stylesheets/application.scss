@@ -26,7 +26,9 @@
 .nav-link {
     @apply text-indigo-600 hover:text-white transition duration-300
 }
-
+.nav-link-dark {
+    @apply text-indigo-600 hover:text-gray-700 transition duration-300
+}
 .nav-link-active {
     @apply text-indigo-600 border-b-4 border-indigo-600  
 }

@@ -1,0 +1,28 @@
+<div class="bg-gray-100 border border-gray-300 shadow-lg rounded-lg h-full overflow-hidden">
+  <div class="px-4 pt-4 mb-4 flex items-center justify-between">
+    <div>
+      <h3 class="text-xl font-bold text-gray-900 mb-2">Novos Vídeos</h3>
+      <span class="text-base font-normal text-gray-500">Lista das submissões</span>
+    </div>
+    <div class="flex-shrink-0">
+      <%= link_to "Ver Todos", videos_path, class: "text-sm font-blod text-cyan-600 hover:bg-gray-400 hover:text-white hover:font-bold rounded-lg p-2" %>
+      <%= link_to "Ver Vídeos Pendentes", analysis_videos_path, class: "text-sm font-medium text-cyan-600 hover:bg-gray-400 hover:text-white hover:font-bold rounded-lg p-2" %>
+    </div>
+  </div>
+  <div class="h-full overflow-y-auto">
+      <table class="w-full bg-white">
+        <thead>
+          <tr class="text-xs font-semibold tracking-wide text-center text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+            <th class="px-4 py-3">Título</th>
+            <th class="px-4 py-3">Streamer</th>
+            <th class="px-4 py-3">Jogo</th>
+            <th class="px-4 py-3">Status</th>
+            <th class="px-4 py-3">Data</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white text-center divide-y dark:divide-gray-700 dark:bg-gray-800">
+          <%= render LineVideoComponent.with_collection(@videos)%>
+        </tbody>
+      </table>
+  </div>
+</div>

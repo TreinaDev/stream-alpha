@@ -1,0 +1,64 @@
+<%# link_to "Ver Streamers", streamer_profiles_path %>
+<%# link_to 'Videos Pendentes', analysis_videos_path %>
+
+<%# <h1>Área do administrador</h1> %>
+
+<%# link_to 'Registrar novo jogo', new_game_path%>
+<%# link_to 'Cadastrar Plano', new_plan_path %>
+<%# link_to 'Planos de Assinatura', plans_path %>
+<%# link_to 'Cadastrar novo Administrador', new_admin_path %>
+
+<%# render 'game_categories/game_categories' %>
+<%# render 'games/games' %>
+    <div class="flex flex-col md:flex-row ">
+        <!-- nav bar -->
+        <div class="shadow-xl h-16 bottom-0 mt-12 md:relative md:h-screen z-10 w-full md:w-48">
+
+            <div class="content-center md:content-start text-left justify-between">
+                <ul class="list-reset flex flex-row md:flex-col py-0 md:py-3 px-1 md:px-2 text-center md:text-left">
+                    <li class="mr-3 flex-1">
+                        <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-pink-500">
+                            <i class="fas fa-tasks pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Assinantes</span>
+                        </a>
+                    </li>
+                    <li class="mr-3 flex-1">
+                        <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
+                            <i class="fa fa-envelope pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Conteúdos</span>
+                        </a>
+                    </li>
+                    <li class="mr-3 flex-1">
+                        <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600">
+                            <i class="fas fa-chart-area pr-0 md:pr-3 text-blue-600"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">Analytics</span>
+                        </a>
+                    </li>
+                    <li class="mr-3 flex-1">
+                        <a href="#" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
+                            <i class="fa fa-wallet pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Pagamentos</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+
+        <div class="main-content flex-1 bg-gray-900 mt-12 md:mt-2 pb-24 md:pb-5 rounded-tl-xl">
+
+            <div class="rounded-tl-xl bg-gradient-to-r from-blue-900 to-gray-800 p-4 shadow text-2xl text-white">
+              <h3 class="font-bold pl-2">Analytics</h3>
+            </div>
+
+            <div class="flex flex-wrap">
+              <%= render CardComponent.new(name: 'Vendas', color: 'green', value: "R$ 3000,00", mode: 1)%>
+              <%= render CardComponent.new(name: 'Quantidade de Usuarios', color: 'pink', value: "249", mode: 1)%>
+              <%= render CardComponent.new(name: 'Novos usuários', color: 'yellow', value: "3", mode: 1)%>
+              <%= render CardComponent.new(name: 'Server uptime', color: 'purple', value: "5 horas", mode: 1)%>
+              <%= render CardComponent.new(name: 'Tarefas', color: 'indigo', value: "7 atividades", mode: 1)%>
+              <%= render CardComponent.new(name: 'Issues', color: 'red', value: "3", mode: 1)%>
+            </div>
+            <div class="flex space-x-5">
+                <%= render TableTransationComponent.new %>
+                <%= render TableComprasComponent.new %>
+            </div>
+    </div>
+    

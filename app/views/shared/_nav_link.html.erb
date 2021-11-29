@@ -1,12 +1,17 @@
 <% if admin_signed_in? %>
 
-  <p><%= link_to 'Área do administrador', admin_area_admins_path, class: "nav-link" %>
-
+  <% if controller_name.eql? 'admins' %>
+    <p><%= link_to 'Área do administrador', admin_area_admins_path, class: "nav-link-dark hover:text-gray-700 btn-line-dark" %>
+  <% else %>
+    <p><%= link_to 'Área do administrador', admin_area_admins_path, class: "nav-link btn-line" %>
+  <% end %>
   <div class="dropdown" data-controller="nav"> 
 
     <button id="b-drop" href="" data-action="nav#toggle"
-            class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-indigo-600 hover:ring-4 hover:ring-indigo-300 hover:text-white transition duration-300">
-      <%= current_admin.email %>
+            class="p-2 btn-expanse">
+      <span>
+        <%= current_admin.email %>
+      </span>
     </button>
 
     <ul class="dropdown-toggle hidden text-gray-500" id="drop" data-nav-target="drop1"> 
@@ -24,11 +29,15 @@
   <div class="dropdown" data-controller="nav"> 
 
     <button id="b-drop" href="" data-action="nav#toggle"
-            class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-indigo-600 hover:ring-4 hover:ring-indigo-300 hover:text-white transition duration-300">
+                                class="p-2 btn-expanse">
       <% if current_client.client_profile? %>
-        <%= current_client.client_profile.full_name %>
+        <span>
+          <%= current_client.client_profile.full_name %>
+        </span>
       <% else %>
-        <%= current_client.email %>
+        <span>
+          <%= current_client.email %>
+        </span>
       <% end %>
     </button>
 
@@ -54,11 +63,15 @@
   <% end %>
   <div class="dropdown" data-controller="nav"> 
     <button id="b-drop" href="" data-action="nav#toggle"
-            class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-indigo-600 hover:ring-4 hover:ring-indigo-300 hover:text-white transition duration-300">
+                                class="p-2 btn-expanse">
       <% if current_streamer.streamer_profile.present? %>
-        <%= current_streamer.streamer_profile.name %>
+        <span>
+          <%= current_streamer.streamer_profile.name %>
+        </span>
       <% else %>
-        <%= current_streamer.email %>
+        <span>
+          <%= current_streamer.email %>
+        </span>
       <% end %>
     </button>
     <ul class="dropdown-toggle hidden text-gray-500" id="drop" data-nav-target="drop1"> 

@@ -1,13 +1,29 @@
-<%= link_to "Ver Streamers", streamer_profiles_path %>
-<%= link_to 'Videos Pendentes', analysis_videos_path %>
+<div class="rounded-tl-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-gray-300 p-4 shadow text-2xl text-white">
+  <h3 class="font-bold pl-2">Dashboard</h3>
+</div>
 
-<h1>Área do administrador</h1>
+<div class="flex flex-wrap">
+  <%= render CardComponent.new(name: 'Total de Vendas', value: (number_to_currency(123)), mode: 2, type: 4, 
+                               icon: "<img src='https://img.icons8.com/flat-round/60/000000/positive-dynamic.png'/>" )%>
+  <%= render CardComponent.new(name: 'Quantidade de Usuários', value: 123 , mode: 2, type: 2,
+                               icon: "<img src='https://img.icons8.com/fluency/64/000000/human-resources.png'/>")%>
+  <%= render CardComponent.new(name: 'Streamers Ativos', value: "1231", mode: 2, type: 1,
+                               icon: "<img src='https://img.icons8.com/external-wanicon-lineal-color-wanicon/64/000000/external-video-advertising-wanicon-lineal-color-wanicon.png'/>")%>
+  <%= render CardComponent.new(name: 'Visualizações', value: "1231", mode: 2, type: 3,
+                               icon: "<img src='https://img.icons8.com/color/60/000000/analytics.png'/>")%>
+</div>
 
-<%= link_to 'Registrar novo jogo', new_game_path%>
-<%= link_to 'Cadastrar Plano', new_plan_path %>
-<%= link_to 'Planos de Assinatura', plans_path %>
-<%= link_to 'Cadastrar novo Administrador', new_admin_path %>
+<%= render TableClientComponent.new %>
 
-<%= render 'game_categories/game_categories' %>
-<%= render 'games/games' %>
-
+<div class="w-1/2 h-1/2 p-6">
+  <div class="inline-block space-y-5 bg-gray-100 w-full h-full">
+    <h3 class="font-bold text-2xl text-center text-gray-600 my-2">Links Gerais (Provisorio)</h3>
+    <%= render ButtonComponent.new(text: "Registrar novo jogo", path:  new_game_path, color: 'indigo')%>
+    <%= render ButtonComponent.new(text: 'Cadastrar Plano', path:  new_plan_path , color: 'green')%>
+    <%= render ButtonComponent.new(text: 'Planos de Assinatura', path: plans_path, color: 'blue')%>
+    <%= render ButtonComponent.new(text: 'Cadastrar novo Administrador', path: new_admin_path, color: 'yellow')%>
+    <%= render ButtonComponent.new(text: 'Ver Streamers', path: streamer_profiles_path, color: 'red')%>
+    <%# Insira links aqui %>
+    <%# render ButtonComponent.new(text: 'Nome do link', path: coloque a rota aqui, color: Escolha uma cor que deseja:)%>
+  </div>
+</div>

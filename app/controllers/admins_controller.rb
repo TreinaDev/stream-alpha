@@ -1,8 +1,16 @@
 class AdminsController < ApplicationController
   before_action :authenticate_admin!, only: %i[admin_area new create]
+  layout 'admin'
   def admin_area
     @game_categories = GameCategory.all
     @games = Game.all
+  end
+  
+  def admin_conteudos
+    @videos_count = Video.approved.count
+    @videos_pendentes = Video.pending.count
+    @game_categories = GameCategory.all.order(name: :asc)
+    @videos = Video.all.order(created_at: :asc).limit(10)
   end
 
   def new
