@@ -31,10 +31,6 @@ class Video < ApplicationRecord
     end
   end
 
-  def reproved_with_feedback?
-    refused? && feed_back_in_database.present?
-  end
-
   def update_view_counter
     self.visualization += 1
     update({ visualization: self.visualization })

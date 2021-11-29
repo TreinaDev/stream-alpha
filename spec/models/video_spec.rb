@@ -35,7 +35,6 @@ RSpec.describe Video, type: :model do
         create(:price, video: video)
         api_response = File.read(Rails.root.join('spec/support/apis/single_video_registration_201.json'))
         fake_response = double('faraday_response', status: 201, body: api_response)
-        allow(SecureRandom).to receive(:alphanumeric).with(20).and_return(Rails.configuration.payment_api['company_auth_token'])
         allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
                                               { product: { name: video.name, type_of: 'single' } },
                                               { company_token: Rails.configuration.payment_api['company_auth_token'] })
@@ -66,7 +65,6 @@ RSpec.describe Video, type: :model do
         video = create(:video, name: 'Ocarina of Time Any% WR', status: 'pending', streamer: streamer_profile.streamer)
         create(:price, video: video)
         fake_response = double('faraday_response', status: 500, body: nil)
-        allow(SecureRandom).to receive(:alphanumeric).with(20).and_return(Rails.configuration.payment_api['company_auth_token'])
         allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
                                               { product: { name: video.name, type_of: 'single' } },
                                               { company_token: Rails.configuration.payment_api['company_auth_token'] })
