@@ -9,9 +9,12 @@ Rails.application.routes.draw do
     get 'admin_area', on: :collection
   end
 
+  resources :clients, only: %i[] do
+    get 'my_payment_methods', on: :member
+  end
   resources :client_profiles, only: %i[new create show edit update]
   resources :game_categories, only: %i[new create]
-  resources :games, only: %i[create new]
+  resources :games, only: %i[new create]
   resources :playlists, only: %i[new create show index]
   resources :plans, only: %i[new create show index]
 

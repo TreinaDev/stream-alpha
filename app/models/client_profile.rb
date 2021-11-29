@@ -9,8 +9,22 @@ class ClientProfile < ApplicationRecord
   validate :must_include_a_surname, :correct_cpf_length, :correct_cep_length
   validate :acceptable_photo
 
+  enum client_token_status: { pending: 5, accepted: 10 }
+
   def owner?(current_client = nil)
     return current_client == client if current_client
+  end
+
+  def register_client_api(current_client)
+    response = faraday_call(current_client)
+
+    case response.status
+    when 500, 422, 401
+      pending!
+    when 201
+      current_client.client_profile.token = JSON.parse(response.body, simbolize_names: true)[0]['token']
+      accepted!
+    end
   end
 
   private
@@ -34,5 +48,11 @@ class ClientProfile < ApplicationRecord
     return unless photo.byte_size > 2.megabyte
 
     errors.add(:photo, I18n.t('file_too_large', scope: 'activerecord.errors.messages', size: '2Mb'))
+  end
+
+  def faraday_call(current_client)
+    Faraday.post('http://localhost:4000/api/v1/customers',
+                 { name: current_client.client_profile.full_name, cpf: current_client.client_profile.cpf },
+                 { company_token: Rails.configuration.payment_api['company_auth_token'] })
   end
 end

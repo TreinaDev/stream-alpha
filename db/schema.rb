@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(version: 2021_11_27_022848) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "cep"
     t.string "cpf"
+    t.string "token"
+    t.integer "client_token_status", default: 5
     t.index ["client_id"], name: "index_client_profiles_on_client_id"
   end
 

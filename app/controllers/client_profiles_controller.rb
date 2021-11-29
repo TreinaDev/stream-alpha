@@ -12,9 +12,10 @@ class ClientProfilesController < ApplicationController
     redirect_to current_client.client_profile, alert: 'Perfil já existente!' if client_profile_exists?
     @client_profile = current_client.build_client_profile(client_profile_params)
     if @client_profile.save
-      redirect_to @client_profile, notice: 'Perfil criado com sucesso!'
+      @client_profile.register_client_api(current_client)
+      redirect_to @client_profile, notice: t('.success')
     else
-      flash[:alert] = "Erro ao criar #{t(:client_profile, scope: 'activerecord.models')}!"
+      flash[:alert] = t('.fail')
       render :new
     end
   end
@@ -31,9 +32,9 @@ class ClientProfilesController < ApplicationController
     @client_profile = ClientProfile.find(params[:id])
 
     if @client_profile.update(update_client_profile_params)
-      redirect_to @client_profile, notice: 'Perfil atualizado com sucesso!'
+      redirect_to @client_profile, notice: t('.success')
     else
-      flash[:alert] = "Erro ao atualizar #{t(:client_profile, scope: 'activerecord.models')}!"
+      flash[:alert] = t('.fail')
       render :edit
     end
   end
