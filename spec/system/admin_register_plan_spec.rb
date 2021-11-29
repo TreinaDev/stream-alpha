@@ -25,7 +25,7 @@ describe 'Some' do
       fill_in 'Nome do Plano', with: ''
       fill_in 'Descrição', with: ''
       fill_in 'Valor', with: ''
-      select gamer.email, from: 'Selecione os Streamer incluídos no plano'
+      select gamer.email, from: 'Selecione os Streamers incluídos no plano'
       click_on 'Criar Plano de Assinatura'
 
       expect(page).to have_content('Nome do Plano não pode ficar em branco')
@@ -46,7 +46,7 @@ describe 'Some' do
       fill_in 'Nome do Plano', with: 'Plano Gamer'
       fill_in 'Descrição', with: 'Desbloqueia todos videos de um Streamer'
       fill_in 'Valor', with: '100'
-      select gamer.email, from: 'Selecione os Streamer incluídos no plano'
+      select gamer.email, from: 'Selecione os Streamers incluídos no plano'
       click_on 'Criar Plano de Assinatura'
 
       expect(page).to have_content('Plano cadastrado com sucesso!')

@@ -13,6 +13,8 @@ class PlaylistsController < ApplicationController
 
   def create
     @playlist = current_admin.playlists.build(playlist_params)
+    @videos = Video.available.order(name: :asc)
+    @streamers = StreamerProfile.all_actives.order(name: :asc)
 
     if @playlist.save
       redirect_to @playlist, notice: t('.success')
