@@ -13,7 +13,9 @@ class PlansController < ApplicationController
   def create
     @video_plan = Plan.new(plans_params)
     @streamers = Streamer.completed
-    @video_plan.register_plan_api(@video_plan)
+    if @video_plan.valid?
+      @video_plan.register_plan_api(@video_plan)
+    end
     if @video_plan.save
       redirect_to @video_plan, notice: 'Plano cadastrado com sucesso!'
     else

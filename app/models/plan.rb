@@ -9,9 +9,10 @@ class Plan < ApplicationRecord
                             { subscription: { name: plan.name } },
                             { company_token: SecureRandom.alphanumeric(20) }
                             )
-    if response.status == 201
+    case
+    when 201
       data = JSON.parse(response.body, simbolize_names: true)
-      plan.plan_token = data["token"]
+      plan.plan_token = data['token']
     end
   end
 end
