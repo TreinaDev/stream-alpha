@@ -25,7 +25,7 @@ describe 'Some' do
       fill_in 'Nome do Plano', with: ''
       fill_in 'Descrição', with: ''
       fill_in 'Valor', with: ''
-      select gamer.email, from: 'Selecione os Streamer incluídos no plano'
+      select gamer.email, from: 'Selecione os Streamers incluídos no plano'
       click_on 'Criar Plano de Assinatura'
 
       expect(page).to have_content('Nome do Plano não pode ficar em branco')

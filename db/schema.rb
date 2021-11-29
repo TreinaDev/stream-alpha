@@ -199,6 +199,7 @@ ActiveRecord::Schema.define(version: 2021_11_28_190709) do
     t.integer "status", default: 0
     t.string "feed_back"
     t.integer "game_id", null: false
+    t.integer "visualization", default: 0
     t.index ["game_id"], name: "index_videos_on_game_id"
     t.index ["link"], name: "index_videos_on_link", unique: true
     t.index ["streamer_id"], name: "index_videos_on_streamer_id"
