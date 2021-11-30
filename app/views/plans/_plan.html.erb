@@ -16,4 +16,6 @@
       <dd>Streamer sem perfil!</dd>
     <% end %>
   <% end %>
+  <dt><%= t(:plan_status, scope: "activerecord.attributes.plan") %>:</dt>
+  <dd><%= Plan.human_enum_name(:plan_status, plan.plan_status) %></dd>
 </dl>

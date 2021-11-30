@@ -11,3 +11,13 @@ pt-BR:
         content_streamer: "Conteúdo"
         streamer_ids: "Streamers"
         created_at: "Criado em"
+        plan_status: "Status do plano"
+        plan_statuses:
+          down: "Pendente"
+          qualified: "Habilitado"
+          not_qualified: "Deshabilitado"
+  plans:
+    create:
+      success: "Plano cadastrado com sucesso!"
+      plan_pending: "Servidor pagapaga indisponivel, cadastro ficou na fila."
+

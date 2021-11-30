@@ -106,6 +106,7 @@ describe 'Some' do
       expect(page).to have_content('Desbloqueia todos videos de um Streamer')
       expect(page).to have_content('Valor: R$ 100')
       expect(page).to have_content(gamer.name)
+      expect(page).to have_content('Status do plano: Habilitado')
     end
     it 'receive error 500 status from API' do
       gamer = create(:streamer_profile)
@@ -129,12 +130,12 @@ describe 'Some' do
 
       Plan.last.reload
       expect(Plan.last.plan_token).to eq(nil)
-      expect(Plan.last.api_registered).to eq('não habilitado')
-      expect(page).to have_content('Servidor pagapaga indisponivel, cadastro ficou na fila.')
       expect(page).to have_content('Plano 4')
       expect(page).to have_content('Desbloqueia todos videos de um Streamer')
       expect(page).to have_content('Valor: R$ 100')
       expect(page).to have_content(gamer.name)
+      expect(page).to have_content('Status do plano: Pendente')
+      expect(page).to have_content('Servidor pagapaga indisponivel, cadastro ficou na fila.')
     end
   end
 end
