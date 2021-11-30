@@ -1,5 +1,10 @@
 class GamesController < ApplicationController
-  before_action :authenticate_admin!, only: %i[create new]
+  before_action :authenticate_admin!, only: %i[new create]
+  def new
+    @game = Game.new
+    @categories = GameCategory.all.order(name: :asc)
+  end
+
   def create
     @game = game_creation
     if @game.save
@@ -8,11 +13,6 @@ class GamesController < ApplicationController
       @categories = GameCategory.all.order(name: :asc)
       render :new
     end
-  end
-
-  def new
-    @game = Game.new
-    @categories = GameCategory.all.order(name: :asc)
   end
 
   private

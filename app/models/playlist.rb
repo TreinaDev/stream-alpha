@@ -4,10 +4,10 @@ class Playlist < ApplicationRecord
   has_many :plans, through: :content_playlists
 
   has_one_attached :cover
-  has_many :playlist_videos, dependent: :nullify
-  has_many :videos, through: :playlist_videos
   has_many :playlist_streamers, dependent: :nullify
+  has_many :playlist_videos, dependent: :nullify
   has_many :streamers, through: :playlist_streamers
+  has_many :videos, through: :playlist_videos
 
   validates :name, :description, presence: true
   validates :name, uniqueness: true

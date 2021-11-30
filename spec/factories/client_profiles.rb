@@ -11,6 +11,8 @@ FactoryBot.define do
     residential_number { '59' }
     age_rating { 'L' }
     client
+    client_token_status { :pending }
+    token { nil }
     trait :with_photo do
       photo do
         Rack::Test::UploadedFile.new(Rails.root.join('spec/support/assets/gary-bendig-unsplash.jpg'), 'photo/jpg')
