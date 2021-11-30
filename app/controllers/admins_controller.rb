@@ -9,10 +9,10 @@ class AdminsController < ApplicationController
   end
 
   def admin_contents
-    @videos_count = Video.approved.count
-    @videos_pendentes = Video.pending.count
-    @game_categories = GameCategory.all.order(name: :asc)
     @videos = Video.all.order(created_at: :asc).limit(10)
+    @game_categories = GameCategory.all.order(name: :asc)
+    @videos_count = Video.approved.count
+    @videos_pending_count = Video.pending.count
   end
 
   def new

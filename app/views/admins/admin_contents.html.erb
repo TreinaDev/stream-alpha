@@ -13,8 +13,8 @@
 
 <div class="flex flex-wrap">
   <%= render CardComponent.new(name: 'Vídeos Disponíveis', color: 'purple', value: @videos_count, mode: 1)%>
-  <%= render CardComponent.new(name: 'Vídeos em Analíse', color: 'green', value: @videos_pendentes, mode: 1)%>
-  <%= render CardComponent.new(name: 'Visualizações', color: 'indigo', value: "10.199", mode: 1)%>
+  <%= render CardComponent.new(name: 'Vídeos em Analíse', color: 'green', value: @videos_pending_count, mode: 1)%>
+  <%= render CardComponent.new(name: 'Playlists Ativas', color: 'indigo', value: @playlists_count, mode: 1)%>
 </div>
 
 <div class="flex h-96">

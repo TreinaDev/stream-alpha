@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admins, skip: [:registrations]
+  devise_for :streamers, skip: [:registrations]
   devise_for :clients
-  devise_for :streamers
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   root to: 'home#index'
@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get 'admin_contents'
     end
   end
+  resources :streamers, only: %i[new create]
 
   resources :clients, only: %i[] do
     get 'my_payment_methods', on: :member

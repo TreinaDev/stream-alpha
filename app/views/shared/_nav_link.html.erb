@@ -75,7 +75,7 @@
         </span>
       <% end %>
     </button>
-    <ul class="dropdown-toggle hidden text-gray-500" id="drop" data-nav-target="drop1"> 
+    <ul class="dropdown-toggle w-32 hidden text-gray-500" id="drop" data-nav-target="drop1"> 
       <li>
         <%= link_to "Meu Perfil", current_streamer.streamer_profile || new_streamer_profile_path,
           class: "dropdown-menu-top bg-white border-l-4  hover:border-blue-500" %>
@@ -114,7 +114,6 @@
 
       <ul class="dropdown-toggle hidden text-gray-500" id="drop-in" data-nav-target="drop2">
         <li> <%= link_to "Como novo Assinante", new_client_registration_path, class: "dropdown-menu-top bg-white border-l-4  hover:border-blue-500" %> </li>
-        <li> <%= link_to "Como novo Streamer", new_streamer_registration_path, class: "dropdown-menu-botton bg-white border-l-4  hover:border-blue-500" %> </li>
       </ul>
     </div>
   </div>

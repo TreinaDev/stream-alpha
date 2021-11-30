@@ -11,6 +11,7 @@ AllCops:
     - "db/**/*"
     - "node_modules/**/*"
     - "app/components/**/*"
+    - "config/routes.rb"
 
 Metrics/BlockLength:
   IgnoredMethods: ["describe", "context", "feature", "scenario", "let", "it", "draw", "configure"]

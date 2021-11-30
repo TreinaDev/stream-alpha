@@ -1,0 +1,20 @@
+<h1>Informe os dados de cadastro do novo Streamer</h1>
+
+<%= form_with model: @streamer do |f|%>
+<div>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+  <% field_errors(@streamer, :email).each do |message|%>
+    <li><%= message %></li>
+  <%end%>
+</div>
+
+<div>
+  <%= f.label :password %>
+  <%= f.text_field :password %>
+  <% field_errors(@streamer, :password).each do |message|%>
+    <li><%= message %></li>
+  <%end%>
+</div>
+  <%= f.submit "Cadastrar" %> 
+<% end %>
