@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class LineComprasComponent < ViewComponent::Base
+class LinePushaseComponent < ViewComponent::Base
   def initialize(name:, value:)
     @name = name
     @value = value

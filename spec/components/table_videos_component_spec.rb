@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe TableComprasComponent, type: :component do
+RSpec.describe TableVideosComponent, type: :component do
   pending "add some examples to (or delete) #{__FILE__}"
 
   # it "renders something useful" do

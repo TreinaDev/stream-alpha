@@ -9,7 +9,7 @@ describe 'Admin' do
       visit root_path
       click_on 'Área do administrador'
 
-      expect(page).to have_link('Cadastrar Playlist', href: new_playlist_path)
+      expect(page).to have_link('Playlist', href: new_playlist_path)
     end
 
     it 'creates playlist' do
@@ -23,7 +23,7 @@ describe 'Admin' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar Playlist'
+      click_on 'Playlist'
       fill_in 'Nome', with: 'Casual Gamers'
       fill_in 'Descrição', with: 'Encontre streamers que jogam apenas para se divertir.'
       attach_file 'Capa', Rails.root.join('spec/support/assets/gary-bendig-unsplash.jpg')
@@ -88,7 +88,7 @@ describe 'Admin' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar Playlist'
+      click_on 'Playlist'
       click_on 'Criar Playlist'
 
       expect(current_path).to eq playlists_path

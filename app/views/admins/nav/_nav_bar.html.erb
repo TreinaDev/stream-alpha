@@ -5,7 +5,7 @@
     <ul class="flex flex-col py-4 space-y-1">
       <li class="px-5 hidden md:block">
         <div class="flex flex-row items-center h-8">
-          <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Main</div>
+          <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Principal</div>
         </div>
       </li>
       <li>
@@ -22,7 +22,6 @@
             <img src="https://img.icons8.com/office/20/000000/documentary.png"/>
           </span>
           <span class="ml-2 text-sm tracking-wide truncate">Conteúdos</span>
-          <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-blue-500 bg-indigo-50 rounded-full">New</span>
         </a>
       </li>
       <li>
@@ -39,7 +38,6 @@
             <img src="https://img.icons8.com/office/20/000000/expensive-2.png"/>
           </span>
           <span class="ml-2 text-sm tracking-wide truncate">Pagamentos</span>
-          <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">1.2k</span>
         </a>
       </li>
       <li>
@@ -47,13 +45,58 @@
           <span class="inline-flex justify-center items-center ml-4">
             <img src="https://img.icons8.com/color/20/000000/statistics.png"/>
           </span>
-          <span class="ml-2 text-sm tracking-wide truncate">Analytics</span>
-          <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-blue-500 bg-indigo-50 rounded-full">New</span>
+          <span class="ml-2 text-sm tracking-wide truncate">Analises</span>
         </a>
       </li>
       <li class="px-5 hidden md:block">
         <div class="flex flex-row items-center mt-5 h-8">
-          <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Settings</div>
+          <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Cadastros</div>
+        </div>
+      </li>
+      <li>
+        <a href=<%= new_admin_path %> class="relative flex flex-row hover:text-white items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+          <span class="inline-flex justify-center items-center ml-4">
+            <img src="https://img.icons8.com/office/20/000000/businessman.png"/>
+          </span>
+          <span class="ml-2 text-sm tracking-wide truncate">Administrador</span>
+        </a>
+      </li>
+      <li>
+        <a href=<%= new_game_category_path %> class="relative flex flex-row hover:text-white items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+          <span class="inline-flex justify-center items-center ml-4">
+            <img src="https://img.icons8.com/color/20/000000/games-folder.png"/>
+          </span>
+          <span class="ml-2 text-sm tracking-wide truncate">Categoria de Jogos</span>
+        </a>
+      </li>
+      <li>
+        <a href=<%= new_game_path %> class="relative flex flex-row hover:text-white items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+          <span class="inline-flex justify-center items-center ml-4">
+            <img src="https://img.icons8.com/external-tal-revivo-shadow-tal-revivo/20/000000/external-games-store-with-wired-controller-kids-store-mall-shadow-tal-revivo.png"/>
+          </span>
+          <span class="ml-2 text-sm tracking-wide truncate">Jogos</span>
+        </a>
+      </li>
+      <li>
+        <a href=<%= new_playlist_path %> class="relative flex flex-row hover:text-white items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+          <span class="inline-flex justify-center items-center ml-4">
+            <img src="https://img.icons8.com/external-prettycons-flat-prettycons/20/000000/external-video-social-media-prettycons-flat-prettycons.png"/>
+          </span>
+          <span class="ml-2 text-sm tracking-wide truncate">Playlist</span>
+        </a>
+      </li>
+      <li>
+        <a href=<%= new_plan_path %> class="relative flex flex-row hover:text-white items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+          <span class="inline-flex justify-center items-center ml-4">
+            <img src="https://img.icons8.com/external-inipagistudio-mixed-inipagistudio/20/000000/external-strategic-plan-advertisement-inipagistudio-mixed-inipagistudio.png"/>
+          </span>
+          <span class="ml-2 text-sm tracking-wide truncate">Plano</span>
+        </a>
+      </li>
+      <li class="px-5 hidden md:block">
+      <li class="px-5 hidden md:block">
+        <div class="flex flex-row items-center mt-5 h-8">
+          <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Configurações</div>
         </div>
       </li>
       <li>
@@ -61,7 +104,7 @@
           <span class="inline-flex justify-center items-center ml-4">
             <img src="https://img.icons8.com/office/20/000000/person-male.png"/>
           </span>
-          <span class="ml-2 text-sm tracking-wide truncate">Profile</span>
+          <span class="ml-2 text-sm tracking-wide truncate">Perfil</span>
         </a>
       </li>
       <li>
@@ -69,7 +112,7 @@
           <span class="inline-flex justify-center items-center ml-4">
             <img src="https://img.icons8.com/fluency/20/000000/administrative-tools.png"/>
           </span>
-          <span class="ml-2 text-sm tracking-wide truncate">Settings</span>
+          <span class="ml-2 text-sm tracking-wide truncate">Configurações</span>
         </a>
       </li>
     </ul>

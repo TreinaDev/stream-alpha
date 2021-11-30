@@ -8,7 +8,7 @@ describe 'Some' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar Plano'
+      click_on 'Plano'
 
       expect(page).to have_content('Insira as informações do plano que deseja cadastrar')
     end
@@ -21,7 +21,7 @@ describe 'Some' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar Plano'
+      click_on 'Plano'
       fill_in 'Nome do Plano', with: ''
       fill_in 'Descrição', with: ''
       fill_in 'Valor', with: ''
@@ -42,7 +42,7 @@ describe 'Some' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar Plano'
+      click_on 'Plano'
       fill_in 'Nome do Plano', with: 'Plano Gamer'
       fill_in 'Descrição', with: 'Desbloqueia todos videos de um Streamer'
       fill_in 'Valor', with: '100'
