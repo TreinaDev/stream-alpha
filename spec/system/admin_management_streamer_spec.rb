@@ -4,7 +4,7 @@ describe 'admin management streamer' do
   it 'can use link with login' do
     login_as create(:admin), scope: :admin
 
-    visit admin_area_admins_path
+    visit admin_contents_admins_path
 
     expect(page).to have_link('Ver Streamers', href: streamer_profiles_path)
   end
@@ -13,7 +13,7 @@ describe 'admin management streamer' do
 
     login_as create(:admin), scope: :admin
 
-    visit admin_area_admins_path
+    visit admin_contents_admins_path
     click_on 'Ver Streamers'
 
     expect(current_path).to eq(streamer_profiles_path)
@@ -26,7 +26,7 @@ describe 'admin management streamer' do
   it 'can view no there streamers' do
     login_as create(:admin), scope: :admin
 
-    visit admin_area_admins_path
+    visit admin_contents_admins_path
     click_on 'Ver Streamers'
 
     expect(current_path).to eq(streamer_profiles_path)
@@ -37,7 +37,7 @@ describe 'admin management streamer' do
 
     login_as create(:admin), scope: :admin
 
-    visit admin_area_admins_path
+    visit admin_contents_admins_path
     click_on 'Ver Streamers'
     click_on streamer.name
 
@@ -65,7 +65,7 @@ describe 'admin management streamer' do
 
     login_as create(:admin), scope: :admin
 
-    visit admin_area_admins_path
+    visit admin_contents_admins_path
     click_on 'Ver Streamers'
     click_on streamer.name
 

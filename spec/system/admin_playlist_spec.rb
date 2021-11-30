@@ -58,6 +58,7 @@ describe 'Admin' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
+      click_on 'Conteúdos'
       click_on 'Ver Playlists'
 
       expect(current_path).to eq playlists_path
@@ -74,6 +75,7 @@ describe 'Admin' do
     login_as admin, scope: :admin
     visit root_path
     click_on 'Área do administrador'
+    click_on 'Conteúdos'
     click_on 'Ver Playlists'
 
     expect(current_path).to eq playlists_path

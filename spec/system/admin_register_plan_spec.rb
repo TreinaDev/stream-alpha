@@ -62,6 +62,7 @@ describe 'Some' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
+      click_on 'Conteúdos'
       click_on 'Planos de Assinatura'
 
       expect(page).to have_content(plano_a.name)
