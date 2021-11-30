@@ -12,7 +12,7 @@ class PlansController < ApplicationController
   end
 
   def create
-    @video_plan = Plan.new(plans_params)
+    @video_plan = Plan.create(plans_params)
     @streamers = Streamer.completed
     @playlists = Playlist.all
     if @video_plan.save
