@@ -10,23 +10,26 @@ Rails.application.routes.draw do
   end
   resources :streamers, only: %i[new create]
 
-  resources :client_profiles, only: %i[create new show edit update]
-  resources :game_categories, only: %i[create new]
-  resources :games, only: %i[create new]
+  resources :clients, only: %i[] do
+    get 'my_payment_methods', on: :member
+  end
+  resources :client_profiles, only: %i[new create show edit update]
+  resources :game_categories, only: %i[new create]
+  resources :games, only: %i[new create]
   resources :playlists, only: %i[new create show index]
-  resources :streamer_profiles, only: %i[show new create edit update]
-  resources :plans, only: %i[create new show index]
+  resources :plans, only: %i[new create show index]
 
-  resources :streamer_profiles, only: %i[show new create edit update index] do
+  resources :streamer_profiles, only: %i[new create show index edit update] do
     member do
       post 'inactive'
       post 'active'
     end
   end
 
-  resources :videos, only: %i[create index new show] do
-    get 'payment', on: :member
+  resources :videos, only: %i[new create show index] do
     get 'analysis', on: :collection
+    get 'my_videos', on: :collection
+    get 'payment', on: :member
     member do
       post 'approve'
       post 'refuse'

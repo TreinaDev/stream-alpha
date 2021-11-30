@@ -9,7 +9,9 @@ describe 'client buys a video' do
       payment_methods << PaymentMethod.new({ name: 'Boleto', status: 'Ativo' })
       allow(PaymentMethod).to receive(:all).and_return(payment_methods)
       client = create(:client)
-      video = create(:video, link: '613710178')
+      streamer_profile = create(:streamer_profile, name: 'Solaire')
+      video = create(:video, name: 'Jogando Mind Craft', status: 'pending', link: '613710178',
+                             streamer: streamer_profile.streamer)
       create(:price, loose: true, video: video)
 
       login_as client, scope: :client
@@ -30,7 +32,8 @@ describe 'client buys a video' do
     it 'and should view error message for down API' do
       allow(PaymentMethod).to receive(:all).and_return(nil)
       client = create(:client)
-      video = create(:video)
+      streamer_profile = create(:streamer_profile, name: 'Solaire')
+      video = create(:video, streamer: streamer_profile.streamer)
       create(:price, loose: true, video: video)
 
       login_as client, scope: :client

@@ -1,7 +1,7 @@
 class StreamerProfilesController < ApplicationController
-  before_action :authenticate_admin!, only: %i[index active inactive]
+  before_action :authenticate_admin!, only: %i[active inactive index]
   before_action :authenticate_streamer!, only: %i[new create edit update]
-  before_action :find_profile, only: %i[show edit update inactive active]
+  before_action :find_profile, only: %i[active inactive show edit update]
   before_action :streamer_is_owner!, only: %i[edit update]
   def index
     @streamers = StreamerProfile.all
@@ -42,12 +42,12 @@ class StreamerProfilesController < ApplicationController
     end
   end
 
-  def inactive
-    redirect_to @streamer_profile, notice: t('.success') if @streamer_profile.inactive!
-  end
-
   def active
     redirect_to @streamer_profile, notice: t('.success') if @streamer_profile.active!
+  end
+
+  def inactive
+    redirect_to @streamer_profile, notice: t('.success') if @streamer_profile.inactive!
   end
 
   private

@@ -8,7 +8,7 @@ describe 'Some' do
 
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar novo Streamer'
+      click_on 'Cadastrar Streamer'
 
       expect(page).to have_content('Informe os dados de cadastro do novo Streamer')
     end
@@ -19,7 +19,7 @@ describe 'Some' do
 
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar novo Streamer'
+      click_on 'Cadastrar Streamer'
       fill_in 'Email', with: 'apolo@user.com'
       fill_in 'Senha', with: '7777777'
       click_on 'Cadastrar'
@@ -33,7 +33,7 @@ describe 'Some' do
 
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar novo Streamer'
+      click_on 'Cadastrar Streamer'
       fill_in 'Email', with: ''
       fill_in 'Senha', with: ''
       click_on 'Cadastrar'
