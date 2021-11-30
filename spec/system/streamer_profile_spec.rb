@@ -6,7 +6,7 @@ describe 'Streamer log in' do
       streamer = create(:streamer)
 
       visit root_path
-      click_on 'Como streamer'
+      click_on 'Como Streamer'
       fill_in 'Email', with: streamer.email
       fill_in 'Senha', with: streamer.password
       within 'form' do
@@ -34,7 +34,7 @@ describe 'Streamer log in' do
       streamer = create(:streamer)
 
       visit root_path
-      click_on 'Como streamer'
+      click_on 'Como Streamer'
       fill_in 'Email', with: streamer.email
       fill_in 'Senha', with: streamer.password
       within 'form' do

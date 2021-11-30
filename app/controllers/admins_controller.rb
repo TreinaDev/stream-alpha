@@ -3,6 +3,9 @@ class AdminsController < ApplicationController
   layout 'admin'
   def admin_area
     @games = Game.all
+    @clients_count = Client.all.count
+    @streamers_count = Streamer.all.count
+    @total_views = Video.all.sum(:visualization)
   end
 
   def admin_contents

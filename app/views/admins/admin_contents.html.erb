@@ -1,10 +1,10 @@
 <div class="rounded-tl-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-gray-300 p-4 shadow text-2xl text-white">
-  <h3 class="font-bold pl-2">Conteudos</h3>
+  <h3 class="font-bold pl-2">Conteúdos</h3>
 </div>
 
 <div class="flex flex-wrap">
-  <%= render CardComponent.new(name: 'Videos Disponíveis', color: 'purple', value: @videos_count, mode: 1)%>
-  <%= render CardComponent.new(name: 'Videos em Analíse', color: 'green', value: @videos_pendentes, mode: 1)%>
+  <%= render CardComponent.new(name: 'Vídeos Disponíveis', color: 'purple', value: @videos_count, mode: 1)%>
+  <%= render CardComponent.new(name: 'Vídeos em Analíse', color: 'green', value: @videos_pendentes, mode: 1)%>
   <%= render CardComponent.new(name: 'Visualizações', color: 'indigo', value: "10.199", mode: 1)%>
 </div>
 

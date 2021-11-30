@@ -5,7 +5,7 @@ describe 'Client registration and login -' do
     it 'successfully' do
       visit root_path
       click_on 'Inscreva-se'
-      click_on 'Como novo assinante'
+      click_on 'Como novo Assinante'
       fill_in 'Email', with: 'client@user.com'
       fill_in 'Senha', with: '123456789'
       fill_in 'Confirme sua senha', with: '123456789'
@@ -23,7 +23,7 @@ describe 'Client registration and login -' do
       client = create(:client)
 
       visit root_path
-      click_on 'Como assinante'
+      click_on 'Como Assinante'
       fill_in 'Email', with: client.email
       fill_in 'Senha', with: client.password
       within 'form' do

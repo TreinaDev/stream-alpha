@@ -8,9 +8,9 @@ describe 'game categories' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Registrar nova categoria de jogos'
+      click_on 'Cadastrar Categoria de Jogos'
       fill_in 'Nome', with: 'Ação'
-      click_on 'Registrar nova categoria'
+      click_on 'Categoria de Jogos'
 
       expect(page).to have_content('Ação')
       expect(page).to have_content(I18n.l(Time.zone.now.to_date))
@@ -24,9 +24,9 @@ describe 'game categories' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Registrar nova categoria de jogos'
+      click_on 'Cadastrar Categoria de Jogos'
       fill_in 'Nome', with: 'RPG'
-      click_on 'Registrar nova categoria'
+      click_on 'Criar Categoria de Jogos'
 
       expect(page).to have_content('Nome já está em uso')
       expect(GameCategory.count).to eq(1)
@@ -37,8 +37,8 @@ describe 'game categories' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Registrar nova categoria de jogos'
-      click_on 'Registrar nova categoria'
+      click_on 'Cadastrar Categoria de Jogos'
+      click_on 'Categoria de Jogos'
 
       expect(page).to have_content('Nome não pode ficar em branco')
       expect(GameCategory.count).to eq(0)

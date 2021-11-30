@@ -1,5 +1,6 @@
 class StreamerProfile < ApplicationRecord
   belongs_to :streamer
+  has_many :videos, through: :streamer
 
   validates :name, :description, :streamer_id,
             presence: true
