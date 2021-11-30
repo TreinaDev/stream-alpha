@@ -72,7 +72,7 @@ describe 'Some' do
       expect(page).to have_content('Plano cadastrado com sucesso!')
       expect(page).to have_content(playlist.name)
       expect(page).to have_content(playlist1.name)
-      expect(page).to have_content(playlist2.name)
+      expect(page).not_to have_content(playlist2.name)
     end
   end
   context 'Admin view all plans registred' do
