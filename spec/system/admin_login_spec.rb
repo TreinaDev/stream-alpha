@@ -6,7 +6,8 @@ describe 'Admin login -' do
       admin = create(:admin)
 
       visit root_path
-      click_on 'Como administrador'
+      click_on 'Entrar'
+      click_on 'Como Administrador'
       fill_in 'Email', with: admin.email
       fill_in 'Senha', with: admin.password
       within 'form' do

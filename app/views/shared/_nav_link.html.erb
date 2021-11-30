@@ -44,13 +44,13 @@
     <ul class="dropdown-toggle hidden text-gray-500" id="drop" data-nav-target="drop1"> 
       <% if current_client.client_profile? %>
         <%= link_to 'Meu Perfil', current_client.client_profile,
-            class: "dropdown-menu-top bg-white border-l-4  hover:border-blue-500"%>
+            class: "dropdown-menu-top bg-white border-l-4 hover:border-blue-500" %>
       <% else %>
         <%= link_to 'Meu Perfil', new_client_profile_path,
-            class: "dropdown-menu-top bg-white border-l-4  hover:border-blue-500"%>
+            class: "dropdown-menu-top bg-white border-l-4 hover:border-blue-500" %>
       <% end %>
-      <%= form_with url: destroy_client_session_path, method: :delete do%>
-        <li> <%= button_tag "Sair", class: "dropdown-menu-mid rounded bg-white border-l-4  hover:border-blue-500" %>
+      <%= form_with url: destroy_client_session_path, method: :delete do %>
+        <li> <%= button_tag "Sair", class: "dropdown-menu-mid rounded bg-white border-l-4 hover:border-blue-500" %>
       <% end %>
     </ul>
 
@@ -58,7 +58,8 @@
 <% end %>
 
 <% if streamer_signed_in? %>
-  <% if streamer_signed_in? %>
+  <% if current_streamer.streamer_profile.present? %>
+    <%= link_to "Meus Vídeos", my_videos_videos_path, class: 'nav-link' %>
     <%= link_to 'Cadastrar Vídeo', new_video_path, class: 'nav-link' %>
   <% end %>
   <div class="dropdown" data-controller="nav"> 
@@ -97,9 +98,9 @@
       </button>
 
       <ul class="dropdown-toggle hidden text-gray-500" id="drop" data-nav-target="drop1">
-        <li> <%= link_to "Como administrador", new_admin_session_path, class: "dropdown-menu-top bg-white border-l-4  hover:border-blue-500" %> </li>
-        <li> <%= link_to "Como assinante", new_client_session_path, class: "dropdown-menu-mid bg-white border-l-4  hover:border-blue-500" %> </li>
-        <li> <%= link_to "Como streamer", new_streamer_session_path, class: "dropdown-menu-botton bg-white border-l-4  hover:border-blue-500" %> </li>
+        <li> <%= link_to "Como Administrador", new_admin_session_path, class: "dropdown-menu-top bg-white border-l-4  hover:border-blue-500" %> </li>
+        <li> <%= link_to "Como Assinante", new_client_session_path, class: "dropdown-menu-mid bg-white border-l-4  hover:border-blue-500" %> </li>
+        <li> <%= link_to "Como Streamer", new_streamer_session_path, class: "dropdown-menu-botton bg-white border-l-4  hover:border-blue-500" %> </li>
       </ul>
 
     </div>
@@ -112,8 +113,8 @@
       </button>
 
       <ul class="dropdown-toggle hidden text-gray-500" id="drop-in" data-nav-target="drop2">
-        <li> <%= link_to "Como novo assinante", new_client_registration_path, class: "dropdown-menu-top bg-white border-l-4  hover:border-blue-500" %> </li>
-        <li> <%= link_to "Como novo streamer", new_streamer_registration_path, class: "dropdown-menu-botton bg-white border-l-4  hover:border-blue-500" %> </li>
+        <li> <%= link_to "Como novo Assinante", new_client_registration_path, class: "dropdown-menu-top bg-white border-l-4  hover:border-blue-500" %> </li>
+        <li> <%= link_to "Como novo Streamer", new_streamer_registration_path, class: "dropdown-menu-botton bg-white border-l-4  hover:border-blue-500" %> </li>
       </ul>
     </div>
   </div>

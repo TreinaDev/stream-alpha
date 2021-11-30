@@ -1,14 +1,23 @@
 <div style="padding:56.25% 0 0 0;position:relative;">
-  <iframe src="https://player.vimeo.com/video/<%= video.link %>?autoplay=1&background=0" 
-          style="position:absolute;top:0;left:0;width:100%;height:100%;" 
-          frameborder="0" 
-          allow="autoplay; fullscreen; picture-in-picture" 
+  <iframe src="https://player.vimeo.com/video/<%= video.link %>?autoplay=1&background=0&color=6441a5&muted=0&title=0&byline=0&portrait=0" 
+          style="position:absolute;top:0;left:0;width:100%;height:100%;"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture"
           allowfullscreen>
   </iframe>
 </div>
 <script src="https://player.vimeo.com/api/player.js"></script>
 
 <h1><%= video.name %></h1>
+<h3>Por: <%= link_to @streamer_profile.name, streamer_profile_path(@streamer_profile) %></h3>
+<p>
+  <% if video.visualization == 1 %>
+    <%= "#{video.visualization} #{Video.human_attribute_name(:visualization)} -" %>
+  <% else %>
+    <%= "#{video.visualization} #{Video.human_attribute_name(:visualizations)} -" %>
+  <% end %>
+  <%= l(video.created_at.to_date) %>
+</p>
 
 <dl>
   <dt><%= Video.human_attribute_name(:description) %>:</dt>
@@ -21,14 +30,22 @@
   <dd><%= video.game.game_categories_list_as_string %></dd>
 
   <dt><%= Video.human_attribute_name(:loose) %>:</dt>
-  <dd> 
-    <% if @price&.loose? %>
-      <%= 'Sim' %>
-    <% else %>
-      <%= 'Não' %>
+  <% if @price&.loose? %>
+    <dd><%= 'Sim' %></dd>
+
+    <dt><%= Video.human_attribute_name(:value) %>:</dt>
+    <dd><%= number_to_currency(@price&.value) %> </dd>
+  <% else %>
+    <dd><%= 'Não' %></dd>
+  <% end %>
+
+  <% if admin_signed_in? || streamer_signed_in? %>
+    <dt><%= Video.human_attribute_name(:status) %>:</dt>
+    <dd><%= Video.human_enum_name(:status, video.status) %></dd>
+
+    <% if  video.refused? %>
+      <dt><%= Video.human_attribute_name(:feed_back) %>:</dt>
+      <dd><%= video.feed_back %></dd>
     <% end %>
-  </dd>
-  
-  <dt><%= Video.human_attribute_name(:value) %>:</dt>
-  <dd><%= number_to_currency(@price&.value) %> </dd>
+  <% end %>
 </dl>

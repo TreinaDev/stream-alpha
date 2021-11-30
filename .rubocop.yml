@@ -13,9 +13,7 @@ AllCops:
     - "app/components/**/*"
 
 Metrics/BlockLength:
-  Exclude:
-    - "config/environments/**/*"
-  IgnoredMethods: ["describe", "context", "feature", "scenario", "let", "it"]
+  IgnoredMethods: ["describe", "context", "feature", "scenario", "let", "it", "draw", "configure"]
 
 Style/AsciiComments:
   Enabled: false

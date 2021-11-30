@@ -5,7 +5,7 @@ describe 'Streamer registration and login -' do
     it 'successfully' do
       visit root_path
       click_on 'Inscreva-se'
-      click_on 'Como novo streamer'
+      click_on 'Como novo Streamer'
       fill_in 'Email', with: 'streamer@user.com'
       fill_in 'Senha', with: '123456789'
       fill_in 'Confirme sua senha', with: '123456789'
@@ -23,7 +23,7 @@ describe 'Streamer registration and login -' do
       streamer = create(:streamer)
 
       visit root_path
-      click_on 'Como streamer'
+      click_on 'Como Streamer'
       fill_in 'Email', with: streamer.email
       fill_in 'Senha', with: streamer.password
       within 'form' do

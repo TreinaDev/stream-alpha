@@ -6,8 +6,8 @@ describe 'visitor visit home page' do
 
     click_on 'Entrar'
     expect(current_path).to eq root_path
-    expect(page).to have_link('Como administrador')
-    expect(page).to have_link('Como streamer')
-    expect(page).to have_link('Como assinante')
+    expect(page).to have_link('Como Administrador')
+    expect(page).to have_link('Como Streamer')
+    expect(page).to have_link('Como Assinante')
   end
 end

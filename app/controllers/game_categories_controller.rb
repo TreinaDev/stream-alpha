@@ -1,5 +1,9 @@
 class GameCategoriesController < ApplicationController
-  before_action :authenticate_admin!, only: %i[create new]
+  before_action :authenticate_admin!, only: %i[new create]
+  def new
+    @game_category = GameCategory.new
+  end
+
   def create
     @game_category = current_admin.game_categories.new(game_category_params)
     if @game_category.save
@@ -9,10 +13,6 @@ class GameCategoriesController < ApplicationController
       flash[:alert] = "Erro ao criar #{t(:game_category, scope: 'activerecord.models')}!"
       render :new
     end
-  end
-
-  def new
-    @game_category = GameCategory.new
   end
 
   def index
