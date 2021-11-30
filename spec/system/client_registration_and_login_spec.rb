@@ -4,8 +4,8 @@ describe 'Client registration and login -' do
   context 'registration:' do
     it 'successfully' do
       visit root_path
-      click_on 'Como assinante'
-      click_on 'Cadastre-se'
+      click_on 'Inscreva-se'
+      click_on 'Como novo assinante'
       fill_in 'Email', with: 'client@user.com'
       fill_in 'Senha', with: '123456789'
       fill_in 'Confirme sua senha', with: '123456789'
@@ -29,10 +29,12 @@ describe 'Client registration and login -' do
       within 'form' do
         click_on 'Entrar'
       end
+      click_on client.email
 
       expect(current_path).to eq(new_client_profile_path)
       expect(page).to have_content 'Login efetuado com sucesso!'
-      expect(page).to have_content 'client1@user.com'
+      expect(page).to have_content client.email
+      expect(page).to have_button 'Sair'
     end
   end
 end

@@ -54,6 +54,7 @@ describe 'game categories' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
+      click_on 'Ver Categoria de Jogos'
 
       expect(page).to have_content(game_category1.name)
       expect(page).to have_content(I18n.l(game_category1.created_at.to_date))
@@ -71,6 +72,7 @@ describe 'game categories' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
+      click_on 'Ver Categoria de Jogos'
 
       expect(page).to have_content('Nenhuma categoria de jogo registrada.')
     end

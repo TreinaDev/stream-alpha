@@ -9,7 +9,7 @@ describe 'Admin login -' do
       click_on 'Como administrador'
       fill_in 'Email', with: admin.email
       fill_in 'Senha', with: admin.password
-      within 'form'do
+      within 'form' do
         click_on 'Entrar'
       end
 

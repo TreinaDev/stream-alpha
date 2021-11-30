@@ -301,8 +301,8 @@ DEPENDENCIES
   capybara (>= 2.15)
   devise
   factory_bot_rails
-  importmap-rails (~> 0.8.2)
   faraday
+  importmap-rails (~> 0.8.2)
   jbuilder (~> 2.7)
   listen (~> 3.3)
   particles-js-rails (~> 2.0)
@@ -327,4 +327,4 @@ RUBY VERSION
    ruby 3.0.2p107
 
 BUNDLED WITH
-   2.2.22
+   2.2.27

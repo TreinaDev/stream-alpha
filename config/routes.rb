@@ -8,13 +8,13 @@ Rails.application.routes.draw do
   resources :admins, only: %i[new create] do
     collection do
       get 'admin_area'
-      get 'admin_conteudos'
+      get 'admin_contents'
     end
   end
 
   resources :client_profiles, only: %i[create new show edit update]
-  resources :game_categories, only: %i[create new]
-  resources :games, only: %i[create new]
+  resources :game_categories, only: %i[create new index]
+  resources :games, only: %i[create new index]
   resources :plans, only: %i[create new show index]
 
   resources :streamer_profiles, only: %i[show new create edit update index] do

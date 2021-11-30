@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   def create
     @game = game_creation
     if @game.save
-      redirect_to admin_area_admins_path, notice: 'Jogo cadastrado com sucesso!'
+      redirect_to games_path, notice: 'Jogo cadastrado com sucesso!'
     else
       @categories = GameCategory.all.order(name: :asc)
       render :new
@@ -13,6 +13,10 @@ class GamesController < ApplicationController
   def new
     @game = Game.new
     @categories = GameCategory.all.order(name: :asc)
+  end
+
+  def index
+    @games = Game.all.order(name: :asc)
   end
 
   private

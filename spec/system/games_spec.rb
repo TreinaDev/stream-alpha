@@ -60,6 +60,7 @@ describe 'games' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
+      click_on 'Ver Jogos'
 
       expect(page).to have_content('TLOZ - Breath of the Wild')
       expect(page).to have_content('Final Fantasy XII - The Zodiac Age')
@@ -70,6 +71,7 @@ describe 'games' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
+      click_on 'Ver Jogos'
 
       expect(page).to have_content('Nenhum jogo registrado.')
     end

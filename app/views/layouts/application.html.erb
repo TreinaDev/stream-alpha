@@ -18,13 +18,6 @@
     <%= render '/shared/nav_bar'%>
     <%= render '/shared/flash_notification' %>
     <div class="py-2">
-      <% if notice %>
-        <p class="alert alert-primary" role="alert"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class="alert alert-warning" role="alert"><%= alert %></p>
-      <% end %>
-
       <%= yield %>
     </div>
   </body>
