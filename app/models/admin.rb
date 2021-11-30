@@ -3,6 +3,7 @@ class Admin < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  validate :email_valid
 
   has_many :game_categories, dependent: :nullify
   has_many :playlists, dependent: :nullify
