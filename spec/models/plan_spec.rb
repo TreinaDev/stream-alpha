@@ -39,6 +39,22 @@ RSpec.describe Plan, type: :model do
 
         expect(plan.plan_token).to eq(nil)
       end
+
+      it 'and there is a validation error, status == 422' do
+        create(:streamer_profile)
+        create(:admin)
+        plan = create(:plan)
+        api_response = File.read(Rails.root.join('spec/support/apis/plan_registration_422.json'))
+        fake_response = double('faraday_response', status: 522, body: api_response)
+        allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/product',
+                                              { product: { name: plan.name, type_of: 'subscription' } },
+                                              { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                        .and_return(fake_response)
+
+        plan.register_plan_api(plan)
+
+        expect(plan.plan_token).to eq(nil)
+      end
     end
   end
 end

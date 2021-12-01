@@ -15,7 +15,7 @@ class Plan < ApplicationRecord
     when 201
       plan.plan_token = JSON.parse(response.body, simbolize_names: true)['token']
       plan.qualified!
-    when 500
+    when 500, 422
       plan.plan_token = nil
     end
   end

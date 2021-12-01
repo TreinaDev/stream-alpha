@@ -137,5 +137,28 @@ describe 'Some' do
       expect(page).to have_content('Status do plano: Pendente')
       expect(page).to have_content('Servidor pagapaga indisponivel, cadastro ficou na fila.')
     end
+    it 'receive error 500 status from API' do
+      gamer = create(:streamer_profile)
+      admin = create(:admin)
+      fake_response = double('faraday_response', status: 500, body: nil)
+      allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('bsdjbfjbf41546154523')
+      api_response = File.read(Rails.root.join('spec/support/apis/plan_registration_422.json'))
+      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/product',
+                                            { product: { name: 'Plano 4', type_of: 'subscription' } },
+                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                      .and_return(fake_response)
+
+      login_as admin, scope: :admin
+      visit root_path
+      click_on 'Área do administrador'
+      click_on 'Cadastrar Plano'
+      fill_in 'Nome do Plano', with: 'Plano 4'
+      fill_in 'Descrição', with: 'Desbloqueia todos videos de um Streamer'
+      fill_in 'Valor', with: '100'
+      select gamer.streamer.email, from: 'Selecione os Streamers incluídos no plano'
+      click_on 'Criar Plano de Assinatura'
+
+      expect(page).to have_content('Erro de validação em API pagapaga, plano nãodoi salvo.')
+    end
   end
 end
