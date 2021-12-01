@@ -2,10 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   static targets = ["button1", "button2", "drop1", "drop2"];
-  connect() {
-    if (this.hasListTarget) {
-    }
-  }
+  connect() {}
   toggle() {
     console.log(this.drop1Target.classList);
     if (this.drop1Target.classList.contains("hidden")) {

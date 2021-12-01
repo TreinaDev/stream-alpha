@@ -9,7 +9,7 @@ class AdminsController < ApplicationController
   end
 
   def admin_contents
-    @videos = Video.all.order(created_at: :asc).limit(10)
+    @videos = Video.all.order(created_at: :asc).limit(4)
     @game_categories = GameCategory.all.order(name: :asc)
     @videos_count = Video.approved.count
     @videos_pending_count = Video.pending.count
