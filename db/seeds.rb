@@ -16,6 +16,8 @@ client3 = FactoryBot.create(:client)
 client_profile1 = FactoryBot.create(:client_profile, :with_photo, client: client1)
 client_profile2 = FactoryBot.create(:client_profile, client: client2)
 
+customer_payment_method1 = FactoryBot.create(:customer_payment_method, client_profile: client_profile1)
+
 streamer1 = FactoryBot.create(:streamer)
 streamer2 = FactoryBot.create(:streamer)
 streamer3 = FactoryBot.create(:streamer)

@@ -8,16 +8,16 @@ Rails.application.routes.draw do
   resources :admins, only: %i[new create] do
     get 'admin_area', on: :collection
   end
-  resources :streamers, only: %i[new create]
-
-  resources :clients, only: %i[] do
-    get 'my_payment_methods', on: :member
+  
+  resources :client_profiles, only: %i[new create show edit update] do
+    resources :customer_payment_methods, only: %i[new create show]
   end
-  resources :client_profiles, only: %i[new create show edit update]
+
   resources :game_categories, only: %i[new create]
   resources :games, only: %i[new create]
   resources :playlists, only: %i[new create show index]
   resources :plans, only: %i[new create show index]
+  resources :streamers, only: %i[new create]
 
   resources :streamer_profiles, only: %i[new create show index edit update] do
     member do
