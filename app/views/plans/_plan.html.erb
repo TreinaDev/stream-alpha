@@ -5,10 +5,13 @@
   <dt><%= t(:value, scope: "activerecord.attributes.plan") %>:</dt>
   <dd><%= number_to_currency plan.value %></dd>
 
+  <dd>
   <dt><%= t(:content_streamer, scope: "activerecord.attributes.plan") %>:</dt>
-  <dd></dd>
 
   <dt><%= t(:streamer_ids, scope: "activerecord.attributes.plan") %>:</dt>
+  </dd>
+
+
   <% plan.streamers.each do |streamer| %>
     <% if streamer.streamer_profile.present? %>
       <dd><%= link_to streamer.streamer_profile.name, streamer_profile_path(streamer.streamer_profile) %></dd>
@@ -18,4 +21,13 @@
   <% end %>
   <dt><%= t(:plan_status, scope: "activerecord.attributes.plan") %>:</dt>
   <dd><%= Plan.human_enum_name(:plan_status, plan.plan_status) %></dd>
+  <dd>
+    <dt><%= t(:content_playlist, scope: "activerecord.attributes.plan") %>:</dt>
+
+  <dt><%= t(:playlist_ids, scope: "activerecord.attributes.plan") %>:</dt>
+  </dd>
+
+  <% plan.playlists.each do |playlist| %>
+    <%= playlist.name %>
+  <% end %>
 </dl>

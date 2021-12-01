@@ -10,6 +10,7 @@ pt-BR:
         value: "Valor"
         content_streamer: "Conteúdo"
         streamer_ids: "Streamers"
+        playlist_ids: "Playlists"
         created_at: "Criado em"
         plan_status: "Status do plano"
         plan_statuses:

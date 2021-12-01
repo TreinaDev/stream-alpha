@@ -8,11 +8,13 @@ class PlansController < ApplicationController
   def new
     @video_plan = Plan.new
     @streamers = Streamer.completed
+    @playlists = Playlist.all
   end
 
   def create
-    @video_plan = Plan.new(plans_params)
+    @video_plan = Plan.create(plans_params)
     @streamers = Streamer.completed
+    @playlists = Playlist.all
     @video_plan.register_plan_api(@video_plan) if @video_plan.valid?
     render :new, notice: t('.error_validation') if @video_plan.register_plan_api(@video_plan).status == 422
     if @video_plan.save
@@ -30,6 +32,6 @@ class PlansController < ApplicationController
   private
 
   def plans_params
-    params.require(:plan).permit(:name, :description, :value, streamer_ids: [])
+    params.require(:plan).permit(:name, :description, :value, streamer_ids: [], playlist_ids: [])
   end
 end
