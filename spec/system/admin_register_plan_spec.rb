@@ -31,24 +31,6 @@ describe 'Some' do
       expect(page).to have_content('Valor não é um número')
     end
 
-    it 'successfully' do
-      admin = create(:admin)
-      gamer = create(:streamer, profile_status: 10)
-      create(:streamer_profile, streamer: gamer)
-
-      login_as admin, scope: :admin
-      visit root_path
-      click_on 'Área do administrador'
-      click_on 'Cadastrar Plano'
-      fill_in 'Nome do Plano', with: 'Plano Gamer'
-      fill_in 'Descrição', with: 'Desbloqueia todos videos de um Streamer'
-      fill_in 'Valor', with: '100'
-      select gamer.email, from: 'Selecione os Streamers incluídos no plano'
-      click_on 'Criar Plano de Assinatura'
-
-      expect(page).to have_content('Plano cadastrado com sucesso!')
-    end
-
     it 'with streamer and playlist successfully' do
       admin = create(:admin)
       gamer = create(:streamer, profile_status: 10)
@@ -56,6 +38,13 @@ describe 'Some' do
       playlist = create(:playlist)
       playlist1 = create(:playlist)
       playlist2 = create(:playlist)
+      api_response = File.read(Rails.root.join('spec/support/apis/plan_registration_201.json'))
+      fake_response = double('faraday_response', status: 201, body: api_response)
+      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/product',
+                                            { product: { name: 'Plano Gamer', type_of: 'subscription',
+                                                         status: 'enabled' } },
+                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                      .and_return(fake_response)
 
       login_as admin, scope: :admin
       visit root_path
@@ -126,7 +115,8 @@ describe 'Some' do
       api_response = File.read(Rails.root.join('spec/support/apis/plan_registration_201.json'))
       fake_response = double('faraday_response', status: 201, body: api_response)
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/product',
-                                            { product: { name: 'Plano 4', type_of: 'subscription', status: 'enabled' } },
+                                            { product: { name: 'Plano 4', type_of: 'subscription',
+                                                         status: 'enabled' } },
                                             { company_token: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
@@ -153,9 +143,9 @@ describe 'Some' do
       gamer = create(:streamer_profile)
       admin = create(:admin)
       fake_response = double('faraday_response', status: 500, body: nil)
-      allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('bsdjbfjbf41546154523')
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/product',
-                                            { product: { name: 'Plano 4', type_of: 'subscription', status: 'enabled'  } },
+                                            { product: { name: 'Plano 4', type_of: 'subscription',
+                                                         status: 'enabled' } },
                                             { company_token: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
@@ -178,14 +168,14 @@ describe 'Some' do
       expect(page).to have_content('Status do plano: Pendente')
       expect(page).to have_content('Servidor pagapaga indisponivel, cadastro ficou na fila.')
     end
-    it 'receive error 500 status from API' do
+    it 'receive error 422 status from API' do
       gamer = create(:streamer_profile)
       admin = create(:admin)
-      fake_response = double('faraday_response', status: 500, body: nil)
-      allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('bsdjbfjbf41546154523')
       api_response = File.read(Rails.root.join('spec/support/apis/plan_registration_422.json'))
+      fake_response = double('faraday_response', status: 422, body: api_response)
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/product',
-                                            { product: { name: 'Plano 4', type_of: 'subscription'} },
+                                            { product: { name: 'Plano 4', type_of: 'subscription',
+                                                         status: 'enabled' } },
                                             { company_token: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
@@ -199,7 +189,11 @@ describe 'Some' do
       select gamer.streamer.email, from: 'Selecione os Streamers incluídos no plano'
       click_on 'Criar Plano de Assinatura'
 
-      expect(page).to have_content('Erro de validação em API pagapaga, plano não foi salvo.')
+      Plan.last.reload
+      expect(current_path).to eq(plan_path(Plan.last))
+      expect(page).to have_content('Status do plano: Pendente')
+      expect(page).to have_content('Servidor pagapaga indisponivel, cadastro ficou na fila.')
+      expect(api_response['message']).presence
     end
   end
 end
