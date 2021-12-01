@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_01_101850) do
+ActiveRecord::Schema.define(version: 2021_12_01_194327) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -90,6 +90,16 @@ ActiveRecord::Schema.define(version: 2021_12_01_101850) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["plan_id"], name: "index_content_streamers_on_plan_id"
     t.index ["streamer_id"], name: "index_content_streamers_on_streamer_id"
+  end
+
+  create_table "credit_card_settings", force: :cascade do |t|
+    t.string "nickname"
+    t.string "encrypted_digits"
+    t.string "token"
+    t.integer "customer_payment_method_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_payment_method_id"], name: "index_credit_card_settings_on_customer_payment_method_id"
   end
 
   create_table "customer_payment_methods", force: :cascade do |t|
@@ -221,6 +231,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_101850) do
   add_foreign_key "client_profiles", "clients"
   add_foreign_key "content_streamers", "plans"
   add_foreign_key "content_streamers", "streamers"
+  add_foreign_key "credit_card_settings", "customer_payment_methods"
   add_foreign_key "customer_payment_methods", "client_profiles"
   add_foreign_key "game_categories", "admins"
   add_foreign_key "games", "admins"

@@ -2,6 +2,7 @@ class ClientProfile < ApplicationRecord
   belongs_to :client
   has_one_attached :photo
   has_one :customer_payment_method, dependent: :destroy
+  has_many :credit_card_settings, through: :customer_payment_method
   validates :full_name, :social_name, :birth_date, :cpf, :cep, :city,
             :state, :residential_number, :residential_address, :age_rating,
             presence: true
@@ -33,8 +34,14 @@ class ClientProfile < ApplicationRecord
     when 500, 422, 421
       nil
     when 201
-      current_client.client_profile.customer_payment_method.pix_token = JSON.parse(response.body, simbolize_names: true)['customer_payment_method']['token'] if payment_method == "pix"
-      current_client.client_profile.customer_payment_method.boleto_token = JSON.parse(response.body, simbolize_names: true)['customer_payment_method']['token'] if payment_method == "boleto"
+      if payment_method == 'pix'
+        current_client.client_profile.customer_payment_method.pix_token = JSON.parse(response.body,
+                                                                                     simbolize_names: true)['customer_payment_method']['token']
+      end
+      if payment_method == 'boleto'
+        current_client.client_profile.customer_payment_method.boleto_token = JSON.parse(response.body,
+                                                                                        simbolize_names: true)['customer_payment_method']['token']
+      end
     end
   end
 

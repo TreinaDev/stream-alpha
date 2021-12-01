@@ -65,8 +65,9 @@ class VideosController < ApplicationController
 
   def payment
     @video = Video.find(params[:id])
+    @price = @video.price
     @streamer_profile = @video.streamer_profile
-    @payment_methods = PaymentMethod.all
+    @payment_methods = current_client.client_profile.customer_payment_method
   end
 
   private

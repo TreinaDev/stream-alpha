@@ -17,6 +17,7 @@ client_profile1 = FactoryBot.create(:client_profile, :with_photo, client: client
 client_profile2 = FactoryBot.create(:client_profile, client: client2)
 
 customer_payment_method1 = FactoryBot.create(:customer_payment_method, client_profile: client_profile1)
+credit_card1 = FactoryBot.create(:credit_card_setting, customer_payment_method: customer_payment_method1)
 
 streamer1 = FactoryBot.create(:streamer)
 streamer2 = FactoryBot.create(:streamer)

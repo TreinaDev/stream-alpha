@@ -3,7 +3,7 @@
 <%= render @video %>
 <div>
 <p> Clique no meio de pagamento que você quer utilizar nessa compra </p>
-  <% if @payment_methods.nil? %>
+  <% if @payment_methods.blank? %>
     Não foi possível consultar os meios de pagamento no momento
   <% else %>
     <% @payment_methods.each do |pm| %>

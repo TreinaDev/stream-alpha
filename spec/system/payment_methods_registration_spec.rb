@@ -25,8 +25,9 @@ describe 'Payment methods registration' do
       client = create(:client)
       client_profile = create(:client_profile, client: client, client_token_status: 'accepted',
                                                token: 'ijlKA9Kxc7Q9vrXOtgTK')
-      cpm = create(:customer_payment_method, client_profile: client_profile, boleto_token: "KDE3V0O07j17WGSoFGRC", pix_token: "VI3wjoM7il0VIOtkl4aj")
-      
+      cpm = create(:customer_payment_method, client_profile: client_profile, boleto_token: 'KDE3V0O07j17WGSoFGRC',
+                                             pix_token: 'VI3wjoM7il0VIOtkl4aj')
+
       login_as client, scope: :client
       visit root_path
       click_on 'Meu Perfil'
@@ -37,6 +38,26 @@ describe 'Payment methods registration' do
       expect(page).to have_content('Pagamento via Boleto')
       expect(page).to have_content('Você ainda não tem nenhum cartão de crédito cadastrado.')
       expect(page).to have_link('Clique aqui para cadastrar um novo cartão')
+    end
+    it 'client views a page for registering a new credit card' do
+      client = create(:client)
+      client_profile = create(:client_profile, client: client, client_token_status: 'accepted',
+                                               token: 'ijlKA9Kxc7Q9vrXOtgTK')
+      cpm = create(:customer_payment_method, client_profile: client_profile, boleto_token: 'KDE3V0O07j17WGSoFGRC',
+                                             pix_token: 'VI3wjoM7il0VIOtkl4aj')
+      
+      login_as client, scope: :client
+      visit root_path
+      click_on 'Meu Perfil'
+      click_on 'Ver meus métodos de pagamento'
+      click_on 'Clique aqui para cadastrar um novo cartão'
+
+      expect(page).to have_content('Cadastro de cartão de crédito')
+      expect(page).to have_content('Apelido do cartão')
+      expect(page).to have_content('Nome do titular do cartão')
+      expect(page).to have_content('Número do cartão')
+      expect(page).to have_content('Data de validade')
+      expect(page).to have_content('Código de segurança')
     end
   end
 end
