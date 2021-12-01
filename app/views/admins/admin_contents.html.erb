@@ -140,7 +140,7 @@
       </div>
 
       <div class="shadow-md overflow-y-auto h-72 rounded-b-xl">
-        <%= @game_categories.each do |game_category| %>
+        <% @game_categories.each do |game_category| %>
           <div class="tab w-auto overflow-hidden border-t bg-green-500 hover:bg-green-700">
             <h3 class="block p-5 leading-normal text-white"><%= game_category.name %></h3>
           </div>
