@@ -12,19 +12,33 @@ RSpec.describe Plan, type: :model do
   context 'API' do
     context 'Registration on PagaPaga' do
       it 'successfully, status == 201' do
-        gamer = create(:streamer_profile)
-        admin = create(:admin)
+        create(:streamer_profile)
+        create(:admin)
         plan = create(:plan)
         api_response = File.read(Rails.root.join('spec/support/apis/plan_registration_201.json'))
         fake_response = double('faraday_response', status: 201, body: api_response)
-        allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/subscriptions',
-                                              { subscription: { name: plan.name } },
-                                              { company_token: 'rVAfNGdvfh6va61nDv11' })
+        allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/product',
+                                              { product: { name: plan.name, type_of: 'subscription' } },
+                                              { company_token: Rails.configuration.payment_api['company_auth_token'] })
                                         .and_return(fake_response)
         plan.register_plan_api(plan)
 
-        expect(plan.plan_token).to eq('ag54g6sd54gas87d52jk')                                
+        expect(plan.plan_token).to eq('ag54g6sd54gas87d52jk')
+      end
+
+      it 'and PagaPaga server unable, status == 500' do
+        create(:streamer_profile)
+        create(:admin)
+        plan = create(:plan)
+        fake_response = double('faraday_response', status: 500, body: nil)
+        allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/product',
+                                              { product: { name: plan.name, type_of: 'subscription' } },
+                                              { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                        .and_return(fake_response)
+        plan.register_plan_api(plan)
+
+        expect(plan.plan_token).to eq(nil)
       end
     end
-  end                    
+  end
 end

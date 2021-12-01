@@ -8,16 +8,15 @@ class Plan < ApplicationRecord
   enum plan_status: { down: 0, qualified: 1, not_qualified: 2 }
 
   def register_plan_api(plan)
-    response = Faraday.post('http://localhost:4000/api/v1/subscriptions',
-                            { subscription: { name: plan.name } },
-                            { company_token: Rails.configuration.company_token['token'] }
-                            )
+    response = Faraday.post('http://localhost:4000/api/v1/product',
+                            { product: { name: plan.name, type_of: 'subscription' } },
+                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
     case response.status
     when 201
-      data = JSON.parse(response.body, simbolize_names: true)
-      plan.plan_token = data['token']
+      plan.plan_token = JSON.parse(response.body, simbolize_names: true)['token']
       plan.qualified!
     when 500
+      plan.plan_token = nil
     end
   end
 end

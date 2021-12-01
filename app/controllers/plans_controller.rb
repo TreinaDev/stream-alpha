@@ -13,9 +13,7 @@ class PlansController < ApplicationController
   def create
     @video_plan = Plan.new(plans_params)
     @streamers = Streamer.completed
-    if @video_plan.valid?
-      @video_plan.register_plan_api(@video_plan)
-    end
+    @video_plan.register_plan_api(@video_plan) if @video_plan.valid?
     if @video_plan.save
       redirect_to @video_plan, notice: t('.plan_pending') if @video_plan.down?
       redirect_to @video_plan, notice: t('.success') if @video_plan.qualified?
@@ -23,7 +21,6 @@ class PlansController < ApplicationController
       render :new
     end
   end
-  
 
   def show
     @video_plan = Plan.find(params[:id])
