@@ -1,17 +1,21 @@
 Rails.application.routes.draw do
   devise_for :admins, skip: [:registrations]
+  devise_for :streamers, skip: [:registrations]
   devise_for :clients
-  devise_for :streamers
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   root to: 'home#index'
   resources :admins, only: %i[new create] do
     get 'admin_area', on: :collection
   end
+  resources :streamers, only: %i[new create]
 
+  resources :clients, only: %i[] do
+    get 'my_payment_methods', on: :member
+  end
   resources :client_profiles, only: %i[new create show edit update]
   resources :game_categories, only: %i[new create]
-  resources :games, only: %i[create new]
+  resources :games, only: %i[new create]
   resources :playlists, only: %i[new create show index]
   resources :plans, only: %i[new create show index]
 

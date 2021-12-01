@@ -19,6 +19,18 @@ class Video < ApplicationRecord
   scope :all_in_analysis, -> { where(status: 'pending') }
   scope :available, -> { where(status: 'approved') }
 
+  def register_video_api(video)
+    response = Faraday.post('http://localhost:4000/api/v1/products',
+                            { product: { name: video.name, type_of: 'single' } },
+                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+    case response.status
+    when 500, 422
+      video.single_video_token = nil
+    when 201
+      video.single_video_token = JSON.parse(response.body, simbolize_names: true)['token']
+    end
+  end
+
   def update_view_counter
     self.visualization += 1
     update({ visualization: self.visualization })
