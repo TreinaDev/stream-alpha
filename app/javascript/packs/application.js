@@ -7,7 +7,6 @@
 import Rails from "@rails/ujs";
 import Turbolinks from "turbolinks";
 import "stylesheets/application";
-import "packs/animate_text";
 
 Rails.start();
 Turbolinks.start();
