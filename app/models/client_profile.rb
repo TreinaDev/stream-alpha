@@ -24,19 +24,17 @@ class ClientProfile < ApplicationRecord
     when 201
       current_client.client_profile.token = JSON.parse(response.body, simbolize_names: true)[0]['customer']['token']
       accepted!
-      update({ token: self.token })
-      current_client.client_profile.customer_payment_method.boleto_token = register_client_boleto_and_pix_payment_method(current_client, 'boleto', Rails.configuration.payment_api['company_boleto_token'])
-      current_client.client_profile.customer_payment_method.pix_token = register_client_boleto_and_pix_payment_method(current_client, 'pix', Rails.configuration.payment_api['company_pix_token'])
     end
   end
 
-  def register_client_boleto_and_pix_payment_method(current_client, string, type_token)
-    response = faraday_boleto_and_pix_creation_call(current_client, string, type_token)
+  def register_client_boleto_and_pix_payment_method(current_client, payment_method, type_token)
+    response = faraday_boleto_and_pix_creation_call(current_client, payment_method, type_token)
     case response.status
     when 500, 422, 421
       nil
     when 201
-      JSON.parse(response.body, simbolize_names: true)[0]['customer_payment_method']['token']
+      current_client.client_profile.customer_payment_method.pix_token = JSON.parse(response.body, simbolize_names: true)['customer_payment_method']['token'] if payment_method == "pix"
+      current_client.client_profile.customer_payment_method.boleto_token = JSON.parse(response.body, simbolize_names: true)['customer_payment_method']['token'] if payment_method == "boleto"
     end
   end
 
@@ -69,12 +67,12 @@ class ClientProfile < ApplicationRecord
                  { company_token: Rails.configuration.payment_api['company_auth_token'] })
   end
 
-  def faraday_boleto_and_pix_creation_call(current_client, string, type_token)
+  def faraday_boleto_and_pix_creation_call(current_client, payment_method, type_token)
     Faraday.post('http://localhost:4000/api/v1/customer_payment_methods',
                  {
                    customer_payment_method: {
                      customer_token: current_client.client_profile.token,
-                     type_of: string,
+                     type_of: payment_method,
                      payment_setting_token: type_token
                    }
                  },

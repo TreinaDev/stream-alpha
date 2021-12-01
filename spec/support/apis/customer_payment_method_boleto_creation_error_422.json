@@ -1,0 +1,19 @@
+{
+  "message": "Requisição inválida",
+  "errors": {
+    "base": [
+      "É obrigatório passar uma payment setting enabled, de acordo com o type_of passado!"
+    ]
+  },
+  "request": {
+    "customer_payment_method": {
+      "type_of": "boleto",
+      "customer": {
+        "token": "AE7u4vn0v2jEjK4Or4w3"
+      },
+      "company": {
+        "legal_name": "Empresa n1"
+      }
+    }
+  }
+}

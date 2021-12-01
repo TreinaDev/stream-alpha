@@ -1,20 +1,20 @@
 production:
   environment: production
   company_auth_token: rVAfNGdvfh6va61nDv11
+  company_boleto_token: "KDE3V0O07j17WGSoFGRC"
   company_credit_card_token: "jRGpRiyoXv96LO538Hjc"
   company_pix_token: "VI3wjoM7il0VIOtkl4aj"
-  company_boleto_token: "KDE3V0O07j17WGSoFGRC"
 
 development:
   environment: development
   company_auth_token: rVAfNGdvfh6va61nDv11
+  company_boleto_token: "KDE3V0O07j17WGSoFGRC"
   company_credit_card_token: "jRGpRiyoXv96LO538Hjc"
   company_pix_token: "VI3wjoM7il0VIOtkl4aj"
-  company_boleto_token: "KDE3V0O07j17WGSoFGRC"
 
 test:
   environment: test
   company_auth_token: rVAfNGdvfh6va61nDv11
+  company_boleto_token: "KDE3V0O07j17WGSoFGRC"
   company_credit_card_token: "jRGpRiyoXv96LO538Hjc"
   company_pix_token: "VI3wjoM7il0VIOtkl4aj"
-  company_boleto_token: "KDE3V0O07j17WGSoFGRC"

@@ -19,13 +19,14 @@ describe 'Payment methods registration' do
       expect(current_path).to eq(root_path)
       expect(page).to have_content('Não foi possível realizar essa ação agora. Por favor, tente novamente mais tarde')
     end
-
+  end
+  context 'Successfully' do
     it 'client views his basic payment methods, as in pix and boleto' do
       client = create(:client)
       client_profile = create(:client_profile, client: client, client_token_status: 'accepted',
-                                               token: SecureRandom.alphanumeric(20))
-      cpm = create(:customer_payment_method, client_profile: client.client_profile)
-
+                                               token: 'ijlKA9Kxc7Q9vrXOtgTK')
+      cpm = create(:customer_payment_method, client_profile: client_profile, boleto_token: "KDE3V0O07j17WGSoFGRC", pix_token: "VI3wjoM7il0VIOtkl4aj")
+      
       login_as client, scope: :client
       visit root_path
       click_on 'Meu Perfil'

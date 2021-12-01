@@ -38,7 +38,7 @@ describe 'Client profile' do
       expect(ClientProfile.count).to eq(1)
       expect(page).to have_css("img[src*='gary-bendig-unsplash.jpg']")
       expect(page).to_not have_content('CPF: 60243105878')
-      expect(ClientProfile.find(1).token).to eq('XpD75xP4lQ')
+      expect(ClientProfile.find(1).token).to eq('ijlKA9Kxc7Q9vrXOtgTK')
     end
     it 'successfully logs_in with a created profile' do
       client = create(:client)
