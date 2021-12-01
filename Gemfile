@@ -9,7 +9,6 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 gem 'faraday'
 gem 'jbuilder', '~> 2.7'
-gem 'particles-js-rails', '~> 2.0'
 gem 'puma', '~> 5.0'
 gem 'sass-rails', '>= 6'
 gem 'securerandom'
