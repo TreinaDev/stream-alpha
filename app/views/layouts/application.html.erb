@@ -12,10 +12,10 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="background">
+  <body class="background text-white">
     <%= render '/shared/nav_bar'%>
     <%= render '/shared/flash_notification' %>
-    <div class="py-2">
+    <div class="py-2 px-2">
       <%= yield %>
     </div>
   </body>
