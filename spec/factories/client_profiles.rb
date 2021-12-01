@@ -17,13 +17,14 @@ FactoryBot.define do
         Rack::Test::UploadedFile.new(Rails.root.join('spec/support/assets/gary-bendig-unsplash.jpg'), 'photo/jpg')
       end
     end
-    after(:build) { |client_profile| client_profile.cpf =  generate_cpf }
+    after(:build) { |client_profile| client_profile.cpf = generate_cpf }
   end
 end
 
 def generate_cpf
   cpf = "#{rand(1..9)}#{rand(1..9)}#{rand(1..9)}#{rand(1..9)}#{rand(1..9)}#{rand(1..9)}#{rand(1..9)}#{rand(1..9)}#{rand(1..9)}#{rand(1..9)}#{rand(1..9)}"
   return cpf if cpf_correct(cpf)
+
   generate_cpf
 end
 
@@ -36,4 +37,3 @@ def cpf_correct(cpf)
   end
   cpf.index((d1 % 11).to_s + (d2 % 11).to_s).eql? 9
 end
-
