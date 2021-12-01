@@ -14,6 +14,7 @@ class PlansController < ApplicationController
     @video_plan = Plan.new(plans_params)
     @streamers = Streamer.completed
     @video_plan.register_plan_api(@video_plan) if @video_plan.valid?
+    render :new, notice: t('.error_validation') if @video_plan.register_plan_api(@video_plan).status == 422
     if @video_plan.save
       redirect_to @video_plan, notice: t('.plan_pending') if @video_plan.down?
       redirect_to @video_plan, notice: t('.success') if @video_plan.qualified?

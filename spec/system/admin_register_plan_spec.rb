@@ -85,7 +85,7 @@ describe 'Some' do
       api_response = File.read(Rails.root.join('spec/support/apis/plan_registration_201.json'))
       fake_response = double('faraday_response', status: 201, body: api_response)
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/product',
-                                            { product: { name: 'Plano 4', type_of: 'subscription' } },
+                                            { product: { name: 'Plano 4', type_of: 'subscription', status: 'enabled' } },
                                             { company_token: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
@@ -114,7 +114,7 @@ describe 'Some' do
       fake_response = double('faraday_response', status: 500, body: nil)
       allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('bsdjbfjbf41546154523')
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/product',
-                                            { product: { name: 'Plano 4', type_of: 'subscription' } },
+                                            { product: { name: 'Plano 4', type_of: 'subscription', status: 'enabled'  } },
                                             { company_token: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
@@ -144,7 +144,7 @@ describe 'Some' do
       allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('bsdjbfjbf41546154523')
       api_response = File.read(Rails.root.join('spec/support/apis/plan_registration_422.json'))
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/product',
-                                            { product: { name: 'Plano 4', type_of: 'subscription' } },
+                                            { product: { name: 'Plano 4', type_of: 'subscription'} },
                                             { company_token: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
@@ -158,7 +158,7 @@ describe 'Some' do
       select gamer.streamer.email, from: 'Selecione os Streamers incluídos no plano'
       click_on 'Criar Plano de Assinatura'
 
-      expect(page).to have_content('Erro de validação em API pagapaga, plano nãodoi salvo.')
+      expect(page).to have_content('Erro de validação em API pagapaga, plano não foi salvo.')
     end
   end
 end
