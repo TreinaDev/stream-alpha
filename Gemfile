@@ -37,8 +37,6 @@ group :test do
   gem 'simplecov', require: false
 end
 
-gem 'view_component', '~> 2.44'
-
 gem 'importmap-rails', '~> 0.8.2'
 
 gem 'stimulus-rails', '~> 0.7.2'
