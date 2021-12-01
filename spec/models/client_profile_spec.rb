@@ -46,11 +46,33 @@ RSpec.describe ClientProfile, type: :model do
     it 'successfully: response == 201' do
       client_profile = create(:client_profile)
       api_response = File.read(Rails.root.join('spec/support/apis/client_registration_201.json'))
+      api_response2 = File.read(Rails.root.join('spec/support/apis/customer_payment_method_boleto_creation_201.json'))
+      api_response3 = File.read(Rails.root.join('spec/support/apis/customer_payment_method_pix_creation_201.json'))
       fake_response = double('faraday_response', status: 201, body: api_response)
+      fake_response2 = double('faraday_response', status: 201, body: api_response2)
+      fake_response3 = double('faraday_response', status: 201, body: api_response3)
+
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customers',
                                             { name: client_profile.full_name, cpf: client_profile.cpf },
                                             { company_token: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
+      client_profile.reload
+      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customer_payment_methods',
+                                            {
+                                            customer_payment_method: {
+                                            customer_token: client_profile.token,
+                                            type_of: 'boleto',
+                                            payment_setting_token: Rails.configuration.payment_api['company_boleto_token']}},
+                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                      .and_return(fake_response2)
+      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customer_payment_methods',
+                                            {
+                                            customer_payment_method: {
+                                            customer_token: client_profile.token,
+                                            type_of: 'pix',
+                                            payment_setting_token: Rails.configuration.payment_api['company_pix_token']}},
+                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                      .and_return(fake_response3)
 
       client_profile.register_client_api(client_profile.client)
 

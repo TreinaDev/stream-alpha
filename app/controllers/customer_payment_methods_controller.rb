@@ -10,6 +10,7 @@ class CustomerPaymentMethodsController < ApplicationController
   private
 
   def check_pix_and_boleto_tokens
+    return if current_client.client_profile.client_token_status == "pending"
     if current_client.client_profile.customer_payment_method.pix_token.nil?
       current_client.client_profile.register_client_pix_payment_method(current_client)
     end

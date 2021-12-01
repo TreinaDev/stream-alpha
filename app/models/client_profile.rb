@@ -23,24 +23,15 @@ class ClientProfile < ApplicationRecord
       pending!
     when 201
       current_client.client_profile.token = JSON.parse(response.body, simbolize_names: true)[0]['customer']['token']
-      current_client.client_profile.customer_payment_method.boleto_token = register_client_boleto_payment_method(current_client)
-      current_client.client_profile.customer_payment_method.pix_token = register_client_pix_payment_method(current_client)
       accepted!
+      update({ token: self.token })
+      current_client.client_profile.customer_payment_method.boleto_token = register_client_boleto_and_pix_payment_method(current_client, 'boleto', Rails.configuration.payment_api['company_boleto_token'])
+      current_client.client_profile.customer_payment_method.pix_token = register_client_boleto_and_pix_payment_method(current_client, 'pix', Rails.configuration.payment_api['company_pix_token'])
     end
   end
 
-  def register_client_boleto_payment_method(current_client)
-    response = faraday_boleto_creation_call(current_client)
-    case response.status
-    when 500, 422, 421
-      nil
-    when 201
-      JSON.parse(response.body, simbolize_names: true)[0]['customer_payment_method']['token']
-    end
-  end
-
-  def register_client_pix_payment_method(current_client)
-    response = faraday_pix_creation_call(current_client)
+  def register_client_boleto_and_pix_payment_method(current_client, string, type_token)
+    response = faraday_boleto_and_pix_creation_call(current_client, string, type_token)
     case response.status
     when 500, 422, 421
       nil
@@ -78,25 +69,13 @@ class ClientProfile < ApplicationRecord
                  { company_token: Rails.configuration.payment_api['company_auth_token'] })
   end
 
-  def faraday_boleto_creation_call(current_client)
+  def faraday_boleto_and_pix_creation_call(current_client, string, type_token)
     Faraday.post('http://localhost:4000/api/v1/customer_payment_methods',
                  {
                    customer_payment_method: {
                      customer_token: current_client.client_profile.token,
-                     type_of: 'boleto',
-                     payment_setting_token: Rails.configuration.payment_api['company_boleto_token']
-                   }
-                 },
-                 { company_token: Rails.configuration.payment_api['company_auth_token'] })
-  end
-
-  def faraday_pix_creation_call(current_client)
-    Faraday.post('http://localhost:4000/api/v1/customer_payment_methods',
-                 {
-                   customer_payment_method: {
-                     customer_token: current_client.client_profile.token,
-                     type_of: 'pix',
-                     payment_setting_token: Rails.configuration.payment_api['company_pix_token']
+                     type_of: string,
+                     payment_setting_token: type_token
                    }
                  },
                  { company_token: Rails.configuration.payment_api['company_auth_token'] })
