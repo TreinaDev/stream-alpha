@@ -27,7 +27,7 @@ class Video < ApplicationRecord
     when 500, 422
       video.single_video_token = nil
     when 201
-      video.single_video_token = JSON.parse(response.body, simbolize_names: true)['token']
+      video.single_video_token = JSON.parse(response.body, simbolize_names: true)['product']['token']
     end
   end
 

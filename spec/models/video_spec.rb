@@ -42,7 +42,7 @@ RSpec.describe Video, type: :model do
 
         video.register_video_api(video)
 
-        expect(video.single_video_token).to eq('3fGXrXJ4tAyysV9KW7G2')
+        expect(video.single_video_token).to eq('ncsSFYxlrW0fcHJKN5jj')
       end
 
       it 'unsuccessfully, status == 422' do

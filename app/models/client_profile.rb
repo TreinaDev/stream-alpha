@@ -27,6 +27,8 @@ class ClientProfile < ApplicationRecord
     end
   end
 
+  def register_client_basic_payment_methods(current_client); end
+
   private
 
   def correct_cep_length
