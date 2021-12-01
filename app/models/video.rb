@@ -16,9 +16,6 @@ class Video < ApplicationRecord
 
   enum status: { pending: 0, approved: 1, refused: 2 }
 
-  scope :all_in_analysis, -> { where(status: 'pending') }
-  scope :available, -> { where(status: 'approved') }
-
   def register_video_api(video)
     response = Faraday.post('http://localhost:4000/api/v1/products',
                             { product: { name: video.name, type_of: 'single' } },
@@ -32,7 +29,9 @@ class Video < ApplicationRecord
   end
 
   def update_view_counter
+    return unless approved?
+
     self.visualization += 1
-    update({ visualization: self.visualization })
+    update({ visualization: visualization })
   end
 end

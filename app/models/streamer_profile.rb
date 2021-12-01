@@ -9,8 +9,6 @@ class StreamerProfile < ApplicationRecord
 
   enum status: { active: 0, inactive: 1 }
 
-  scope :all_actives, -> { where(status: 'active') }
-
   def owner?(current_streamer = nil)
     return current_streamer == streamer if current_streamer
   end

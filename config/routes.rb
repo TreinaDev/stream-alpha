@@ -6,7 +6,10 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
   resources :admins, only: %i[new create] do
-    get 'admin_area', on: :collection
+    collection do
+      get 'admin_area'
+      get 'admin_contents'
+    end
   end
   resources :streamers, only: %i[new create]
 
@@ -14,8 +17,8 @@ Rails.application.routes.draw do
     get 'my_payment_methods', on: :member
   end
   resources :client_profiles, only: %i[new create show edit update]
-  resources :game_categories, only: %i[new create]
-  resources :games, only: %i[new create]
+  resources :game_categories, only: %i[new create index]
+  resources :games, only: %i[new create index]
   resources :playlists, only: %i[new create show index]
   resources :plans, only: %i[new create show index]
 

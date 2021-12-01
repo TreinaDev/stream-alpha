@@ -35,3 +35,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
 end
+
+gem 'importmap-rails', '~> 0.8.2'
+
+gem 'stimulus-rails', '~> 0.7.2'
