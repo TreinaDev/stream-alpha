@@ -30,7 +30,13 @@ RSpec.describe ClientProfile, type: :model do
         'CPF deve ter 11 dígitos'
       )
     end
+    it 'cpf must be sequence corrrect' do
+      client = build(:client_profile)
+      client.cpf = '12345678911'
+      client.valid?
 
+      expect(client.errors.full_messages_for(:cpf)).to include ('CPF com sequência de dígitos invalida')
+    end
     it 'image cannot be grater than 2 Mb' do
       photo_profile = ClientProfile.new(photo: Rack::Test::UploadedFile
         .new(Rails.root.join('spec/support/assets/4mb_photo.jpg')))
