@@ -8,6 +8,7 @@ class CreditCardSetting < ApplicationRecord
       nil
     when 201
       self.token = JSON.parse(response.body, simbolize_names: true)['customer_payment_method']['token']
+      encrypt_credit_card_digits(api_params[:credit_card_number])
     end
   end
 

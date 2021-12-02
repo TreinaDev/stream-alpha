@@ -9,14 +9,11 @@ class CreditCardSettingsController < ApplicationController
   def create
     credit_card_creation
     @credit_card.credit_card_api_registration(current_client, api_params(params[:credit_card_setting]))
-    if @credit_card.token
-      @credit_card.encrypt_credit_card_digits(params[:credit_card_setting][:credit_card_number])
-      @credit_card.save
-      redirect_to client_profile_customer_payment_method_path(current_client.client_profile,
-                                                              @credit_card.customer_payment_method)
-    else
-      redirect_to current_client.client_profile, notice: 'Erro ao criar cartão'
-    end
+    redirect_to current_client.client_profile, notice: 'Erro ao criar cartão' and return unless @credit_card.token
+
+    @credit_card.save
+    redirect_to client_profile_customer_payment_method_path(current_client.client_profile,
+                                                            @credit_card.customer_payment_method)
   end
 
   private
