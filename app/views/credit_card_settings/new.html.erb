@@ -17,7 +17,7 @@
 
   <div>
     <%= f.label :credit_card_number %>
-    <%= f.text_field :credit_card_number, required: true, placeholder: t('.credit_card_number') %>
+    <%= f.number_field :credit_card_number, required: true, min: 0, max: 9999999999999999, placeholder: t('.credit_card_number') %>
   </div>
 
   <div>
