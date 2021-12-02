@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_27_213111) do
+ActiveRecord::Schema.define(version: 2021_11_30_155431) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -134,6 +134,8 @@ ActiveRecord::Schema.define(version: 2021_11_27_213111) do
     t.decimal "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "plan_token"
+    t.integer "plan_status", default: 0
   end
 
   create_table "playlist_streamers", force: :cascade do |t|
