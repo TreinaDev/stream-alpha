@@ -53,7 +53,7 @@ describe 'admin approves registration of video' do
     fake_response = double('faraday_response', status: 201, body: api_response)
     allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
                                           { product: { name: video.name, type_of: 'single' } },
-                                          { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                          { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                     .and_return(fake_response)
 
     login_as admin, scope: :admin
@@ -77,7 +77,7 @@ describe 'admin approves registration of video' do
     fake_response = double('faraday_response', status: 500, body: nil)
     allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
                                           { product: { name: video.name, type_of: 'single' } },
-                                          { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                          { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                     .and_return(fake_response)
 
     login_as admin, scope: :admin

@@ -34,14 +34,7 @@ class ClientProfile < ApplicationRecord
     when 500, 422, 421
       nil
     when 201
-      if payment_method == 'pix'
-        customer_payment_method.pix_token = JSON.parse(response.body,
-                                                       simbolize_names: true)['customer_payment_method']['token']
-      end
-      if payment_method == 'boleto'
-        customer_payment_method.boleto_token = JSON.parse(response.body,
-                                                          simbolize_names: true)['customer_payment_method']['token']
-      end
+      get_token(response, payment_method)
     end
   end
 
@@ -49,6 +42,17 @@ class ClientProfile < ApplicationRecord
 
   def correct_cep_length
     errors.add(:cep, I18n.t('digits', scope: 'activerecord.errors.messages', size: '8')) if cep && cep.chars.length != 8
+  end
+
+  def get_token(response, payment_method)
+    case payment_method
+    when 'pix'
+      customer_payment_method.pix_token = JSON.parse(response.body,
+                                                     simbolize_names: true)['customer_payment_method']['token']
+    when 'boleto'
+      customer_payment_method.boleto_token = JSON.parse(response.body,
+                                                        simbolize_names: true)['customer_payment_method']['token']
+    end
   end
 
   def correct_cpf_length
@@ -71,7 +75,7 @@ class ClientProfile < ApplicationRecord
   def faraday_client_creation_call
     Faraday.post('http://localhost:4000/api/v1/customers',
                  { name: full_name, cpf: cpf },
-                 { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                 { companyToken: Rails.configuration.payment_api['company_auth_token'] })
   end
 
   def faraday_boleto_and_pix_creation_call(payment_method, type_token)
@@ -83,6 +87,6 @@ class ClientProfile < ApplicationRecord
                      payment_setting_token: type_token
                    }
                  },
-                 { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                 { companyToken: Rails.configuration.payment_api['company_auth_token'] })
   end
 end

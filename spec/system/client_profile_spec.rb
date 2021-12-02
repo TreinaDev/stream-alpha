@@ -8,7 +8,7 @@ describe 'Client profile' do
       fake_response = double('faraday_response', status: 201, body: api_response)
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customers',
                                             { name: 'Otávio Augusto da Silva Lins', cpf: '60243105878' },
-                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
       visit root_path

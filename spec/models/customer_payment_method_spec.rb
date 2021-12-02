@@ -16,7 +16,7 @@ RSpec.describe CustomerPaymentMethod, type: :model do
                                                 payment_setting_token: 'VI3wjoM7il0VIOtkl4aj'
                                               }
                                             },
-                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
       client_profile.register_client_boleto_and_pix_payment_method('pix', 'VI3wjoM7il0VIOtkl4aj')
@@ -31,7 +31,7 @@ RSpec.describe CustomerPaymentMethod, type: :model do
 
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customer_payment_methods',
                                             any_args,
-                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
       client_profile.register_client_boleto_and_pix_payment_method('pix', 'VI3wjoM7il0VIOtkl4aj')
@@ -51,7 +51,7 @@ RSpec.describe CustomerPaymentMethod, type: :model do
                                                 payment_setting_token: 'VI3wjoM7il0VIOtkl4aj'
                                               }
                                             },
-                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
       client_profile.register_client_boleto_and_pix_payment_method('pix', 'VI3wjoM7il0VIOtkl4aj')
@@ -74,7 +74,7 @@ RSpec.describe CustomerPaymentMethod, type: :model do
                                                 payment_setting_token: 'KDE3V0O07j17WGSoFGRC'
                                               }
                                             },
-                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
       client_profile.register_client_boleto_and_pix_payment_method('boleto',
@@ -91,7 +91,7 @@ RSpec.describe CustomerPaymentMethod, type: :model do
 
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customer_payment_methods',
                                             any_args,
-                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
       client_profile.register_client_boleto_and_pix_payment_method('boleto',
@@ -112,7 +112,7 @@ RSpec.describe CustomerPaymentMethod, type: :model do
                                                 payment_setting_token: 'KDE3V0O07j17WGSoFGRC'
                                               }
                                             },
-                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
       client_profile.register_client_boleto_and_pix_payment_method('boleto',

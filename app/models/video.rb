@@ -22,7 +22,7 @@ class Video < ApplicationRecord
   def register_video_api(video)
     response = Faraday.post('http://localhost:4000/api/v1/products',
                             { product: { name: video.name, type_of: 'single' } },
-                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
     case response.status
     when 500, 422
       video.single_video_token = nil

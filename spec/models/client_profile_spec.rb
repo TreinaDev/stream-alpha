@@ -50,7 +50,7 @@ RSpec.describe ClientProfile, type: :model do
 
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customers',
                                             { name: client_profile.full_name, cpf: client_profile.cpf },
-                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
       client_profile.register_client_api(client_profile.client)
@@ -78,7 +78,7 @@ RSpec.describe ClientProfile, type: :model do
       fake_response = double('faraday_response', status: 422, body: api_response)
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customers',
                                             any_args,
-                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
       client_profile.register_client_api(client_profile.client)
 
@@ -91,7 +91,7 @@ RSpec.describe ClientProfile, type: :model do
       fake_response = double('faraday_response', status: 500, body: '')
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customers',
                                             { name: client_profile.full_name, cpf: client_profile.cpf },
-                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
       client_profile.register_client_api(client_profile.client)
 
