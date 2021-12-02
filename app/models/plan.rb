@@ -10,7 +10,7 @@ class Plan < ApplicationRecord
   enum plan_status: { down: 0, qualified: 1, not_qualified: 2 }
 
   def register_plan_api(plan)
-    response = Faraday.post('http://localhost:4000/api/v1/product',
+    response = Faraday.post('http://localhost:4000/api/v1/products',
                             { product: { name: plan.name, type_of: 'subscription', status: 'enabled' } },
                             { company_token: Rails.configuration.payment_api['company_auth_token'] })
     case response.status

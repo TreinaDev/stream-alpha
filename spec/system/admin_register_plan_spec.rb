@@ -40,7 +40,7 @@ describe 'Some' do
       playlist2 = create(:playlist)
       api_response = File.read(Rails.root.join('spec/support/apis/plan_registration_201.json'))
       fake_response = double('faraday_response', status: 201, body: api_response)
-      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/product',
+      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
                                             { product: { name: 'Plano Gamer', type_of: 'subscription',
                                                          status: 'enabled' } },
                                             { company_token: Rails.configuration.payment_api['company_auth_token'] })
@@ -114,7 +114,7 @@ describe 'Some' do
       admin = create(:admin)
       api_response = File.read(Rails.root.join('spec/support/apis/plan_registration_201.json'))
       fake_response = double('faraday_response', status: 201, body: api_response)
-      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/product',
+      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
                                             { product: { name: 'Plano 4', type_of: 'subscription',
                                                          status: 'enabled' } },
                                             { company_token: Rails.configuration.payment_api['company_auth_token'] })
@@ -143,7 +143,7 @@ describe 'Some' do
       gamer = create(:streamer_profile)
       admin = create(:admin)
       fake_response = double('faraday_response', status: 500, body: nil)
-      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/product',
+      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
                                             { product: { name: 'Plano 4', type_of: 'subscription',
                                                          status: 'enabled' } },
                                             { company_token: Rails.configuration.payment_api['company_auth_token'] })
@@ -173,7 +173,7 @@ describe 'Some' do
       admin = create(:admin)
       api_response = File.read(Rails.root.join('spec/support/apis/plan_registration_422.json'))
       fake_response = double('faraday_response', status: 422, body: api_response)
-      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/product',
+      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
                                             { product: { name: 'Plano 4', type_of: 'subscription',
                                                          status: 'enabled' } },
                                             { company_token: Rails.configuration.payment_api['company_auth_token'] })
