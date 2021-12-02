@@ -53,6 +53,6 @@ class ClientProfile < ApplicationRecord
   def faraday_call(current_client)
     Faraday.post('http://localhost:4000/api/v1/customers',
                  { name: current_client.client_profile.full_name, cpf: current_client.client_profile.cpf },
-                 { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                 { companyToken: Rails.configuration.payment_api['company_auth_token'] })
   end
 end
