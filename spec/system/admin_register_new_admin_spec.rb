@@ -8,7 +8,7 @@ describe 'Some' do
 
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar Administrador'
+      click_on 'Administrador'
 
       expect(page).to have_content('Informe os dados de cadastro do novo Administrador')
     end
@@ -19,7 +19,7 @@ describe 'Some' do
 
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar Administrador'
+      click_on 'Administrador'
       fill_in 'Email', with: 'apolo@gamestream.com.br'
       fill_in 'Senha', with: '7777777'
       click_on 'Criar Admin'
@@ -33,7 +33,7 @@ describe 'Some' do
 
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar Administrador'
+      click_on 'Administrador'
       fill_in 'Email', with: ''
       fill_in 'Senha', with: ''
       click_on 'Criar Admin'

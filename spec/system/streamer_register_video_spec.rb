@@ -31,7 +31,7 @@ describe 'Streamer' do
       expect(page).to have_content('Vídeo cadastrado com sucesso!')
       expect(page).to have_css('iframe[src*="https://player.vimeo.com/video/613710178?autoplay=1&background=0"]')
       expect(page).to have_content('Jogando Mind Craft')
-      expect(page).to have_content("1 Visualização - #{I18n.l(Time.zone.now.to_date)}")
+      expect(page).to have_content("0 Visualizações - #{I18n.l(Time.zone.now.to_date)}")
       expect(page).to have_content('Por: Solaire')
       expect(page).to have_content('Descrição: Jogador irado, joga demais!!')
       expect(page).to have_content('Megaman X4')
@@ -55,7 +55,7 @@ describe 'Streamer' do
 
       expect(page).to have_content(video.name)
       expect(page).to have_content('Por: Solaire')
-      expect(page).to have_content("1 Visualização - #{I18n.l(Time.zone.now.to_date)}")
+      expect(page).to have_content("0 Visualizações - #{I18n.l(Time.zone.now.to_date)}")
       expect(page).to have_content('Descrição: Jogador irado, joga demais!!')
       expect(page).to have_content('Avulso: Não')
       expect(page).not_to have_content('Preço:')

@@ -1,0 +1,66 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+
+// You can add your own custom components/styles here
+
+@import "tailwindcss/utilities";
+
+.nav-text {
+    @apply py-4 px-2 font-semibold 
+}
+.nav-link {
+    @apply text-indigo-600 hover:text-white transition duration-300
+}
+.nav-link-dark {
+    @apply text-indigo-600 hover:text-gray-700 transition duration-300
+}
+.nav-link-active {
+    @apply text-indigo-600 border-b-4 border-indigo-600  
+}
+.dropdown {
+    @apply inline-block relative
+}
+
+.dropdown-toggle {
+    @apply bg-white absolute mt-1 shadow-lg overflow-hidden rounded
+}
+
+.dropdown-menu-top {
+    @apply py-2 px-4 block 
+}
+
+.dropdown-menu-mid {
+    @apply py-2 pl-4 pr-10 block
+}
+
+.dropdown-menu-botton {
+    @apply px-4 py-2 block
+}
+
+@keyframes notification-countdown {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+}
+.anime {
+    animation: notification-countdown 3s;
+}
+

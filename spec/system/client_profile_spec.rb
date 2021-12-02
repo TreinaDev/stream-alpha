@@ -12,10 +12,12 @@ describe 'Client profile' do
                                       .and_return(fake_response)
 
       visit root_path
-      click_on 'Entrar como Assinante'
+      click_on 'Como Assinante'
       fill_in 'Email', with: client.email
       fill_in 'Senha', with: client.password
-      click_on 'Entrar'
+      within 'form' do
+        click_on 'Entrar'
+      end
       fill_in 'Nome completo (conforme documentos)', with: 'Otávio Augusto da Silva Lins'
       fill_in 'Nome social', with: 'Marcela'
       fill_in 'Data de nascimento', with: '19/08/1997'
@@ -45,10 +47,12 @@ describe 'Client profile' do
       create(:client_profile, client: client)
 
       visit root_path
-      click_on 'Entrar como Assinante'
+      click_on 'Como Assinante'
       fill_in 'Email', with: client.email
       fill_in 'Senha', with: client.password
-      click_on 'Entrar'
+      within 'form' do
+        click_on 'Entrar'
+      end
 
       expect(current_path).to eq(root_path)
     end
@@ -56,10 +60,12 @@ describe 'Client profile' do
       client = create(:client)
 
       visit root_path
-      click_on 'Entrar como Assinante'
+      click_on 'Como Assinante'
       fill_in 'Email', with: client.email
       fill_in 'Senha', with: client.password
-      click_on 'Entrar'
+      within 'form' do
+        click_on 'Entrar'
+      end
       click_on 'Criar Perfil de Assinante'
 
       expect(current_path).to eq client_profiles_path
@@ -135,7 +141,6 @@ describe 'Client profile' do
       client_profile2 = create(:client_profile, client: client2)
 
       login_as client, scope: :client
-      visit root_path
       visit edit_client_profile_path(client2.client_profile)
 
       expect(current_path).to eq root_path
@@ -143,13 +148,7 @@ describe 'Client profile' do
                                    "#{I18n.t(:client_profile, scope: 'activerecord.models')}!"
       expect(page).to_not have_content(client_profile2.social_name)
       expect(page).to_not have_content(I18n.l(client_profile2.birth_date))
-      expect(page).to_not have_content(client_profile2.cpf)
-      expect(page).to_not have_content(client_profile2.cep)
-      expect(page).to_not have_content(client_profile2.city)
-      expect(page).to_not have_content(client_profile2.state)
-      expect(page).to_not have_content(client_profile2.residential_number)
       expect(page).to_not have_content(client_profile2.residential_address)
-      expect(page).to_not have_content(client_profile2.age_rating)
     end
 
     it 'unsuccessfully edit filling fields wrong' do
@@ -205,9 +204,8 @@ describe 'Client profile' do
 
       login_as client, scope: :client
       visit root_path
-      click_on 'Meu Perfil'
 
-      expect(current_path).to eq(new_client_profile_path)
+      expect(page).to have_link('Meu Perfil', href: new_client_profile_path)
     end
   end
 end

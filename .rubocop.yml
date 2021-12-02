@@ -13,7 +13,17 @@ AllCops:
     - "config/routes.rb"
 
 Metrics/BlockLength:
-  IgnoredMethods: ["describe", "context", "feature", "scenario", "let", "it", "draw", "configure"]
+  IgnoredMethods:
+    [
+      "describe",
+      "context",
+      "feature",
+      "scenario",
+      "let",
+      "it",
+      "draw",
+      "configure",
+    ]
 
 Style/AsciiComments:
   Enabled: false

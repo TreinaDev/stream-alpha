@@ -17,7 +17,7 @@ RSpec.describe Plan, type: :model do
         plan = create(:plan)
         api_response = File.read(Rails.root.join('spec/support/apis/plan_registration_201.json'))
         fake_response = double('faraday_response', status: 201, body: api_response)
-        allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/product',
+        allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
                                               { product: { name: plan.name, type_of: 'subscription',
                                                            status: 'enabled' } },
                                               { company_token: Rails.configuration.payment_api['company_auth_token'] })
@@ -32,7 +32,7 @@ RSpec.describe Plan, type: :model do
         create(:admin)
         plan = create(:plan)
         fake_response = double('faraday_response', status: 500, body: nil)
-        allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/product',
+        allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
                                               { product: { name: plan.name, type_of: 'subscription',
                                                            status: 'enabled' } },
                                               { company_token: Rails.configuration.payment_api['company_auth_token'] })
@@ -48,7 +48,7 @@ RSpec.describe Plan, type: :model do
         plan = create(:plan)
         api_response = File.read(Rails.root.join('spec/support/apis/plan_registration_422.json'))
         fake_response = double('faraday_response', status: 422, body: api_response)
-        allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/product',
+        allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
                                               { product: { name: plan.name, type_of: 'subscription',
                                                            status: 'enabled' } },
                                               { company_token: Rails.configuration.payment_api['company_auth_token'] })

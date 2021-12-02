@@ -6,10 +6,12 @@ describe 'Streamer log in' do
       streamer = create(:streamer)
 
       visit root_path
-      click_on 'Entrar como Streamer'
+      click_on 'Como Streamer'
       fill_in 'Email', with: streamer.email
       fill_in 'Senha', with: streamer.password
-      click_on 'Entrar'
+      within 'form' do
+        click_on 'Entrar'
+      end
       fill_in 'Nome', with: 'Fulano'
       attach_file 'Foto do Perfil', Rails.root.join('spec/support/assets/gary-bendig-unsplash.jpg')
       fill_in 'Descrição', with: 'Jovem de 22 anos sem ter o que fazer da vida e fica fazendo live na internet'
@@ -32,10 +34,12 @@ describe 'Streamer log in' do
       streamer = create(:streamer)
 
       visit root_path
-      click_on 'Entrar como Streamer'
+      click_on 'Como Streamer'
       fill_in 'Email', with: streamer.email
       fill_in 'Senha', with: streamer.password
-      click_on 'Entrar'
+      within 'form' do
+        click_on 'Entrar'
+      end
       fill_in 'Nome', with: ''
       fill_in 'Descrição', with: ''
       fill_in 'URL do Facebook', with: ''

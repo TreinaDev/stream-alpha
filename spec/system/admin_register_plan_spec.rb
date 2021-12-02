@@ -8,7 +8,7 @@ describe 'Some' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar Plano'
+      click_on 'Plano'
 
       expect(page).to have_content('Insira as informações do plano que deseja cadastrar')
     end
@@ -21,7 +21,7 @@ describe 'Some' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar Plano'
+      click_on 'Plano'
       fill_in 'Valor', with: ''
       click_on 'Criar Plano de Assinatura'
 
@@ -49,7 +49,7 @@ describe 'Some' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar Plano'
+      click_on 'Plano'
       fill_in 'Nome do Plano', with: 'Plano Gamer'
       fill_in 'Descrição', with: 'Desbloqueia todos videos de um Streamer'
       fill_in 'Valor', with: '100'
@@ -74,6 +74,7 @@ describe 'Some' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
+      click_on 'Conteúdos'
       click_on 'Planos de Assinatura'
 
       expect(page).to have_content(plano_a.name)
@@ -88,6 +89,7 @@ describe 'Some' do
       login_as user, scope: :client
       visit new_plan_path
 
+      expect(current_path).to eq(new_admin_session_path)
       expect(page).to have_content('Para continuar, efetue login ou registre-se.')
     end
   end
@@ -98,6 +100,7 @@ describe 'Some' do
       login_as streamer, scope: :streamer
       visit new_plan_path
 
+      expect(current_path).to eq(new_admin_session_path)
       expect(page).to have_content('Para continuar, efetue login ou registre-se.')
     end
   end
@@ -105,6 +108,7 @@ describe 'Some' do
     it 'try to see the plan registration form' do
       visit new_plan_path
 
+      expect(current_path).to eq(new_admin_session_path)
       expect(page).to have_content('Para continuar, efetue login ou registre-se.')
     end
   end
@@ -123,7 +127,7 @@ describe 'Some' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar Plano'
+      click_on 'Plano'
       fill_in 'Nome do Plano', with: 'Plano 4'
       fill_in 'Descrição', with: 'Desbloqueia todos videos de um Streamer'
       fill_in 'Valor', with: '100'
@@ -152,7 +156,7 @@ describe 'Some' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar Plano'
+      click_on 'Plano'
       fill_in 'Nome do Plano', with: 'Plano 4'
       fill_in 'Descrição', with: 'Desbloqueia todos videos de um Streamer'
       fill_in 'Valor', with: '100'
@@ -182,7 +186,7 @@ describe 'Some' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar Plano'
+      click_on 'Plano'
       fill_in 'Nome do Plano', with: 'Plano 4'
       fill_in 'Descrição', with: 'Desbloqueia todos videos de um Streamer'
       fill_in 'Valor', with: '100'
