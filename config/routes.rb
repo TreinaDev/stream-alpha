@@ -12,10 +12,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :clients, only: %i[] do
-    get 'my_payment_methods', on: :member
+  resources :client_profiles, only: %i[new create show edit update] do
+    resources :customer_payment_methods, only: %i[new create show] do
+      resources :credit_card_settings, only: %i[new create show]
+    end
   end
-  resources :client_profiles, only: %i[new create show edit update]
+
   resources :game_categories, only: %i[new create index]
   resources :games, only: %i[new create index]
   resources :plans, only: %i[new create show index]

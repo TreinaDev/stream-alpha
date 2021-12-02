@@ -1,7 +1,7 @@
 <h2>Perfil de <%= client_profile.social_name.split.first %></h2>
 <% if client_profile.owner?(current_client) %>
   <%= link_to "Editar Perfil", edit_client_profile_path %>
-  <%= link_to "Ver meus métodos de pagamento",  my_payment_methods_client_path(current_client) %>
+  <%= link_to "Ver meus métodos de pagamento", client_profile_customer_payment_method_path(current_client) %>
 <% end %>
 
 <dl>

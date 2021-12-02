@@ -1,0 +1,14 @@
+<h3> Meus métodos de pagamento </h3>
+
+<p> Aqui se encontram seus métodos de pagamento habilitados. </p>
+  <p>- Pagamento via Pix</p>
+  <p>- Pagamento via Boleto</p>
+  <p><%= link_to 'Clique aqui para cadastrar um novo cartão', new_client_profile_customer_payment_method_credit_card_setting_path(@client_profile, @customer_payment_method) %></p>
+
+<% if @credit_cards.any? %>
+  <%= @credit_cards.each do |credit_card| %>
+    <p><%= link_to "Cartão #{credit_card.nickname} terminado em: #{credit_card.encrypted_digits}", client_profile_customer_payment_method_credit_card_setting_path(@client_profile, @customer_payment_method, credit_card) %></p>
+  <% end %>
+<% else %>
+  <p>- Você ainda não tem nenhum cartão de crédito cadastrado.</p>
+<% end %>

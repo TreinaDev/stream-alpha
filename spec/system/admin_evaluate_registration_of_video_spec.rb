@@ -70,7 +70,7 @@ describe 'admin approves registration of video' do
     expect(current_path).to eq(video_path(video))
     expect(video.status).to eq('approved')
     expect(page).to have_content('Vídeo aprovado com sucesso!')
-    expect(video.single_video_token).to eq('3fGXrXJ4tAyysV9KW7G2')
+    expect(video.single_video_token).to eq('ncsSFYxlrW0fcHJKN5jj')
   end
   it 'and tries to approve a single video, but PagaPaga API is down' do
     streamer_profile = create(:streamer_profile)

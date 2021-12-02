@@ -1,16 +1,15 @@
 {
   "message": "Requisição inválida",
   "errors": {
-    "name": [
-      "não pode ficar em branco"
-    ],
     "cpf": [
-      "não pode ficar em branco",
-      "deve ter 11 dígitos"
+      "deve ser composto apenas por números",
+      "não possui o tamanho esperado (11 caracteres)"
     ]
   },
   "request": {
-    "name": "",
-    "cpf": ""
+    "customer": {
+      "name": "Hikari Luz",
+      "cpf": "aaaaaa.aaa"
+    }
   }
 }

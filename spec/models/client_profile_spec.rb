@@ -47,6 +47,7 @@ RSpec.describe ClientProfile, type: :model do
       client_profile = create(:client_profile)
       api_response = File.read(Rails.root.join('spec/support/apis/client_registration_201.json'))
       fake_response = double('faraday_response', status: 201, body: api_response)
+
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customers',
                                             { name: client_profile.full_name, cpf: client_profile.cpf },
                                             { companyToken: Rails.configuration.payment_api['company_auth_token'] })
@@ -55,7 +56,7 @@ RSpec.describe ClientProfile, type: :model do
       client_profile.register_client_api(client_profile.client)
 
       expect(client_profile.client_token_status).to eq('accepted')
-      expect(client_profile.token).to eq('XpD75xP4lQ')
+      expect(client_profile.token).to eq('ijlKA9Kxc7Q9vrXOtgTK')
     end
 
     it 'unsuccessfully: response == 401' do
