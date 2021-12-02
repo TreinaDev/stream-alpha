@@ -17,7 +17,6 @@ class PlansController < ApplicationController
     @playlists = Playlist.all
     if @video_plan.save
       @video_plan.register_plan_api(@video_plan)
-      # redirect_to root_path, notice: t('.error_valition_422') if !@video_plan.present?
       redirect_to @video_plan, notice: t('.plan_pending') if @video_plan&.down?
       redirect_to @video_plan, notice: t('.success') if @video_plan&.qualified?
     else

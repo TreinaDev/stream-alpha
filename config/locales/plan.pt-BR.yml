@@ -20,5 +20,4 @@ pt-BR:
   plans:
     create:
       success: "Plano cadastrado com sucesso!"
-      plan_pending: "Servidor pagapaga indisponivel, cadastro ficou na fila."
-
+      plan_pending: "Servidor PagaPaga indisponível, cadastro ficou na fila."

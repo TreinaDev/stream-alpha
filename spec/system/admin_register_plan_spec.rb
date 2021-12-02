@@ -170,7 +170,7 @@ describe 'Some' do
       expect(page).to have_content('Valor: R$ 100')
       expect(page).to have_content(gamer.name)
       expect(page).to have_content('Status do plano: Pendente')
-      expect(page).to have_content('Servidor pagapaga indisponivel, cadastro ficou na fila.')
+      expect(page).to have_content('Servidor PagaPaga indisponível, cadastro ficou na fila.')
     end
     it 'receive error 422 status from API' do
       gamer = create(:streamer_profile)
@@ -196,7 +196,7 @@ describe 'Some' do
       Plan.last.reload
       expect(current_path).to eq(plan_path(Plan.last))
       expect(page).to have_content('Status do plano: Pendente')
-      expect(page).to have_content('Servidor pagapaga indisponivel, cadastro ficou na fila.')
+      expect(page).to have_content('Servidor PagaPaga indisponível, cadastro ficou na fila.')
       expect(api_response['message']).presence
     end
   end

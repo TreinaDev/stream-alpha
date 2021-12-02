@@ -11,7 +11,6 @@ Rails.application.routes.draw do
       get 'admin_contents'
     end
   end
-  resources :streamers, only: %i[new create]
 
   resources :clients, only: %i[] do
     get 'my_payment_methods', on: :member
@@ -19,8 +18,9 @@ Rails.application.routes.draw do
   resources :client_profiles, only: %i[new create show edit update]
   resources :game_categories, only: %i[new create index]
   resources :games, only: %i[new create index]
-  resources :playlists, only: %i[new create show index]
   resources :plans, only: %i[new create show index]
+  resources :playlists, only: %i[new create show index]
+  resources :streamers, only: %i[new create]
 
   resources :streamer_profiles, only: %i[new create show index edit update] do
     member do
