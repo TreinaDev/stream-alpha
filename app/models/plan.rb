@@ -12,7 +12,7 @@ class Plan < ApplicationRecord
   def register_plan_api(plan)
     response = Faraday.post('http://localhost:4000/api/v1/products',
                             { product: { name: plan.name, type_of: 'subscription', status: 'enabled' } },
-                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
     case response.status
     when 201
       plan.plan_token = JSON.parse(response.body, simbolize_names: true)['token']
