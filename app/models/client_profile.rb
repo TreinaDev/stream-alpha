@@ -17,7 +17,7 @@ class ClientProfile < ApplicationRecord
   end
 
   def register_client_api(current_client)
-    response = faraday_client_creation_call(current_client)
+    response = faraday_client_creation_call
 
     case response.status
     when 500, 422, 401
@@ -28,19 +28,19 @@ class ClientProfile < ApplicationRecord
     end
   end
 
-  def register_client_boleto_and_pix_payment_method(current_client, payment_method, type_token)
-    response = faraday_boleto_and_pix_creation_call(current_client, payment_method, type_token)
+  def register_client_boleto_and_pix_payment_method(payment_method, type_token)
+    response = faraday_boleto_and_pix_creation_call(payment_method, type_token)
     case response.status
     when 500, 422, 421
       nil
     when 201
       if payment_method == 'pix'
-        current_client.client_profile.customer_payment_method.pix_token = JSON.parse(response.body,
-                                                                                     simbolize_names: true)['customer_payment_method']['token']
+        customer_payment_method.pix_token = JSON.parse(response.body,
+                                                       simbolize_names: true)['customer_payment_method']['token']
       end
       if payment_method == 'boleto'
-        current_client.client_profile.customer_payment_method.boleto_token = JSON.parse(response.body,
-                                                                                        simbolize_names: true)['customer_payment_method']['token']
+        customer_payment_method.boleto_token = JSON.parse(response.body,
+                                                          simbolize_names: true)['customer_payment_method']['token']
       end
     end
   end
@@ -68,17 +68,17 @@ class ClientProfile < ApplicationRecord
     errors.add(:photo, I18n.t('file_too_large', scope: 'activerecord.errors.messages', size: '2Mb'))
   end
 
-  def faraday_client_creation_call(current_client)
+  def faraday_client_creation_call
     Faraday.post('http://localhost:4000/api/v1/customers',
-                 { name: current_client.client_profile.full_name, cpf: current_client.client_profile.cpf },
+                 { name: full_name, cpf: cpf },
                  { company_token: Rails.configuration.payment_api['company_auth_token'] })
   end
 
-  def faraday_boleto_and_pix_creation_call(current_client, payment_method, type_token)
+  def faraday_boleto_and_pix_creation_call(payment_method, type_token)
     Faraday.post('http://localhost:4000/api/v1/customer_payment_methods',
                  {
                    customer_payment_method: {
-                     customer_token: current_client.client_profile.token,
+                     customer_token: token,
                      type_of: payment_method,
                      payment_setting_token: type_token
                    }

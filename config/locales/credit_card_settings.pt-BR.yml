@@ -1,0 +1,19 @@
+pt-BR:
+  activerecord:
+    models:
+      credit_card_setting: "Cartão de Crédito"
+    attributes:
+      credit_card_setting:
+        credit_card_name: "Nome do titular do cartão"
+        nickname: "Apelido do cartão"
+        credit_card_number: "Número do cartão"
+        credit_card_expiration_date: "Data de validade do cartão"
+        credit_card_security_code: "Código de segurança"
+
+  credit_card_settings:
+    new:
+      credit_card_name: "Titular do cartão"
+      nickname: "Apelido do cartão"
+      credit_card_number: "0000 1111 2222 3333"
+      credit_card_expiration_date: ""
+      credit_card_security_code: "XXX"

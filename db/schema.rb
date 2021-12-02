@@ -83,6 +83,15 @@ ActiveRecord::Schema.define(version: 2021_12_01_194327) do
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
   end
 
+  create_table "content_playlists", force: :cascade do |t|
+    t.integer "plan_id", null: false
+    t.integer "playlist_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["plan_id"], name: "index_content_playlists_on_plan_id"
+    t.index ["playlist_id"], name: "index_content_playlists_on_playlist_id"
+  end
+
   create_table "content_streamers", force: :cascade do |t|
     t.integer "plan_id", null: false
     t.integer "streamer_id", null: false
@@ -144,6 +153,8 @@ ActiveRecord::Schema.define(version: 2021_12_01_194327) do
     t.decimal "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "plan_token"
+    t.integer "plan_status", default: 0
   end
 
   create_table "playlist_streamers", force: :cascade do |t|
@@ -229,6 +240,8 @@ ActiveRecord::Schema.define(version: 2021_12_01_194327) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "client_profiles", "clients"
+  add_foreign_key "content_playlists", "plans"
+  add_foreign_key "content_playlists", "playlists"
   add_foreign_key "content_streamers", "plans"
   add_foreign_key "content_streamers", "streamers"
   add_foreign_key "credit_card_settings", "customer_payment_methods"

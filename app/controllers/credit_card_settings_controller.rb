@@ -8,7 +8,7 @@ class CreditCardSettingsController < ApplicationController
 
   def create
     @credit_card = CreditCardSetting.new
-    credit_card_api_registration(api_params(params), @credit_card)
+    @credit_card.credit_card_api_registration(api_params(params))
   end
 
   private
@@ -16,7 +16,7 @@ class CreditCardSettingsController < ApplicationController
   def api_params(params)
     {
       customer_token: current_client.client_profile.token,
-      type_of: "credit_card",
+      type_of: 'credit_card',
       payment_setting_token: Rails.configuration.payment_api['company_credit_card_token'],
       credit_card_name: params[:credit_card_name],
       credit_card_number: params[:credit_card_number],
@@ -24,7 +24,8 @@ class CreditCardSettingsController < ApplicationController
       credit_card_security_code: params[:credit_card_security_code]
     }
   end
+
   def credit_card_creation
-    @credit_card = CreditCardSetting.new(params.require(:credit_card_setting).permit(:nickname)) 
+    @credit_card = CreditCardSetting.new(params.require(:credit_card_setting).permit(:nickname))
   end
 end
