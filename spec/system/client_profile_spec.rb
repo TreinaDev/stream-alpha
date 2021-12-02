@@ -103,7 +103,7 @@ describe 'Client profile' do
 
       expect(current_path).to eq edit_client_profile_path(profile)
       expect(page).to have_content('Insira as informações que deseja atualizar!')
-      expect(page).to have_content('CPF (apenas números) 80052514080')
+      expect(page).to have_content('CPF (apenas números)')
     end
     it 'successfully: edit profile' do
       client = create(:client)

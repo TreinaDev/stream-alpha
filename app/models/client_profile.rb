@@ -35,7 +35,7 @@ class ClientProfile < ApplicationRecord
     errors.add(:birth_date, "deve ser anterior a #{I18n.l 12.years.ago.to_date}") if birth_date.after? 12.years.ago
   end
 
-  def correct_cpf_sequence
+  def cpf_final_digits
     d1 = 0
     d2 = 0
 
@@ -44,7 +44,11 @@ class ClientProfile < ApplicationRecord
       d2 += number.to_i * (11 - index) * 10 if index < 10
     end
 
-    return if cpf.index((d1 % 11).to_s + (d2 % 11).to_s).eql? 9
+    [d1 % 11, d2 % 11]
+  end
+
+  def correct_cpf_sequence
+    return if cpf.index(cpf_final_digits.join).eql? 9
 
     errors.add(:cpf, 'com sequência de dígitos invalida')
   end
