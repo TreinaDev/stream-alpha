@@ -7,11 +7,14 @@ class CreditCardSettingsController < ApplicationController
   end
 
   def create
-    @credit_card = CreditCardSetting.new(params.require(:credit_card_setting).permit(:nickname, :customer_payment_method_id))
+    @credit_card = CreditCardSetting.new(params.require(:credit_card_setting).permit(:nickname))
     @credit_card.customer_payment_method = current_client.client_profile.customer_payment_method
     @credit_card.encrypt_credit_card_digits(params[:credit_card_setting][:credit_card_number])
-    @credit_card.credit_card_api_registration(api_params)
-    if @credit_card.save
+    @credit_card.credit_card_api_registration(current_client, api_params)
+    if @credit_card.token.nil?
+      redirect_to new_client_profile_customer_payment_method_credit_card_setting_path(current_client.client_profile, current_client.client_profile.customer_payment_method)
+    else
+      @credit_card.save
       redirect_to client_profile_customer_payment_method_path(current_client.client_profile, @credit_card.customer_payment_method)
     end
   end
