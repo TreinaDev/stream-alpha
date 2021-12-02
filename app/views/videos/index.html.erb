@@ -1,9 +1,8 @@
 <h3> Vídeos disponíveis na plataforma </h3>
-
 <p> Abaixo você encontra os vídeos disponíveis para compra. Clique sobre o nome do vídeo
-para ver mais detalhes e, possivelmente, comprá-lo. </p>
+  para ver mais detalhes e, possivelmente, comprá-lo. </p>
 <div>
-<% @videos.each do |video| %>
-  <p><%= link_to video.name, video%></p>
-<% end %>
+  <% @videos.each do |video| %>
+    <p><%= link_to video.name, video%></p>
+  <% end %>
 </div>

@@ -1,18 +1,100 @@
-<%= link_to 'Ver Streamers', streamer_profiles_path %>
-<%= link_to 'Ver Vídeos Pendentes', analysis_videos_path %>
-<%= link_to 'Ver Planos de Assinatura', plans_path %>
-<%= link_to 'Ver Playlists', playlists_path %>
+<div class="rounded-tl-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-gray-300 p-4 shadow text-2xl text-white">
+  <h3 class="font-bold pl-2">Dashboard</h3>
+</div>
 
-<h1>Área do administrador</h1>
+<div class="flex flex-wrap">
+  <div class="w-1/4 h-full p-6">
+    <div class="card card-4 p-5">
+      <div class="flex items-center justify-center">
+        <div class="text-white align-middle flex-grow">
+          <h3 class="font-bold text-3xl"> <%= number_to_currency(8234) %> <span class="text-white-500"><i class="fas fa-caret-up"></i></span></h3>
+          <h2 class="font-bold text-white text-opacity-95"> Total de Vendas </h5>
+        </div>
+        <div class="w-1/5">
+          <img src='https://img.icons8.com/flat-round/60/000000/positive-dynamic.png'/>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<ol>
-  <li><%= link_to 'Cadastrar Administrador', new_admin_path %></li>
-  <li><%= link_to 'Cadastrar Streamer', new_streamer_path %></li>
-  <li><%= link_to 'Cadastrar Categoria de Jogos', new_game_category_path %></li>
-  <li><%= link_to 'Cadastrar Jogo', new_game_path%></li>
-  <li><%= link_to 'Cadastrar Playlist', new_playlist_path %></li>
-  <li><%= link_to 'Cadastrar Plano', new_plan_path %></li>
-</ol>
+  <div class="w-1/4 h-full p-6">
+    <div class="card card-2 p-5">
+      <div class="flex items-center justify-center">
+        <div class="text-white align-middle flex-grow">
+          <h3 class="font-bold text-3xl"> <%= @clients_count %> <span class="text-white-500"><i class="fas fa-caret-up"></i></span></h3>
+          <h2 class="font-bold text-white text-opacity-95"> Quantidade de Assinantes </h5>
+        </div>
+        <div class="w-1/5">
+          <img src='https://img.icons8.com/fluency/64/000000/human-resources.png'/>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<%= render 'game_categories/game_categories' %>
-<%= render 'games/games' %>
+  <div class="w-1/4 h-full p-6">
+    <div class="card card-1 p-5">
+      <div class="flex items-center justify-center">
+        <div class="text-white align-middle flex-grow">
+          <h3 class="font-bold text-3xl"> <%= @streamers_count %> <span class="text-white-500"><i class="fas fa-caret-up"></i></span></h3>
+          <h2 class="font-bold text-white text-opacity-95"> Streamers Ativos </h5>
+        </div>
+        <div class="w-1/5">
+          <img src='https://img.icons8.com/external-wanicon-lineal-color-wanicon/64/000000/external-video-advertising-wanicon-lineal-color-wanicon.png'/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-1/4 h-full p-6">
+    <div class="card card-3 p-5">
+      <div class="flex items-center justify-center">
+        <div class="text-white align-middle flex-grow">
+          <h3 class="font-bold text-3xl"> <%= @total_views %> <span class="text-<%= @color %>-500"><i class="fas fa-caret-up"></i></span></h3>
+          <h2 class="font-bold text-white text-opacity-95"> Visualizações </h5>
+        </div>
+        <div class="w-1/5">
+          <img src='https://img.icons8.com/color/60/000000/analytics.png'/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="mt-4 mx-6">
+  <div class="w-full overflow-hidden rounded-lg shadow-xs">
+    <div class="w-full overflow-x-auto">
+      <table class="w-full border border-gray-300">
+        <thead>
+          <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-300 dark:text-gray-400 dark:bg-gray-800">
+            <th class="px-4 py-3">Cliente</th>
+            <th class="px-4 py-3">Montante</th>
+            <th class="px-4 py-3">Status</th>
+            <th class="px-4 py-3">Data</th>
+          </tr>
+        </thead>
+        <tbody class="bg-gray-700 divide-y dark:divide-gray-700 dark:bg-gray-800">
+
+          <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+            <td class="px-4 py-3">
+              <div class="flex items-center text-sm">
+                <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                  <img class="object-cover w-full h-full rounded-full" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ" alt="" loading="lazy" />
+                  <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                </div>
+                <div>
+                  <p class="font-semibold"> danilo </p>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-sm"> R$ 1002,32 </td>
+            <td class="px-4 py-3 text-xs">
+              <span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full"> aprovado </span>
+            </td>
+            <td class="px-4 py-3 text-sm"> <%= Date.current %> </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

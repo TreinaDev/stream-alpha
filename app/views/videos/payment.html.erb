@@ -1,10 +1,9 @@
 <h2> Comprar vídeo </h2>
-
 <%= render @video %>
 <div>
 <p> Clique no meio de pagamento que você quer utilizar nessa compra </p>
-  <%= link_to 'Pix' %>
   <%= link_to 'Boleto' %>
+  <%= link_to 'Pix' %>
   <% if @credit_cards.any? %>
     <% @credit_cards.each do |cc| %>
       <li> <%= link_to cc.nickname %> </li>

@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stream</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-white">
+    <%= render '/shared/nav_bar'%>
+    <%= render '/shared/flash_notification' %>
+    <div class="py-2 flex bg-gray-200">
+      <%= render '/admins/nav/nav_bar'%>
+      <% if notice %>
+        <p class="alert alert-primary" role="alert"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-warning" role="alert"><%= alert %></p>
+      <% end %>
+
+      <div class="min-h-screen w-full">
+          <div class="h-full bg-white rounded-tl-xl">
+            <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

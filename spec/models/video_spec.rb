@@ -19,10 +19,34 @@ RSpec.describe Video, type: :model do
 
         expect(video.refused? && video.feed_back.present?).to be true
       end
+
       it 'is refused without feed_back' do
         video = build(:video, status: 'refused')
 
         expect(video.refused? && video.feed_back.present?).to be false
+      end
+    end
+
+    context 'update view counter' do
+      it 'count when approved' do
+        video = create(:video, status: 'approved', visualization: 0)
+
+        expect(video.update_view_counter).to be true
+        expect(video.visualization).to be 1
+      end
+
+      it 'dont count when pending' do
+        video = create(:video, status: 'pending', visualization: 0)
+
+        expect(video.update_view_counter).to be nil
+        expect(video.visualization).to be 0
+      end
+
+      it 'dont count when refused' do
+        video = create(:video, status: 'refused', feed_back: 'não atende aos requisitos', visualization: 0)
+
+        expect(video.update_view_counter).to be nil
+        expect(video.visualization).to be 0
       end
     end
   end

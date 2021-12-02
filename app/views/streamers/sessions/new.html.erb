@@ -1,25 +1,37 @@
-<h2>Entrar como streamer</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="bg-gray-900 mt-12 xl:w-2/5 mx-auto w-full shadow-lg rounded-lg px-8 pt-6 pb-4 mb-4">
+  <div class="text-center">
+    <h2 class="mt-3 text-3xl font-bold text-blue-300">
+      Bem-vindo novamente!
+    </h2>
+    <p class="mt-2 text-sm text-gray-600">Por favor entre na sua conta</p>
   </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <%= f.label :email, class: "block text-blue-300 py-2 font-bold mb-2" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out" %>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Entrar" %>
-  </div>
+    <div class="field">
+      <%= f.label :password, class: "block text-blue-300 py-2 font-bold mb-2" %>
+      <%= f.password_field :password, autocomplete: "current-password", class: "shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out" %>
+    </div>
+    <div class="flex items-center justify-between my-5">
+      <div class="flex items-center">
+        <% if devise_mapping.rememberable? %>
+          <%= f.check_box :remember_me, class: "h-4 w-4 bg-indigo-500 focus:ring-indigo-400 border-gray-300 rounded" %>
+          <%= f.label :remember_me, class: "ml-2 block text-sm text-blue-300" %>
+        <% end %>
+      </div>
+      <div class="text-sm">
+        <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+          <%= link_to "Esqueceu sua senha?", new_password_path(resource_name), class: "font-medium text-indigo-500 hover:text-indigo-500" %><br />
+        <% end %>
+      </div>
+    </div>
+    <div class="actions">
+      <%= f.submit "Entrar", class: "bg-gradient-to-r from-purple-800
+      to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold
+      py-2 px-4 rounded focus:ring transform transition hover:scale-105
+      duration-300 ease-in-out" %>
+    </div>
 <% end %>
 

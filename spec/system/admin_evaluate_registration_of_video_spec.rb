@@ -13,6 +13,7 @@ describe 'admin approves registration of video' do
 
     visit root_path
     click_on 'Área do administrador'
+    click_on 'Conteúdos'
     click_on 'Ver Vídeos Pendentes'
 
     expect(page).to have_link('Jogando Mind Craft', href: video_path(video1))
@@ -29,6 +30,7 @@ describe 'admin approves registration of video' do
 
     visit root_path
     click_on 'Área do administrador'
+    click_on 'Conteúdos'
     click_on 'Ver Vídeos Pendentes'
     click_on 'Jogando Mind Craft'
     click_on 'Aprovar Vídeo'
@@ -59,7 +61,8 @@ describe 'admin approves registration of video' do
     login_as admin, scope: :admin
     visit root_path
     click_on 'Área do administrador'
-    click_on 'Vídeos Pendentes'
+    click_on 'Conteúdos'
+    click_on 'Ver Vídeos Pendentes'
     click_on 'Ocarina of Time Any% WR'
     click_on 'Aprovar'
 
@@ -83,7 +86,8 @@ describe 'admin approves registration of video' do
     login_as admin, scope: :admin
     visit root_path
     click_on 'Área do administrador'
-    click_on 'Vídeos Pendentes'
+    click_on 'Conteúdos'
+    click_on 'Ver Vídeos Pendentes'
     click_on 'Ocarina of Time Any% WR'
     click_on 'Aprovar'
 
@@ -101,6 +105,7 @@ describe 'admin approves registration of video' do
 
     visit root_path
     click_on 'Área do administrador'
+    click_on 'Conteúdos'
     click_on 'Ver Vídeos Pendentes'
     click_on 'Jogando Mind Craft'
     fill_in 'Retorne um feedback para o streamer', with: 'Podia ser melhor...'
@@ -123,6 +128,7 @@ describe 'admin approves registration of video' do
 
     visit root_path
     click_on 'Área do administrador'
+    click_on 'Conteúdos'
     click_on 'Ver Vídeos Pendentes'
     click_on 'Jogando Mind Craft'
     fill_in 'Retorne um feedback para o streamer:',	with: 'o vídeo não se enquadra no requisitos preestabelecidos'
@@ -147,6 +153,7 @@ describe 'admin approves registration of video' do
 
     visit root_path
     click_on 'Área do administrador'
+    click_on 'Conteúdos'
     click_on 'Ver Vídeos Pendentes'
     click_on 'Jogando Mind Craft'
     click_on 'Recusar Vídeo'

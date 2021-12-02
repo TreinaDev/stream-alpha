@@ -11,7 +11,7 @@ describe 'games' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar Jogo'
+      click_on 'Jogos'
       fill_in 'Nome', with: 'Minecraft'
       select 'Sobrevivência', from: 'Categorias'
       select 'Sandbox', from: 'Categorias'
@@ -30,7 +30,7 @@ describe 'games' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar Jogo'
+      click_on 'Jogos'
       fill_in 'Nome', with: 'Final Fantasy XII - The Zodiac Age'
       click_on 'Registrar Jogo'
 
@@ -43,7 +43,7 @@ describe 'games' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
-      click_on 'Cadastrar Jogo'
+      click_on 'Jogos'
       click_on 'Registrar Jogo'
 
       expect(page).to have_content('Nome não pode ficar em branco')
@@ -60,6 +60,8 @@ describe 'games' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
+      click_on 'Conteúdos'
+      click_on 'Ver Jogos'
 
       expect(page).to have_content('TLOZ - Breath of the Wild')
       expect(page).to have_content('Final Fantasy XII - The Zodiac Age')
@@ -70,6 +72,8 @@ describe 'games' do
       login_as admin, scope: :admin
       visit root_path
       click_on 'Área do administrador'
+      click_on 'Conteúdos'
+      click_on 'Ver Jogos'
 
       expect(page).to have_content('Nenhum jogo registrado.')
     end

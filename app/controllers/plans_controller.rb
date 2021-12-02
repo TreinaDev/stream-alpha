@@ -8,13 +8,17 @@ class PlansController < ApplicationController
   def new
     @video_plan = Plan.new
     @streamers = Streamer.completed
+    @playlists = Playlist.all
   end
 
   def create
-    @video_plan = Plan.new(plans_params)
+    @video_plan = Plan.create(plans_params)
     @streamers = Streamer.completed
+    @playlists = Playlist.all
     if @video_plan.save
-      redirect_to @video_plan, notice: 'Plano cadastrado com sucesso!'
+      @video_plan.register_plan_api(@video_plan)
+      redirect_to @video_plan, notice: t('.plan_pending') if @video_plan&.down?
+      redirect_to @video_plan, notice: t('.success') if @video_plan&.qualified?
     else
       render :new
     end
@@ -27,6 +31,6 @@ class PlansController < ApplicationController
   private
 
   def plans_params
-    params.require(:plan).permit(:name, :description, :value, streamer_ids: [])
+    params.require(:plan).permit(:name, :description, :value, streamer_ids: [], playlist_ids: [])
   end
 end
