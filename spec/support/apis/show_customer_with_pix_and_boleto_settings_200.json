@@ -1,0 +1,16 @@
+{
+  "customer": {
+    "name": "John Smith",
+    "cpf": "12345678910",
+    "token": "1QWGiC1ZYxynLmtlRkAl",
+    "company": {
+      "legal_name": "Empresa n1"
+    },
+    "customer_payment_methods": [
+      {
+        "name": "pix",
+        "token": "L7j95lypZbVZgh0aGTt7"
+      }
+    ]
+  }
+}

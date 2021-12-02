@@ -55,7 +55,7 @@ describe 'admin approves registration of video' do
     fake_response = double('faraday_response', status: 201, body: api_response)
     allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
                                           { product: { name: video.name, type_of: 'single' } },
-                                          { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                          { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                     .and_return(fake_response)
 
     login_as admin, scope: :admin
@@ -70,7 +70,7 @@ describe 'admin approves registration of video' do
     expect(current_path).to eq(video_path(video))
     expect(video.status).to eq('approved')
     expect(page).to have_content('Vídeo aprovado com sucesso!')
-    expect(video.single_video_token).to eq('3fGXrXJ4tAyysV9KW7G2')
+    expect(video.single_video_token).to eq('ncsSFYxlrW0fcHJKN5jj')
   end
   it 'and tries to approve a single video, but PagaPaga API is down' do
     streamer_profile = create(:streamer_profile)
@@ -80,7 +80,7 @@ describe 'admin approves registration of video' do
     fake_response = double('faraday_response', status: 500, body: nil)
     allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
                                           { product: { name: video.name, type_of: 'single' } },
-                                          { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                          { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                     .and_return(fake_response)
 
     login_as admin, scope: :admin

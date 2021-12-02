@@ -8,7 +8,7 @@ describe 'Client profile' do
       fake_response = double('faraday_response', status: 201, body: api_response)
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customers',
                                             { name: 'Otávio Augusto da Silva Lins', cpf: '60243105878' },
-                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
       visit root_path
@@ -40,7 +40,7 @@ describe 'Client profile' do
       expect(ClientProfile.count).to eq(1)
       expect(page).to have_css("img[src*='gary-bendig-unsplash.jpg']")
       expect(page).to_not have_content('CPF: 60243105878')
-      expect(ClientProfile.find(1).token).to eq('XpD75xP4lQ')
+      expect(ClientProfile.find(1).token).to eq('ijlKA9Kxc7Q9vrXOtgTK')
     end
     it 'successfully logs_in with a created profile' do
       client = create(:client)

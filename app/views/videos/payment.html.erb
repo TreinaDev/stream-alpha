@@ -1,12 +1,15 @@
 <h2> Comprar vídeo </h2>
 <%= render @video %>
 <div>
-  <p> Clique no meio de pagamento que você quer utilizar nessa compra </p>
-  <% if @payment_methods.nil? %>
-    Não foi possível consultar os meios de pagamento no momento
-  <% else %>
-    <% @payment_methods.each do |pm| %>
-      <li><%= link_to pm.name %></li>
+<p> Clique no meio de pagamento que você quer utilizar nessa compra </p>
+  <%= link_to 'Boleto' %>
+  <%= link_to 'Pix' %>
+  <% if @credit_cards.any? %>
+    <% @credit_cards.each do |cc| %>
+      <li> <%= link_to cc.nickname %> </li>
     <% end %>
+  <% else %>
+    <p>Nenhum cartão de crédito registrado.</p>
   <% end %>
+  <%= link_to 'Registrar novo cartão de crédito', new_client_profile_customer_payment_method_credit_card_setting_path(@client_profile, @customer_payment_method) %></p>
 </div>

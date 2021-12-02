@@ -1,0 +1,35 @@
+<h3> Cadastro de cartão de crédito </h3>
+
+<%= form_with model: [@client_profile, @customer_payment_method, @credit_card_setting] do |f| %>
+
+  <div>
+    <%= f.label :nickname %>
+    <%= f.text_field :nickname, placeholder: t('.nickname') %>
+    <% @credit_card_setting.errors.full_messages_for(:nickname).each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :credit_card_name %>
+    <%= f.text_field :credit_card_name, required: true, placeholder: t('.credit_card_name') %>
+  </div>
+
+  <div>
+    <%= f.label :credit_card_number %>
+    <%= f.number_field :credit_card_number, required: true, min: 0, max: 9999999999999999, placeholder: t('.credit_card_number') %>
+  </div>
+
+  <div>
+    <%= f.label :credit_card_expiration_date %>
+    <%= f.date_field :credit_card_expiration_date, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :credit_card_security_code %>
+    <%= f.number_field :credit_card_security_code, required: true, min: 0, max: 999999, placeholder: t('.credit_card_security_code') %>
+  </div>
+
+  <%= f.submit 'Cadastrar um novo cartão' %>
+
+<% end %>

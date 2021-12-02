@@ -10,20 +10,9 @@ AllCops:
     - "vendor/**/*"
     - "db/**/*"
     - "node_modules/**/*"
-    - "config/routes.rb"
 
 Metrics/BlockLength:
-  IgnoredMethods:
-    [
-      "describe",
-      "context",
-      "feature",
-      "scenario",
-      "let",
-      "it",
-      "draw",
-      "configure",
-    ]
+  IgnoredMethods: ["describe", "context", "feature", "scenario", "let", "it", "draw", "configure"]
 
 Style/AsciiComments:
   Enabled: false
