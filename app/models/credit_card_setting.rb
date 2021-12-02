@@ -13,6 +13,14 @@ class CreditCardSetting < ApplicationRecord
     end
   end
 
+  def encrypt_credit_card_digits(credit_card, credit_card_number)
+    encrypted = '**** **** **** '
+    (12..15).each do |index|
+      encrypted += credit_card_number.to_s.chars[index]
+    end
+    credit_card.encrypted_digits = encrypted
+  end
+
   private
 
   def faraday_credit_card_registration_call(api_params)

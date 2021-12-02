@@ -100,8 +100,11 @@ describe 'Payment methods registration' do
       fill_in 'Código de segurança', with: '789'
       click_on 'Cadastrar um novo cartão'
 
-      expect(current_path).to eq(new_client_profile_customer_payment_method_credit_card_setting_path(client_profile,
-                                                                                                     cpm))
+      credit_card = CreditCardSetting.last
+      expect(credit_card.token).to eq('xn9mc8WiA1nWPXXHCZHB')
+      expect(credit_card.encrypted_digits).to eq('**** **** **** 9591')
+      expect(credit_card.nickname).to eq('VISA')
+      expect(current_path).to eq(root_path)
     end
   end
 end
