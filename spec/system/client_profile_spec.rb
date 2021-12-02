@@ -81,6 +81,7 @@ describe 'Client profile' do
       expect(page).to have_content('Estado não pode ficar em branco')
       expect(ClientProfile.count).to eq(0)
     end
+
     it 'unsuccessfully: profile already exists' do
       client = create(:client)
       create(:client_profile, client: client)
@@ -92,6 +93,7 @@ describe 'Client profile' do
       expect(current_path).to eq client_profile_path(client.client_profile.id)
       expect(page).to have_content('Perfil já existente!')
     end
+
     it 'successfully: click on the link to edit profile' do
       client = create(:client)
       profile = create(:client_profile, client: client)
@@ -103,7 +105,7 @@ describe 'Client profile' do
 
       expect(current_path).to eq edit_client_profile_path(profile)
       expect(page).to have_content('Insira as informações que deseja atualizar!')
-      expect(page).to have_content('CPF (apenas números) 80052514080')
+      expect(page).to have_content("CPF (apenas números) #{profile.cpf}")
     end
     it 'successfully: edit profile' do
       client = create(:client)
