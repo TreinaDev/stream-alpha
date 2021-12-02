@@ -4,7 +4,9 @@ class CustomerPaymentMethodsController < ApplicationController
   before_action :check_pix_and_boleto_tokens, only: %i[show]
 
   def show
-    @customer_payment_method = current_client.client_profile.customer_payment_method
+    @client_profile = current_client.client_profile
+    @customer_payment_method = @client_profile.customer_payment_method
+    @credit_cards = @client_profile.credit_card_settings
   end
 
   private

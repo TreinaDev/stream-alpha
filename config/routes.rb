@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :client_profiles, only: %i[new create show edit update] do
     resources :customer_payment_methods, only: %i[new create show] do
-      resources :credit_card_settings, only: %i[new create]
+      resources :credit_card_settings, only: %i[new create show]
     end
   end
   resources :game_categories, only: %i[new create]

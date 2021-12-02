@@ -101,10 +101,13 @@ describe 'Payment methods registration' do
       click_on 'Cadastrar um novo cartão'
 
       credit_card = CreditCardSetting.last
+      expect(current_path).to eq(client_profile_customer_payment_method_path(client_profile, cpm))
       expect(credit_card.nickname).to eq('VISA')
       expect(credit_card.encrypted_digits).to eq('**** **** **** 9591')
       expect(credit_card.token).to eq('xn9mc8WiA1nWPXXHCZHB')
+      expect(page).to have_link('Cartão VISA terminado em: **** **** **** 9591'), href: client_profile_customer_payment_method_credit_card_setting_path(client_profile, cpm, credit_card)
     end
+
     it 'tries to create a new credit card via API' do
       client = create(:client)
       client_profile = create(:client_profile, client: client, client_token_status: 'accepted',
