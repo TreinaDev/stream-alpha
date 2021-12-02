@@ -8,7 +8,7 @@ describe 'Payment methods registration' do
       fake_response = double('faraday_response', status: 500, body: '')
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/customers',
                                             { name: client.client_profile.full_name, cpf: client.client_profile.cpf },
-                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
       login_as client, scope: :client

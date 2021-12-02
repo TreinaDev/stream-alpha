@@ -7,7 +7,7 @@ describe PaymentMethod, type: :model do
       fake_response = double('faraday_response', status: 200, body: api_response)
       allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('154689459647851263as')
       allow(Faraday).to receive(:get).with('http://pagapaga.com.br/api/v1/payment_methods/', nil,
-                                           { company_token: '154689459647851263as' })
+                                           { companyToken: '154689459647851263as' })
                                      .and_return(fake_response)
 
       result = PaymentMethod.all
@@ -26,7 +26,7 @@ describe PaymentMethod, type: :model do
 
       allow(SecureRandom).to receive(:alphanumeric).with(20).and_return('154689459647851263as')
       allow(Faraday).to receive(:get).with('http://pagapaga.com.br/api/v1/payment_methods/', nil,
-                                           { company_token: '154689459647851263as' })
+                                           { companyToken: '154689459647851263as' })
                                      .and_return(fake_response)
 
       result = PaymentMethod.all

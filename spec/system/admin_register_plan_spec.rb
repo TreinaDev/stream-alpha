@@ -43,7 +43,7 @@ describe 'Some' do
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
                                             { product: { name: 'Plano Gamer', type_of: 'subscription',
                                                          status: 'enabled' } },
-                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
       login_as admin, scope: :admin
@@ -121,7 +121,7 @@ describe 'Some' do
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
                                             { product: { name: 'Plano 4', type_of: 'subscription',
                                                          status: 'enabled' } },
-                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
       login_as admin, scope: :admin
@@ -150,7 +150,7 @@ describe 'Some' do
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
                                             { product: { name: 'Plano 4', type_of: 'subscription',
                                                          status: 'enabled' } },
-                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
       login_as admin, scope: :admin
@@ -180,7 +180,7 @@ describe 'Some' do
       allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
                                             { product: { name: 'Plano 4', type_of: 'subscription',
                                                          status: 'enabled' } },
-                                            { company_token: Rails.configuration.payment_api['company_auth_token'] })
+                                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
                                       .and_return(fake_response)
 
       login_as admin, scope: :admin
