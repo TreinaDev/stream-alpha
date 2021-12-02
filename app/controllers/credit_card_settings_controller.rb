@@ -8,6 +8,8 @@ class CreditCardSettingsController < ApplicationController
 
   def create
     @credit_card = CreditCardSetting.new(params.require(:credit_card_setting).permit(:nickname, :customer_payment_method_id))
+    @credit_card.customer_payment_method = current_client.client_profile.customer_payment_method
+    @credit_card.encrypt_credit_card_digits(params[:credit_card_setting][:credit_card_number])
     @credit_card.credit_card_api_registration(api_params)
     if @credit_card.save
       redirect_to client_profile_customer_payment_method_path(current_client.client_profile, @credit_card.customer_payment_method)
@@ -26,8 +28,5 @@ class CreditCardSettingsController < ApplicationController
       credit_card_expiration_date: params[:credit_card_setting][:credit_card_expiration_date],
       credit_card_security_code: params[:credit_card_setting][:credit_card_security_code]
     }
-  end
-
-  def credit_card_creation
   end
 end
