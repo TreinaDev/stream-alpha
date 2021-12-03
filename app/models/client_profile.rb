@@ -43,7 +43,7 @@ class ClientProfile < ApplicationRecord
   private
 
   def correct_birth_date
-    errors.add(:birth_date, "deve ser anterior a #{I18n.l 12.years.ago.to_date}") if birth_date.after? 12.years.ago
+    errors.add(:birth_date, "deve ser anterior a #{I18n.l 18.years.ago.to_date}") if birth_date.after? 18.years.ago
   end
 
   def cpf_final_digits

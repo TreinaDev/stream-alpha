@@ -3,6 +3,7 @@ FactoryBot.define do
     full_name { 'Otávio Augusto da Silva Lins' }
     social_name { 'Marcelo' }
     birth_date { '19/08/1997' }
+    cpf { |client_profile| client_profile.cpf = generate_cpf }
     cep { '75629465' }
     city { 'Cidade dos assinantes' }
     state { 'Estado dos assinantes' }
@@ -17,7 +18,6 @@ FactoryBot.define do
         Rack::Test::UploadedFile.new(Rails.root.join('spec/support/assets/gary-bendig-unsplash.jpg'), 'photo/jpg')
       end
     end
-    after(:build) { |client_profile| client_profile.cpf = generate_cpf }
   end
 end
 

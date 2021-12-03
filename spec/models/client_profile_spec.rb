@@ -37,14 +37,14 @@ RSpec.describe ClientProfile, type: :model do
 
       expect(client.errors.full_messages_for(:cpf)).to include('CPF com sequência de dígitos invalida')
     end
-    it 'birth date must be 12 years ago or more' do
+    it 'birth date must be 18 years ago or more' do
       client = build(:client_profile, birth_date: 5.years.ago)
       client.valid?
 
       expect(client.errors.full_messages_for(:birth_date)).to include('Data de nascimento deve ser anterior '\
-                                                                      "a #{I18n.l 12.years.ago.to_date}")
+                                                                      "a #{I18n.l 18.years.ago.to_date}")
     end
-    it 'image cannot be grater than 2 Mb' do
+    it 'image cannot be greater than 2 Mb' do
       photo_profile = ClientProfile.new(photo: Rack::Test::UploadedFile
         .new(Rails.root.join('spec/support/assets/4mb_photo.jpg')))
       photo_profile.valid?
