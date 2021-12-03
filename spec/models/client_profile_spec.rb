@@ -30,7 +30,7 @@ RSpec.describe ClientProfile, type: :model do
         'CPF deve ter 11 dígitos'
       )
     end
-    it 'cpf must be sequence corrrect' do
+    it 'cpf sequence must be correct' do
       client = build(:client_profile)
       client.cpf = '12345678911'
       client.valid?
