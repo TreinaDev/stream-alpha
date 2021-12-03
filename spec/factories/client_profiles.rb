@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :client_profile do
     full_name { 'Otávio Augusto da Silva Lins' }
-    social_name { 'Marcelo' }
+    sequence(:social_name) { |n| "Marcelo #{n}" }
     birth_date { '19/08/1997' }
     cpf { |client_profile| client_profile.cpf = generate_cpf }
     cep { '75629465' }

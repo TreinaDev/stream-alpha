@@ -1,89 +1,224 @@
-<%= form_with model: @client_profile do |f| %>
-  <div>
-    <%= f.label :full_name %>
-    <%= f.text_field :full_name %>
-    <% @client_profile.errors.full_messages_for(:full_name).each do |message| %>
-      <li><%= message %></li>
+    <%= form_with model: @client_profile do |f| %>
+      <div class="w-full flex flex-col mx-auto mt-12 mb-6">
+        <%= f.label :photo, class: "font-semibold mb-2 leading-none text-gray-300" %>
+        <%= f.file_field :photo, class: "flex-1 py-2 border-b-2 border-gray-400 focus:border-green-400 
+                      text-gray-600 placeholder-gray-400
+                      outline-none" %>
+      </div>
+      <% unless @client_profile.errors.full_messages_for(:full_name).any? %>
+        <div class="md:flex items-center">
+            <div class="w-full flex flex-col mx-auto">
+              <%= f.label :full_name, class: "font-semibold leading-none text-gray-300" %>
+              <%= f.text_field :full_name, class: "leading-none text-gray-50 p-3 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+            </div>
+        </div>
+      <% else %>
+        <div class="items-center mt-12">
+            <div class="w-full mx-auto">
+              <%= f.label :full_name, class: "font-semibold leading-none text-gray-300" %>
+              <%= f.text_field :full_name, class: "w-full leading-none text-gray-50 p-3 border border-red-300 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+            </div>
+        </div>
+        <div class="items-center w-full">
+            <% @client_profile.errors.full_messages_for(:full_name).each do |message| %>
+              <li class= "text-red-300 font-bold"><%= message %></li>
+            <% end %>
+        </div>
+      <% end %>
+
+      <% unless @client_profile.errors.full_messages_for(:social_name).any? %>
+        <div class="md:flex items-center mt-6">
+            <div class="w-full flex flex-col mx-auto">
+              <%= f.label :social_name, class: "font-semibold leading-none text-gray-300" %>
+              <%= f.text_field :social_name, class: "leading-none text-gray-50 p-3 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+            </div>
+        </div>
+      <% else %>
+        <div class="items-center mt-12">
+            <div class="w-full mx-auto">
+              <%= f.label :social_name, class: "font-semibold leading-none text-gray-300" %>
+              <%= f.text_field :social_name, class: "w-full leading-none text-gray-50 p-3 border border-red-300 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+            </div>
+        </div>
+        <div class="items-center w-full">
+            <% @client_profile.errors.full_messages_for(:social_name).each do |message| %>
+              <li class= "text-red-300 font-bold"><%= message %></li>
+            <% end %>
+        </div>
+      <% end %>
+
+      <% unless @client_profile.errors.full_messages_for(:birth_date).any? %>
+        <div class="md:flex items-center mt-6">
+            <div class="w-full flex flex-col mx-auto">
+              <%= f.label :birth_date, class: "font-semibold leading-none text-gray-300" %>
+              <%= f.date_field :birth_date, class: "w-2/5 leading-none text-gray-50 p-3 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+            </div>
+        </div>
+      <% else %>
+        <div class="items-center mt-12">
+            <div class="w-full mx-auto">
+              <%= f.label :birth_date, class: "font-semibold leading-none text-gray-300" %>
+              <%= f.date_field :birth_date, class: "w-2/5 leading-none text-gray-50 p-3 border border-red-300 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+            </div>
+        </div>
+        <div class="items-center w-full">
+            <% @client_profile.errors.full_messages_for(:birth_date).each do |message| %>
+              <li class= "text-red-300 font-bold"><%= message %></li>
+            <% end %>
+        </div>
+      <% end %>
+
+      <% unless @client_profile.errors.full_messages_for(:cpf).any? %>
+        <div class="md:flex items-center mt-6">
+            <div class="w-full flex flex-col mx-auto">
+              <%= f.label :cpf, "CPF (apenas números)", class: "font-semibold leading-none text-gray-300" %>
+              <%= f.number_field :cpf, class: "leading-none text-gray-50 p-3 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+              <%= @client_profile.cpf if !current_page?(new_client_profile_path) %>
+            </div>
+        </div>
+      <% else %>
+        <div class="items-center mt-12">
+            <div class="w-full mx-auto">
+              <%= f.label :cpf, class: "font-semibold leading-none text-gray-300" %>
+              <%= f.number_field :cpf, class: "leading-none text-gray-50 p-3 border border-red-300 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+              <%= @client_profile.cpf if !current_page?(new_client_profile_path) %>
+            </div>
+        </div>
+        <div class="items-center w-full">
+            <% @client_profile.errors.full_messages_for(:cpf).each do |message| %>
+              <li class= "text-red-300 font-bold"><%= message %></li>
+            <% end %>
+        </div>
+      <% end %>
+
+      <% unless @client_profile.errors.full_messages_for(:cep).any? %>
+        <div class="md:flex items-center mt-6">
+            <div class="w-full flex flex-col mx-auto">
+              <%= f.label :cep, class: "font-semibold leading-none text-gray-300" %>
+              <%= f.number_field :cep, class: "leading-none text-gray-50 p-3 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+            </div>
+        </div>
+      <% else %>
+        <div class="items-center mt-12">
+            <div class="w-full mx-auto">
+              <%= f.label :cep, class: "font-semibold leading-none text-gray-300" %>
+              <%= f.number_field :cep, class: "leading-none text-gray-50 p-3 border border-red-300 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+            </div>
+        </div>
+        <div class="items-center w-full">
+            <% @client_profile.errors.full_messages_for(:cep).each do |message| %>
+              <li class= "text-red-300 font-bold"><%= message %></li>
+            <% end %>
+        </div>
+      <% end %>
+
+      <% unless @client_profile.errors.full_messages_for(:residential_address).any? %>
+        <div class="md:flex items-center mt-6">
+            <div class="w-full flex flex-col mx-auto">
+              <%= f.label :residential_address, class: "font-semibold leading-none text-gray-300" %>
+              <%= f.text_field :residential_address, class: "leading-none text-gray-50 p-3 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+            </div>
+        </div>
+      <% else %>
+        <div class="items-center mt-12">
+            <div class="w-full mx-auto">
+              <%= f.label :residential_address, class: "font-semibold leading-none text-gray-300" %>
+              <%= f.text_field :residential_address, class: "leading-none text-gray-50 p-3 border border-red-300 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+            </div>
+        </div>
+        <div class="items-center w-full">
+            <% @client_profile.errors.full_messages_for(:residential_address).each do |message| %>
+              <li class= "text-red-300 font-bold"><%= message %></li>
+            <% end %>
+        </div>
+      <% end %>
+
+      <% unless @client_profile.errors.full_messages_for(:residential_number).any? %>
+        <div class="md:flex items-center mt-6">
+            <div class="w-full flex flex-col mx-auto">
+              <%= f.label :residential_number, class: "font-semibold leading-none text-gray-300" %>
+              <%= f.number_field :residential_number, class: "leading-none text-gray-50 p-3 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+            </div>
+        </div>
+      <% else %>
+        <div class="items-center mt-12">
+            <div class="w-full mx-auto">
+              <%= f.label :residential_number, class: "font-semibold leading-none text-gray-300" %>
+              <%= f.number_field :residential_number, class: "leading-none text-gray-50 p-3 border border-red-300 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+            </div>
+        </div>
+        <div class="items-center w-full">
+            <% @client_profile.errors.full_messages_for(:residential_number).each do |message| %>
+              <li class= "text-red-300 font-bold"><%= message %></li>
+            <% end %>
+        </div>
+      <% end %>
+
+      <% unless @client_profile.errors.full_messages_for(:city).any? %>
+        <div class="md:flex items-center mt-6">
+            <div class="w-full flex flex-col mx-auto">
+              <%= f.label :city, class: "font-semibold leading-none text-gray-300" %>
+              <%= f.text_field :city, class: "leading-none text-gray-50 p-3 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+            </div>
+        </div>
+      <% else %>
+        <div class="items-center mt-12">
+            <div class="w-full mx-auto">
+              <%= f.label :city, class: "font-semibold leading-none text-gray-300" %>
+              <%= f.text_field :city, class: "leading-none text-gray-50 p-3 border border-red-300 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+            </div>
+        </div>
+        <div class="items-center w-full">
+            <% @client_profile.errors.full_messages_for(:city).each do |message| %>
+              <li class= "text-red-300 font-bold"><%= message %></li>
+            <% end %>
+        </div>
+      <% end %>
+
+      <% unless @client_profile.errors.full_messages_for(:state).any? %>
+        <div class="md:flex items-center mt-6">
+            <div class="w-full flex flex-col mx-auto">
+              <%= f.label :state, class: "font-semibold leading-none text-gray-300" %>
+              <%= f.text_field :state, class: "leading-none text-gray-50 p-3 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+            </div>
+        </div>
+      <% else %>
+        <div class="items-center mt-12">
+            <div class="w-full mx-auto">
+              <%= f.label :state, class: "font-semibold leading-none text-gray-300" %>
+              <%= f.text_field :state, class: "leading-none text-gray-50 p-3 border border-red-300 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+            </div>
+        </div>
+        <div class="items-center w-full">
+            <% @client_profile.errors.full_messages_for(:state).each do |message| %>
+              <li class= "text-red-300 font-bold"><%= message %></li>
+            <% end %>
+        </div>
+      <% end %>
+
+      <% unless @client_profile.errors.full_messages_for(:age_rating).any? %>
+        <div class="md:flex items-center mt-6">
+            <div class="w-full flex flex-col mx-auto ">
+              <%= f.label :age_rating, class: "font-semibold mb-4 leading-none text-gray-300" %>
+              <%= f.select :age_rating, ['L', '10', '12', '14', '16', '18'],class: "w-1/3 leading-none text-gray-50 p-3 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+            </div>
+        </div>
+      <% else %>
+        <div class="items-center mt-12">
+            <div class="w-full mx-auto">
+              <%= f.label :age_rating, class: "font-semibold mb-4 leading-none text-gray-300" %>
+              <%= f.text_field :age_rating, class: "leading-none text-gray-50 p-3 border border-red-300 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded"  %>
+            </div>
+        </div>
+        <div class="items-center w-full">
+            <% @client_profile.errors.full_messages_for(:age_rating).each do |message| %>
+              <li class= "text-red-300 font-bold"><%= message %></li>
+            <% end %>
+        </div>
+      <% end %>
+      <div>
+
+      <div class="flex items-center justify-center w-full">
+        <%= f.submit class: "mt-9 font-semibold leading-none text-white py-4 px-10 bg-blue-700 rounded hover:bg-blue-600 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:outline-none" %>
+      </div>
     <% end %>
-  </div>
-
-  <div>
-    <%= f.label :social_name %>
-    <%= f.text_field :social_name %>
-    <% @client_profile.errors.full_messages_for(:social_name).each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </div>
-
-  <div>
-    <%= f.label :birth_date %>
-    <%= f.date_field :birth_date %>
-    <% @client_profile.errors.full_messages_for(:birth_date).each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </div>
-
-  <div>
-    <%= f.label :cpf, 'CPF (apenas números)' %>
-    <%= f.number_field :cpf if current_page?(new_client_profile_path) %>
-    <%= @client_profile.cpf if !current_page?(new_client_profile_path) %>
-    <% @client_profile.errors.full_messages_for(:cpf).each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </div>
-
-  <div>
-    <%= f.label :cep %>
-    <%= f.number_field :cep %>
-    <% @client_profile.errors.full_messages_for(:cep).each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </div>
-
-  <div>
-    <%= f.label :residential_address %>
-    <%= f.text_field :residential_address %>
-    <% @client_profile.errors.full_messages_for(:residential_address).each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </div>
-
-  <div>
-    <%= f.label :residential_number %>
-    <%= f.number_field :residential_number%>
-    <% @client_profile.errors.full_messages_for(:residential_number).each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </div>
-
-  <div>
-    <%= f.label :city %>
-    <%= f.text_field :city %>
-    <% @client_profile.errors.full_messages_for(:city).each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </div>
-
-  <div>
-    <%= f.label :state %>
-    <%= f.text_field :state %>
-    <% @client_profile.errors.full_messages_for(:state).each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </div>
-
-  <div>
-    <%= f.label :age_rating%>
-    <%= f.select :age_rating, ['L', '10', '12', '14', '16', '18'] %>
-    <% @client_profile.errors.full_messages_for(:age_rating).each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </div>
-
-  <div>
-    <%= f.label :photo %>
-    <%= f.file_field :photo %>
-  </div>
-
-  <%= f.submit %>
-<% end %>
