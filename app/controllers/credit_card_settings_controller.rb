@@ -11,9 +11,8 @@ class CreditCardSettingsController < ApplicationController
     credit_card_creation
     redirect_to current_client.client_profile, notice: t('.failure') and return unless @credit_card.token
 
-    if @credit_card.save
-      redirect_to [current_client.client_profile, @credit_card.customer_payment_method], notice: t('.success')
-    end
+    @credit_card.save
+    redirect_to [current_client.client_profile, @credit_card.customer_payment_method], notice: t('.success')
   end
 
   private
