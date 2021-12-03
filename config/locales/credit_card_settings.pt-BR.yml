@@ -17,3 +17,6 @@ pt-BR:
       credit_card_number: "0000 1111 2222 3333"
       credit_card_expiration_date: ""
       credit_card_security_code: "XXX"
+    create:
+      success: "Cartão de Crédito cadastrado com sucesso na PagaPaga!"
+      failure: "Erro ao cadastrar Cartão de Crédito na PagaPaga!"

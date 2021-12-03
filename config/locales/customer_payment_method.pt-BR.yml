@@ -9,4 +9,4 @@ pt-BR:
         credit_card_token: "Token do Cartão de Crédito"
   customer_payment_methods:
     show:
-      get_client_token_error: "Não foi possível realizar essa ação agora. Por favor, tente novamente mais tarde"
+      get_client_token_error: "Não foi possível realizar essa ação agora. Por favor, tente novamente mais tarde..."

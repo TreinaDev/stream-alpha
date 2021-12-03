@@ -9,6 +9,7 @@ describe 'admin content' do
     click_on 'Área do administrador'
     click_on 'Conteúdos'
 
+    expect(current_path).to eq(admin_contents_admins_path)
     expect(page).to have_link('Dashboard', href: admin_area_admins_path)
     expect(page).to have_link('Conteúdos', href: admin_contents_admins_path)
     expect(page).to have_link('Ver Streamer', href: streamer_profiles_path)
@@ -29,6 +30,7 @@ describe 'admin content' do
     click_on 'Área do administrador'
     click_on 'Conteúdos'
 
+    expect(current_path).to eq(admin_contents_admins_path)
     expect(page).to have_content('Arcade')
     expect(page).to have_content('Ação')
     expect(page).to have_content('Luta')
@@ -43,6 +45,7 @@ describe 'admin content' do
     click_on 'Área do administrador'
     click_on 'Conteúdos'
 
+    expect(current_path).to eq(admin_contents_admins_path)
     expect(page).to have_content(video1.name)
     expect(page).to have_content(video1.streamer.email)
     expect(page).to have_content(video1.game.name)
@@ -62,6 +65,7 @@ describe 'admin content' do
     click_on 'Área do administrador'
     click_on 'Conteúdos'
 
+    expect(current_path).to eq(admin_contents_admins_path)
     expect(page).to have_content(/3/)
     expect(page).to have_content(/5/)
     expect(page).to have_content(/0/)

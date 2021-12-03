@@ -1,5 +1,6 @@
 class CreditCardSettingsController < ApplicationController
   before_action :authenticate_client!, only: %i[new]
+
   def new
     @client_profile = current_client.client_profile
     @customer_payment_method = @client_profile.customer_payment_method
@@ -8,12 +9,10 @@ class CreditCardSettingsController < ApplicationController
 
   def create
     credit_card_creation
-    @credit_card.credit_card_api_registration(current_client, api_params(params[:credit_card_setting]))
-    redirect_to current_client.client_profile, notice: 'Erro ao criar cartão' and return unless @credit_card.token
+    redirect_to current_client.client_profile, notice: t('.failure') and return unless @credit_card.token
 
     @credit_card.save
-    redirect_to client_profile_customer_payment_method_path(current_client.client_profile,
-                                                            @credit_card.customer_payment_method)
+    redirect_to [current_client.client_profile, @credit_card.customer_payment_method], notice: t('.success')
   end
 
   private
@@ -31,5 +30,6 @@ class CreditCardSettingsController < ApplicationController
   def credit_card_creation
     @credit_card = CreditCardSetting.new(params.require(:credit_card_setting).permit(:nickname))
     @credit_card.customer_payment_method = current_client.client_profile.customer_payment_method
+    @credit_card.credit_card_api_registration(current_client, api_params(params[:credit_card_setting]))
   end
 end

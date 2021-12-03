@@ -21,6 +21,16 @@ pt-BR:
           approved: "Aprovado"
           refused: "Recusado"
   videos:
+    new:
+      profile_exists: "Vídeo já existente!"
+    create:
+      success: "Vídeo cadastrado com sucesso!"
+      failure: "Erro ao cadastrar Vídeo!"
+    edit:
+      unauthorized_profile: "Você não é o dono deste Vídeo!"
+    update:
+      success: "Vídeo atualizado com sucesso!"
+      failure: "Erro ao atualizar Vídeo!"
     show:
       name: "Nome"
       description: "Descrição"
@@ -28,13 +38,10 @@ pt-BR:
       feed_back: "Retorne um feedback para o streamer:"
     refuse:
       success: "Vídeo recusado com sucesso!"
-      fail: "Erro ao recusar Vídeo!"
+      failure: "Erro ao recusar Vídeo!"
     approve:
       success: "Vídeo aprovado com sucesso!"
-      integration_error: "Falha na integração com a plataforma Pagapaga. Tente novamente"
-    create:
-      success: "Vídeo cadastrado com sucesso!"
-      fail: "Erro ao criar Vídeo!"
+      integration_error: "Falha na integração com a plataforma PagaPaga. Tente novamente..."
   actioncontroller:
     videos:
       success: "Operação realizada com sucesso!"

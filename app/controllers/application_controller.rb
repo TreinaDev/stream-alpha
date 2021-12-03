@@ -10,14 +10,14 @@ class ApplicationController < ActionController::Base
     return if current_admin || current_client || current_streamer
 
     redirect_to root_path,
-                alert: 'Você não tem permissão para visualizar essa página!'
+                alert: t('.unauthorized')
   end
 
   def authenticate_client_or_admin!
     return if current_client || current_admin
 
     redirect_to root_path,
-                alert: 'Você não tem permissão para visualizar essa página!'
+                alert: t('.unauthorized')
   end
 
   def check_client_token

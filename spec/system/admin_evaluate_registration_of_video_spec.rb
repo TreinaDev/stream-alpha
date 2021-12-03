@@ -16,6 +16,7 @@ describe 'admin approves registration of video' do
     click_on 'Conteúdos'
     click_on 'Ver Vídeos Pendentes'
 
+    expect(current_path).to eq(analysis_videos_path)
     expect(page).to have_link('Jogando Mind Craft', href: video_path(video1))
     expect(page).to have_link('Fifa 1988', href: video_path(video2))
     expect(page).to_not have_link('Grand theft auto crazy', href: video_path(video3))
@@ -46,6 +47,7 @@ describe 'admin approves registration of video' do
     expect(page).to_not have_link('Aprovar Vídeo')
     expect(page).to_not have_button('Recusar Vídeo')
   end
+
   it 'and approves a single video, registering it on pagapaga via API' do
     streamer_profile = create(:streamer_profile)
     video = create(:video, name: 'Ocarina of Time Any% WR', status: 'pending', streamer: streamer_profile.streamer)
@@ -72,6 +74,7 @@ describe 'admin approves registration of video' do
     expect(page).to have_content('Vídeo aprovado com sucesso!')
     expect(video.single_video_token).to eq('ncsSFYxlrW0fcHJKN5jj')
   end
+
   it 'and tries to approve a single video, but PagaPaga API is down' do
     streamer_profile = create(:streamer_profile)
     video = create(:video, name: 'Ocarina of Time Any% WR', status: 'pending', streamer: streamer_profile.streamer)
@@ -94,9 +97,10 @@ describe 'admin approves registration of video' do
     video.reload
     expect(current_path).to eq(video_path(video))
     expect(video.status).to eq('pending')
-    expect(page).to have_content('Falha na integração com a plataforma Pagapaga. Tente novamente')
+    expect(page).to have_content('Falha na integração com a plataforma PagaPaga. Tente novamente...')
     expect(video.single_video_token).to eq(nil)
   end
+
   it 'and refused video' do
     streamer_profile = create(:streamer_profile, name: 'Solaire')
     video1 = create(:video, name: 'Jogando Mind Craft', status: 'pending', streamer: streamer_profile.streamer)
@@ -133,12 +137,12 @@ describe 'admin approves registration of video' do
     click_on 'Jogando Mind Craft'
     fill_in 'Retorne um feedback para o streamer:',	with: 'o vídeo não se enquadra no requisitos preestabelecidos'
     click_on 'Recusar Vídeo'
-
     video1.reload
-    expect(video1.status).to eq('refused')
-    expect(video1.feed_back).to eq('o vídeo não se enquadra no requisitos preestabelecidos')
+
     expect(current_path).to eq(video_path(video1))
     expect(page).to have_content('Vídeo recusado com sucesso!')
+    expect(video1.status).to eq('refused')
+    expect(video1.feed_back).to eq('o vídeo não se enquadra no requisitos preestabelecidos')
     expect(page).to have_content('Status: Recusado')
     expect(page).to have_content('Feedback: o vídeo não se enquadra no requisitos preestabelecidos')
     expect(page).to_not have_link('Aprovar Vídeo')

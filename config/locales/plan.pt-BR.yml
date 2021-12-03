@@ -16,8 +16,9 @@ pt-BR:
         plan_statuses:
           down: "Pendente"
           qualified: "Habilitado"
-          not_qualified: "Deshabilitado"
+          not_qualified: "Desabilitado"
   plans:
     create:
       success: "Plano cadastrado com sucesso!"
+      failure: "Erro ao cadastrar Plano!"
       plan_pending: "Servidor PagaPaga indisponível, cadastro ficou na fila."

@@ -8,8 +8,9 @@ class StreamersController < ApplicationController
   def create
     @streamer = Streamer.new(streamer_params)
     if @streamer.save
-      redirect_to root_path, notice: 'Streamer cadastrado com sucesso!'
+      redirect_to root_path, notice: t('.success')
     else
+      flash[:alert] = t('.failure')
       render :new
     end
   end
