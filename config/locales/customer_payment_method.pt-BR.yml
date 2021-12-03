@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      customer_payment_method: "Métodos de Pagamento do Assinante"
+    attributes:
+      customer_payment_method:
+        boleto_token: "Token do Boleto"
+        pix_token: "Token do Pix"
+        credit_card_token: "Token do Cartão de Crédito"
+  customer_payment_methods:
+    show:
+      get_client_token_error: "Não foi possível realizar essa ação agora. Por favor, tente novamente mais tarde"

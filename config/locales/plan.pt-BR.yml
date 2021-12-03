@@ -12,3 +12,12 @@ pt-BR:
         streamer_ids: "Streamers"
         playlist_ids: "Playlists"
         created_at: "Criado em"
+        plan_status: "Status do plano"
+        plan_statuses:
+          down: "Pendente"
+          qualified: "Habilitado"
+          not_qualified: "Deshabilitado"
+  plans:
+    create:
+      success: "Plano cadastrado com sucesso!"
+      plan_pending: "Servidor PagaPaga indisponível, cadastro ficou na fila."

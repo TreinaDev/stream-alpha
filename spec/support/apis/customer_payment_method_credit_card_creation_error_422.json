@@ -1,0 +1,31 @@
+{
+  "message": "Requisição inválida",
+  "errors": {
+    "customer": [
+      "é obrigatório(a)"
+    ],
+    "credit_card_name": [
+      "não pode ficar em branco"
+    ],
+    "credit_card_number": [
+      "não pode ficar em branco"
+    ],
+    "credit_card_expiration_date": [
+      "não pode ficar em branco"
+    ],
+    "credit_card_security_code": [
+      "não pode ficar em branco"
+    ],
+    "base": [
+      "É obrigatório passar uma payment setting enabled, de acordo com o type_of passado!"
+    ]
+  },
+  "request": {
+    "customer_payment_method": {
+      "type_of": "credit_card",
+      "company": {
+        "legal_name": "Empresa n1"
+      }
+    }
+  }
+}

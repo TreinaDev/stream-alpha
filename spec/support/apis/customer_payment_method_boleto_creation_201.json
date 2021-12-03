@@ -1,0 +1,15 @@
+{
+  "customer_payment_method": {
+    "type_of": "boleto",
+    "token": "xn9mc8WiA1nWPXXHCZHB",
+    "boleto_setting": {
+      "token": "KDE3V0O07j17WGSoFGRC"
+    },
+    "customer": {
+      "token": "ijlKA9Kxc7Q9vrXOtgTK"
+    },
+    "company": {
+      "legal_name": "Gamestream"
+    }
+  }
+}
