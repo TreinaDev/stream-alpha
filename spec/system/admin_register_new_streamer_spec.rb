@@ -23,7 +23,7 @@ describe 'Some' do
       click_on 'Streamer'
       fill_in 'Email', with: 'apolo@user.com'
       fill_in 'Senha', with: '7777777'
-      click_on 'Cadastrar'
+      click_on 'Criar Streamer'
 
       expect(current_path).to eq(root_path)
       expect(page).to have_content('Streamer cadastrado com sucesso!')
@@ -38,7 +38,7 @@ describe 'Some' do
       click_on 'Streamer'
       fill_in 'Email', with: ''
       fill_in 'Senha', with: ''
-      click_on 'Cadastrar'
+      click_on 'Criar Streamer'
 
       expect(current_path).to eq(streamers_path)
       expect(page).to have_content('Erro ao cadastrar Streamer!')
