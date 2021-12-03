@@ -1,6 +1,22 @@
 class AdminsController < ApplicationController
   before_action :authenticate_admin!, only: %i[admin_area new create]
   layout 'admin'
+
+  def new
+    @admin = Admin.new
+  end
+
+  def create
+    @admin = Admin.new(admin_params)
+
+    if @admin.save
+      redirect_to root_path, notice: t('.success')
+    else
+      flash[:alert] = t('.failure')
+      render :new
+    end
+  end
+
   def admin_area
     @games = Game.all
     @clients_count = Client.all.count
@@ -13,19 +29,6 @@ class AdminsController < ApplicationController
     @game_categories = GameCategory.all.order(name: :asc)
     @videos_count = Video.approved.count
     @videos_pending_count = Video.pending.count
-  end
-
-  def new
-    @admin = Admin.new
-  end
-
-  def create
-    @admin = Admin.new(admin_params)
-    if @admin.save
-      redirect_to root_path, notice: 'Administrador cadastrado com sucesso!'
-    else
-      render :new
-    end
   end
 
   private

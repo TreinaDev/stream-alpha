@@ -2,29 +2,29 @@ class StreamerProfilesController < ApplicationController
   before_action :authenticate_admin!, only: %i[active inactive index]
   before_action :authenticate_streamer!, only: %i[new create edit update]
   before_action :find_profile, only: %i[active inactive show edit update]
+  before_action :profile_exists!, only: %i[new create]
   before_action :streamer_is_owner!, only: %i[edit update]
-  def index
-    @streamers = StreamerProfile.all
+
+  def new
+    @streamer_profile = StreamerProfile.new
+  end
+
+  def create
+    @streamer_profile = current_streamer.build_streamer_profile(streamer_profile_params)
+
+    if @streamer_profile.save
+      @streamer_profile.streamer.completed!
+      redirect_to @streamer_profile, notice: t('.success')
+    else
+      flash[:alert] = t('.failure')
+      render :new
+    end
   end
 
   def show; end
 
-  def new
-    @streamer_profile = StreamerProfile.new
-
-    redirect_to current_streamer.streamer_profile, alert: 'Perfil já existente!' if streamer_profile_exists?
-  end
-
-  def create
-    redirect_to current_streamer.streamer_profile, alert: 'Perfil já existente!' if streamer_profile_exists?
-    @streamer_profile = current_streamer.build_streamer_profile(streamer_profile_params)
-    if @streamer_profile.save
-      @streamer_profile.streamer.completed!
-      redirect_to @streamer_profile, notice: "#{t(:streamer_profile, scope: 'activerecord.models')} criado com sucesso!"
-    else
-      flash[:alert] = "Erro ao criar #{t(:streamer_profile, scope: 'activerecord.models')}!"
-      render :new
-    end
+  def index
+    @streamers = StreamerProfile.all
   end
 
   def edit
@@ -35,9 +35,9 @@ class StreamerProfilesController < ApplicationController
     @streamer_profile = StreamerProfile.find(params[:id])
 
     if @streamer_profile.update(streamer_profile_params)
-      redirect_to @streamer_profile, notice: 'Perfil atualizado com sucesso!'
+      redirect_to @streamer_profile, notice: t('.success')
     else
-      flash[:alert] = "Erro ao atualizar #{t(:streamer_profile, scope: 'activerecord.models')}!"
+      flash[:alert] = t('.failure')
       render :edit
     end
   end
@@ -56,15 +56,17 @@ class StreamerProfilesController < ApplicationController
     @streamer_profile = StreamerProfile.find(params[:id])
   end
 
+  def profile_exists!
+    return if StreamerProfile.find_by(streamer: current_streamer).nil?
+
+    redirect_to current_streamer.streamer_profile, alert: t('.profile_exists')
+  end
+
   def streamer_is_owner!
     @streamer_profile = StreamerProfile.find(params[:id])
     return if @streamer_profile.owner?(current_streamer)
 
-    redirect_to root_path, alert: "Você só pode editar o seu #{t(:streamer_profile, scope: 'activerecord.models')}!"
-  end
-
-  def streamer_profile_exists?
-    !StreamerProfile.find_by(streamer: current_streamer).nil?
+    redirect_to root_path, alert: t('.unauthorized_profile')
   end
 
   def streamer_profile_params

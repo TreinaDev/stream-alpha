@@ -12,11 +12,14 @@ describe 'game categories' do
       fill_in 'Nome', with: 'Ação'
       click_on 'Criar Categoria de Jogos'
 
+      expect(current_path).to eq(game_categories_path)
+      expect(page).to have_content('Categoria de Jogo cadastrada com sucesso!')
       expect(page).to have_content('Ação')
       expect(page).to have_content(I18n.l(Time.zone.now.to_date))
       expect(page).to have_content(admin.email)
       expect(GameCategory.count).to eq(1)
     end
+
     it 'unsuccessfully - tried to create a repeated category' do
       admin = create(:admin)
       create(:game_category, name: 'RPG')
@@ -28,9 +31,12 @@ describe 'game categories' do
       fill_in 'Nome', with: 'RPG'
       click_on 'Criar Categoria de Jogos'
 
+      expect(current_path).to eq(game_categories_path)
+      expect(page).to have_content('Erro ao cadastrar Categoria de Jogo!')
       expect(page).to have_content('Nome já está em uso')
       expect(GameCategory.count).to eq(1)
     end
+
     it 'unsuccessfully - tried to create a blank category' do
       admin = create(:admin)
 
@@ -40,10 +46,13 @@ describe 'game categories' do
       click_on 'Categoria de Jogos'
       click_on 'Criar Categoria de Jogos'
 
+      expect(current_path).to eq(game_categories_path)
+      expect(page).to have_content('Erro ao cadastrar Categoria de Jogo!')
       expect(page).to have_content('Nome não pode ficar em branco')
       expect(GameCategory.count).to eq(0)
     end
   end
+
   context 'Admin views game categories:' do
     it 'successfully' do
       admin = create(:admin)
@@ -57,6 +66,7 @@ describe 'game categories' do
       click_on 'Conteúdos'
       click_on 'Ver Categoria de Jogos'
 
+      expect(current_path).to eq(game_categories_path)
       expect(page).to have_content(game_category1.name)
       expect(page).to have_content(I18n.l(game_category1.created_at.to_date))
       expect(page).to have_content(game_category1.admin.email)
@@ -67,6 +77,7 @@ describe 'game categories' do
       expect(page).to have_content(I18n.l(game_category3.created_at.to_date))
       expect(page).to have_content(game_category3.admin.email)
     end
+
     it 'and there are no game categories registered' do
       admin = create(:admin)
 
@@ -76,6 +87,7 @@ describe 'game categories' do
       click_on 'Conteúdos'
       click_on 'Ver Categoria de Jogos'
 
+      expect(current_path).to eq(game_categories_path)
       expect(page).to have_content('Nenhuma categoria de jogo registrada.')
     end
   end
