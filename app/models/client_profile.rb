@@ -8,6 +8,8 @@ class ClientProfile < ApplicationRecord
             presence: true
 
   validate :must_include_a_surname, :correct_cpf_length, :correct_cep_length
+  validate :correct_cpf_sequence, if: :cpf
+  validate :correct_birth_date, if: :birth_date
   validate :acceptable_photo
 
   enum client_token_status: { pending: 5, accepted: 10 }
@@ -39,6 +41,28 @@ class ClientProfile < ApplicationRecord
   end
 
   private
+
+  def correct_birth_date
+    errors.add(:birth_date, "deve ser anterior a #{I18n.l 18.years.ago.to_date}") if birth_date.after? 18.years.ago
+  end
+
+  def cpf_final_digits
+    d1 = 0
+    d2 = 0
+
+    cpf.each_char.with_index do |number, index|
+      d1 += number.to_i * (10 - index) * 10 if index < 9
+      d2 += number.to_i * (11 - index) * 10 if index < 10
+    end
+
+    [d1 % 11, d2 % 11]
+  end
+
+  def correct_cpf_sequence
+    return if cpf.index(cpf_final_digits.join).eql? 9
+
+    errors.add(:cpf, 'com sequência de dígitos invalida')
+  end
 
   def correct_cep_length
     errors.add(:cep, I18n.t('digits', scope: 'activerecord.errors.messages', size: '8')) if cep && cep.chars.length != 8
