@@ -9,6 +9,7 @@ describe 'Admin' do
       visit root_path
       click_on 'Área do administrador'
 
+      expect(current_path).to eq(admin_area_admins_path)
       expect(page).to have_link('Playlist', href: new_playlist_path)
     end
 
@@ -31,11 +32,10 @@ describe 'Admin' do
       select 'jogando fifa na master league', from: 'Videos'
       select 'Yoda SL', from: 'Streamers'
       select 'Robo', from: 'Streamers'
-
       click_on 'Criar Playlist'
 
       expect(current_path).to eq playlist_path(1)
-      expect(page).to have_content 'Playlist criada com sucesso!'
+      expect(page).to have_content 'Playlist cadastrada com sucesso!'
       expect(page).to have_content 'Nome: Casual Gamers'
       expect(page).to have_content 'Descrição: Encontre streamers que jogam apenas para se divertir.'
       expect(page).to have_link('jogando fifa modo carreira', href: video_path(video))
@@ -94,7 +94,7 @@ describe 'Admin' do
       click_on 'Criar Playlist'
 
       expect(current_path).to eq playlists_path
-      expect(page).to have_content('Erro ao criar Playlist!')
+      expect(page).to have_content('Erro ao cadastrar Playlist!')
       expect(page).to have_content('Nome não pode ficar em branco')
       expect(page).to have_content('Descrição não pode ficar em branco')
     end

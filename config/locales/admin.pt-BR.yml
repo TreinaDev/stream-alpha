@@ -9,3 +9,7 @@ pt-BR:
         password: "Senha"
         password_confirmation: "Confirme sua senha"
         remember_me: "Lembrar senha"
+  admins:
+    create:
+      success: "Administrador cadastrado com sucesso!"
+      failure: "Erro ao cadastrar Administrador!"

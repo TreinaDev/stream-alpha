@@ -28,6 +28,7 @@ describe 'Streamer' do
       select 'Megaman X4', from: 'Jogo'
       click_on 'Enviar'
 
+      expect(current_path).to eq(video_path(1))
       expect(page).to have_content('Vídeo cadastrado com sucesso!')
       expect(page).to have_css('iframe[src*="https://player.vimeo.com/video/613710178?autoplay=1&background=0"]')
       expect(page).to have_content('Jogando Mind Craft')
@@ -53,6 +54,7 @@ describe 'Streamer' do
       click_on 'Ver todos os videos avulsos'
       click_on video.name
 
+      expect(current_path).to eq(video_path(video))
       expect(page).to have_content(video.name)
       expect(page).to have_content('Por: Solaire')
       expect(page).to have_content("0 Visualizações - #{I18n.l(Time.zone.now.to_date)}")
@@ -90,11 +92,12 @@ describe 'Streamer' do
       create(:streamer_profile, name: 'Solaire', streamer: streamer)
 
       login_as streamer, scope: :streamer
-      visit new_video_path
+      visit root_path
+      click_on 'Cadastrar Vídeo'
       click_on 'Enviar'
 
-      expect(current_path).to have_content('/videos')
-      expect(page).to have_content('Erro ao criar Vídeo!')
+      expect(current_path).to eq(videos_path)
+      expect(page).to have_content('Erro ao cadastrar Vídeo!')
       expect(page).to have_content('Jogo é obrigatório(a)')
       expect(page).to have_content('Nome não pode ficar em branco')
       expect(page).to have_content('Descrição não pode ficar em branco')
@@ -112,8 +115,8 @@ describe 'Streamer' do
       fill_in 'https://vimeo.com/', with: '0123456789'
       click_on 'Enviar'
 
-      expect(current_path).to have_content('/videos')
-      expect(page).to have_content('Erro ao criar Vídeo!')
+      expect(current_path).to eq(videos_path)
+      expect(page).to have_content('Erro ao cadastrar Vídeo!')
       expect(page).to have_content('Link é muito longo (máximo: 9 caracteres)')
     end
 
@@ -127,8 +130,8 @@ describe 'Streamer' do
       fill_in 'https://vimeo.com/', with: '123456789'
       click_on 'Enviar'
 
-      expect(current_path).to have_content('/videos')
-      expect(page).to have_content('Erro ao criar Vídeo!')
+      expect(current_path).to eq(videos_path)
+      expect(page).to have_content('Erro ao cadastrar Vídeo!')
       expect(page).to have_content('Link já está em uso')
     end
 
