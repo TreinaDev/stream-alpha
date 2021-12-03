@@ -14,7 +14,7 @@
       </span>
     </button>
 
-    <ul class="dropdown-toggle hidden text-gray-500" id="drop" data-nav-target="drop1"> 
+    <ul class="dropdown-toggle w-20 hidden text-gray-500" id="drop" data-nav-target="drop1"> 
       <%= form_with url: destroy_admin_session_path, method: :delete do%>
         <li> <%= button_tag "Sair", class: "dropdown-menu-mid rounded bg-white border-l-4  hover:border-blue-500" %>
       <% end %>
@@ -32,7 +32,7 @@
                                 class="p-2 btn-expanse">
       <% if current_client.client_profile? %>
         <span>
-          <%= current_client.client_profile.full_name %>
+          <%= current_client.client_profile.social_name %>
         </span>
       <% else %>
         <span>
@@ -41,7 +41,7 @@
       <% end %>
     </button>
 
-    <ul class="dropdown-toggle hidden text-gray-500" id="drop" data-nav-target="drop1"> 
+    <ul class="dropdown-toggle w-32 hidden text-gray-500" id="drop" data-nav-target="drop1"> 
       <% if current_client.client_profile? %>
         <%= link_to 'Meu Perfil', current_client.client_profile,
             class: "dropdown-menu-top bg-white border-l-4 hover:border-blue-500" %>
@@ -112,7 +112,7 @@
         Inscreva-se
       </button>
 
-      <ul class="dropdown-toggle hidden text-gray-500" id="drop-in" data-nav-target="drop2">
+      <ul class="dropdown-toggle w-52 hidden text-gray-500" id="drop-in" data-nav-target="drop2">
         <li> <%= link_to "Como novo Assinante", new_client_registration_path, class: "dropdown-menu-top bg-white border-l-4  hover:border-blue-500" %> </li>
       </ul>
     </div>

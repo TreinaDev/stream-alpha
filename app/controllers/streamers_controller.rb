@@ -3,6 +3,7 @@ class StreamersController < ApplicationController
 
   def new
     @streamer = Streamer.new
+    render layout: 'admin'
   end
 
   def create
@@ -11,7 +12,7 @@ class StreamersController < ApplicationController
       redirect_to root_path, notice: t('.success')
     else
       flash[:alert] = t('.failure')
-      render :new
+      render :new, layout: 'admin'
     end
   end
 
