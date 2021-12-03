@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   resources :client_profiles, only: %i[new create show edit update]
   resources :game_categories, only: %i[new create index]
   resources :games, only: %i[new create index]
-  resources :plans, only: %i[new create show index]
+  resources :plans, only: %i[new create show index] do
+    get 'subscription', on: :member
+  end
   resources :playlists, only: %i[new create show index]
   resources :streamers, only: %i[new create]
 

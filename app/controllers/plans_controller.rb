@@ -28,6 +28,9 @@ class PlansController < ApplicationController
     @video_plan = Plan.find(params[:id])
   end
 
+  def subscription
+  end
+
   private
 
   def plans_params
