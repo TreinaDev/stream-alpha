@@ -101,7 +101,7 @@ describe 'Client profile' do
 
     it 'successfully: click on the link to edit profile' do
       client = create(:client)
-      profile = create(:client_profile, client: client)
+      profile = create(:client_profile, client: client, cpf: '39216572027')
 
       login_as client, scope: :client
       visit root_path
@@ -110,7 +110,7 @@ describe 'Client profile' do
 
       expect(current_path).to eq edit_client_profile_path(profile)
       expect(page).to have_content('Insira as informações que deseja atualizar!')
-      expect(page).to have_content('CPF (apenas números) 80052514080')
+      expect(page).to have_content('CPF (apenas números) 39216572027')
     end
     it 'successfully: edit profile' do
       client = create(:client)
