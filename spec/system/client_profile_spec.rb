@@ -96,7 +96,7 @@ describe 'Client profile' do
       visit new_client_profile_path
 
       expect(current_path).to eq client_profile_path(client.client_profile.id)
-      expect(page).to have_content('Perfil já existente!')
+      expect(page).to have_content('Você já possui um Perfil!')
     end
 
     it 'successfully: click on the link to edit profile' do

@@ -64,7 +64,7 @@ describe 'Streamer log in' do
       visit new_streamer_profile_path
 
       expect(current_path).to eq streamer_profile_path(streamer.streamer_profile.id)
-      expect(page).to have_content('Perfil já existente!')
+      expect(page).to have_content('Você já possui um Perfil!')
     end
 
     it 'and click on the link to edit profile' do
