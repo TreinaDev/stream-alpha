@@ -13,9 +13,6 @@ class CreditCardSettingsController < ApplicationController
 
     if @credit_card.save
       redirect_to [current_client.client_profile, @credit_card.customer_payment_method], notice: t('.success')
-    else
-      flash[:alert] = t('.failure')
-      render :new
     end
   end
 
