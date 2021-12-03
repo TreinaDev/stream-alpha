@@ -8,5 +8,7 @@ FactoryBot.define do
         Rack::Test::UploadedFile.new(Rails.root.join('spec/support/assets/gary-bendig-unsplash.jpg'), 'cover/jpg')
       end
     end
+    streamer
+    video
   end
 end

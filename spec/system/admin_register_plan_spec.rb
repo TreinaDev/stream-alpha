@@ -199,5 +199,35 @@ describe 'Some' do
       expect(page).to have_content('Servidor PagaPaga indisponível, cadastro ficou na fila.')
       expect(api_response['message']).presence
     end
+    it 'and try to qualify a down plan' do
+      playlist = create(:playlist)
+      gamer = create(:streamer)
+      create(:streamer_profile, name: 'O famoso', streamer: gamer)
+      admin = create(:admin)
+      plan = create(:plan, name: 'Compra fixa', value: 100,  streamers: [gamer], playlists: [playlist])
+      api_response = File.read(Rails.root.join('spec/support/apis/plan_registration_201.json'))
+      fake_response = double('faraday_response', status: 500 , body: api_response)
+      allow(Faraday).to receive(:post).with('http://localhost:4000/api/v1/products',
+                                            { product: { name: 'Plano 4', type_of: 'subscription',
+                                                         status: 'enabled' } },
+                                            { companyToken: Rails.configuration.payment_api['company_auth_token'] })
+                                      .and_return(fake_response)
+
+      login_as admin, scope: :admin
+      visit root_path
+      click_on 'Área do administrador'
+      click_on 'Plano'
+      click_on 'Planos deshabilitados'
+      click_on 'Habilitar'
+
+      Plan.last.reload
+      expect(Plan.last.plan_token).to eq('ag54g6sd54gas87d52jk')
+      expect(page).to have_content('Plano cadastrado com sucesso!')
+      expect(page).to have_content('Compra fixa')
+      expect(page).to have_content('Desbloqueia todos videos de um Streamer')
+      expect(page).to have_content('Valor: R$ 100')
+      expect(page).to have_content('O famoso')
+      expect(page).to have_content('Status do plano: Habilitado')
+    end
   end
 end
