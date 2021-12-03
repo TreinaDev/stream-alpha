@@ -12,5 +12,5 @@ pt-BR:
         streamer_ids: "Streamers"
   playlists:
     create:
-      success: "Playlist criada com sucesso!"
-      failed: "Erro ao criar Playlist!"
+      success: "Playlist cadastrada com sucesso!"
+      failure: "Erro ao cadastrar Playlist!"

@@ -9,3 +9,7 @@ pt-BR:
         created_at: "Criada em"
         creator: "Criador"
         admin_id: "Por"
+  game_categories:
+    create:
+      success: "Categoria de Jogo cadastrada com sucesso!"
+      failure: "Erro ao cadastrar Categoria de Jogo!"

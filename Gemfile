@@ -16,6 +16,9 @@ gem 'sqlite3', '~> 1.4'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 5.0'
 
+gem 'importmap-rails', '~> 0.8.2'
+gem 'stimulus-rails', '~> 0.7.2'
+
 group :development, :test do
   gem 'factory_bot_rails'
   gem 'pry-byebug'
@@ -35,7 +38,3 @@ group :test do
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
 end
-
-gem 'importmap-rails', '~> 0.8.2'
-
-gem 'stimulus-rails', '~> 0.7.2'

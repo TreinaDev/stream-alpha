@@ -31,6 +31,8 @@ describe 'Client profile' do
       attach_file 'Foto', Rails.root.join('spec/support/assets/gary-bendig-unsplash.jpg')
       click_on 'Criar Perfil de Assinante'
 
+      expect(current_path).to eq(client_profile_path(1))
+      expect(page).to have_content('Perfil cadastrado com sucesso!')
       expect(page).to have_content('Perfil de Marcela')
       expect(page).to have_content('Data de nascimento: 19/08/1997')
       expect(page).to have_content('Configuração de classificação etária: 16')
@@ -42,6 +44,7 @@ describe 'Client profile' do
       expect(page).to_not have_content('CPF: 60243105878')
       expect(ClientProfile.find(1).token).to eq('ijlKA9Kxc7Q9vrXOtgTK')
     end
+
     it 'successfully logs_in with a created profile' do
       client = create(:client)
       create(:client_profile, client: client)
@@ -55,7 +58,9 @@ describe 'Client profile' do
       end
 
       expect(current_path).to eq(root_path)
+      expect(page).to have_content('Login efetuado com sucesso!')
     end
+
     it 'unsuccessfully: left mandatory information blank' do
       client = create(:client)
 
@@ -69,7 +74,7 @@ describe 'Client profile' do
       click_on 'Criar Perfil de Assinante'
 
       expect(current_path).to eq client_profiles_path
-      expect(page).to have_content('Erro ao criar Perfil de Assinante!')
+      expect(page).to have_content('Erro ao cadastrar Perfil!')
       expect(page).to have_content(
         'Nome completo (conforme documentos) não pode ficar em branco'
       )
@@ -91,12 +96,12 @@ describe 'Client profile' do
       visit new_client_profile_path
 
       expect(current_path).to eq client_profile_path(client.client_profile.id)
-      expect(page).to have_content('Perfil já existente!')
+      expect(page).to have_content('Você já possui um Perfil!')
     end
 
     it 'successfully: click on the link to edit profile' do
       client = create(:client)
-      profile = create(:client_profile, client: client)
+      profile = create(:client_profile, client: client, cpf: '39216572027')
 
       login_as client, scope: :client
       visit root_path
@@ -105,7 +110,7 @@ describe 'Client profile' do
 
       expect(current_path).to eq edit_client_profile_path(profile)
       expect(page).to have_content('Insira as informações que deseja atualizar!')
-      expect(page).to have_content("CPF (apenas números) #{profile.cpf}")
+      expect(page).to have_content('CPF (apenas números) 39216572027')
     end
     it 'successfully: edit profile' do
       client = create(:client)
@@ -136,6 +141,7 @@ describe 'Client profile' do
       expect(page).to have_content('Cidade: São Fidélis, RJ')
       expect(page).to have_css("img[src*='gary-bendig-unsplash.jpg']")
     end
+
     it 'unsuccessfully: cant edit another client profile' do
       client = create(:client)
       client2 = create(:client)
@@ -145,9 +151,8 @@ describe 'Client profile' do
       login_as client, scope: :client
       visit edit_client_profile_path(client2.client_profile)
 
-      expect(current_path).to eq root_path
-      expect(page).to have_content 'Você só pode editar o seu ' \
-                                   "#{I18n.t(:client_profile, scope: 'activerecord.models')}!"
+      expect(current_path).to eq(root_path)
+      expect(page).to have_content 'Você não é o dono deste Perfil!'
       expect(page).to_not have_content(client_profile2.social_name)
       expect(page).to_not have_content(I18n.l(client_profile2.birth_date))
       expect(page).to_not have_content(client_profile2.residential_address)
@@ -173,7 +178,7 @@ describe 'Client profile' do
       click_on 'Atualizar Perfil de Assinante'
 
       expect(current_path).to eq client_profile_path(client.client_profile)
-      expect(page).to have_content('Erro ao atualizar Perfil de Assinante!')
+      expect(page).to have_content('Erro ao atualizar Perfil!')
       expect(page).to have_content('Data de nascimento não pode ficar em branco')
       expect(page).to have_content('Endereço residencial não pode ficar em branco')
       expect(page).to have_content('Número residencial não pode ficar em branco')
@@ -201,12 +206,14 @@ describe 'Client profile' do
       expect(page).to have_content("Cidade: #{client_profile.city}, #{client_profile.state}")
       expect(page).to have_css("img[src*='gary-bendig-unsplash.jpg']")
     end
+
     it 'unsuccessfully view own profile, cause the profile is invalid/nil' do
       client = create(:client)
 
       login_as client, scope: :client
       visit root_path
 
+      expect(current_path).to eq(root_path)
       expect(page).to have_link('Meu Perfil', href: new_client_profile_path)
     end
   end

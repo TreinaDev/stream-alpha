@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   before_action :authenticate_admin!, only: %i[new create]
+
   def new
     @game = Game.new
     @categories = GameCategory.all.order(name: :asc)
@@ -7,10 +8,12 @@ class GamesController < ApplicationController
 
   def create
     @game = game_creation
+
     if @game.save
-      redirect_to games_path, notice: 'Jogo cadastrado com sucesso!'
+      redirect_to games_path, notice: t('.success')
     else
       @categories = GameCategory.all.order(name: :asc)
+      flash[:alert] = t('.failure')
       render :new
     end
   end

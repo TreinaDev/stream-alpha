@@ -21,7 +21,7 @@ describe 'Streamer log in' do
       click_on 'Criar Perfil de streamer'
 
       expect(current_path).to eq streamer_profile_path(streamer.streamer_profile)
-      expect(page).to have_content 'Perfil de streamer criado com sucesso!'
+      expect(page).to have_content 'Perfil cadastrado com sucesso!'
       expect(page).to have_content 'Descrição: Jovem de 22 anos sem ter o que fazer da vida ' \
                                    'e fica fazendo live na internet'
       expect(page).to have_css('img[src*="gary-bendig-unsplash.jpg"]')
@@ -48,11 +48,12 @@ describe 'Streamer log in' do
       click_on 'Criar Perfil de streamer'
 
       expect(current_path).to eq streamer_profiles_path
-      expect(page).to have_content('Erro ao criar Perfil de streamer!')
+      expect(page).to have_content('Erro ao cadastrar Perfil!')
       expect(page).to have_content('Nome não pode ficar em branco')
       expect(page).to have_content('Descrição não pode ficar em branco')
     end
   end
+
   context 'and profile already exists' do
     it 'and is redirected to home page' do
       streamer = create(:streamer)
@@ -63,7 +64,7 @@ describe 'Streamer log in' do
       visit new_streamer_profile_path
 
       expect(current_path).to eq streamer_profile_path(streamer.streamer_profile.id)
-      expect(page).to have_content('Perfil já existente!')
+      expect(page).to have_content('Você já possui um Perfil!')
     end
 
     it 'and click on the link to edit profile' do
@@ -113,7 +114,7 @@ describe 'Streamer log in' do
       click_on 'Atualizar Perfil de streamer'
 
       expect(current_path).to eq streamer_profile_path(streamer.streamer_profile)
-      expect(page).to have_content('Erro ao atualizar Perfil de streamer!')
+      expect(page).to have_content('Erro ao atualizar Perfil!')
       expect(page).to have_content('Nome não pode ficar em branco')
       expect(page).to have_content('Descrição não pode ficar em branco')
     end
@@ -129,8 +130,7 @@ describe 'Streamer log in' do
       visit edit_streamer_profile_path(streamer2.streamer_profile)
 
       expect(current_path).to eq root_path
-      expect(page).to have_content 'Você só pode editar o seu ' \
-                                   "#{I18n.t(:streamer_profile, scope: 'activerecord.models')}!"
+      expect(page).to have_content('Você não é o dono deste Perfil!')
       expect(page).to_not have_content streamer_profile2.name
       expect(page).to_not have_content streamer_profile2.description
       expect(page).to_not have_link streamer_profile2.facebook

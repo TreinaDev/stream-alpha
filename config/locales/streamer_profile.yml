@@ -17,6 +17,16 @@ pt-BR:
           active: "Ativo"
           inactive: "Inativo"
   streamer_profiles:
+    new:
+      profile_exists: "Você já possui um Perfil!"
+    create:
+      success: "Perfil cadastrado com sucesso!"
+      failure: "Erro ao cadastrar Perfil!"
+    edit:
+      unauthorized_profile: "Você não é o dono deste Perfil!"
+    update:
+      success: "Perfil atualizado com sucesso!"
+      failure: "Erro ao atualizar Perfil!"
     inactive:
       success: "Streamer inativado com sucesso!"
     active:

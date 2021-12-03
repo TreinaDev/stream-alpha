@@ -10,6 +10,7 @@ describe 'Some' do
       click_on 'Área do administrador'
       click_on 'Plano'
 
+      expect(current_path).to eq(new_plan_path)
       expect(page).to have_content('Insira as informações do plano que deseja cadastrar')
     end
 
@@ -25,6 +26,8 @@ describe 'Some' do
       fill_in 'Valor', with: ''
       click_on 'Criar Plano de Assinatura'
 
+      expect(current_path).to eq(plans_path)
+      expect(page).to have_content('Erro ao cadastrar Plano!')
       expect(page).to have_content('Nome do Plano não pode ficar em branco')
       expect(page).to have_content('Descrição não pode ficar em branco')
       expect(page).to have_content('Valor não pode ficar em branco')
@@ -58,12 +61,14 @@ describe 'Some' do
       select playlist1.name, from: 'Selecione as playlists incluídas no plano'
       click_on 'Criar Plano de Assinatura'
 
+      expect(current_path).to eq(plan_path(1))
       expect(page).to have_content('Plano cadastrado com sucesso!')
       expect(page).to have_content(playlist.name)
       expect(page).to have_content(playlist1.name)
       expect(page).not_to have_content(playlist2.name)
     end
   end
+
   context 'Admin view all plans registred' do
     it 'successfuly' do
       admin = create(:admin)
@@ -82,6 +87,7 @@ describe 'Some' do
       expect(page).to have_content(plano_c.name)
     end
   end
+
   context 'Client' do
     it 'try to see the plan registration form' do
       user = create(:client)
@@ -93,6 +99,7 @@ describe 'Some' do
       expect(page).to have_content('Para continuar, efetue login ou registre-se.')
     end
   end
+
   context 'Streamer' do
     it 'try to see the plan registration form' do
       streamer = create(:streamer)
@@ -104,6 +111,7 @@ describe 'Some' do
       expect(page).to have_content('Para continuar, efetue login ou registre-se.')
     end
   end
+
   context 'Person not logged in' do
     it 'try to see the plan registration form' do
       visit new_plan_path
@@ -112,6 +120,7 @@ describe 'Some' do
       expect(page).to have_content('Para continuar, efetue login ou registre-se.')
     end
   end
+
   context 'API' do
     it 'successfully receive token from API' do
       gamer = create(:streamer_profile)
@@ -135,14 +144,16 @@ describe 'Some' do
       click_on 'Criar Plano de Assinatura'
 
       Plan.last.reload
-      expect(Plan.last.plan_token).to eq('ag54g6sd54gas87d52jk')
+      expect(current_path).to eq(plan_path(1))
       expect(page).to have_content('Plano cadastrado com sucesso!')
+      expect(Plan.last.plan_token).to eq('ag54g6sd54gas87d52jk')
       expect(page).to have_content('Plano 4')
       expect(page).to have_content('Desbloqueia todos videos de um Streamer')
       expect(page).to have_content('Valor: R$ 100')
       expect(page).to have_content(gamer.name)
       expect(page).to have_content('Status do plano: Habilitado')
     end
+
     it 'receive error 500 status from API' do
       gamer = create(:streamer_profile)
       admin = create(:admin)
@@ -164,13 +175,14 @@ describe 'Some' do
       click_on 'Criar Plano de Assinatura'
 
       Plan.last.reload
+      expect(current_path).to eq(plan_path(1))
+      expect(page).to have_content('Servidor PagaPaga indisponível, cadastro ficou na fila.')
       expect(Plan.last.plan_token).to eq(nil)
       expect(page).to have_content('Plano 4')
       expect(page).to have_content('Desbloqueia todos videos de um Streamer')
       expect(page).to have_content('Valor: R$ 100')
       expect(page).to have_content(gamer.name)
       expect(page).to have_content('Status do plano: Pendente')
-      expect(page).to have_content('Servidor PagaPaga indisponível, cadastro ficou na fila.')
     end
     it 'receive error 422 status from API' do
       gamer = create(:streamer_profile)
@@ -195,8 +207,8 @@ describe 'Some' do
 
       Plan.last.reload
       expect(current_path).to eq(plan_path(Plan.last))
-      expect(page).to have_content('Status do plano: Pendente')
       expect(page).to have_content('Servidor PagaPaga indisponível, cadastro ficou na fila.')
+      expect(page).to have_content('Status do plano: Pendente')
       expect(api_response['message']).presence
     end
   end
